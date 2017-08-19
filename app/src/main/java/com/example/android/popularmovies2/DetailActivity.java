@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;

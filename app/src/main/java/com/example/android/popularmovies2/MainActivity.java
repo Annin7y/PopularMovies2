@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
+import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
 import com.example.android.popularmovies2.asynctask.MultipleAsyncTask;
 import com.example.android.popularmovies2.decoration.DividerItemDecoration;
 import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
@@ -65,7 +66,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
 
-        MultipleAsyncTask.execute("most_popular");
+        MovieAsyncTask myTask = new MovieAsyncTask(this);
+        myTask.execute("most_popular");
 
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
@@ -83,12 +85,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.setAdapter(movieAdapter);
     }
 
-    @Override
-    public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieData) {
-        mLoadingIndicator.setVisibility(View.INVISIBLE);
-        movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, MainActivity.this);
-        mRecyclerView.setAdapter(movieReviewAdapter);
-    }
+
 
 
     private void showErrorMessage() {
@@ -99,15 +96,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     @Override
-    public void onClick(Movie movie) {
+    public void onClick(Movie movie, MovieReview review) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("Movie", movie);
-        startActivity(intent);
-    }
-    @Override
-    public void onClick(MovieReview movieReview) {
-        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        intent.putExtra("MovieReview", movieReview);
+        intent.putExtra("MovieReview", review);
         startActivity(intent);
     }
 
@@ -124,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        MultipleAsyncTask myTask = new MultipleAsyncTask(this);
+        MovieAsyncTask myTask = new MovieAsyncTask(this);
         switch (item.getItemId()) {
             case R.id.most_popular:
                 myTask.execute("most_popular");

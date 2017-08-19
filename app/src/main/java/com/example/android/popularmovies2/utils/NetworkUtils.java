@@ -130,7 +130,7 @@ public class NetworkUtils {
         return moviesReviewList;
     }
 
-    //  https://api.themoviedb.org/3/movie/263115/reviews?api_key=0f0a5f2bb046bea24c1c11aa3f328796
+    
     public static URL buildUrlReview(String reviewQuery) {
         Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
