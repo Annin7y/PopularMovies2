@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- CardView margins in movie_list_item -->
+    <dimen name="card_margin">5dp</dimen>
+
+    <!-- ImageView width, height and padding specifications in movie_list_item -->
+    <dimen name="image_view_width">300dp</dimen>
+    <dimen name="image_view_height">150dp</dimen>
+    <dimen name="image_view_padding">2dp</dimen>
+
+    <!-- Error message padding and text size specifications in activity_main -->
+    <dimen name="error_padding">16dp</dimen>
+    <dimen name="error_text">20sp</dimen>
+
+    <!-- Progress bar width and height specifications in activity_main -->
+    <dimen name="progress_bar">42dp</dimen>
+
+    <!-- Progress bar marginStart & marginEnd in activity_main -->
+    <dimen name="progress_bar_start">230dp</dimen>
+    <dimen name="progress_bar_end">230dp</dimen>
+
+    <!-- Progress bar marginLeft & marginRight in activity_main -->
+    <dimen name="progress_bar_left">230dp</dimen>
+    <dimen name="progress_bar_right">230dp</dimen>
+
+    <!-- Progress bar marginTop in activity_main -->
+    <dimen name="progress_bar_top">265dp</dimen>
+
+    <!-- ImageView marginStart, End, Left and Right in activity_detail -->
+    <dimen name="imageView_margin">15dp</dimen>
+
+    <!-- ImageView marginTop in activity_detail -->
+    <dimen name="imageView_top">45dp</dimen>
+
+    <!-- TextView marginStart, End, Left and Right  in activity_detail -->
+    <dimen name="text_margin">15dp</dimen>
+
+    <!-- TextView padding and size in activity_detail -->
+    <dimen name="text_padding">3dp</dimen>
+    <dimen name="text_size">15sp</dimen>
+
+</resources>
