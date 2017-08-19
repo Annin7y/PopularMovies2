@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.popularmovies2.Movie;
 import com.example.android.popularmovies2.MovieReview;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * Created by Maino96-10022 on 8/18/2017.
  */
 
-public class MultipleAsyncTask extends Activity
+public class MultipleAsyncTask extends AppCompatActivity
 {
     private AsyncTaskInterface listener;
 
@@ -28,16 +29,16 @@ public class MultipleAsyncTask extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        runMultipleAsyncTask(); // Start Async Task
+        runMultipleAsyncTask();
     }
-    private void runMultipleAsyncTask() // Run Multiple Async Task
+    public void runMultipleAsyncTask()
     {
         FirstMovieAsyncTask asyncTask = new FirstMovieAsyncTask();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
         {
             asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
-        else // Below Api Level 13
+        else
         {
             asyncTask.execute();
         }
@@ -52,7 +53,7 @@ public class MultipleAsyncTask extends Activity
             asyncTask2.execute();
         }
     }
-    private class FirstMovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>> {
+    public class FirstMovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>> {
 
         @Override
         protected void onPreExecute() {
@@ -92,7 +93,7 @@ public class MultipleAsyncTask extends Activity
         }
 
     }
-    private class SecondMovieAsyncTask extends AsyncTask<String, Void, ArrayList<MovieReview>> {
+    public class SecondMovieAsyncTask extends AsyncTask<String, Void, ArrayList<MovieReview>> {
 
         @Override
         protected void onPreExecute() {
