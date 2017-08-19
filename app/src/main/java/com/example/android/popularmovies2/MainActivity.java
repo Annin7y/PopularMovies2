@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
-import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
+import com.example.android.popularmovies2.asynctask.MultipleAsyncTask;
 import com.example.android.popularmovies2.decoration.DividerItemDecoration;
 import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
 
-        MovieAsyncTask myTask = new MovieAsyncTask(this);
+        MultipleAsyncTask myTask = new MultipleAsyncTask(this);
         myTask.execute("most_popular");
 
         //specifying the space between images
@@ -105,6 +105,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         intent.putExtra("Movie", movie);
         startActivity(intent);
     }
+    @Override
+    public void onClick(MovieReview movieReview) {
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("MovieReview", movieReview);
+        startActivity(intent);
+    }
 
 
     @Override
@@ -119,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        MovieAsyncTask myTask = new MovieAsyncTask(this);
+        MultipleAsyncTask myTask = new MultipleAsyncTask(this);
         switch (item.getItemId()) {
             case R.id.most_popular:
                 myTask.execute("most_popular");

@@ -105,15 +105,15 @@ public class MultipleAsyncTask extends Activity
             if (params.length == 0) {
                 return null;
             }
-            String sortMode = params[0];
-            URL movieRequestUrl = NetworkUtils.buildUrl(sortMode);
+            String reviewQuery = params[0];
+            URL movieReviewRequestUrl = NetworkUtils.buildUrlReview(reviewQuery);
 
             try {
-                String jsonMovieResponse = NetworkUtils
-                        .makeHttpRequest(movieRequestUrl);
+                String jsonMovieReviewResponse = NetworkUtils
+                        .makeHttpReviewRequest(movieReviewRequestUrl);
 
                 ArrayList simpleJsonMovieReviewData = NetworkUtils
-                        .extractFeatureFromJson(jsonMovieResponse);
+                        .extractFeatureFromJson(jsonMovieReviewResponse);
 
                 return simpleJsonMovieReviewData;
 

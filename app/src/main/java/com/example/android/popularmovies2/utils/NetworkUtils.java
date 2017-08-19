@@ -235,7 +235,7 @@ public class NetworkUtils {
         }
         return jsonReviewResponse;
     }
-    
+
     /**
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
