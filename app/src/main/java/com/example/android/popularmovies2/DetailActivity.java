@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
+import com.example.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
 import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
 import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import com.squareup.picasso.Picasso;
@@ -19,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements MovieReviewAdapter.MovieReviewAdapterOnClickHandler, AsyncTaskReviewInterface {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -39,17 +40,17 @@ public abstract class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-     //   context = getApplicationContext();
-      //  mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
-  //      movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, context);
-     //   mRecyclerView.setAdapter(movieReviewAdapter);
+        context = getApplicationContext();
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
+        movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, context);
+        mRecyclerView.setAdapter(movieReviewAdapter);
 
         poster = (ImageView) findViewById(R.id.imageView);
 
 
-     //   MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-     //   myReviewTask.execute("author");
-     //   returnReviewData(simpleJsonMovieReviewData);
+        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
+        myReviewTask.execute("author");
+        returnReviewData(simpleJsonMovieReviewData);
 
 
         Movie movie;
@@ -88,22 +89,22 @@ public abstract class DetailActivity extends AppCompatActivity {
         }
     }
 
- //   @Override
-  //  public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
-   //     movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, DetailActivity.this);
-    //    mRecyclerView.setAdapter(movieReviewAdapter);
+    @Override
+    public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
+        movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, DetailActivity.this);
+        mRecyclerView.setAdapter(movieReviewAdapter);
 
 
-  //  }
+         }
 
-   // @Override
- //   public void onClick(MovieReview review) {
-   //     MovieAsyncTask myTask = new MovieAsyncTask(this);
-    //    returnReviewData(simpleJsonMovieReviewData);
+        @Override
+        public void onClick (MovieReview review){
+            MovieReviewAsyncTask myTask = new MovieReviewAsyncTask(this);
+            returnReviewData(simpleJsonMovieReviewData);
 
 
- //   }
-}
+        }
+    }
 
 
 

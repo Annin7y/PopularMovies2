@@ -11,5 +11,4 @@ import java.util.ArrayList;
 
 public interface AsyncTaskInterface {
     void returnData(ArrayList<Movie> simpleJsonMovieData);
- void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData);
 }

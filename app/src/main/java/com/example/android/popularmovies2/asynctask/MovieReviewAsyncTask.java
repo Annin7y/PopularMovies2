@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<MovieReview>> {
 
     private static final String TAG = MovieReviewAsyncTask.class.getSimpleName();
-    private AsyncTaskInterface listener;
+    private AsyncTaskReviewInterface listener;
 
-    public MovieReviewAsyncTask(AsyncTaskInterface listener) {
+    public MovieReviewAsyncTask(AsyncTaskReviewInterface listener) {
         this.listener = listener;
     }
 
