@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<MovieReview>> {
 
-    private static final String TAG = MovieAsyncTask.class.getSimpleName();
+    private static final String TAG = MovieReviewAsyncTask.class.getSimpleName();
     private AsyncTaskInterface listener;
 
     public MovieReviewAsyncTask(AsyncTaskInterface listener) {
@@ -36,13 +36,13 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
         URL movieRequestUrl = NetworkUtils.buildUrl(reviewQuery);
 
         try {
-            String jsonMovieResponse = NetworkUtils
+            String jsonMovieReviewResponse = NetworkUtils
                     .makeHttpRequest(movieRequestUrl);
 
             ArrayList simpleJsonMovieReviewData = NetworkUtils
-                    .extractFeatureFromJson(jsonMovieResponse);
+                    .extractFeatureFromReviewJson(jsonMovieReviewResponse);
 
-            return simpleJsonMovieData;
+            return simpleJsonMovieReviewData;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,10 +51,10 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
     }
 
     @Override
-    protected void onPostExecute(ArrayList<MovieReview> mMovieList) {
-        super.onPostExecute(mMovieList);
-        if (mMovieList != null) {
-            listener.returnReviewData(mMovieList);
+    protected void onPostExecute(ArrayList<MovieReview> mMovieReviewList) {
+        super.onPostExecute(mMovieReviewList);
+        if (mMovieReviewList != null) {
+            listener.returnReviewData(mMovieReviewList);
         }
     }
 }

@@ -130,7 +130,7 @@ public class NetworkUtils {
         return moviesReviewList;
     }
 
-    
+
     public static URL buildUrlReview(String reviewQuery) {
         Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
@@ -322,9 +322,9 @@ public class NetworkUtils {
                 JSONObject currentMovieReview = movieReviewArray.getJSONObject(i);
 
                 // Extract the value for the key called "poster_title"
-                String authorName = currentMovieReview.getString(KEY_POSTER_PATH);
+                String authorName = currentMovieReview.getString(KEY_REVIEW_AUTHOR);
 
-                String reviewName = currentMovieReview.getString(KEY_ORIGINAL_TITLE);
+                String reviewName = currentMovieReview.getString(KEY_REVIEW_CONTENT);
 
                 MovieReview review = new MovieReview(authorName, reviewName);
                 moviesReviewList.add(review);

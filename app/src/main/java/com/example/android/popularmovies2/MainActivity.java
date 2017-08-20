@@ -16,13 +16,13 @@ import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
 import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
-import com.example.android.popularmovies2.asynctask.MultipleAsyncTask;
+import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import com.example.android.popularmovies2.decoration.DividerItemDecoration;
 import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, MovieReviewAdapter.MovieReviewAdapterOnClickHandler, AsyncTaskInterface {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, MovieReviewAdapter.MovieReviewAdapterOnClickHandler,AsyncTaskInterface {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         context = getApplicationContext();
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
-        movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, context);
+        movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
 
         //specifying that the images will be displayed in two columns
@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         MovieAsyncTask myTask = new MovieAsyncTask(this);
         myTask.execute("most_popular");
 
+        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
+
+
+
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -78,13 +82,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                         R.drawable.item_decorator)));
     }
 
-    @Override
+       @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
         mRecyclerView.setAdapter(movieAdapter);
     }
-
 
 
 
@@ -96,10 +99,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     @Override
-    public void onClick(Movie movie, MovieReview review) {
+    public void onClick(Movie movie) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("Movie", movie);
-        intent.putExtra("MovieReview", review);
         startActivity(intent);
     }
 
