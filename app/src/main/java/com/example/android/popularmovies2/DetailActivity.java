@@ -1,20 +1,35 @@
 package com.example.android.popularmovies2;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
+import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
+import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
-public class DetailActivity extends AppCompatActivity {
+public abstract class DetailActivity extends AppCompatActivity {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
+
+    private ArrayList<MovieReview> simpleJsonMovieReviewData = new ArrayList<>();
+
+    private Context context;
+
+    private MovieReviewAdapter movieReviewAdapter;
+
+    private RecyclerView mRecyclerView;
 
     ImageView poster;
 
@@ -24,12 +39,17 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        //Movie movie = getIntent().getExtras().getParcelable("Movie");
+     //   context = getApplicationContext();
+      //  mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
+  //      movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, context);
+     //   mRecyclerView.setAdapter(movieReviewAdapter);
+
         poster = (ImageView) findViewById(R.id.imageView);
 
-        //   MovieReview review = getIntent().getExtras().getParcelable("MovieReview");
-        //  TextView movieReview = (TextView) findViewById(R.id.movie_review);
-        // movieReview.setText(movieReview.getMovieReview());
+
+     //   MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
+     //   myReviewTask.execute("author");
+     //   returnReviewData(simpleJsonMovieReviewData);
 
 
         Movie movie;
@@ -66,15 +86,24 @@ public class DetailActivity extends AppCompatActivity {
 
             releaseDate.setText(finalDate);
         }
-
-        MovieReview review;
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            review = getIntent().getExtras().getParcelable("MovieReview");
-
-            TextView movieReview = (TextView) findViewById(R.id.movie_review);
-            movieReview.setText(review.getMovieReview());
-        }
     }
+
+ //   @Override
+  //  public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
+   //     movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, DetailActivity.this);
+    //    mRecyclerView.setAdapter(movieReviewAdapter);
+
+
+  //  }
+
+   // @Override
+ //   public void onClick(MovieReview review) {
+   //     MovieAsyncTask myTask = new MovieAsyncTask(this);
+    //    returnReviewData(simpleJsonMovieReviewData);
+
+
+ //   }
 }
+
 
 

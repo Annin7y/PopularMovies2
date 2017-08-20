@@ -22,21 +22,17 @@ import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, MovieReviewAdapter.MovieReviewAdapterOnClickHandler,AsyncTaskInterface {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private ArrayList<Movie> simpleJsonMovieData = new ArrayList<>();
-
-    private ArrayList<MovieReview> simpleJsonMovieReviewData = new ArrayList<>();
 
     private Context context;
 
     private RecyclerView mRecyclerView;
 
     private MovieAdapter movieAdapter;
-
-    private MovieReviewAdapter movieReviewAdapter;
 
     RecyclerView.LayoutManager mLayoutManager;
 
@@ -53,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         context = getApplicationContext();
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
-        movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
 
         //specifying that the images will be displayed in two columns
@@ -69,10 +64,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         MovieAsyncTask myTask = new MovieAsyncTask(this);
         myTask.execute("most_popular");
 
-        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-
-
-
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -82,14 +73,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                         R.drawable.item_decorator)));
     }
 
-       @Override
+    @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
         mRecyclerView.setAdapter(movieAdapter);
     }
-
-
 
     private void showErrorMessage() {
         /* First, hide the currently visible data */
