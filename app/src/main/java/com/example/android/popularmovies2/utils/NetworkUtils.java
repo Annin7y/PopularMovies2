@@ -135,7 +135,7 @@ public class NetworkUtils {
 
     public static URL buildUrlReview(String reviewId) {
         Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
-                .appendQueryParameter(MOVIE_ID,String.valueOf(reviewId))
+                .appendPath(MOVIE_ID)
                 .appendPath("reviews")
                 .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                 .build();
