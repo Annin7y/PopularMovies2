@@ -55,7 +55,9 @@ public class NetworkUtils {
 
     private static final String API_KEY = "api_key";
 
-    private static final String BASE_URL = "https://api.themoviedb.org/3/263115/reviews";
+    private static final String MOVIE_ID = "<Movie_ID>";
+
+    private static final String BASE_URL = "https://api.themoviedb.org/3/movie";
 
     private static final String BASE_URL_POPULAR = "https://api.themoviedb.org/3/movie/popular";
 
@@ -113,26 +115,28 @@ public class NetworkUtils {
     private static ArrayList<MovieReview> fetchMoviesReviewData(String requestReviewUrl) {
 
         // Create a URL object
-        URL url = buildUrl(requestReviewUrl);
+        URL urlReview = buildUrlReview(requestReviewUrl);
 
         // Perform HTTP request to the URL and receive a JSON response back
-        String jsonResponse = null;
+        String jsonReviewResponse = null;
         try {
-            jsonResponse = makeHttpRequest(url);
+            jsonReviewResponse = makeHttpReviewRequest(urlReview);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
         // Extract relevant fields from the JSON response and create a list of {@link Movie}s
-        ArrayList<MovieReview> moviesReviewList = extractFeatureFromReviewJson(jsonResponse);
+        ArrayList<MovieReview> moviesReviewList = extractFeatureFromReviewJson(jsonReviewResponse);
 
         // Return the list of {@link Movie}s
         return moviesReviewList;
     }
 
 
-    public static URL buildUrlReview(String reviewQuery) {
+    public static URL buildUrlReview(String reviewId) {
         Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
+                .appendQueryParameter(MOVIE_ID,String.valueOf(reviewId))
+                .appendPath("reviews")
                 .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                 .build();
 
