@@ -147,7 +147,7 @@ public class NetworkUtils {
             e.printStackTrace();
         }
 
-        Log.v(TAG, "Built URI " + urlReview);
+        Log.d(TAG, "Built URI " + urlReview);
 
         return urlReview;
 
