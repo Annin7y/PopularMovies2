@@ -135,7 +135,7 @@ public class NetworkUtils {
 
     public static URL buildUrlReview(String reviewId) {
         Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
-                .appendPath(MOVIE_ID)
+                .appendPath(String.valueOf(reviewId))
                 .appendPath("reviews")
                 .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                 .build();
@@ -147,7 +147,7 @@ public class NetworkUtils {
             e.printStackTrace();
         }
 
-        Log.d(TAG, "Built URI " + urlReview);
+        Log.v(TAG, "Built URI " + urlReview);
 
         return urlReview;
 
@@ -201,7 +201,7 @@ public class NetworkUtils {
 
     public static String makeHttpReviewRequest(URL urlReview) throws IOException {
         String jsonReviewResponse = "";
-        Log.i("URL: ", urlReview.toString());
+        Log.i("URLREVIEW: ", urlReview.toString());
         // If the URL is null, then return early.
         if (urlReview == null) {
             return jsonReviewResponse;
@@ -225,7 +225,7 @@ public class NetworkUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving movie JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving movie review JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
