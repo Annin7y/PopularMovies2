@@ -15,52 +15,32 @@ import java.util.ArrayList;
 
 public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.MovieReviewAdapterViewHolder> {
 
+    private static final String TAG = MovieReviewAdapter.class.getSimpleName();
+
     private ArrayList<MovieReview> movieReviewList = new ArrayList<MovieReview>();
     private Context context;
-    private MovieReviewAdapter.MovieReviewAdapterOnClickHandler mClickHandler;
-
-    /**
-     * The interface that receives onClick messages.
-     */
-    public interface MovieReviewAdapterOnClickHandler {
-        void onClick(MovieReview posterClick);
-    }
 
     /**
      * Creates a MovieAdapter.
-     *
-     * @param clickHandler The on-click handler for this adapter. This single handler is called
-     *                     when an item is clicked.
      */
-    public MovieReviewAdapter(MovieReviewAdapter.MovieReviewAdapterOnClickHandler clickHandler, ArrayList<MovieReview> movieReviewList, Context context) {
+    public MovieReviewAdapter(ArrayList<MovieReview> movieReviewList, Context context) {
         this.movieReviewList = movieReviewList;
         this.context = context;
-        mClickHandler = clickHandler;
+        //    mClickHandler = clickHandler;
     }
 
     /**
      * Cache of the children views for a movie list item.
      */
-    public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder {
 
         public TextView movieReview;
+
 
         public MovieReviewAdapterViewHolder(View view) {
             super(view);
             movieReview = (TextView) view.findViewById(R.id.movie_review);
-            view.setOnClickListener(this);
-        }
 
-        /**
-         * This gets called by the child views during a click.
-         *
-         * @param v The View that was clicked
-         */
-        @Override
-        public void onClick(View v) {
-            int adapterPosition = getAdapterPosition();
-            MovieReview posterClick = movieReviewList.get(adapterPosition);
-            mClickHandler.onClick(posterClick);
         }
 
         public TextView getMovieReview() {
@@ -88,8 +68,7 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return movieReviewList.size();
     }
 

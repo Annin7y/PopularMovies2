@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DetailActivity extends AppCompatActivity implements MovieReviewAdapter.MovieReviewAdapterOnClickHandler, AsyncTaskReviewInterface {
+public class DetailActivity extends AppCompatActivity implements MovieReviewAdapter.MovieReviewAdapterViewHolder, AsyncTaskReviewInterface {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -24,11 +24,11 @@ public class DetailActivity extends AppCompatActivity implements MovieReviewAdap
 
     private Context context;
 
+    private MovieReview review;
+
     private MovieReviewAdapter movieReviewAdapter;
 
     private RecyclerView mRecyclerViewReview;
-
-    RecyclerView.LayoutManager mLayoutManager;
 
     ImageView poster;
 
@@ -41,11 +41,18 @@ public class DetailActivity extends AppCompatActivity implements MovieReviewAdap
 
         context = getApplicationContext();
         mRecyclerViewReview = (RecyclerView) findViewById(R.id.recyclerview_detail);
-        movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, context);
+        movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
 
         poster = (ImageView) findViewById(R.id.imageView);
 
+        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
+        myReviewTask.execute("author");
+
+        TextView movieReview = (TextView) findViewById(R.id.movie_review);
+        movieReview.setText(review.getMovieReview());
+        TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
+        reviewAuthor.setText(review.getReviewAuthor());
 
         Movie movie;
         if (getIntent() != null && getIntent().getExtras() != null) {
@@ -81,29 +88,19 @@ public class DetailActivity extends AppCompatActivity implements MovieReviewAdap
 
             releaseDate.setText(finalDate);
         }
+
     }
 
     @Override
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
-        movieReviewAdapter = new MovieReviewAdapter(this, simpleJsonMovieReviewData, DetailActivity.this);
+        movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
-
-    }
-
-    @Override
-    public void onClick(MovieReview review) {
-        MovieReviewAsyncTask myTask = new MovieReviewAsyncTask(this);
-        myTask.execute("author");
         returnReviewData(simpleJsonMovieReviewData);
 
-        TextView movieReview = (TextView) findViewById(R.id.movie_review);
-        movieReview.setText(review.getMovieReview());
-
-        TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
-        reviewAuthor.setText(review.getReviewAuthor());
-
     }
+
 }
+
 
 
 
