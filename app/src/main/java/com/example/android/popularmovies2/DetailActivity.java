@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DetailActivity extends AppCompatActivity implements MovieReviewAdapter.MovieReviewAdapterViewHolder, AsyncTaskReviewInterface {
+public class DetailActivity extends AppCompatActivity implements AsyncTaskReviewInterface {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -32,7 +32,6 @@ public class DetailActivity extends AppCompatActivity implements MovieReviewAdap
 
     ImageView poster;
 
-//implements MovieReviewAdapter.MovieReviewAdapterOnClickHandler, AsyncTaskReviewInterface
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +46,7 @@ public class DetailActivity extends AppCompatActivity implements MovieReviewAdap
         poster = (ImageView) findViewById(R.id.imageView);
 
         MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-        myReviewTask.execute("author");
-
-        TextView movieReview = (TextView) findViewById(R.id.movie_review);
-        movieReview.setText(review.getMovieReview());
-        TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
-        reviewAuthor.setText(review.getReviewAuthor());
+        myReviewTask.execute("reviewId");
 
         Movie movie;
         if (getIntent() != null && getIntent().getExtras() != null) {
@@ -97,8 +91,11 @@ public class DetailActivity extends AppCompatActivity implements MovieReviewAdap
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
         returnReviewData(simpleJsonMovieReviewData);
 
+        TextView movieReview = (TextView) findViewById(R.id.movie_review);
+        movieReview.setText(review.getMovieReview());
+        TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
+        reviewAuthor.setText(review.getReviewAuthor());
     }
-
 }
 
 

@@ -37,7 +37,7 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
 
         try {
             String jsonMovieReviewResponse = NetworkUtils
-                    .makeHttpRequest(movieRequestUrl);
+                    .makeHttpReviewRequest(movieRequestUrl);
 
             ArrayList simpleJsonMovieReviewData = NetworkUtils
                     .extractFeatureFromReviewJson(jsonMovieReviewResponse);

@@ -134,23 +134,23 @@ public class NetworkUtils {
 
 
     public static URL buildUrlReview(String reviewId) {
-        Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
-                .appendPath(String.valueOf(reviewId))
-                .appendPath("reviews")
-                .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
-                .build();
-
         URL urlReview = null;
         try {
+        if (reviewId.equals(MOVIE_ID)) {
+            Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
+                    .appendPath(String.valueOf(reviewId))
+                    .appendPath("reviews")
+                    .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
+                    .build();
             urlReview = new URL(movieReviewQueryUri.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        }}
+            catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
 
-        Log.v(TAG, "Built URI " + urlReview);
+            Log.v(TAG, "Built URI " + urlReview);
 
-        return urlReview;
-
+            return urlReview;
     }
 //
 
