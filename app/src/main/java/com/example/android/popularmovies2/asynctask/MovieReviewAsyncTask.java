@@ -32,8 +32,8 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
         if (params.length == 0) {
             return null;
         }
-        String reviewId= params[0];
-        URL movieRequestUrl = NetworkUtils.buildUrlReview(reviewId);
+        String movieId= params[0];
+        URL movieRequestUrl = NetworkUtils.buildUrlReview(movieId);
 
         try {
             String jsonMovieReviewResponse = NetworkUtils
