@@ -46,7 +46,9 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         poster = (ImageView) findViewById(R.id.imageView);
 
         MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-        myReviewTask.execute("reviewId");
+        myReviewTask.execute("263115");
+
+        returnReviewData(simpleJsonMovieReviewData);
 
         Movie movie;
         if (getIntent() != null && getIntent().getExtras() != null) {
@@ -89,7 +91,6 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
-        returnReviewData(simpleJsonMovieReviewData);
 
         TextView movieReview = (TextView) findViewById(R.id.movie_review);
         movieReview.setText(review.getMovieReview());
