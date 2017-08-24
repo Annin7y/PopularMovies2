@@ -39,6 +39,8 @@ public class Movie implements Parcelable {
      */
     private String releaseDate;
 
+    private String movieId;
+
 
     public Movie(String posterUrl, String originalTitle, String movieOverview, String voteAverage, String releaseDate) {
         this.posterUrl = posterUrl;
@@ -46,6 +48,7 @@ public class Movie implements Parcelable {
         this.movieOverview = movieOverview;
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
+
     }
 
     public String getPosterUrl() {
@@ -88,12 +91,21 @@ public class Movie implements Parcelable {
         this.releaseDate = releaseDate;
     }
 
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
+
+    public int getMovieId(int movieId) {
+        return movieId;
+    }
+
     protected Movie(Parcel in) {
         posterUrl = in.readString();
         originalTitle = in.readString();
         movieOverview = in.readString();
         voteAverage = in.readString();
         releaseDate = in.readString();
+        movieId = in.readString();
     }
 
     @Override

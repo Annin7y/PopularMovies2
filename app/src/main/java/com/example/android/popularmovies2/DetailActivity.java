@@ -47,9 +47,10 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         poster = (ImageView) findViewById(R.id.imageView);
 
         MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-        myReviewTask.execute("MOVIE_ID");
+        myReviewTask.execute();
 
-        returnReviewData(simpleJsonMovieReviewData);
+
+         returnReviewData(simpleJsonMovieReviewData);
 
         Movie movie;
         if (getIntent() != null && getIntent().getExtras() != null) {
@@ -95,6 +96,7 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         movieReview.setText(review.getMovieReview());
         TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
         reviewAuthor.setText(review.getReviewAuthor());
+
     }
 }
 
