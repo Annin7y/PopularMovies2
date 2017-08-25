@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity implements AsyncTaskReviewInterface {
 
-   // implements AsyncTaskReviewInterface {
+    // implements AsyncTaskReviewInterface {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -36,6 +36,8 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
     ImageView poster;
 
+    private static int MOVIE_ID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
 
         poster = (ImageView) findViewById(R.id.imageView);
+
+        movie.getMovieId();
 
         MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
         myReviewTask.execute();
@@ -97,7 +101,7 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
     }
 
-    public void loadReview(Movie movie){
+    public void loadReview(Movie movie) {
 
         MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
         myReviewTask.execute();
