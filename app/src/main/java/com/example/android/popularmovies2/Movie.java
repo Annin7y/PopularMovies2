@@ -95,7 +95,7 @@ public class Movie implements Parcelable {
         this.movieId = movieId;
     }
 
-    public int getMovieId(int movieId) {
+    public String getMovieId(String movieId) {
         return movieId;
     }
 
