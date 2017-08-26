@@ -55,7 +55,7 @@ public class NetworkUtils {
 
     private static final String API_KEY = "api_key";
 
-    private static final String MOVIE_ID = "<Movie_ID>";
+    private static final String MOVIE_ID = "id";
 
     private static final String BASE_URL = "https://api.themoviedb.org/3/movie";
 
@@ -290,7 +290,7 @@ public class NetworkUtils {
 
                 String releaseDate = currentMovie.getString(KEY_RELEASE_DATE);
 
-                String movieId = currentMovie.getInt(MOVIE_ID);
+                String movieId = currentMovie.getString(MOVIE_ID);
 
                 Movie movie = new Movie(posterName, movieName, overviewName, voteName, releaseDate,movieId);
                 movies.add(movie);

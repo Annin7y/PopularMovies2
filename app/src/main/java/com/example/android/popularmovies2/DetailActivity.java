@@ -23,7 +23,6 @@ public class DetailActivity extends AppCompatActivity  {
 
     ImageView poster;
 
-    public String movieId;
     private MovieReview review;
 
     @Override
