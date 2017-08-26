@@ -79,8 +79,8 @@
             android:textSize="@dimen/text_size"
             tools:text="@string/release_date" />
 
-        <TextView
-            android:id="@+id/author_review"
+        <Button
+            android:id="@+id/reviewButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/release_date"
@@ -88,23 +88,11 @@
             android:layout_marginLeft="@dimen/text_margin"
             android:layout_marginRight="@dimen/text_margin"
             android:layout_marginStart="@dimen/text_margin"
+            android:focusable="false"
+            android:onClick="onClickAddReview"
             android:padding="@dimen/text_padding"
-            android:textSize="@dimen/text_size"
-            tools:text="@string/movie_author" />
-
-        <TextView
-            android:id="@+id/movie_review"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/release_date"
-            android:layout_marginEnd="@dimen/text_margin"
-            android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginRight="@dimen/text_margin"
-            android:layout_marginStart="@dimen/text_margin"
-            android:padding="@dimen/text_padding"
-            android:textSize="@dimen/text_size"
-            tools:text="@string/movie_review" />
-
+            android:text="@string/review_button"
+            android:textSize="25sp" />
 
     </RelativeLayout>
 </ScrollView>

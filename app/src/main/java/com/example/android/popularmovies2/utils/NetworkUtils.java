@@ -290,7 +290,9 @@ public class NetworkUtils {
 
                 String releaseDate = currentMovie.getString(KEY_RELEASE_DATE);
 
-                Movie movie = new Movie(posterName, movieName, overviewName, voteName, releaseDate);
+                String movieId = currentMovie.getInt(MOVIE_ID);
+
+                Movie movie = new Movie(posterName, movieName, overviewName, voteName, releaseDate,movieId);
                 movies.add(movie);
 
             }

@@ -42,60 +42,61 @@ public class Movie implements Parcelable {
     private String movieId;
 
 
-    public Movie(String posterUrl, String originalTitle, String movieOverview, String voteAverage, String releaseDate) {
+    public Movie(String posterUrl, String originalTitle, String movieOverview, String voteAverage, String releaseDate, String movieId) {
         this.posterUrl = posterUrl;
         this.originalTitle = originalTitle;
         this.movieOverview = movieOverview;
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
+        this.movieId = movieId;
 
-    }
-
-    public String getPosterUrl() {
-        return BASE_POSTER_URL + posterUrl;
     }
 
     public void setPosterUrl(String poster) {
         this.posterUrl = poster;
     }
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getPosterUrl() {
+        return BASE_POSTER_URL + posterUrl;
     }
 
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
-    public String getMovieOverview() {
-        return movieOverview;
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
     public void setMovieOverview(String movieOverview) {
         this.movieOverview = movieOverview;
     }
 
-    public String getVoteAverage() {
-        return voteAverage;
+    public String getMovieOverview() {
+        return movieOverview;
     }
 
     public void setVoteAverage(String voteAverage) {
         this.voteAverage = voteAverage;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getVoteAverage() {
+        return voteAverage;
     }
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
     public void setMovieId(String movieId) {
         this.movieId = movieId;
     }
 
-    public String getMovieId(String movieId) {
+    public String getMovieId() {
         return movieId;
     }
 
@@ -120,6 +121,7 @@ public class Movie implements Parcelable {
         dest.writeString(movieOverview);
         dest.writeString(voteAverage);
         dest.writeString(releaseDate);
+        dest.writeString(movieId);
 
     }
 
