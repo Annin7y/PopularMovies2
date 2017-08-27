@@ -3,6 +3,7 @@ package com.example.android.popularmovies2;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,6 +35,10 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
     private MovieReviewAdapter movieReviewAdapter;
 
+    public String movieId;
+
+    RecyclerView.LayoutManager mReviewLayoutManager;
+
     ImageView poster;
 
 
@@ -47,12 +52,16 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
 
-        movie.getMovieId();
+        RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
 
-        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-        myReviewTask.execute("reviews");
+        movieId = movie.getMovieId();
 
         poster = (ImageView) findViewById(R.id.imageView);
+
+        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
+        myReviewTask.execute(movieId);
+
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             movie = getIntent().getExtras().getParcelable("Movie");
@@ -60,6 +69,7 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
                     .load(movie.getPosterUrl())
                     .into(poster);
 
+           // movie.getMovieId();
             TextView originalTitle = (TextView) findViewById(R.id.original_title);
             originalTitle.setText(movie.getOriginalTitle());
 

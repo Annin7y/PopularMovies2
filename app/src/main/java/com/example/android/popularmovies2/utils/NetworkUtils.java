@@ -115,12 +115,12 @@ public class NetworkUtils {
     private static ArrayList<MovieReview> fetchMoviesReviewData(String requestReviewUrl) {
 
         // Create a URL object
-        URL urlReview = buildUrlReview(requestReviewUrl);
+        URL url= buildUrlReview(requestReviewUrl);
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonReviewResponse = null;
         try {
-            jsonReviewResponse = makeHttpReviewRequest(urlReview);
+            jsonReviewResponse = makeHttpReviewRequest(url);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
@@ -134,7 +134,7 @@ public class NetworkUtils {
 
 
     public static URL buildUrlReview(String movieId) {
-        URL urlReview = null;
+        URL url = null;
         try {
 
             Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
@@ -142,15 +142,15 @@ public class NetworkUtils {
                     .appendPath("reviews")
                     .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                     .build();
-            urlReview = new URL(movieReviewQueryUri.toString());
+            url = new URL(movieReviewQueryUri.toString());
         }
             catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 
-            Log.v(TAG, "Built URI " + urlReview);
+            Log.v(TAG, "Built URI " + url);
 
-            return urlReview;
+            return url;
     }
 //
 
