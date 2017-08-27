@@ -55,12 +55,12 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
 
-        movieId = movie.getMovieId();
-
-        poster = (ImageView) findViewById(R.id.imageView);
-
         MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-        myReviewTask.execute(movieId);
+
+        myReviewTask.execute("id");
+
+        movieId = movie.getMovieId();
+        poster = (ImageView) findViewById(R.id.imageView);
 
 
         if (getIntent() != null && getIntent().getExtras() != null) {
