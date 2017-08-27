@@ -136,14 +136,15 @@ public class NetworkUtils {
     public static URL buildUrlReview(String movieId) {
         URL url = null;
         try {
-
-            Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
-                    .appendPath(String.valueOf(movieId))
-                    .appendPath("reviews")
-                    .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
-                    .build();
-            url = new URL(movieReviewQueryUri.toString());
-        }
+            if (movieId.equals(MOVIE_ID)) {
+                Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
+                        .appendPath(String.valueOf(movieId))
+                        .appendPath("reviews")
+                        .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
+                        .build();
+                url = new URL(movieReviewQueryUri.toString());
+            }
+            }
             catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -327,7 +328,6 @@ public class NetworkUtils {
                 // Get a single movie description at position i within the list of movies
                 JSONObject currentMovieReview = movieReviewArray.getJSONObject(i);
 
-                // Extract the value for the key called "poster_title"
                 String authorName = currentMovieReview.getString(KEY_REVIEW_AUTHOR);
 
                 String reviewName = currentMovieReview.getString(KEY_REVIEW_CONTENT);
