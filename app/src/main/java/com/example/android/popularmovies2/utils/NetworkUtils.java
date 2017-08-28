@@ -134,7 +134,7 @@ public class NetworkUtils {
 
 
     public static URL buildUrlReview(String movieId) {
-        URL url = null;
+        URL urlReview = null;
         try {
             if (movieId.equals(MOVIE_ID)) {
                 Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
@@ -142,16 +142,16 @@ public class NetworkUtils {
                         .appendPath("reviews")
                         .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                         .build();
-                url = new URL(movieReviewQueryUri.toString());
+                urlReview = new URL(movieReviewQueryUri.toString());
             }
             }
             catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 
-            Log.v(TAG, "Built URI " + url);
+            Log.v(TAG, "Built URI " + urlReview);
 
-            return url;
+            return urlReview;
     }
 //
 
