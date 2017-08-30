@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
     Movie movie;
 
-    MovieReview review;
+    public MovieReview review;
 
     private MovieReviewAdapter movieReviewAdapter;
 
@@ -41,6 +41,9 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
     ImageView poster;
 
+    TextView movieReview;
+
+    TextView reviewAuthor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +55,16 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
 
-        RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
 
         poster = (ImageView) findViewById(R.id.imageView);
 
+        movieReview = (TextView) findViewById(R.id.movie_review);
+        reviewAuthor = (TextView) findViewById(R.id.author_review);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("MovieReview",simpleJsonMovieReviewData);
 
 
         if (getIntent() != null && getIntent().getExtras() != null) {
@@ -66,7 +74,6 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
                     .into(poster);
 
             movieId = movie.getMovieId();
-
 
             TextView originalTitle = (TextView) findViewById(R.id.original_title);
             originalTitle.setText(movie.getOriginalTitle());
@@ -97,23 +104,21 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         }
         MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
         myReviewTask.execute(movieId);
-        returnReviewData(simpleJsonMovieReviewData);
-
-
-//        if (getIntent() != null && getIntent().getExtras() != null) {
-//            review = getIntent().getExtras().getParcelable("Review");
-//            TextView movieReview = (TextView) findViewById(R.id.movie_review);
-//            movieReview.setText(review.getMovieReview());
-//            TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
-//            reviewAuthor.setText(review.getReviewAuthor());
-//        }
+       // returnReviewData(simpleJsonMovieReviewData);
 
     }
+
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
+//        TextView movieReview = (TextView) findViewById(R.id.movie_review);
+//        movieReview.setText(review.getMovieReview());
+//        TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
+//        reviewAuthor.setText(review.getReviewAuthor());
+
     }
+    
 }
 
 

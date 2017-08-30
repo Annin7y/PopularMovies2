@@ -55,6 +55,7 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
         super.onPostExecute(mMovieReviewList);
         if (mMovieReviewList != null) {
             listener.returnReviewData(mMovieReviewList);
+
         }
     }
 }

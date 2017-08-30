@@ -2,9 +2,9 @@ package com.example.android.popularmovies2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
 import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
-import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import com.example.android.popularmovies2.decoration.DividerItemDecoration;
 import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
 
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
-
+    public MovieReview review;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
+
 
         MovieAsyncTask myTask = new MovieAsyncTask(this);
         myTask.execute("most_popular");
