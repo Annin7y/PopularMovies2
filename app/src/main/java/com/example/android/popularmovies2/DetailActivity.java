@@ -58,7 +58,6 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
 
-
         poster = (ImageView) findViewById(R.id.imageView);
 
         movieReview = (TextView) findViewById(R.id.movie_review);
@@ -67,7 +66,6 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("MovieReview", simpleJsonMovieReviewData);
 
-//        loadMovieReviewData();
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             movie = getIntent().getExtras().getParcelable("Movie");
@@ -107,8 +105,9 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
             releaseDate.setText(finalDate);
         }
-//        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-//        myReviewTask.execute(movieId);
+        review.getMovieReview();
+        review.getReviewAuthor();
+
     }
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
@@ -117,15 +116,8 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
     }
 
-    private void loadMovieReviewData() {
-        MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-        returnReviewData(simpleJsonMovieReviewData);
-        TextView movieReview = (TextView) findViewById(R.id.movie_review);
-        movieReview.setText(review.getMovieReview());
-        TextView reviewAuthor = (TextView) findViewById(R.id.author_review);
-        reviewAuthor.setText(review.getReviewAuthor());
     }
-}
+
 
 
 

@@ -36,11 +36,13 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder {
 
         public TextView movieReview;
+        public TextView reviewAuthor;
 
 
         public MovieReviewAdapterViewHolder(View view) {
             super(view);
             movieReview = (TextView) view.findViewById(R.id.movie_review);
+            reviewAuthor  = (TextView) view.findViewById(R.id.author_review);
 
         }
 
@@ -67,6 +69,7 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
 
         MovieReview review = movieReviewList.get(position);
         holder.movieReview.setText(review.getMovieReview());
+        holder.reviewAuthor.setText(review.getReviewAuthor());
 
     }
 

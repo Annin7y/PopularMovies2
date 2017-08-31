@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
-    public MovieReview review;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
