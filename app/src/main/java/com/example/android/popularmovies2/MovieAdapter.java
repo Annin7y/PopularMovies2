@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
-
     private ArrayList<Movie> moviesList = new ArrayList<Movie>();
     private Context context;
     private MovieAdapterOnClickHandler mClickHandler;

@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                         R.drawable.item_decorator)));
+
+
+
     }
 
     @Override

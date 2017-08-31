@@ -20,6 +20,7 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     private ArrayList<MovieReview> movieReviewList = new ArrayList<MovieReview>();
     private Context context;
 
+
     /**
      * Creates a MovieAdapter.
      */
@@ -43,15 +44,15 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
 
         }
 
-        public TextView getMovieReview() {
-            return movieReview;
-        }
+//        public TextView getMovieReview() {
+//            return movieReview;
+//        }
     }
 
     @Override
     public MovieReviewAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.movie_list_item;
+        int layoutIdForListItem = R.layout.review_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
@@ -62,8 +63,10 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     public void onBindViewHolder(MovieReviewAdapterViewHolder holder, int position) {
 
         //Binding data
-        final MovieReview movieReviewView = movieReviewList.get(position);
+      //  final MovieReview movieReviewView = movieReviewList.get(position);
 
+        MovieReview review = movieReviewList.get(position);
+        holder.movieReview.setText(review.getMovieReview());
 
     }
 
