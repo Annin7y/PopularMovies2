@@ -46,9 +46,12 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
 
         }
 
-//        public TextView getMovieReview() {
-//            return movieReview;
-//        }
+       public TextView getMovieReview() {
+          return movieReview;
+       }
+        public TextView getReviewAuthor() {
+            return reviewAuthor;
+        }
     }
 
     @Override

@@ -19,8 +19,6 @@ import java.util.Date;
 
 public class DetailActivity extends AppCompatActivity implements AsyncTaskReviewInterface {
 
-    // implements AsyncTaskReviewInterface {
-
     private static final String TAG = DetailActivity.class.getSimpleName();
 
     private ArrayList<MovieReview> simpleJsonMovieReviewData = new ArrayList<>();
@@ -63,52 +61,49 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         movieReview = (TextView) findViewById(R.id.movie_review);
         reviewAuthor = (TextView) findViewById(R.id.author_review);
 
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList("MovieReview", simpleJsonMovieReviewData);
+            if (getIntent() != null && getIntent().getExtras() != null) {
+                movie = getIntent().getExtras().getParcelable("Movie");
+                Picasso.with(this)
+                        .load(movie.getPosterUrl())
+                        .into(poster);
 
+                movieId = movie.getMovieId();
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            movie = getIntent().getExtras().getParcelable("Movie");
-            Picasso.with(this)
-                    .load(movie.getPosterUrl())
-                    .into(poster);
+                MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
+                myReviewTask.execute(movieId);
+                
+                movieReview.setText(review.getMovieReview());
 
-            movieId = movie.getMovieId();
+                TextView originalTitle = (TextView) findViewById(R.id.original_title);
+                originalTitle.setText(movie.getOriginalTitle());
 
-            TextView originalTitle = (TextView) findViewById(R.id.original_title);
-            originalTitle.setText(movie.getOriginalTitle());
+                TextView movieOverview = (TextView) findViewById(R.id.movie_overview);
+                movieOverview.setText(movie.getMovieOverview());
 
-            TextView movieOverview = (TextView) findViewById(R.id.movie_overview);
-            movieOverview.setText(movie.getMovieOverview());
+                TextView voteAverage = (TextView) findViewById(R.id.vote_average);
+                voteAverage.setText(movie.getVoteAverage());
 
-            TextView voteAverage = (TextView) findViewById(R.id.vote_average);
-            voteAverage.setText(movie.getVoteAverage());
+                TextView releaseDate = (TextView) findViewById(R.id.release_date);
+                releaseDate.setText(movie.getReleaseDate());
 
-            TextView releaseDate = (TextView) findViewById(R.id.release_date);
-            releaseDate.setText(movie.getReleaseDate());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
 
-            MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
-            myReviewTask.execute(movieId);
+                try {
+                    date = simpleDateFormat.parse(movie.getReleaseDate());
+                    date.toString();
 
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = null;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy");
+                String finalDate = newDateFormat.format(date);
 
-            try {
-                date = simpleDateFormat.parse(movie.getReleaseDate());
-                date.toString();
-
-            } catch (ParseException e) {
-                e.printStackTrace();
+                releaseDate.setText(finalDate);
             }
-            SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy");
-            String finalDate = newDateFormat.format(date);
-
-            releaseDate.setText(finalDate);
         }
-        review.getMovieReview();
-        review.getReviewAuthor();
+//        returnReviewData(simpleJsonMovieReviewData);
 
-    }
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
@@ -116,8 +111,7 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
     }
 
-    }
-
+}
 
 
 
