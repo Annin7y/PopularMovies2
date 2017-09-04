@@ -46,13 +46,13 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
 
         }
 
-       public TextView getMovieReview() {
-          return movieReview;
-       }
-        public TextView getReviewAuthor() {
-            return reviewAuthor;
-        }
-    }
+//       public TextView getMovieReview() {
+//          return movieReview;
+//       }
+//        public TextView getReviewAuthor() {
+//            return reviewAuthor;
+//        }
+   }
 
     @Override
     public MovieReviewAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -68,11 +68,10 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     public void onBindViewHolder(MovieReviewAdapterViewHolder holder, int position) {
 
         //Binding data
-      //  final MovieReview movieReviewView = movieReviewList.get(position);
+       final MovieReview movieReviewView = movieReviewList.get(position);
 
-        MovieReview review = movieReviewList.get(position);
-        holder.movieReview.setText(review.getMovieReview());
-        holder.reviewAuthor.setText(review.getReviewAuthor());
+        holder.movieReview.setText(movieReviewView.getMovieReview());
+        holder.reviewAuthor.setText(movieReviewView.getReviewAuthor());
 
     }
 

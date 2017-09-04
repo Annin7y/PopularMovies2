@@ -100,6 +100,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public int getItemCount()
+
     {
         return moviesList.size();
     }

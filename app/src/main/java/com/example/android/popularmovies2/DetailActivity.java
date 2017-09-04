@@ -61,6 +61,7 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         movieReview = (TextView) findViewById(R.id.movie_review);
         reviewAuthor = (TextView) findViewById(R.id.author_review);
 
+
             if (getIntent() != null && getIntent().getExtras() != null) {
                 movie = getIntent().getExtras().getParcelable("Movie");
                 Picasso.with(this)
@@ -71,8 +72,6 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
                 MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
                 myReviewTask.execute(movieId);
-                
-                movieReview.setText(review.getMovieReview());
 
                 TextView originalTitle = (TextView) findViewById(R.id.original_title);
                 originalTitle.setText(movie.getOriginalTitle());
@@ -101,6 +100,7 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
                 releaseDate.setText(finalDate);
             }
+      //  movieReview.setText(review.getMovieReview());
         }
 //        returnReviewData(simpleJsonMovieReviewData);
 

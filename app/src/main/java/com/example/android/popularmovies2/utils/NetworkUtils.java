@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.android.popularmovies2.BuildConfig;
 import com.example.android.popularmovies2.Movie;
 import com.example.android.popularmovies2.MovieReview;
+import com.example.android.popularmovies2.MovieTrailer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +49,10 @@ public class NetworkUtils {
     private static final String KEY_REVIEW_AUTHOR = "author";
 
     private static final String KEY_REVIEW_CONTENT = "content";
+
+    private static final String KEY_TRAILER_NAME = "name";
+
+    private static final String KEY_TRAILER_KEY = "key";
 
     public static final String SORT_BY_POPULAR = "most_popular";
 
@@ -115,7 +120,7 @@ public class NetworkUtils {
     private static ArrayList<MovieReview> fetchMoviesReviewData(String requestReviewUrl) {
 
         // Create a URL object
-        URL urlReview= buildUrlReview(requestReviewUrl);
+        URL urlReview = buildUrlReview(requestReviewUrl);
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonReviewResponse = null;
@@ -136,24 +141,60 @@ public class NetworkUtils {
     public static URL buildUrlReview(String movieId) {
         URL urlReview = null;
         try {
-          //  if (movieId.equals(MOVIE_ID)) {
-                Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
-                        .appendPath(String.valueOf(movieId))
-                        .appendPath("reviews")
-                        .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
-                        .build();
-                urlReview = new URL(movieReviewQueryUri.toString());
+            Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
+                    .appendPath(String.valueOf(movieId))
+                    .appendPath("reviews")
+                    .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
+                    .build();
+            urlReview = new URL(movieReviewQueryUri.toString());
 
-            }
-            catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-            Log.v(TAG, "Built URI " + urlReview);
+        Log.v(TAG, "Built URI " + urlReview);
 
-            return urlReview;
+        return urlReview;
     }
-//
+
+    private static ArrayList<MovieTrailer> fetchMoviesTrailerData(String requestTrailerUrl) {
+
+        // Create a URL object
+        URL urlTrailer = buildUrlTrailer(requestTrailerUrl);
+
+        // Perform HTTP request to the URL and receive a JSON response back
+        String jsonTrailerResponse = null;
+        try {
+            jsonTrailerResponse = makeHttpTrailerRequest(urlTrailer);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
+        }
+
+        // Extract relevant fields from the JSON response and create a list of {@link Movie}s
+        ArrayList<MovieTrailer> moviesTrailerList = extractFeatureFromTrailerJson(jsonTrailerResponse);
+
+        // Return the list of {@link Movie}s
+        return moviesTrailerList;
+    }
+
+    public static URL buildUrlTrailer(String movieId) {
+        URL urlTrailer = null;
+        try {
+            Uri movieTrailerQueryUri = Uri.parse(BASE_URL).buildUpon()
+                    .appendPath(String.valueOf(movieId))
+                    .appendPath("videos")
+                    .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
+                    .build();
+            urlTrailer = new URL(movieTrailerQueryUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI " + urlTrailer);
+
+        return urlTrailer;
+    }
+
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.
@@ -241,6 +282,48 @@ public class NetworkUtils {
         return jsonReviewResponse;
     }
 
+    public static String makeHttpTrailerRequest(URL urlTrailer) throws IOException {
+        String jsonTrailerResponse = "";
+        Log.i("URLREVIEW: ", urlTrailer.toString());
+        // If the URL is null, then return early.
+        if (urlTrailer == null) {
+            return jsonTrailerResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try {
+            urlConnection = (HttpURLConnection) urlTrailer.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                jsonTrailerResponse = readFromStream(inputStream);
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving movie review JSON results.", e);
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null) {
+                // Closing the input stream could throw an IOException, which is why
+                // the makeHttpRequest(URL url) method signature specifies than an IOException
+                // could be thrown.
+                inputStream.close();
+            }
+        }
+        return jsonTrailerResponse;
+    }
+
+
     /**
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
@@ -293,7 +376,7 @@ public class NetworkUtils {
 
                 String movieId = currentMovie.getString(MOVIE_ID);
 
-                Movie movie = new Movie(posterName, movieName, overviewName, voteName, releaseDate,movieId);
+                Movie movie = new Movie(posterName, movieName, overviewName, voteName, releaseDate, movieId);
                 movies.add(movie);
 
             }
@@ -347,4 +430,44 @@ public class NetworkUtils {
         // Return the list of movies
         return moviesReviewList;
     }
+
+    public static ArrayList<MovieTrailer> extractFeatureFromTrailerJson(String movieTrailerJSON) {
+        // If the JSON string is empty or null, then return early.
+        if (TextUtils.isEmpty(movieTrailerJSON)) {
+            return null;
+        }
+        ArrayList<MovieTrailer> moviesTrailerList = new ArrayList<>();
+        try {
+
+            // Create a JSONObject from the JSON response string
+            JSONObject baseJsonResponse = new JSONObject(movieTrailerJSON);
+
+            JSONArray movieTrailerArray = baseJsonResponse.getJSONArray("results");
+
+// For each movie review in the movieReviewArray, create an {@link MovieReview} object
+            for (int i = 0; i < movieTrailerArray.length(); i++) {
+
+                // Get a single movie description at position i within the list of movies
+                JSONObject currentMovieTrailer = movieTrailerArray.getJSONObject(i);
+
+                String trailerName = currentMovieTrailer.getString(KEY_TRAILER_NAME);
+
+                String trailerKey = currentMovieTrailer.getString(KEY_TRAILER_KEY);
+
+                MovieTrailer trailer = new MovieTrailer(trailerName, trailerKey);
+                moviesTrailerList.add(trailer);
+
+            }
+
+        } catch (JSONException e) {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e("QueryUtils", "Problem parsing movies JSON review results", e);
+        }
+
+        // Return the list of movies
+        return moviesTrailerList;
+    }
+
 }

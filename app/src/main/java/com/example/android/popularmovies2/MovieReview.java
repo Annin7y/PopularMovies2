@@ -25,21 +25,20 @@ public class MovieReview implements Parcelable {
         this.reviewAuthor = reviewAuthor;
     }
 
+    public void setMovieReview(String movieReview) {
+        this.movieReview = movieReview;
+    }
 
     public String getMovieReview() {
         return movieReview;
     }
 
-    public void setMovieReview(String movieOverview) {
-        this.movieReview = movieReview;
+    public void setReviewAuthor(String reviewAuthor) {
+        this.reviewAuthor = reviewAuthor;
     }
 
     public String getReviewAuthor() {
         return reviewAuthor;
-    }
-
-    public void setReviewAuthor(String reviewAuthor) {
-        this.reviewAuthor = reviewAuthor;
     }
 
 
