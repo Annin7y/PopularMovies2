@@ -1,4 +1,4 @@
-package com.example.android.popularmovies2;
+package com.example.android.popularmovies2.recyclerviewadapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.android.popularmovies2.MovieReview;
+import com.example.android.popularmovies2.R;
 
 import java.util.ArrayList;
 
@@ -45,13 +48,6 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
             reviewAuthor  = (TextView) view.findViewById(R.id.author_review);
 
         }
-
-//       public TextView getMovieReview() {
-//          return movieReview;
-//       }
-//        public TextView getReviewAuthor() {
-//            return reviewAuthor;
-//        }
    }
 
     @Override

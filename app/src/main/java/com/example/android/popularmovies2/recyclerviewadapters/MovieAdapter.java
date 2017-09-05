@@ -1,4 +1,4 @@
-package com.example.android.popularmovies2;
+package com.example.android.popularmovies2.recyclerviewadapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.popularmovies2.Movie;
+import com.example.android.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
  */
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
+
+    private static final String TAG = MovieAdapter.class.getSimpleName();
 
     private ArrayList<Movie> moviesList = new ArrayList<Movie>();
     private Context context;

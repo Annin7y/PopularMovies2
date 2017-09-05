@@ -9,7 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
+import com.example.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
 import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
+import com.example.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
+import com.example.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
+import com.example.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -17,11 +21,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DetailActivity extends AppCompatActivity implements AsyncTaskReviewInterface {
+public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler,AsyncTaskReviewInterface, AsyncTaskTrailerInterface{
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
     private ArrayList<MovieReview> simpleJsonMovieReviewData = new ArrayList<>();
+
+    private ArrayList<MovieTrailer> simpleJsonMovieTrailerData = new ArrayList<>();
 
     private Context context;
 
@@ -32,6 +38,8 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
     public MovieReview review;
 
     private MovieReviewAdapter movieReviewAdapter;
+
+    private MovieTrailerAdapter movieTrailerAdapter;
 
     public String movieId;
 
@@ -51,7 +59,9 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         context = getApplicationContext();
         mRecyclerViewReview = (RecyclerView) findViewById(R.id.recyclerview_detail);
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
+        movieTrailerAdapter = new MovieTrailerAdapter(this,simpleJsonMovieTrailerData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
+        mRecyclerViewReview.setAdapter(movieTrailerAdapter);
 
         RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
@@ -72,6 +82,9 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
 
                 MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
                 myReviewTask.execute(movieId);
+
+                MovieTrailerAsyncTask myTrailerTask = new MovieTrailerAsyncTask(this);
+                myTrailerTask.execute(movieId);
 
                 TextView originalTitle = (TextView) findViewById(R.id.original_title);
                 originalTitle.setText(movie.getOriginalTitle());
@@ -110,6 +123,16 @@ public class DetailActivity extends AppCompatActivity implements AsyncTaskReview
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
 
     }
+    public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
+        movieTrailerAdapter = new MovieTrailerAdapter(this,simpleJsonMovieTrailerData, DetailActivity.this);
+        mRecyclerViewReview.setAdapter(movieReviewAdapter);
+
+    }
+    @Override
+    public void onClick(MovieTrailer trailer) {
+
+    }
+
 
 }
 

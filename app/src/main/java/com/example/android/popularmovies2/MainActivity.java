@@ -18,6 +18,7 @@ import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
 import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
 import com.example.android.popularmovies2.decoration.DividerItemDecoration;
 import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
+import com.example.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 
 import java.util.ArrayList;
 

@@ -9,5 +9,5 @@
     <string name="release_date">2012-07-14</string>
     <string name="movie_review">A solid thriller</string>
     <string name="movie_author">Bob Smith</string>
-    <string name="review_button">Get the review for this movie</string>
+    <string name="movie_trailer">Watch the trailer!</string>
 </resources>
