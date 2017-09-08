@@ -33,6 +33,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     private RecyclerView mRecyclerViewReview;
 
+    private RecyclerView mRecyclerViewTrailer;
+
     Movie movie;
 
     public MovieReview review;
@@ -44,6 +46,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public String movieId;
 
     RecyclerView.LayoutManager mReviewLayoutManager;
+
+    RecyclerView.LayoutManager mTrailerLayoutManager;
 
     ImageView poster;
 
@@ -61,10 +65,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
         movieTrailerAdapter = new MovieTrailerAdapter(this,simpleJsonMovieTrailerData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
-        mRecyclerViewReview.setAdapter(movieTrailerAdapter);
+        mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
 
         RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
+
+        RecyclerView.LayoutManager mTrailerLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerViewTrailer.setLayoutManager(mTrailerLayoutManager);
 
         poster = (ImageView) findViewById(R.id.imageView);
 
@@ -113,10 +120,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
                 releaseDate.setText(finalDate);
             }
-      //  movieReview.setText(review.getMovieReview());
         }
-//        returnReviewData(simpleJsonMovieReviewData);
-
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
@@ -132,7 +136,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void onClick(MovieTrailer trailer) {
 
     }
-
 
 }
 

@@ -84,8 +84,8 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
         return movieTrailerList.size();
     }
 
-    public void setMovieTrailerList(ArrayList<MovieTrailer> movieTrailerList) {
-        this.movieTrailerList.addAll(movieTrailerList);
+    public void setMovieTrailerList(ArrayList<MovieTrailer> mMovieTrailerList) {
+        this.movieTrailerList.addAll(mMovieTrailerList);
         notifyDataSetChanged();
     }
 }

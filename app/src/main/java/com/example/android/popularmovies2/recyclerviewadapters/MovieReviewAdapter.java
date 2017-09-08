@@ -76,8 +76,8 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
         return movieReviewList.size();
     }
 
-    public void setMovieReviewList(ArrayList<MovieReview> movieReviewList) {
-        this.movieReviewList.addAll(movieReviewList);
+    public void setMovieReviewList(ArrayList<MovieReview> mMovieReviewList) {
+        this.movieReviewList.addAll(mMovieReviewList);
         notifyDataSetChanged();
     }
 }
