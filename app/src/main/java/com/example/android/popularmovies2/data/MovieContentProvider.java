@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import static com.example.android.popularmovies2.data.MovieContract.MovieEntry.TABLE_NAME;
+
 /**
  * Created by Maino96-10022 on 9/6/2017.
  */
@@ -48,19 +50,19 @@ public class MovieContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         // Get access to the task database (to write new data to)
-        final SQLiteDatabase db = mTaskDbHelper.getWritableDatabase();
+        final SQLiteDatabase db = mMovieDbHelper.getWritableDatabase();
 
         // Write URI matching code to identify the match for the tasks directory
         int match = sUriMatcher.match(uri);
         Uri returnUri; // URI to be returned
 
         switch (match) {
-            case TASKS:
+            case MOVIES:
                 // Insert new values into the database
                 // Inserting values into tasks table
                 long id = db.insert(TABLE_NAME, null, values);
                 if (id > 0) {
-                    returnUri = ContentUris.withAppendedId(TaskContract.TaskEntry.CONTENT_URI, id);
+                    returnUri = ContentUris.withAppendedId(MovieContract.MovieEntry.CONTENT_URI, id);
                 } else {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
@@ -85,7 +87,7 @@ public class MovieContentProvider extends ContentProvider {
                         String[] selectionArgs, String sortOrder) {
 
         // Get access to underlying database (read-only for query)
-        final SQLiteDatabase db = mTaskDbHelper.getReadableDatabase();
+        final SQLiteDatabase db = mMovieDbHelper.getReadableDatabase();
 
         // Write URI match code and set a variable to return a Cursor
         int match = sUriMatcher.match(uri);
@@ -94,7 +96,7 @@ public class MovieContentProvider extends ContentProvider {
         // Query for the tasks directory and write a default case
         switch (match) {
             // Query for the tasks directory
-            case TASKS:
+            case MOVIES:
                 retCursor = db.query(TABLE_NAME,
                         projection,
                         selection,
@@ -121,34 +123,34 @@ public class MovieContentProvider extends ContentProvider {
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
 
         // Get access to the database and write URI matching code to recognize a single item
-        final SQLiteDatabase db = mTaskDbHelper.getWritableDatabase();
+        final SQLiteDatabase db = mMovieDbHelper.getWritableDatabase();
 
         int match = sUriMatcher.match(uri);
         // Keep track of the number of deleted tasks
-        int tasksDeleted; // starts as 0
+        int moviesDeleted; // starts as 0
 
         // Write the code to delete a single row of data
         // [Hint] Use selections to delete an item by its row ID
         switch (match) {
             // Handle the single item case, recognized by the ID included in the URI path
-            case TASK_WITH_ID:
+            case MOVIE_WITH_ID:
                 // Get the task ID from the URI path
                 String id = uri.getPathSegments().get(1);
                 // Use selections/selectionArgs to filter for this ID
-                tasksDeleted = db.delete(TABLE_NAME, "_id=?", new String[]{id});
+                moviesDeleted = db.delete(TABLE_NAME, "_id=?", new String[]{id});
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
         // Notify the resolver of a change and return the number of items deleted
-        if (tasksDeleted != 0) {
+        if (moviesDeleted != 0) {
             // A task was deleted, set notification
             getContext().getContentResolver().notifyChange(uri, null);
         }
 
         // Return the number of tasks deleted
-        return tasksDeleted;
+        return moviesDeleted;
     }
 
 
@@ -159,9 +161,9 @@ public class MovieContentProvider extends ContentProvider {
         int tasksUpdated;
         final int match = sUriMatcher.match(uri);
         switch (match) {
-            case TASK_WITH_ID:
+            case MOVIE_WITH_ID:
                 String id = uri.getPathSegments().get(1);
-                tasksUpdated = mTaskDbHelper.getWritableDatabase().update(TABLE_NAME, values, "_id=?", new String[]{id});
+                tasksUpdated = mMovieDbHelper.getWritableDatabase().update(TABLE_NAME, values, "_id=?", new String[]{id});
                 break;
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
