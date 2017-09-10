@@ -284,7 +284,7 @@ public class NetworkUtils {
 
     public static String makeHttpTrailerRequest(URL urlTrailer) throws IOException {
         String jsonTrailerResponse = "";
-        Log.i("URLREVIEW: ", urlTrailer.toString());
+        Log.i("URLTRAILER: ", urlTrailer.toString());
         // If the URL is null, then return early.
         if (urlTrailer == null) {
             return jsonTrailerResponse;

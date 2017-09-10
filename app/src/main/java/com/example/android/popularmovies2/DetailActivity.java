@@ -9,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
-import com.example.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
 import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
-import com.example.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import com.squareup.picasso.Picasso;
@@ -21,7 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler,AsyncTaskReviewInterface, AsyncTaskTrailerInterface{
+public class DetailActivity extends AppCompatActivity implements AsyncTaskReviewInterface {
+//MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler AsyncTaskTrailerInterface
+
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -63,15 +63,15 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         context = getApplicationContext();
         mRecyclerViewReview = (RecyclerView) findViewById(R.id.recyclerview_detail);
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
-        movieTrailerAdapter = new MovieTrailerAdapter(this,simpleJsonMovieTrailerData, context);
+//        movieTrailerAdapter = new MovieTrailerAdapter(this,simpleJsonMovieTrailerData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
-        mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
+//        mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
 
         RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
 
-        RecyclerView.LayoutManager mTrailerLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mRecyclerViewTrailer.setLayoutManager(mTrailerLayoutManager);
+//        RecyclerView.LayoutManager mTrailerLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        mRecyclerViewTrailer.setLayoutManager(mTrailerLayoutManager);
 
         poster = (ImageView) findViewById(R.id.imageView);
 
@@ -90,8 +90,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
                 myReviewTask.execute(movieId);
 
-                MovieTrailerAsyncTask myTrailerTask = new MovieTrailerAsyncTask(this);
-                myTrailerTask.execute(movieId);
+//                MovieTrailerAsyncTask myTrailerTask = new MovieTrailerAsyncTask(this);
+//                myTrailerTask.execute(movieId);
 
                 TextView originalTitle = (TextView) findViewById(R.id.original_title);
                 originalTitle.setText(movie.getOriginalTitle());
@@ -104,6 +104,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
                 TextView releaseDate = (TextView) findViewById(R.id.release_date);
                 releaseDate.setText(movie.getReleaseDate());
+
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = null;
@@ -127,15 +128,15 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
 
     }
-    public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
-        movieTrailerAdapter = new MovieTrailerAdapter(this,simpleJsonMovieTrailerData, DetailActivity.this);
-        mRecyclerViewReview.setAdapter(movieReviewAdapter);
-
-    }
-    @Override
-    public void onClick(MovieTrailer trailer) {
-
-    }
+//    public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
+//        movieTrailerAdapter = new MovieTrailerAdapter(this,simpleJsonMovieTrailerData, DetailActivity.this);
+//        mRecyclerViewReview.setAdapter(movieReviewAdapter);
+//
+//    }
+//    @Override
+//    public void onClick(MovieTrailer trailer) {
+//
+//    }
 
 }
 

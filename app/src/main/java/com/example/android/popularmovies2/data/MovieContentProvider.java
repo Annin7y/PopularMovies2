@@ -183,7 +183,7 @@ public class MovieContentProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case MOVIES:
-                return "vnd.android.cursor.dir" + "/" + MovieContract.CONTENT_AUTHORITY + "/" + MovieContract.PATH_MOVIES;
+                return MovieContract.MovieEntry.CONTENT_LIST_TYPE;
             case MOVIE_WITH_ID:
                 return "vnd.android.cursor.item" + "/" + MovieContract.CONTENT_AUTHORITY + "/" + MovieContract.PATH_MOVIES;
             default:

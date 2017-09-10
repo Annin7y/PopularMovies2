@@ -1,5 +1,6 @@
 package com.example.android.popularmovies2.data;
 
+import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -38,9 +39,19 @@ public class MovieContract {
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIES).build();
 
+        public static final String CONTENT_LIST_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
+
+
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
+
+
         public final static String _ID = BaseColumns._ID;
 
         public static final String TABLE_NAME = "movies";
+
+        public final static String COLUMN_MOVIES_ID= "id";
 
         public final static String COLUMN_MOVIES_TITLE = "original_title";
 
@@ -54,6 +65,5 @@ public class MovieContract {
 
         public final static String COLUMN_MOVIES_REVIEW_AUTHOR = "author";
 
-        public final static String COLUMN_MOVIES_ID= "id";
     }
 }
