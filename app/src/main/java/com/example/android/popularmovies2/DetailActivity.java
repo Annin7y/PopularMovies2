@@ -145,9 +145,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     @Override
     public void onClick(MovieTrailer movieTrailer) {
         Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
+        intent.setAction(Intent.ACTION_VIEW, NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey()));
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
-        intent.setData(NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey())));
         startActivity(intent);
 
     }
