@@ -52,7 +52,7 @@ public class NetworkUtils {
 
     private static final String KEY_TRAILER_NAME = "name";
 
-    private static final String KEY_TRAILER_KEY = "key";
+    public static final String KEY_TRAILER_KEY = "key";
 
     public static final String SORT_BY_POPULAR = "most_popular";
 
@@ -67,6 +67,8 @@ public class NetworkUtils {
     private static final String BASE_URL_POPULAR = "https://api.themoviedb.org/3/movie/popular";
 
     private static final String BASE_URL_TOP_RATED = "https://api.themoviedb.org/3/movie/top_rated";
+
+    private static final String BASE_YOUTUBE_URL= "https://www.youtube.com/watch?v=";
 
 
     public NetworkUtils() {
@@ -195,6 +197,22 @@ public class NetworkUtils {
         return urlTrailer;
     }
 
+    public static URL buildUrlYouTube(String trailerKey) {
+        URL urlYouTube = null;
+
+        try {
+            Uri youTubeTrailerQueryUri = Uri.parse(BASE_URL).buildUpon()
+                    .appendPath(String.valueOf(trailerKey))
+                    .build();
+            urlYouTube = new URL(youTubeTrailerQueryUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI " + urlYouTube);
+        return urlYouTube;
+
+    }
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.

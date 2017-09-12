@@ -39,6 +39,9 @@ public class Movie implements Parcelable {
      */
     private String releaseDate;
 
+    /**
+     * Movie id
+     */
     private String movieId;
 
 

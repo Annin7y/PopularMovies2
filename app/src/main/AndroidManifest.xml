@@ -29,10 +29,11 @@
         </activity>
 
         <provider
-            android:name="com.example.android.popularmovies2.data.MovieContentProvider"
+            android:name=".data.MovieContentProvider"
             android:authorities="com.example.android.popularmovies2"
-            android:exported="false"/>
+            android:exported="false" />
 
+        <activity android:name=".FavoritesActivity"></activity>
     </application>
 
 </manifest>

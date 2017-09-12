@@ -25,7 +25,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     private MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler mClickHandler;
 
     public interface MovieTrailerAdapterOnClickHandler {
-        void onClick(MovieTrailer trailerClick);
+        void onClick(MovieTrailer movieTrailer);
     }
 
     /**
@@ -53,8 +53,8 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            MovieTrailer trailerClick = movieTrailerList.get(adapterPosition);
-            mClickHandler.onClick(trailerClick);
+            MovieTrailer movieTrailer = movieTrailerList.get(adapterPosition);
+            mClickHandler.onClick(movieTrailer);
         }
 
 
