@@ -197,15 +197,16 @@ public class NetworkUtils {
         return urlTrailer;
     }
 
-    public static Uri buildUrlYouTube(String trailerKey) {
-
-            Uri youTubeTrailerQueryUri = Uri.parse(BASE_URL).buildUpon()
-                    .appendPath(String.valueOf(trailerKey))
-                    .build();
-
-        Log.v(TAG, "Built URI " + youTubeTrailerQueryUri);
-        return youTubeTrailerQueryUri;
-    }
+//    public static Uri buildUrlYouTube(String trailerKey) {
+//
+//            Uri youTubeTrailerQueryUri = Uri.parse(BASE_URL).buildUpon()
+//                    .appendPath(String.valueOf(trailerKey))
+//                    .build();
+//
+//
+//        Log.v(TAG, "Built URI " + youTubeTrailerQueryUri);
+//        return youTubeTrailerQueryUri;
+//    }
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.

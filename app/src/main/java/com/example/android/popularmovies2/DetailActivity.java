@@ -2,6 +2,7 @@ package com.example.android.popularmovies2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +16,6 @@ import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import com.example.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
-import com.example.android.popularmovies2.utils.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -144,14 +144,21 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     @Override
     public void onClick(MovieTrailer movieTrailer) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW, NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey()));
-        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-        startActivity(intent);
+
+        Uri.Builder youtubeUri = new Uri.Builder();
+       		youtubeUri.scheme("https");
+        		youtubeUri.authority("www.youtube.com");
+       		    youtubeUri.path("watch");
+        		youtubeUri.appendQueryParameter("v", new StringBuilder("\"").append(movieTrailer.getTrailerKey()).append("\" trailer").toString());
+
+       		StringBuilder youtubeUriStr = new StringBuilder("https://www.youtube.com/watch?v=");
+        		youtubeUriStr.append(new StringBuilder("\"").append(Uri.encode(movieTrailer.getTrailerKey())).append("\"+trailer").toString());
+        		Intent myIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(youtubeUriStr.toString()));
+            startActivity(myIntent);
+
 
     }
 }
-
 
 
 
