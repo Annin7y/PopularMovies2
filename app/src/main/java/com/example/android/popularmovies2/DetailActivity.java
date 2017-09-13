@@ -1,13 +1,10 @@
 package com.example.android.popularmovies2;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -146,17 +143,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     @Override
     public void onClick(MovieTrailer movieTrailer) {
 
-      Uri.Builder youtubeUri = new Uri.Builder();
-      		youtubeUri.scheme("https");
-       		youtubeUri.authority("www.youtube.com");
-      		    youtubeUri.path("watch");
-       		youtubeUri.appendQueryParameter("v", new StringBuilder("").append(movieTrailer.getTrailerKey()).toString());
-
-//       		StringBuilder youtubeUriStr = new StringBuilder("https://www.youtube.com/watch?v=");
-//        		youtubeUriStr.append(new StringBuilder("\"").append(Uri.encode(movieTrailer.getTrailerKey())).toString());
-        		Intent myIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(youtubeUri.toString()));
-            startActivity(myIntent);
-        Log.i("url",youtubeUri.toString());
     }
 }
 
