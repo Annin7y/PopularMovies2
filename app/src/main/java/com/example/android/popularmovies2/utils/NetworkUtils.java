@@ -203,7 +203,6 @@ public class NetworkUtils {
                     .build();
 
 
-
         Log.v(TAG, "Built URI " + movieTrailerQueryUri);
 
         return movieTrailerQueryUri;
