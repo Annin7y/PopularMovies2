@@ -196,21 +196,17 @@ public class NetworkUtils {
 
         return urlTrailer;
     }
-    public static URL buildUrlYouTube(String trailerKey) {
-        URL urlYouTubeTrailer = null;
-        try {
+    public static Uri buildUrlYouTube(String trailerKey) {
+
             Uri movieTrailerQueryUri = Uri.parse(BASE_YOUTUBE_URL).buildUpon()
                     .appendPath(String.valueOf(trailerKey))
-
                     .build();
-            urlYouTubeTrailer = new URL(movieTrailerQueryUri.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
 
-        Log.v(TAG, "Built URI " + urlYouTubeTrailer);
 
-        return urlYouTubeTrailer;
+
+        Log.v(TAG, "Built URI " + movieTrailerQueryUri);
+
+        return movieTrailerQueryUri;
     }
 
     /**
