@@ -1,11 +1,14 @@
 package com.example.android.popularmovies2;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ import com.example.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
 import com.example.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
 import com.example.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import com.example.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
+import com.example.android.popularmovies2.data.MovieContract;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import com.example.android.popularmovies2.utils.NetworkUtils;
@@ -41,15 +45,11 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     Movie movie;
 
-    public MovieReview review;
-
     private MovieReviewAdapter movieReviewAdapter;
 
     private MovieTrailerAdapter movieTrailerAdapter;
 
     public String movieId;
-
-    public static final String VIDEO_ID = "GUzMYvHJLz8";
 
     RecyclerView.LayoutManager mReviewLayoutManager;
 
@@ -61,12 +61,15 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     TextView reviewAuthor;
 
+    Button favoritesButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
         context = getApplicationContext();
+        favoritesButton = (Button) findViewById(R.id.favorites_button);
         mRecyclerViewReview = (RecyclerView) findViewById(R.id.recyclerview_review);
         mRecyclerViewTrailer = (RecyclerView) findViewById(R.id.recyclerview_trailer);
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
@@ -84,6 +87,22 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         movieReview = (TextView) findViewById(R.id.movie_review);
         reviewAuthor = (TextView) findViewById(R.id.author_review);
+
+        favoritesButton.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View view) {
+                ContentValues values = new ContentValues();
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
+                getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
+
+            }
+            });
+
 
 
         if (getIntent() != null && getIntent().getExtras() != null) {
@@ -152,7 +171,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         startActivity(intent);
 
     }
+
 }
-
-
 

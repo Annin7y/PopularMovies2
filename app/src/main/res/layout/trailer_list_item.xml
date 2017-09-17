@@ -13,7 +13,7 @@
         android:layout_marginRight="@dimen/text_margin"
         android:layout_marginTop="425dp"
         android:padding="@dimen/text_padding"
-        android:textSize="@dimen/text_size"
+        android:textSize="25sp"
         tools:text="@string/movie_trailer" />
 
 </LinearLayout>

@@ -68,7 +68,7 @@ public class NetworkUtils {
 
     private static final String BASE_URL_TOP_RATED = "https://api.themoviedb.org/3/movie/top_rated";
 
-    private static final String BASE_YOUTUBE_URL= "https://www.youtube.com/watch?v=";
+    private static final String BASE_YOUTUBE_URL = "https://www.youtube.com/watch";
 
 
     public NetworkUtils() {
@@ -144,7 +144,7 @@ public class NetworkUtils {
         URL urlReview = null;
         try {
             Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
-                    .appendPath(String.valueOf(movieId))
+                    .appendPath(movieId)
                     .appendPath("reviews")
                     .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                     .build();
@@ -183,7 +183,7 @@ public class NetworkUtils {
         URL urlTrailer = null;
         try {
             Uri movieTrailerQueryUri = Uri.parse(BASE_URL).buildUpon()
-                    .appendPath(String.valueOf(movieId))
+                    .appendPath(movieId)
                     .appendPath("videos")
                     .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                     .build();
@@ -196,16 +196,17 @@ public class NetworkUtils {
 
         return urlTrailer;
     }
+
     public static Uri buildUrlYouTube(String trailerKey) {
 
-            Uri movieTrailerQueryUri = Uri.parse(BASE_YOUTUBE_URL).buildUpon()
-                    .appendPath(String.valueOf(trailerKey))
-                    .build();
-
+        Uri movieTrailerQueryUri = Uri.parse(BASE_YOUTUBE_URL).buildUpon()
+                .appendQueryParameter("v", String.valueOf(trailerKey))
+                .build();
 
         Log.v(TAG, "Built URI " + movieTrailerQueryUri);
 
         return movieTrailerQueryUri;
+
     }
 
     /**

@@ -30,13 +30,12 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     public MovieReviewAdapter(ArrayList<MovieReview> movieReviewList, Context context) {
         this.movieReviewList = movieReviewList;
         this.context = context;
-        //    mClickHandler = clickHandler;
     }
 
     /**
      * Cache of the children views for a movie list item.
      */
-    public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder {
+    public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder  {
 
         public TextView movieReview;
         public TextView reviewAuthor;
@@ -46,7 +45,6 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
             super(view);
             movieReview = (TextView) view.findViewById(R.id.movie_review);
             reviewAuthor  = (TextView) view.findViewById(R.id.author_review);
-
         }
    }
 
