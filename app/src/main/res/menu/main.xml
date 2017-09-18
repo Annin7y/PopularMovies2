@@ -22,8 +22,4 @@
         android:title="Favorite movies"
         app:showAsAction="never" />
 
-
-
-
-
 </menu>

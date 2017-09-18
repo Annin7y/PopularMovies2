@@ -4,9 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ShareActionProvider;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -55,6 +60,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     RecyclerView.LayoutManager mTrailerLayoutManager;
 
+    private ShareActionProvider mShareActionProvider;
+
     ImageView poster;
 
     TextView movieReview;
@@ -93,16 +100,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         {
             @Override
             public void onClick(View view) {
-                ContentValues values = new ContentValues();
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
-                getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
-
+                Intent intent = new Intent(DetailActivity.this, FavoritesActivity.class);
+                startActivity(intent);
             }
-            });
-
+        });
 
 
         if (getIntent() != null && getIntent().getExtras() != null) {
@@ -163,7 +164,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     @Override
     public void onClick(MovieTrailer movieTrailer) {
-
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -172,5 +172,38 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     }
 
-}
+    public void saveMovieFavorites() {
+        ContentValues values = new ContentValues();
+        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
+        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
+        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
+        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
+        getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
+        MenuInflater inflater = getMenuInflater();
+        /* Use the inflater's inflate method to inflate our menu layout to this menu */
+        inflater.inflate(R.menu.detail, menu);
+        /* Return true so that the menu is displayed in the Toolbar */
+        MenuItem item = menu.findItem(R.id.menu_item_share);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        setShareIntent(createShareIntent());
+        return true;
+    }
+    // Call to update the share intent
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
+    }
+    private Intent createShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+                "http://stackandroid.com");
+        return shareIntent;
+    }
+}
