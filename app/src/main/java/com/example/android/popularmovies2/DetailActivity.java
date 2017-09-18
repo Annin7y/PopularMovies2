@@ -170,6 +170,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         intent.setData(NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey()));
         startActivity(intent);
 
+
     }
 
     public void saveMovieFavorites() {
