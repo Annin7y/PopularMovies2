@@ -50,6 +50,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     Movie movie;
 
+    MovieTrailer movieTrailer;
+
     private MovieReviewAdapter movieReviewAdapter;
 
     private MovieTrailerAdapter movieTrailerAdapter;
@@ -61,6 +63,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     RecyclerView.LayoutManager mTrailerLayoutManager;
 
     private ShareActionProvider mShareActionProvider;
+
+    private static final String BASE_YOUTUBE_URL_SHARE = "http://www.youtube.com/watch?v=";
 
     ImageView poster;
 
@@ -170,7 +174,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         intent.setData(NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey()));
         startActivity(intent);
 
-
     }
 
     public void saveMovieFavorites() {
@@ -189,22 +192,17 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         /* Use the inflater's inflate method to inflate our menu layout to this menu */
         inflater.inflate(R.menu.detail, menu);
         /* Return true so that the menu is displayed in the Toolbar */
-        MenuItem item = menu.findItem(R.id.menu_item_share);
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-        setShareIntent(createShareIntent());
-        return true;
-    }
-    // Call to update the share intent
-    private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
-        }
-    }
-    private Intent createShareIntent() {
+        MenuItem shareItem = menu.findItem(R.id.menu_item_share);
+
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                "http://stackandroid.com");
-        return shareIntent;
+        shareIntent.putExtra(Intent.EXTRA_TEXT,  "http://www.youtube.com/watch?v=" );
+
+        mShareActionProvider.setShareIntent(shareIntent);
+        return true;
+
     }
 }
