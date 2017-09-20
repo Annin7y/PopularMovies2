@@ -33,7 +33,12 @@
             android:authorities="com.example.android.popularmovies2"
             android:exported="false" />
 
-        <activity android:name=".FavoritesActivity"></activity>
+        <activity android:name=".FavoritesActivity"
+            android:parentActivityName=".DetailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DetailActivity" />
+        </activity>
     </application>
 
 </manifest>

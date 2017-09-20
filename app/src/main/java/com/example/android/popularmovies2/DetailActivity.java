@@ -3,6 +3,7 @@ package com.example.android.popularmovies2;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +59,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     public String movieId;
 
+    private String myLon;
     RecyclerView.LayoutManager mReviewLayoutManager;
 
     RecyclerView.LayoutManager mTrailerLayoutManager;
@@ -106,6 +108,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             public void onClick(View view) {
                 Intent intent = new Intent(DetailActivity.this, FavoritesActivity.class);
                 startActivity(intent);
+                saveMovieFavorites();
             }
         });
 
@@ -123,6 +126,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             MovieTrailerAsyncTask myTrailerTask = new MovieTrailerAsyncTask(this);
             myTrailerTask.execute(movieId);
+
 
             TextView originalTitle = (TextView) findViewById(R.id.original_title);
             originalTitle.setText(movie.getOriginalTitle());
@@ -163,6 +167,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
+        Uri videoId = NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey());
+        String stringUri;
+        stringUri = videoId.toString();
 
     }
 
@@ -195,14 +202,24 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,  "http://www.youtube.com/watch?v=" );
-
-        mShareActionProvider.setShareIntent(shareIntent);
+        setShareIntent(createShareIntent());
         return true;
+    }
+
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null && simpleJsonMovieReviewData != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+
+        }
+    }
+
+    public Intent createShareIntent() {
+       String videoId =  "Fee5vbFLYM4";
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + str);
+        return shareIntent;
+
 
     }
 }
