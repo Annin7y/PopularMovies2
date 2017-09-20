@@ -3,7 +3,6 @@ package com.example.android.popularmovies2;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +58,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     public String movieId;
 
-    private String myLon;
+    private String videoId;
     RecyclerView.LayoutManager mReviewLayoutManager;
 
     RecyclerView.LayoutManager mTrailerLayoutManager;
@@ -127,7 +126,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             MovieTrailerAsyncTask myTrailerTask = new MovieTrailerAsyncTask(this);
             myTrailerTask.execute(movieId);
 
-
             TextView originalTitle = (TextView) findViewById(R.id.original_title);
             originalTitle.setText(movie.getOriginalTitle());
 
@@ -161,15 +159,12 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
-
     }
 
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
-        Uri videoId = NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey());
-        String stringUri;
-        stringUri = videoId.toString();
+        videoId = movieTrailer.getTrailerKey();
 
     }
 
@@ -214,10 +209,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     }
 
     public Intent createShareIntent() {
-       String videoId =  "Fee5vbFLYM4";
+       // String videoId =  "Fee5vbFLYM4";
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + str);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + videoId);
         return shareIntent;
 
 
