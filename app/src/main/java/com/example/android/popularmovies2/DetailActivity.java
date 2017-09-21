@@ -171,7 +171,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             firstTrailer.getTrailerKey();
 
         }
-        String youTubeKey = firstTrailer.toString();
+        String youtubeKey = firstTrailer.toString();
     }
     @Override
     public void onClick(MovieTrailer movieTrailer) {
@@ -202,7 +202,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        setShareIntent(createShareIntent(youTubeKey));
+        setShareIntent(createShareIntent(youtubeKey));
         return true;
     }
 
