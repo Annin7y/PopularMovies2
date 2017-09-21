@@ -58,7 +58,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     public String movieId;
 
-    private String videoId;
     RecyclerView.LayoutManager mReviewLayoutManager;
 
     RecyclerView.LayoutManager mTrailerLayoutManager;
@@ -159,15 +158,21 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
+
     }
 
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
-        videoId = movieTrailer.getTrailerKey();
 
+        MovieTrailer firstTrailer = null;
+        if (!simpleJsonMovieTrailerData.isEmpty() && simpleJsonMovieTrailerData.size() > 0)  {
+            firstTrailer= simpleJsonMovieTrailerData.get(0);
+            firstTrailer.getTrailerKey();
+
+        }
+        String youTubeKey = firstTrailer.toString();
     }
-
     @Override
     public void onClick(MovieTrailer movieTrailer) {
         Intent intent = new Intent();
@@ -208,11 +213,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         }
     }
 
-    public Intent createShareIntent() {
-       // String videoId =  "Fee5vbFLYM4";
+    public Intent createShareIntent(String youtubeKey) {
+    //  String youtubeKey =  "Fee5vbFLYM4";
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + videoId);
+        String myUrl = BASE_YOUTUBE_URL_SHARE + youtubeKey;
+        shareIntent.putExtra(Intent.EXTRA_TEXT, myUrl);
+       // shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + youtubeKey);
         return shareIntent;
 
 
