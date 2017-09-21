@@ -202,7 +202,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        setShareIntent(createShareIntent());
+        setShareIntent(createShareIntent(youTubeKey));
         return true;
     }
 
@@ -213,8 +213,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         }
     }
 
-    public Intent createShareIntent(String youtubeKey) {
-    //  String youtubeKey =  "Fee5vbFLYM4";
+    public Intent createShareIntent(String youtubeKey ) {
+    // String youtubeKey =  "Fee5vbFLYM4";
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         String myUrl = BASE_YOUTUBE_URL_SHARE + youtubeKey;

@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 myTask.execute("top_rated");
                 returnData(simpleJsonMovieData);
                 return true;
+            case R.id.movie_favorites:
+
             default:
 
                 return super.onOptionsItemSelected(item);
