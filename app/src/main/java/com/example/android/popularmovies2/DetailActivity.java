@@ -166,12 +166,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
-
+        mShareActionProvider.setShareIntent(createShareIntent());
         if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             firstTrailer.getTrailerKey();
+
+            youtubeKey = firstTrailer.toString();
+            mShareActionProvider.setShareIntent(createShareIntent());
         }
-         youtubeKey = firstTrailer.toString();
     }
 
     @Override
@@ -203,16 +205,20 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        setShareIntent(createShareIntent());
-        return true;
+       // setShareIntent(createShareIntent());
+      //  mShareActionProvider.setShareIntent(createShareIntent());
+     //   return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
-    private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
-
-        }
-    }
+//    private void setShareIntent(Intent shareIntent) {
+//        if (mShareActionProvider != null) {
+//            mShareActionProvider.setShareIntent(shareIntent);
+//            createShareIntent();
+//
+//            ;
+//        }
+//    }
 
     public Intent createShareIntent() {
        // youtubeKey = //"Fee5vbFLYM4";
