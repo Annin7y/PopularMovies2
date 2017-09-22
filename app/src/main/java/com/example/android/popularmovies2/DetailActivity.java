@@ -167,14 +167,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
         mShareActionProvider.setShareIntent(createShareIntent());
-        if (simpleJsonMovieTrailerData.size() > 0) {
+       // if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
-            firstTrailer.getTrailerKey();
-
-            youtubeKey = firstTrailer.toString();
+            youtubeKey = firstTrailer.getTrailerKey();
+        if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
-    }
+        }
+   // }
 
     @Override
     public void onClick(MovieTrailer movieTrailer) {
@@ -205,9 +205,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-       // setShareIntent(createShareIntent());
-      //  mShareActionProvider.setShareIntent(createShareIntent());
-     //   return true;
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -215,13 +213,11 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //        if (mShareActionProvider != null) {
 //            mShareActionProvider.setShareIntent(shareIntent);
 //            createShareIntent();
-//
-//            ;
 //        }
 //    }
 
     public Intent createShareIntent() {
-       // youtubeKey = //"Fee5vbFLYM4";
+
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + youtubeKey);
