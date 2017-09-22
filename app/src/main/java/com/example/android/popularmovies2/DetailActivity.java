@@ -50,7 +50,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     Movie movie;
 
-    MovieTrailer movieTrailer;
+    private String youtubeKey;
+
+    MovieTrailer firstTrailer;
 
     private MovieReviewAdapter movieReviewAdapter;
 
@@ -165,14 +167,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
 
-        MovieTrailer firstTrailer = null;
-        if (!simpleJsonMovieTrailerData.isEmpty() && simpleJsonMovieTrailerData.size() > 0)  {
-            firstTrailer= simpleJsonMovieTrailerData.get(0);
+        if (simpleJsonMovieTrailerData.size() > 0) {
+            firstTrailer = simpleJsonMovieTrailerData.get(0);
             firstTrailer.getTrailerKey();
-
         }
-        String youtubeKey = firstTrailer.toString();
+         youtubeKey = firstTrailer.toString();
     }
+
     @Override
     public void onClick(MovieTrailer movieTrailer) {
         Intent intent = new Intent();
@@ -202,24 +203,22 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
 
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        setShareIntent(createShareIntent(youtubeKey));
+        setShareIntent(createShareIntent());
         return true;
     }
 
     private void setShareIntent(Intent shareIntent) {
-        if (mShareActionProvider != null && simpleJsonMovieReviewData != null) {
+        if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(shareIntent);
 
         }
     }
 
-    public Intent createShareIntent(String youtubeKey ) {
-    // String youtubeKey =  "Fee5vbFLYM4";
+    public Intent createShareIntent() {
+       // youtubeKey = //"Fee5vbFLYM4";
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        String myUrl = BASE_YOUTUBE_URL_SHARE + youtubeKey;
-        shareIntent.putExtra(Intent.EXTRA_TEXT, myUrl);
-       // shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + youtubeKey);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + youtubeKey);
         return shareIntent;
 
 
