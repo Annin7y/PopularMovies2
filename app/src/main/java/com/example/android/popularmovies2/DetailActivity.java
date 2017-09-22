@@ -167,9 +167,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
         mShareActionProvider.setShareIntent(createShareIntent());
-       // if (simpleJsonMovieTrailerData.size() > 0) {
+        if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
+        }
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
