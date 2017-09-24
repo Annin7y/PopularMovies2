@@ -82,12 +82,11 @@
             android:textSize="@dimen/text_size"
             tools:text="@string/release_date" />
 
-
         <TextView
             android:id="@+id/review_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/favorites_button"
+            android:layout_below="@id/release_date"
             android:layout_marginEnd="@dimen/text_margin"
             android:layout_marginLeft="@dimen/text_margin"
             android:layout_marginRight="@dimen/text_margin"
@@ -97,17 +96,29 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_review"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+
+
+        <ImageView
+            android:id="@+id/imageViewYoutube"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="80dp"
+            android:layout_below="@id/release_date"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_trailer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_review"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
 
     </RelativeLayout>
 </ScrollView>

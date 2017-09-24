@@ -56,8 +56,6 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
             MovieTrailer movieTrailer = movieTrailerList.get(adapterPosition);
             mClickHandler.onClick(movieTrailer);
         }
-
-
     }
 
     @Override

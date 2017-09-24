@@ -32,6 +32,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.example.android.popularmovies2.R.id.imageView;
+import static com.example.android.popularmovies2.R.id.imageViewYoutube;
+
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
         AsyncTaskTrailerInterface {
 
@@ -52,6 +55,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     private String youtubeKey;
 
+    private String youtubeImage;
+
     MovieTrailer firstTrailer;
 
     private MovieReviewAdapter movieReviewAdapter;
@@ -69,6 +74,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     private static final String BASE_YOUTUBE_URL_SHARE = "http://www.youtube.com/watch?v=";
 
     ImageView poster;
+
+    ImageView youtube_thumbnail;
 
     TextView movieReview;
 
@@ -96,7 +103,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         RecyclerView.LayoutManager mTrailerLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewTrailer.setLayoutManager(mTrailerLayoutManager);
 
-        poster = (ImageView) findViewById(R.id.imageView);
+        poster = (ImageView) findViewById(imageView);
+
+        youtube_thumbnail = (ImageView) findViewById(imageViewYoutube);
 
         movieReview = (TextView) findViewById(R.id.movie_review);
         reviewAuthor = (TextView) findViewById(R.id.author_review);
@@ -170,12 +179,17 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
+            youtubeImage = "http://img.youtube.com/vi/" + youtubeKey + "/0.jpg";
+
+            Picasso.with(context)
+                    .load(youtubeImage)
+                    .into(youtube_thumbnail);
+
         }
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
         }
-   // }
 
     @Override
     public void onClick(MovieTrailer movieTrailer) {
@@ -209,13 +223,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         return super.onCreateOptionsMenu(menu);
     }
-
-//    private void setShareIntent(Intent shareIntent) {
-//        if (mShareActionProvider != null) {
-//            mShareActionProvider.setShareIntent(shareIntent);
-//            createShareIntent();
-//        }
-//    }
 
     public Intent createShareIntent() {
 
