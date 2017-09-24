@@ -93,30 +93,14 @@
             />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_trailer"
+            android:id="@+id/recyclerview_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
             android:scrollbars="vertical" >
-
-    </android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/review_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/text_margin"
-            android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginRight="@dimen/text_margin"
-            android:layout_marginStart="@dimen/text_margin"
-            android:layout_below="@id/imageViewYoutube"
-            android:padding="@dimen/text_padding"
-            android:text="Review"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+        </android.support.v7.widget.RecyclerView>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_review"
+            android:id="@+id/recyclerview_trailer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical" >
