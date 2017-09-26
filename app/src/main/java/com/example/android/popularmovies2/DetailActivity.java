@@ -115,7 +115,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DetailActivity.this, FavoritesActivity.class);
+                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                 startActivity(intent);
                 saveMovieFavorites();
             }

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginRight="@dimen/text_margin"
-        android:layout_marginTop="425dp"
+        android:layout_marginTop="455dp"
         android:padding="@dimen/text_padding"
         android:textSize="25sp"
         tools:text="@string/movie_trailer" />
