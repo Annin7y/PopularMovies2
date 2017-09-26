@@ -82,7 +82,6 @@
             android:textSize="@dimen/text_size"
             tools:text="@string/release_date" />
 
-
         <ImageView
             android:id="@+id/imageViewYoutube"
             android:layout_width="150dp"
@@ -95,14 +94,14 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_review"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:scrollbars="vertical" >
         </android.support.v7.widget.RecyclerView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_trailer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:scrollbars="vertical" >
         </android.support.v7.widget.RecyclerView>
 

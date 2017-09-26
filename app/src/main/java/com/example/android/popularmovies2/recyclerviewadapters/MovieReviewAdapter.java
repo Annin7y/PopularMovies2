@@ -24,6 +24,7 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     private Context context;
 
 
+
     /**
      * Creates a MovieAdapter.
      */
