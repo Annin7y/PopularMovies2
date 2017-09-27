@@ -2,11 +2,16 @@ package com.example.android.popularmovies2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,13 +21,15 @@ import android.widget.TextView;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskInterface;
 import com.example.android.popularmovies2.asynctask.MovieAsyncTask;
+import com.example.android.popularmovies2.data.MovieContract;
 import com.example.android.popularmovies2.decoration.DividerItemDecoration;
 import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
+import com.example.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -33,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private RecyclerView mRecyclerView;
 
     private MovieAdapter movieAdapter;
+
+    private FavoritesAdapter favoritesAdapter;
 
     RecyclerView.LayoutManager mLayoutManager;
 
@@ -93,35 +102,83 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         startActivity(intent);
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
+
+        return new AsyncTaskLoader<Cursor>(this) {
+
+            // Initialize a Cursor, this will hold all the task data
+            Cursor mTaskData = null;
+
+            // onStartLoading() is called when a loader first starts loading data
+            @Override
+            protected void onStartLoading() {
+                if (mTaskData != null) {
+                    // Delivers any previously loaded data immediately
+                    deliverResult(mTaskData);
+                } else {
+                    // Force a new load
+                    forceLoad();
+                }
+            }
+
+            // loadInBackground() performs asynchronous loading of data
+            @Override
+            public Cursor loadInBackground() {
+                // Will implement to load data
+
+                // Query and load all task data in the background; sort by priority
+                // [Hint] use a try/catch block to catch any errors in loading data
+
+                try {
+                    return getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI,
+                            null,
+                            null,
+                            null,
+                            MovieContract.MovieEntry.COLUMN_MOVIES_ID);
+
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to asynchronously load data.");
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+                // Update the data that the adapter uses to create ViewHolders
+                mAdapter.swapCursor(data);
+            }
+
+
+            @Override
+            public boolean onCreateOptionsMenu(Menu menu) {
         /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
-        MenuInflater inflater = getMenuInflater();
+                MenuInflater inflater = getMenuInflater();
         /* Use the inflater's inflate method to inflate our menu layout to this menu */
-        inflater.inflate(R.menu.main, menu);
+                inflater.inflate(R.menu.main, menu);
         /* Return true so that the menu is displayed in the Toolbar */
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        MovieAsyncTask myTask = new MovieAsyncTask(this);
-        switch (item.getItemId()) {
-            case R.id.most_popular:
-                myTask.execute("most_popular");
-                returnData(simpleJsonMovieData);
                 return true;
+            }
 
-            case R.id.top_rated:
-                myTask.execute("top_rated");
-                returnData(simpleJsonMovieData);
-                return true;
-            case R.id.movie_favorites:
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                MovieAsyncTask myTask = new MovieAsyncTask(this);
+                switch (item.getItemId()) {
+                    case R.id.most_popular:
+                        myTask.execute("most_popular");
+                        returnData(simpleJsonMovieData);
+                        return true;
 
-            default:
+                    case R.id.top_rated:
+                        myTask.execute("top_rated");
+                        returnData(simpleJsonMovieData);
+                        return true;
+                    case R.id.movie_favorites:
 
-                return super.onOptionsItemSelected(item);
+                    default:
+
+                        return super.onOptionsItemSelected(item);
+                }
+            }
         }
-    }
-}

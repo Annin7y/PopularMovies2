@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.android.popularmovies2.Movie;
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.data.MovieContract;
 
@@ -17,8 +18,17 @@ import com.example.android.popularmovies2.data.MovieContract;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesAdapterViewHolder> {
 
     private static final String TAG = FavoritesAdapter.class.getSimpleName();
+
     private Context context;
     private Cursor cursor;
+    private FavoritesAdapter.FavoritesAdapterOnClickHandler mClickHandler;
+    public static final int IMAGE_HEIGHT= 185;
+    public static final int IMAGE_WIDTH= 50;
+
+    public interface FavoritesAdapterOnClickHandler {
+        void onClick(Movie posterClick);
+    }
+
 
     public FavoritesAdapter(Context context,Cursor cursor ) {
 
