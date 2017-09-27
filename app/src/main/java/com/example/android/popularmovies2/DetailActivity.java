@@ -3,6 +3,7 @@ package com.example.android.popularmovies2;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -207,7 +208,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
         values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
         values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
-        getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
+        Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
+
     }
 
     @Override

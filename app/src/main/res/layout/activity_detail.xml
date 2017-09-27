@@ -82,28 +82,43 @@
             android:textSize="@dimen/text_size"
             tools:text="@string/release_date" />
 
-        <ImageView
-            android:id="@+id/imageViewYoutube"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="80dp"
-            android:layout_below="@id/release_date"
-            />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_review"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical" >
-        </android.support.v7.widget.RecyclerView>
+            android:layout_marginTop="5dp"
+            android:weightSum="30"
+            android:orientation="vertical"
+            android:layout_below="@id/release_date">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_trailer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical" >
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginStart="@dimen/text_margin"
+            android:scrollbars="vertical">
         </android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/imageViewYoutube"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="@dimen/imageView_margin"
+            android:layout_marginLeft="@dimen/imageView_margin"
+            android:layout_marginRight="@dimen/imageView_margin"
+            android:layout_marginStart="@dimen/imageView_margin"
+            android:scaleType="fitXY"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical">
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
 
     </RelativeLayout>
 </ScrollView>
