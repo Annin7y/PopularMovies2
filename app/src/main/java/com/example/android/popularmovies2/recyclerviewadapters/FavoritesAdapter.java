@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.android.popularmovies2.Movie;
 import com.example.android.popularmovies2.R;
@@ -30,17 +32,23 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     }
 
 
-    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler,Context context) {
-        this.context = context;
+    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler,Context context, Cursor cursor) {
         mClickHandler = clickHandler;
+        this.context = context;
+        this.cursor = cursor;
     }
 
 
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        public ImageView imageView;
+        public TextView releaseDate;
+
 
        public FavoritesAdapterViewHolder(View view) {
             super(view);
+           imageView = (ImageView) view.findViewById(R.id.imageView);
+           releaseDate = (TextView) view.findViewById(R.id.release_date);
             view.setOnClickListener(this);
         }
 
@@ -48,6 +56,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public void onClick(View v) {
 
             int adapterPosition = getAdapterPosition();
+
+            Movie posterClick = moviesList.get(adapterPosition);
+                mClickHandler.onClick(posterClick);
+            }
+
 
         }
 
@@ -68,9 +81,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         cursor.moveToPosition(position); // get to the right location in the cursor
 
         final int id = cursor.getInt(movieIdIndex);
-        String description = mCursor.getString(descriptionIndex);
-        int priority = mCursor.getInt(priorityIndex);
-
+        String title = cursor.getString(movieTitleIndex);
+        String overview = cursor.getString(movieOverviewIndex);
+        String vote = cursor.getString(movieVoteIndex);
+        String date = cursor.getString(movieDateIndex);
 
     }
 

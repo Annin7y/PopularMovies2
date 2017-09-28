@@ -177,7 +177,6 @@ public class MovieContentProvider extends ContentProvider {
         return tasksUpdated;
     }
 
-
     @Override
     public String getType(@NonNull Uri uri) {
         final int match = sUriMatcher.match(uri);
@@ -189,7 +188,5 @@ public class MovieContentProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
         }
-
-
     }
-    }
+}
