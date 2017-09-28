@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.android.popularmovies2.Movie;
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.data.MovieContract;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Maino96-10022 on 9/24/2017.
@@ -44,7 +45,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public ImageView imageView;
         public TextView releaseDate;
 
-
        public FavoritesAdapterViewHolder(View view) {
             super(view);
            imageView = (ImageView) view.findViewById(R.id.imageView);
@@ -64,7 +64,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         }
 
-    }
+
 
     @Override
     public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position) {
@@ -77,6 +77,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         int movieOverviewIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW);
         int movieVoteIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE);
         int movieDateIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
+        int movieImageIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
 
         cursor.moveToPosition(position); // get to the right location in the cursor
 
@@ -85,6 +86,16 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         String overview = cursor.getString(movieOverviewIndex);
         String vote = cursor.getString(movieVoteIndex);
         String date = cursor.getString(movieDateIndex);
+
+        holder.itemView.setTag(id);
+        holder.releaseDate.setText(date);
+       
+
+        Picasso.with(context)
+                .load(movieView.getPosterUrl())
+                .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
+                .centerCrop()
+                .into(holder.imageView);
 
     }
 
