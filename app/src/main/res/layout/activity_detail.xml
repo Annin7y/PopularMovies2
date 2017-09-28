@@ -82,14 +82,6 @@
             android:textSize="@dimen/text_size"
             tools:text="@string/release_date" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:weightSum="30"
-            android:orientation="vertical"
-            android:layout_below="@id/release_date">
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_trailer"
             android:layout_width="match_parent"
@@ -118,7 +110,7 @@
             android:scrollbars="vertical">
         </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
+
 
     </RelativeLayout>
 </ScrollView>
