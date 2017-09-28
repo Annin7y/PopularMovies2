@@ -65,5 +65,7 @@ public class MovieContract {
 
         public final static String COLUMN_MOVIES_REVIEW_AUTHOR = "author";
 
+        public final static String COLUMN_MOVIES_IMAGE = "imagePath";
+
     }
 }

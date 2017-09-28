@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
 import com.example.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
@@ -210,6 +211,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
         Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
+        if(uri != null) {
+            Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+        }
+        finish();
     }
 
     @Override

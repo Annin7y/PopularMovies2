@@ -26,24 +26,31 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public static final int IMAGE_WIDTH= 50;
 
     public interface FavoritesAdapterOnClickHandler {
-        void onClick(Movie posterClick);
+        void onClick(Movie imageClick);
     }
 
 
-    public FavoritesAdapter(Context context,Cursor cursor ) {
-
+    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler,Context context) {
         this.context = context;
-        this.cursor = cursor;
+        mClickHandler = clickHandler;
     }
 
 
+    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder {
 
-
-        public FavoritesAdapterViewHolder(View view) {
+       public FavoritesAdapterViewHolder(View view) {
             super(view);
+            view.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+
+            int adapterPosition = getAdapterPosition();
+
+        }
+
     }
 
     @Override
@@ -52,7 +59,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         // Determine the values of the wanted data
         final int idIndex = cursor.getInt(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry._ID));
 
-        // Indices for the _id, description, and priority columns
         int movieIdIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_ID);
         int movieTitleIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE);
         int movieOverviewIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW);
@@ -60,6 +66,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         int movieDateIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
 
         cursor.moveToPosition(position); // get to the right location in the cursor
+
+        final int id = cursor.getInt(movieIdIndex);
+        String description = mCursor.getString(descriptionIndex);
+        int priority = mCursor.getInt(priorityIndex);
 
 
     }
@@ -73,6 +83,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         return new FavoritesAdapter.FavoritesAdapterViewHolder(view);
     }
+
+
     public Cursor swapCursor(Cursor c) {
         // check if this cursor is the same as the previous cursor (mCursor)
         if (cursor == c) {

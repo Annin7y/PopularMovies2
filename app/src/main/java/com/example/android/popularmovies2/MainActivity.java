@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private RecyclerView mRecyclerView;
 
+    private RecyclerView fRecyclerView;
+
     private MovieAdapter movieAdapter;
 
     private FavoritesAdapter favoritesAdapter;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
+        favoritesAdapter = new FavoritesAdapter()Adapter(this, simpleJsonMovieData, context);
 
         //specifying that the images will be displayed in two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
@@ -148,6 +151,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
                 // Update the data that the adapter uses to create ViewHolders
                 mAdapter.swapCursor(data);
+            }
+            @Override
+            public void onLoaderReset(Loader<Cursor> loader) {
             }
 
 
