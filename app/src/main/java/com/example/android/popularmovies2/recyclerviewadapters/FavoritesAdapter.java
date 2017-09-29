@@ -94,7 +94,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         holder.releaseDate.setText(date);
 
         Picasso.with(context)
-                .load(imagePath.getPosterUrl())
+                .load("http://image.tmdb.org/t/p/w185/" + imagePath)
                 .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
                 .centerCrop()
                 .into(holder.imageView);
