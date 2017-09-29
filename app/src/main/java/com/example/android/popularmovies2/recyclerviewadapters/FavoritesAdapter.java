@@ -25,30 +25,35 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     private Context context;
     private Cursor cursor;
     private FavoritesAdapter.FavoritesAdapterOnClickHandler mClickHandler;
-    public static final int IMAGE_HEIGHT= 185;
-    public static final int IMAGE_WIDTH= 50;
+    public static final int IMAGE_HEIGHT = 185;
+    public static final int IMAGE_WIDTH = 50;
 
     public interface FavoritesAdapterOnClickHandler {
         void onClick(Movie imageClick);
     }
 
-
-    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler,Context context, Cursor cursor) {
+    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler, Context context, Cursor cursor) {
         mClickHandler = clickHandler;
         this.context = context;
         this.cursor = cursor;
     }
 
-
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView imageView;
         public TextView releaseDate;
+        public TextView originalTitle;
+        public TextView movieOverview;
+        public TextView voteAverage;
 
-       public FavoritesAdapterViewHolder(View view) {
+
+        public FavoritesAdapterViewHolder(View view) {
             super(view);
-           imageView = (ImageView) view.findViewById(R.id.imageView);
-           releaseDate = (TextView) view.findViewById(R.id.release_date);
+            imageView = (ImageView) view.findViewById(R.id.imageView);
+            originalTitle = (TextView) view.findViewById(R.id.original_title);
+            movieOverview = (TextView) view.findViewById(R.id.movie_overview);
+            voteAverage = (TextView) view.findViewById(R.id.vote_average);
+            releaseDate = (TextView) view.findViewById(R.id.release_date);
             view.setOnClickListener(this);
         }
 
@@ -56,14 +61,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public void onClick(View v) {
 
             int adapterPosition = getAdapterPosition();
-
-            Movie posterClick = moviesList.get(adapterPosition);
-                mClickHandler.onClick(posterClick);
-            }
-
-
         }
-
+    }
 
 
     @Override
@@ -86,13 +85,17 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         String overview = cursor.getString(movieOverviewIndex);
         String vote = cursor.getString(movieVoteIndex);
         String date = cursor.getString(movieDateIndex);
+        String image = cursor.getString(movieImageIndex);
 
         holder.itemView.setTag(id);
+
+        holder.originalTitle.setText(title);
+        holder.movieOverview.setText(overview);
+        holder.voteAverage.setText(vote);
         holder.releaseDate.setText(date);
-       
 
         Picasso.with(context)
-                .load(movieView.getPosterUrl())
+                .load(image.getPosterUrl())
                 .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
                 .centerCrop()
                 .into(holder.imageView);
@@ -132,5 +135,5 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             return 0;
         return cursor.getCount();
     }
-    }
+}
 
