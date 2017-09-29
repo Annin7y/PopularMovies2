@@ -59,7 +59,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         @Override
         public void onClick(View v) {
-
             int adapterPosition = getAdapterPosition();
         }
     }
