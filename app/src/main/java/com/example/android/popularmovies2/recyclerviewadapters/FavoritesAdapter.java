@@ -71,12 +71,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         // Determine the values of the wanted data
         final int idIndex = cursor.getInt(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry._ID));
 
-        int movieIdIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_ID);
-        int movieTitleIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE);
-        int movieOverviewIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW);
-        int movieVoteIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE);
-        int movieDateIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
-        int movieImageIndex = cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
+        int movieIdIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID);
+        int movieTitleIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE);
+        int movieOverviewIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW);
+        int movieVoteIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE);
+        int movieDateIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
+        int movieImagePathIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
 
         cursor.moveToPosition(position); // get to the right location in the cursor
 
@@ -85,7 +85,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         String overview = cursor.getString(movieOverviewIndex);
         String vote = cursor.getString(movieVoteIndex);
         String date = cursor.getString(movieDateIndex);
-        String image = cursor.getString(movieImageIndex);
+        String imagePath = cursor.getString(movieImagePathIndex);
 
         holder.itemView.setTag(id);
 
@@ -95,7 +95,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         holder.releaseDate.setText(date);
 
         Picasso.with(context)
-                .load(image.getPosterUrl())
+                .load(imagePath.getPosterUrl())
                 .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
                 .centerCrop()
                 .into(holder.imageView);
