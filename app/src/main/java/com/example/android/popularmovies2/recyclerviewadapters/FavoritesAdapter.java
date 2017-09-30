@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.popularmovies2.Movie;
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.data.MovieContract;
 import com.squareup.picasso.Picasso;
@@ -29,7 +28,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public static final int IMAGE_WIDTH = 50;
 
     public interface FavoritesAdapterOnClickHandler {
-        void onClick(Movie imageClick);
+        void onClick(ImageView imageClick);
     }
 
     public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler, Context context, Cursor cursor) {
@@ -61,7 +60,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             cursor.moveToPosition(adapterPosition);
-          
+            mClickHandler.onClick(imageView);
         }
     }
 
