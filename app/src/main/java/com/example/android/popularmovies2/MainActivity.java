@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
-        favoritesAdapter = new FavoritesAdapter(this,context,cursor);
+        favoritesAdapter = new FavoritesAdapter(this,context);
 
         //specifying that the images will be displayed in two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);

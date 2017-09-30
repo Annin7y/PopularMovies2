@@ -31,10 +31,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         void onClick(ImageView imageClick);
     }
 
-    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler, Context context, Cursor cursor) {
+    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler, Context context) {
         mClickHandler = clickHandler;
         this.context = context;
-        this.cursor = cursor;
+        
     }
 
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
