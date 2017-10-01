@@ -34,7 +34,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler, Context context) {
         mClickHandler = clickHandler;
         this.context = context;
-        
+
     }
 
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

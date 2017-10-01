@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -107,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         startActivity(intent);
     }
 
+    @Override
+    public void onClick(ImageView imageView) {
+
+
+    }
     @Override
     public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
 
@@ -209,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 returnData(simpleJsonMovieData);
                 return true;
             case R.id.movie_favorites:
+
 
             default:
 
