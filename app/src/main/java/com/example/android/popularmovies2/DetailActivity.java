@@ -117,8 +117,19 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         {
             @Override
             public void onClick(View view) {
+                ContentValues values = new ContentValues();
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_ID, movie.getMovieId());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
+                Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
-               // saveMovieFavorites();
+                if(uri != null) {
+                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+                }
+                finish();
+
             }
         });
 
@@ -176,7 +187,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
-        mShareActionProvider.setShareIntent(createShareIntent());
         if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
@@ -202,19 +212,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     }
 
-    public void saveMovieFavorites() {
-        ContentValues values = new ContentValues();
-        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
-        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
-        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
-        values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
-        Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
-        if(uri != null) {
-            Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-        }
-        finish();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

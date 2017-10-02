@@ -12,4 +12,5 @@
     <string name="movie_author">Bob Smith</string>
     <string name="movie_trailer">Watch the trailer!</string>
     <string name="action_share">Watch the trailer!</string>
+    <string name="movie_review_title">Review</string>
 </resources>
