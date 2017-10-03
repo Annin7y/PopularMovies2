@@ -61,11 +61,5 @@ public class MovieContract {
 
         public final static String COLUMN_MOVIES_DATE = "release_date";
 
-        public final static String COLUMN_MOVIES_REVIEW= "review";
-
-        public final static String COLUMN_MOVIES_REVIEW_AUTHOR = "author";
-
-        public final static String COLUMN_MOVIES_IMAGE = "imagePath";
-
     }
 }

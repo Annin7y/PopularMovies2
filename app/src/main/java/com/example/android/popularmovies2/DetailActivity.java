@@ -112,7 +112,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         movieReview = (TextView) findViewById(R.id.movie_review);
         reviewAuthor = (TextView) findViewById(R.id.author_review);
 
+
         favoritesButton.setOnClickListener(new View.OnClickListener()
+
 
         {
             @Override
@@ -125,7 +127,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
                 Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
-                if(uri != null) {
+                if (uri != null) {
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                 }
                 finish();
@@ -181,7 +183,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
-
     }
 
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
@@ -200,7 +201,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
-        }
+    }
+
 
     @Override
     public void onClick(MovieTrailer movieTrailer) {
@@ -211,8 +213,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         startActivity(intent);
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -234,7 +234,5 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + youtubeKey);
         return shareIntent;
-
-
     }
 }
