@@ -125,6 +125,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
                 values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
                 values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
+                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH, movie.getPosterUrl());
                 Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
                 if (uri != null) {
@@ -191,11 +192,11 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
-//            youtubeImage = "http://img.youtube.com/vi/" + youtubeKey + "/0.jpg";
-//
-//            Picasso.with(context)
-//                    .load(youtubeImage)
-//                    .into(youtube_thumbnail);
+            youtubeImage = "http://img.youtube.com/vi/" + youtubeKey + "/0.jpg";
+
+            Picasso.with(context)
+                    .load(youtubeImage)
+                    .into(youtube_thumbnail);
 
         }
         if (mShareActionProvider != null) {
@@ -210,14 +211,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         intent.setAction(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
         intent.setData(NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey()));
-
-        ImageView youtube_thumbnail = (ImageView) findViewById(R.id.imageViewYoutube);
-
-        youtubeImage = "http://img.youtube.com/vi/" + youtubeKey + "/0.jpg";
-
-        Picasso.with(context)
-                .load(youtubeImage)
-                .into(youtube_thumbnail);
         startActivity(intent);
 
     }

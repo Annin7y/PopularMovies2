@@ -14,7 +14,7 @@ public class MovieDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "tasksDb.db";
 
     // If you change the database schema, you must increment the database version
-    private static final int VERSION = 2;
+    private static final int VERSION = 4;
 
 
     // Constructor
@@ -36,7 +36,8 @@ public class MovieDbHelper extends SQLiteOpenHelper {
                 MovieContract.MovieEntry.COLUMN_MOVIES_TITLE + " TEXT NOT NULL, " +
                 MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW + " TEXT NOT NULL, " +
                 MovieContract.MovieEntry.COLUMN_MOVIES_VOTE + " TEXT NOT NULL, " +
-                MovieContract.MovieEntry.COLUMN_MOVIES_DATE + " TEXT NOT NULL);";
+                MovieContract.MovieEntry.COLUMN_MOVIES_DATE + " TEXT NOT NULL, " +
+                MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH + " TEXT NOT NULL);";
         db.execSQL(CREATE_TABLE);
     }
 

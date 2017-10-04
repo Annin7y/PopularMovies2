@@ -61,5 +61,7 @@ public class MovieContract {
 
         public final static String COLUMN_MOVIES_DATE = "release_date";
 
+        public final static String COLUMN_MOVIES_POSTER_PATH = "posterPath";
+
     }
 }
