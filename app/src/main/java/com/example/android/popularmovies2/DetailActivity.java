@@ -193,9 +193,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             youtubeKey = firstTrailer.getTrailerKey();
             youtubeImage = "http://img.youtube.com/vi/" + youtubeKey + "/0.jpg";
 
-          Picasso.with(context)
+            Picasso.with(context)
                     .load(youtubeImage)
-                   .into(youtube_thumbnail);
+                    .into(youtube_thumbnail);
 
         }
         if (mShareActionProvider != null) {

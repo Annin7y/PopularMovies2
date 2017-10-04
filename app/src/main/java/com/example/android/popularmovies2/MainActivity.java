@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
-        favoritesAdapter = new FavoritesAdapter(this,context);
+        favoritesAdapter = new FavoritesAdapter(this, context);
 
         //specifying that the images will be displayed in two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
@@ -105,9 +105,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             }
         }).attachToRecyclerView(mRecyclerView);
-
-
-
 
 
         /**
@@ -149,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     public void onClick(ImageView imageView) {
 
-
     }
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
 
@@ -252,8 +249,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 myTask.execute("top_rated");
                 returnData(simpleJsonMovieData);
                 return true;
-            case R.id.movie_favorites:
 
+            case R.id.movie_favorites:
+            //    return true;
 
             default:
 
