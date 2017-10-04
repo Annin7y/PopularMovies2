@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="205dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="90dp"
             android:focusable="false"
             android:text="Add to Favorites" />
 
@@ -86,7 +86,7 @@
             android:id="@+id/recyclerview_trailer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="75dp"
             android:scrollbars="vertical"
             android:layout_below="@+id/release_date"
             >
@@ -122,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/review_title"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="35dp"
             android:scrollbars="vertical">
 
         </android.support.v7.widget.RecyclerView>

@@ -201,6 +201,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     .load(youtubeImage)
                     .into(youtube_thumbnail);
 
+        } else {
+            Toast.makeText(DetailActivity.this, "Trailer currently unavailable", Toast.LENGTH_SHORT).show();
         }
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareIntent());
