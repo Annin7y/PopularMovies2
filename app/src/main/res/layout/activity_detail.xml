@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         tools:context="com.example.android.popularmovies2.DetailActivity">
 
         <ImageView
@@ -42,7 +41,7 @@
             android:padding="@dimen/text_padding"
             android:textSize="@dimen/text_size"
             android:textStyle="bold"
-            tools:text="@string/movie_title" />
+            android:text="@string/movie_title" />
 
         <TextView
             android:id="@+id/movie_overview"
@@ -55,7 +54,7 @@
             android:layout_marginStart="@dimen/text_margin"
             android:padding="@dimen/text_padding"
             android:textSize="@dimen/text_size"
-            tools:text="@string/movie_overview" />
+            android:text="@string/movie_overview" />
 
         <TextView
             android:id="@+id/vote_average"
@@ -68,7 +67,7 @@
             android:layout_marginStart="@dimen/text_margin"
             android:padding="@dimen/text_padding"
             android:textSize="@dimen/text_size"
-            tools:text="@string/movie_vote_average" />
+            android:text="@string/movie_vote_average" />
 
         <TextView
             android:id="@+id/release_date"
@@ -81,7 +80,7 @@
             android:layout_marginStart="@dimen/text_margin"
             android:padding="@dimen/text_padding"
             android:textSize="@dimen/text_size"
-            tools:text="@string/release_date" />
+            android:text="@string/release_date" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_trailer"
@@ -107,10 +106,14 @@
             android:id="@+id/review_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/text_padding"
-            android:textSize="@dimen/text_size"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginStart="@dimen/text_margin"
+            android:padding="3dp"
+            android:textSize="25sp"
             android:textStyle="bold"
-            tools:text="@string/movie_review_title"
+            android:text="@string/movie_review_title"
             android:layout_below="@+id/imageViewYoutube"
             />
 
@@ -124,5 +127,5 @@
 
         </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

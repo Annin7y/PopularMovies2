@@ -222,7 +222,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
      */
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
         favoritesAdapter.swapCursor(null);
     }
 
