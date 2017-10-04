@@ -184,6 +184,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
+        if (simpleJsonMovieReviewData.size() == 0) {
+            Toast.makeText(DetailActivity.this, "Review currently unavailable", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
