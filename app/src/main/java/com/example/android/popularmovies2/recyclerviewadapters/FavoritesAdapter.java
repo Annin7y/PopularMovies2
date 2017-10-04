@@ -46,6 +46,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public TextView voteAverage;
 
 
+
         public FavoritesAdapterViewHolder(View view) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageView);
@@ -68,34 +69,34 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     @Override
     public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position) {
 
+
+        cursor.moveToPosition(position); // get to the right location in the cursor
+
         // Determine the values of the wanted data
-        final int idIndex = cursor.getInt(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry._ID));
 
         int movieIdIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID);
         int movieTitleIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE);
         int movieOverviewIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW);
         int movieVoteIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE);
         int movieDateIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
-        int movieImagePathIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
+        int moviePosterPathIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH);
 
-        cursor.moveToPosition(position); // get to the right location in the cursor
 
         final int id = cursor.getInt(movieIdIndex);
         String title = cursor.getString(movieTitleIndex);
         String overview = cursor.getString(movieOverviewIndex);
         String vote = cursor.getString(movieVoteIndex);
         String date = cursor.getString(movieDateIndex);
-        String imagePath = cursor.getString(movieImagePathIndex);
+        String posterPath = cursor.getString(moviePosterPathIndex);
 
         holder.itemView.setTag(id);
-
         holder.originalTitle.setText(title);
         holder.movieOverview.setText(overview);
         holder.voteAverage.setText(vote);
         holder.releaseDate.setText(date);
 
         Picasso.with(context)
-                .load("http://image.tmdb.org/t/p/w185/" + imagePath)
+                .load("http://image.tmdb.org/t/p/w185/" + posterPath)
                 .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
                 .centerCrop()
                 .into(holder.imageView);

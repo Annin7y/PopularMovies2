@@ -258,6 +258,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             case R.id.movie_favorites:
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+                 favoritesAdapter = new FavoritesAdapter(this,MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
                 return true;
 
