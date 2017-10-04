@@ -250,7 +250,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 return true;
 
             case R.id.movie_favorites:
-             return true;
+                       getSupportLoaderManager().initLoader(
+                               FAVORITES_LOADER_ID, null, new FavoritesAdapter(this, favoritesAdapter));
+
+                return true;
 
             default:
 
