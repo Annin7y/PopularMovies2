@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private ProgressBar mLoadingIndicator;
 
+    private TextView mSearchResultsTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +68,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
-        favoritesAdapter = new FavoritesAdapter(this, context);
 
+        favoritesAdapter = new FavoritesAdapter(this, context);
+        mRecyclerView.setAdapter(favoritesAdapter);
         //specifying that the images will be displayed in two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+
         mErrorMessageDisplay = (TextView) findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
@@ -113,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute("most_popular");
+
 
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
@@ -252,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             case R.id.movie_favorites:
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                favoritesAdapter.swapCursor();
+                mRecyclerView.setAdapter(favoritesAdapter);
                 return true;
 
             default:
@@ -264,6 +270,5 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
 
     } }
