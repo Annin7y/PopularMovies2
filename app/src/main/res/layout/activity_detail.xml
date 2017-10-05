@@ -102,26 +102,11 @@
             android:layout_marginStart="@dimen/text_margin"
             android:layout_below="@+id/recyclerview_trailer" />
 
-        <TextView
-            android:id="@+id/review_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/text_margin"
-            android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginRight="@dimen/text_margin"
-            android:layout_marginStart="@dimen/text_margin"
-            android:padding="3dp"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:text="@string/movie_review_title"
-            android:layout_below="@+id/imageViewYoutube"
-            />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/review_title"
+            android:layout_below="@id/imageViewYoutube"
             android:layout_marginBottom="35dp"
             android:scrollbars="vertical">
 

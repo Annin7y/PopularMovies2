@@ -3,11 +3,11 @@ package com.example.android.popularmovies2.recyclerviewadapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.data.MovieContract;
@@ -40,20 +40,20 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView imageView;
-        public TextView releaseDate;
-        public TextView originalTitle;
-        public TextView movieOverview;
-        public TextView voteAverage;
+//        public TextView releaseDate;
+//        public TextView originalTitle;
+//        public TextView movieOverview;
+//        public TextView voteAverage;
 
 
 
         public FavoritesAdapterViewHolder(View view) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageView);
-            originalTitle = (TextView) view.findViewById(R.id.original_title);
-            movieOverview = (TextView) view.findViewById(R.id.movie_overview);
-            voteAverage = (TextView) view.findViewById(R.id.vote_average);
-            releaseDate = (TextView) view.findViewById(R.id.release_date);
+//            originalTitle = (TextView) view.findViewById(R.id.original_title);
+//            movieOverview = (TextView) view.findViewById(R.id.movie_overview);
+//            voteAverage = (TextView) view.findViewById(R.id.vote_average);
+//            releaseDate = (TextView) view.findViewById(R.id.release_date);
             view.setOnClickListener(this);
         }
 
@@ -75,31 +75,32 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         // Determine the values of the wanted data
 
         int movieIdIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID);
-        int movieTitleIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE);
-        int movieOverviewIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW);
-        int movieVoteIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE);
-        int movieDateIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
+//        int movieTitleIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE);
+//        int movieOverviewIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW);
+//        int movieVoteIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE);
+//        int movieDateIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE);
         int moviePosterPathIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH);
 
 
         final int id = cursor.getInt(movieIdIndex);
-        String title = cursor.getString(movieTitleIndex);
-        String overview = cursor.getString(movieOverviewIndex);
-        String vote = cursor.getString(movieVoteIndex);
-        String date = cursor.getString(movieDateIndex);
+//        String title = cursor.getString(movieTitleIndex);
+//        String overview = cursor.getString(movieOverviewIndex);
+//        String vote = cursor.getString(movieVoteIndex);
+//        String date = cursor.getString(movieDateIndex);
         String posterPath = cursor.getString(moviePosterPathIndex);
 
         holder.itemView.setTag(id);
-        holder.originalTitle.setText(title);
-        holder.movieOverview.setText(overview);
-        holder.voteAverage.setText(vote);
-        holder.releaseDate.setText(date);
+//        holder.originalTitle.setText(title);
+//        holder.movieOverview.setText(overview);
+//        holder.voteAverage.setText(vote);
+//        holder.releaseDate.setText(date);
 
         Picasso.with(context)
                 .load("http://image.tmdb.org/t/p/w185/" + posterPath)
                 .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
                 .centerCrop()
                 .into(holder.imageView);
+        Log.e(TAG, "Failed to load image.");
 
     }
 

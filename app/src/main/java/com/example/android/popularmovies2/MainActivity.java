@@ -54,9 +54,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private ProgressBar mLoadingIndicator;
 
-    private TextView mSearchResultsTextView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mErrorMessageDisplay = (TextView) findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
-
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -126,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                         R.drawable.item_decorator)));
     }
 
+
     @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
@@ -149,7 +146,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     public void onClick(ImageView imageView) {
-
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        startActivity(intent);
     }
 
     @Override
