@@ -109,10 +109,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
+        if(savedInstanceState == null){
              MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute("most_popular");
 
-
+        }else {
+            MovieAsyncTask myTask = new MovieAsyncTask(this);
+            myTask.execute("most_popular");
+        }
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
