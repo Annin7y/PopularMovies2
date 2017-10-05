@@ -33,7 +33,7 @@ public class MovieTrailerAsyncTask extends AsyncTask<String, Void, ArrayList<Mov
         if (params.length == 0) {
             return null;
         }
-        String movieId= params[0];
+        String movieId = params[0];
         URL movieRequestUrl = NetworkUtils.buildUrlTrailer(movieId);
 
         try {
@@ -56,8 +56,6 @@ public class MovieTrailerAsyncTask extends AsyncTask<String, Void, ArrayList<Mov
         super.onPostExecute(mMovieTrailerList);
         if (mMovieTrailerList != null) {
             listener.returnTrailerData(mMovieTrailerList);
-
         }
     }
-
 }

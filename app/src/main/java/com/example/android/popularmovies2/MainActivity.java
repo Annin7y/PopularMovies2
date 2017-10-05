@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private RecyclerView mRecyclerView;
 
-    private RecyclerView fRecyclerView;
-
     private MovieAdapter movieAdapter;
 
     private FavoritesAdapter favoritesAdapter;
@@ -258,8 +256,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             case R.id.movie_favorites:
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                 favoritesAdapter = new FavoritesAdapter(this,MainActivity.this);
-                mRecyclerView.setAdapter(favoritesAdapter);
+                favoritesAdapter = new FavoritesAdapter(this,MainActivity.this);
+                onLoadFinished.setAdapter(favoritesAdapter);
                 return true;
 
             default:

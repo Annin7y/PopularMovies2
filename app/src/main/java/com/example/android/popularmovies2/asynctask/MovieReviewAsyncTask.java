@@ -32,7 +32,7 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
         if (params.length == 0) {
             return null;
         }
-        String movieId= params[0];
+        String movieId = params[0];
         URL movieRequestUrl = NetworkUtils.buildUrlReview(movieId);
 
         try {
@@ -55,7 +55,6 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
         super.onPostExecute(mMovieReviewList);
         if (mMovieReviewList != null) {
             listener.returnReviewData(mMovieReviewList);
-
         }
     }
 }

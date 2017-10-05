@@ -195,7 +195,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
-            youtubeImage = "http://img.youtube.com/vi/" + youtubeKey + "/0.jpg";
+            youtubeImage = BASE_YOUTUBE_URL_SHARE + youtubeKey + "/0.jpg";
 
             Picasso.with(context)
                     .load(youtubeImage)
@@ -217,7 +217,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
         intent.setData(NetworkUtils.buildUrlYouTube(movieTrailer.getTrailerKey()));
         startActivity(intent);
-
     }
 
     @Override
@@ -233,6 +232,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         return super.onCreateOptionsMenu(menu);
     }
+
 
     public Intent createShareIntent() {
 

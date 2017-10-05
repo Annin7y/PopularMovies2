@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 
 public interface AsyncTaskTrailerInterface {
-
     void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData);
 }
 
