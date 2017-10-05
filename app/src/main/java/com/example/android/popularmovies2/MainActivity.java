@@ -113,9 +113,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
-
-            MovieAsyncTask myTask = new MovieAsyncTask(this);
-            myTask.execute("most_popular");
+        MovieAsyncTask myTask = new MovieAsyncTask(this);
+        myTask.execute("most_popular");
 
 
         //specifying the space between images
@@ -256,8 +255,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             case R.id.movie_favorites:
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                favoritesAdapter = new FavoritesAdapter(this,MainActivity.this);
-                onLoadFinished.setAdapter(favoritesAdapter);
+                favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
+                mRecyclerView.setAdapter(favoritesAdapter);
                 return true;
 
             default:
@@ -270,4 +269,5 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-    } }
+    }
+}

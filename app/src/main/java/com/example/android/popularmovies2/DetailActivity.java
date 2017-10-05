@@ -75,6 +75,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     private static final String BASE_YOUTUBE_URL_SHARE = "http://www.youtube.com/watch?v=";
 
+    private static final String BASE_YOUTUBE_URL_IMAGE = "http://img.youtube.com/vi/";
+
     ImageView poster;
 
     ImageView youtube_thumbnail;
@@ -195,13 +197,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
-            youtubeImage = BASE_YOUTUBE_URL_SHARE + youtubeKey + "/0.jpg";
+            youtubeImage = BASE_YOUTUBE_URL_IMAGE + youtubeKey + "/0.jpg";
 
             Picasso.with(context)
                     .load(youtubeImage)
                     .into(youtube_thumbnail);
-
-        } else {
+        }
+        else {
             Toast.makeText(DetailActivity.this, "Trailer currently unavailable", Toast.LENGTH_SHORT).show();
         }
         if (mShareActionProvider != null) {
@@ -235,10 +237,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
 
     public Intent createShareIntent() {
-
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "http://www.youtube.com/watch?v=" + youtubeKey);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, BASE_YOUTUBE_URL_SHARE + youtubeKey);
         return shareIntent;
     }
 }
