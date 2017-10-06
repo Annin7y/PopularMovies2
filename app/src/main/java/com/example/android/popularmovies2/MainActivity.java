@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     SharedPreferences sharedpreferences;
 
-    private int selectedSortOrder = R.id.most_popular;
+    private static final String KEY_SORT_ORDER = "sort_order";
+
+    private int selectedSortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,11 +117,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
-            savedInstanceState.getInt("orderSelected", R.id.most_popular);
+            selectedSortOrder = savedInstanceState.getInt(KEY_SORT_ORDER, R.id.most_popular);
 
         }
         //specifying the space between images
@@ -274,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(KEY_SORT_ORDER, selectedSortOrder);
         super.onSaveInstanceState(outState);
 
     }
