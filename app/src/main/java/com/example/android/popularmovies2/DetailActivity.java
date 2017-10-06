@@ -116,8 +116,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
 
         favoritesButton.setOnClickListener(new View.OnClickListener()
-
-
         {
             @Override
             public void onClick(View view) {

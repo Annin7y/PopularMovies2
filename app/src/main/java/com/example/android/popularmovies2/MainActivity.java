@@ -2,6 +2,7 @@ package com.example.android.popularmovies2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.example.android.popularmovies2.decoration.DividerItemDecoration;
 import com.example.android.popularmovies2.decoration.VerticalSpacingDecoration;
 import com.example.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import com.example.android.popularmovies2.recyclerviewadapters.MovieAdapter;
+import com.example.android.popularmovies2.utils.NetworkUtils;
 
 import java.util.ArrayList;
 
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private TextView mErrorMessageDisplay;
 
     private ProgressBar mLoadingIndicator;
+
+    SharedPreferences sharedpreferences;
+
+    private int selectedSortOrder = R.id.most_popular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,12 +115,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
-        if(savedInstanceState == null){
-             MovieAsyncTask myTask = new MovieAsyncTask(this);
-            myTask.execute("most_popular");
+        if(savedInstanceState != null) {
+            MovieAsyncTask myTask = new MovieAsyncTask(this);
+            myTask.execute(NetworkUtils.SORT_BY_POPULAR);
+        } else {
+            savedInstanceState.getInt("orderSelected", R.id.most_popular);
 
-        }else {
-           
         }
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
@@ -245,12 +251,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         MovieAsyncTask myTask = new MovieAsyncTask(this);
         switch (item.getItemId()) {
             case R.id.most_popular:
-                myTask.execute("most_popular");
+                myTask.execute(NetworkUtils.SORT_BY_POPULAR);
                 returnData(simpleJsonMovieData);
                 return true;
 
             case R.id.top_rated:
-                myTask.execute("top_rated");
+                myTask.execute(NetworkUtils.SORT_BY_RATING);
                 returnData(simpleJsonMovieData);
                 return true;
 
