@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private static final String KEY_SORT_ORDER = "sort_order";
 
-    private String selectedSortOrder;
+   private String selectedSortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,12 +117,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         }
        else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+            MovieAsyncTask myTask = new MovieAsyncTask(this);
+            myTask.execute(selectedSortOrder);
             Log.e(TAG, "Failed to load activity.");
         }
         //specifying the space between images

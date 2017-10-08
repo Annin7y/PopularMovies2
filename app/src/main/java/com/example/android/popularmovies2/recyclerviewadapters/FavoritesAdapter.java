@@ -28,7 +28,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public static final int IMAGE_WIDTH = 50;
 
     public interface FavoritesAdapterOnClickHandler {
-        void onClick(ImageView imageClick);
+        void onClick(ImageView imageView);
     }
 
     public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler, Context context) {
@@ -42,7 +42,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public ImageView imageView;
 
 
-
         public FavoritesAdapterViewHolder(View view) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageView);
@@ -51,8 +50,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         @Override
         public void onClick(View v) {
-//            int adapterPosition = getAdapterPosition();
-//            cursor.moveToPosition(adapterPosition);
+
             mClickHandler.onClick(imageView);
         }
     }
