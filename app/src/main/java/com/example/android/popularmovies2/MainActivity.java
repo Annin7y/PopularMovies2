@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private static final String KEY_SORT_ORDER = "sort_order";
 
-   private String selectedSortOrder;
+    private String selectedSortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,12 +120,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         if (savedInstanceState == null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
-        }
-       else {
+        } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(selectedSortOrder);
-            Log.e(TAG, "Failed to load activity.");
+            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
@@ -257,11 +256,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         switch (item.getItemId()) {
             case R.id.most_popular:
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
+                selectedSortOrder = NetworkUtils.SORT_BY_POPULAR;
                 returnData(simpleJsonMovieData);
                 return true;
 
             case R.id.top_rated:
                 myTask.execute(NetworkUtils.SORT_BY_RATING);
+                selectedSortOrder = NetworkUtils.SORT_BY_RATING;
                 returnData(simpleJsonMovieData);
                 return true;
 
