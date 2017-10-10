@@ -266,7 +266,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 return true;
 
             default:
-
                 return super.onOptionsItemSelected(item);
         }
     }
