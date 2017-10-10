@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.android.popularmovies2.Movie;
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.data.MovieContract;
 import com.squareup.picasso.Picasso;
@@ -32,12 +33,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         mClickHandler = clickHandler;
         this.context = context;
     }
-
-
+    
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView imageView;
-
 
         public FavoritesAdapterViewHolder(View view) {
             super(view);
@@ -49,13 +48,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public void onClick(View v) {
             cursor.moveToPosition(getAdapterPosition());
 
+            Movie movie = new Movie();
+            mClickHandler.onClick(movie);
         }
     }
 
 
     @Override
     public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position) {
-
 
         cursor.moveToPosition(position); // get to the right location in the cursor
 
