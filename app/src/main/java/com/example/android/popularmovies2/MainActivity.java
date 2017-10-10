@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -34,7 +33,7 @@ import com.example.android.popularmovies2.utils.NetworkUtils;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>, FavoritesAdapter.FavoritesAdapterOnClickHandler {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>  {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -154,12 +153,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void onClick(Movie movie) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("Movie", movie);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onClick(ImageView imageView) {
-        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         startActivity(intent);
     }
 

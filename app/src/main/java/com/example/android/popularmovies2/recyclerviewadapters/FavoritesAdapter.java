@@ -23,21 +23,18 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     private Context context;
     private Cursor cursor;
-    private FavoritesAdapter.FavoritesAdapterOnClickHandler mClickHandler;
+    private MovieAdapter.MovieAdapterOnClickHandler mClickHandler;
     public static final int IMAGE_HEIGHT = 185;
     public static final int IMAGE_WIDTH = 50;
 
-    public interface FavoritesAdapterOnClickHandler {
-        void onClick(ImageView imageView);
-    }
 
-    public FavoritesAdapter(FavoritesAdapterOnClickHandler clickHandler, Context context) {
+    public FavoritesAdapter(MovieAdapter.MovieAdapterOnClickHandler clickHandler, Context context) {
         mClickHandler = clickHandler;
         this.context = context;
-
     }
 
-    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView imageView;
 
@@ -45,13 +42,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public FavoritesAdapterViewHolder(View view) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageView);
-            view.setOnClickListener(this);
-        }
 
-        @Override
-        public void onClick(View v) {
-
-            mClickHandler.onClick(imageView);
         }
     }
 
