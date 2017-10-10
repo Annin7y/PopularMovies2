@@ -33,7 +33,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         mClickHandler = clickHandler;
         this.context = context;
     }
-    
+
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView imageView;
@@ -49,6 +49,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             cursor.moveToPosition(getAdapterPosition());
 
             Movie movie = new Movie();
+            movie.setMovieId(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID)));
             mClickHandler.onClick(movie);
         }
     }
