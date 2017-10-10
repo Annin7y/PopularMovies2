@@ -34,7 +34,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     }
 
 
-    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder{
+    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView imageView;
 
@@ -42,6 +42,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public FavoritesAdapterViewHolder(View view) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageView);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            cursor.moveToPosition(getAdapterPosition());
 
         }
     }
