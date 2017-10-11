@@ -48,7 +48,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public void onClick(View v) {
             cursor.moveToPosition(getAdapterPosition());
 
-            Movie movie = new Movie();
+            Movie movie = new Movie(posterUrl, originalTitle, movieOverview, voteAvreage, releaseDate, movieId);
             movie.setMovieId(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID)));
             movie.setReleaseDate(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE)));
             movie.setOriginalTitle(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE)));
