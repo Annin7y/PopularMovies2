@@ -48,13 +48,17 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         public void onClick(View v) {
             cursor.moveToPosition(getAdapterPosition());
 
-            Movie movie = new Movie(posterUrl, originalTitle, movieOverview, voteAvreage, releaseDate, movieId);
-            movie.setMovieId(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID)));
-            movie.setReleaseDate(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE)));
-            movie.setOriginalTitle(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE)));
-            movie.setMovieOverview(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW)));
-            movie.setPosterUrl(cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH)));
+            String posterUrl = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID));
+            String originalTitle = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE));
+            String movieOverview = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW));
+            String voteAverage = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE));
+            String releaseDate = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE));
+            String movieId = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID));
+
+            Movie movie = new Movie(posterUrl, originalTitle, movieOverview, voteAverage, releaseDate,movieId);
+
             mClickHandler.onClick(movie);
+
         }
     }
 
