@@ -132,10 +132,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                 }
                 finish();
-                if (isMovieInDb(movie)) {
+              if (isMovieInDb(movie)) {
                     Toast.makeText(DetailActivity.this, "Movie already saved to database.", Toast.LENGTH_SHORT).show();
-                }
-            }
+               }
+          }
         });
 
 
