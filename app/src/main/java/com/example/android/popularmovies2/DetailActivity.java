@@ -3,6 +3,7 @@ package com.example.android.popularmovies2;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -115,8 +116,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         reviewAuthor = (TextView) findViewById(R.id.author_review);
 
 
-        favoritesButton.setOnClickListener(new View.OnClickListener()
-        {
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ContentValues values = new ContentValues();
@@ -132,7 +132,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                 }
                 finish();
-
+                if (isMovieInDb(movie)) {
+                    Toast.makeText(DetailActivity.this, "Movie already saved to database.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -181,6 +183,25 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         }
     }
 
+    private boolean isMovieInDb(Movie movie) {
+        Cursor cursor = getContentResolver().query(
+                MovieContract.MovieEntry.CONTENT_URI, null, null, null, null);
+      if (cursor != null && cursor.getCount() > 0 ) {
+            while (cursor.moveToNext()) {
+                String movieId = cursor.getString(
+                        cursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIES_ID));
+                if (movieId == movie.getMovieId()) {
+                    return true;
+                }
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return false;
+    }
+
+
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
@@ -200,8 +221,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             Picasso.with(context)
                     .load(youtubeImage)
                     .into(youtube_thumbnail);
-        }
-        else {
+        } else {
             Toast.makeText(DetailActivity.this, "Trailer currently unavailable", Toast.LENGTH_SHORT).show();
         }
         if (mShareActionProvider != null) {
