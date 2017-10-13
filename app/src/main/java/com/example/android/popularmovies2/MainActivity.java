@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 return false;
             }
 
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                if (viewHolder instanceof MovieAdapter.MovieAdapterViewHolder) return 0;
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
             // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
@@ -99,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 // TODO (1) Construct the URI for the item to delete
                 //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
                 // Retrieve the id of the task to delete
+
                 int id = (int) viewHolder.itemView.getTag();
 
                 // Build appropriate uri with String row id appended
@@ -135,6 +142,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                         R.drawable.item_decorator)));
     }
+
+
+
 
 
     @Override
