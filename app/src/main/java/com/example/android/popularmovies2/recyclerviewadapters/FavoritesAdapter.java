@@ -38,10 +38,11 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         public ImageView imageView;
 
-        public FavoritesAdapterViewHolder(View view) {
-            super(view);
-            imageView = (ImageView) view.findViewById(R.id.imageView);
-            view.setOnClickListener(this);
+        public FavoritesAdapterViewHolder(View itemView) {
+            super(itemView);
+            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            itemView.setOnClickListener(this);
+
         }
 
         @Override
@@ -120,5 +121,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             return 0;
         return cursor.getCount();
     }
-}
+    }
+
+
+
+
+
 

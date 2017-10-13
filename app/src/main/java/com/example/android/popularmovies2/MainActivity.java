@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private Context context;
 
     private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerViewFavorites;
 
     private MovieAdapter movieAdapter;
 
@@ -68,14 +69,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         context = getApplicationContext();
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
+        mRecyclerViewFavorites = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
 
         favoritesAdapter = new FavoritesAdapter(this, context);
+        mRecyclerViewFavorites.setAdapter(favoritesAdapter);
         //specifying that the images will be displayed in two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        RecyclerView.LayoutManager mLayoutFavoritesManager = new GridLayoutManager(context, 2);
+        mRecyclerViewFavorites.setLayoutManager(mLayoutFavoritesManager);
 
         mErrorMessageDisplay = (TextView) findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
@@ -109,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 
             }
-        }).attachToRecyclerView(mRecyclerView);
+        }).attachToRecyclerView(mRecyclerViewFavorites);
         getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, this);
 
         /**
