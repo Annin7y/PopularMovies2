@@ -106,17 +106,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 Uri uri = MovieContract.MovieEntry.CONTENT_URI;
                 uri = uri.buildUpon().appendPath(stringId).build();
 
-
                 // TODO (2) Delete a single row of data using a ContentResolver
-                getContentResolver().delete(uri, null, null);
-
+                int rowsDeleted =  getContentResolver().delete(uri, null, null);
+                Log.v("CatalogActivity", rowsDeleted + " rows deleted from the movie database");
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 
             }
         }).attachToRecyclerView(mRecyclerViewFavorites);
-        getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, this);
-
+        getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */

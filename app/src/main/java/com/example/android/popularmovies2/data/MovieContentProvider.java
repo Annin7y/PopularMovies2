@@ -127,7 +127,8 @@ public class MovieContentProvider extends ContentProvider {
 
         int match = sUriMatcher.match(uri);
         // Keep track of the number of deleted tasks
-        int moviesDeleted; // starts as 0
+        int rowsDeleted; // starts as 0
+
 
         // Write the code to delete a single row of data
         // [Hint] Use selections to delete an item by its row ID
@@ -137,20 +138,20 @@ public class MovieContentProvider extends ContentProvider {
                 // Get the task ID from the URI path
                 String id = uri.getPathSegments().get(1);
                 // Use selections/selectionArgs to filter for this ID
-                moviesDeleted = db.delete(MovieContract.MovieEntry.TABLE_NAME, "_id=?", new String[]{id});
+                rowsDeleted = db.delete(MovieContract.MovieEntry.TABLE_NAME, "_id=?", new String[]{id});
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
         // Notify the resolver of a change and return the number of items deleted
-        if (moviesDeleted != 0) {
+        if (rowsDeleted != 0) {
             // A task was deleted, set notification
             getContext().getContentResolver().notifyChange(uri, null);
         }
 
         // Return the number of tasks deleted
-        return moviesDeleted;
+        return rowsDeleted;
     }
 
 
