@@ -38,8 +38,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         public ImageView imageView;
 
-        public FavoritesAdapterViewHolder(View itemView) {
-            super(itemView);
+        public FavoritesAdapterViewHolder(View view) {
+            super(view);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             itemView.setOnClickListener(this);
 

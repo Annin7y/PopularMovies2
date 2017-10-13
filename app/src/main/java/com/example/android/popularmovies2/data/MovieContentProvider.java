@@ -137,7 +137,7 @@ public class MovieContentProvider extends ContentProvider {
                 // Get the task ID from the URI path
                 String id = uri.getPathSegments().get(1);
                 // Use selections/selectionArgs to filter for this ID
-                moviesDeleted = db.delete(TABLE_NAME, "_id=?", new String[]{id});
+                moviesDeleted = db.delete(MovieContract.MovieEntry.TABLE_NAME, "_id=?", new String[]{id});
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
