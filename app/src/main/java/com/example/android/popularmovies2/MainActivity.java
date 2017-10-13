@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.setAdapter(movieAdapter);
 
         favoritesAdapter = new FavoritesAdapter(this, context);
-        mRecyclerView.setAdapter(favoritesAdapter);
         //specifying that the images will be displayed in two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             }
         }).attachToRecyclerView(mRecyclerView);
-
+        getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, this);
 
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
@@ -260,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 return true;
 
             case R.id.movie_favorites:
-                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
                 return true;
