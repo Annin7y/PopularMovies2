@@ -129,7 +129,7 @@ public class MovieContentProvider extends ContentProvider {
         // Keep track of the number of deleted tasks
         int rowsDeleted; // starts as 0
 
-
+      //  if (null == selection) selection = "1";
         // Write the code to delete a single row of data
         // [Hint] Use selections to delete an item by its row ID
         switch (match) {
@@ -137,8 +137,11 @@ public class MovieContentProvider extends ContentProvider {
             case MOVIE_WITH_ID:
                 // Get the task ID from the URI path
                 String id = uri.getPathSegments().get(1);
+
+
                 // Use selections/selectionArgs to filter for this ID
-                rowsDeleted = db.delete(MovieContract.MovieEntry.TABLE_NAME, "_id=?", new String[]{id});
+                rowsDeleted = db.delete(MovieContract.MovieEntry.TABLE_NAME, "id=?", new String[]{id});
+            //    rowsDeleted = db.delete(MovieContract.MovieEntry.TABLE_NAME,  selection,selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
