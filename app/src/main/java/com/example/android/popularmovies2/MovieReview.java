@@ -19,8 +19,7 @@ public class MovieReview implements Parcelable {
      */
     private String reviewAuthor;
 
-    public MovieReview(String movieReview, String reviewAuthor)
-    {
+    public MovieReview(String movieReview, String reviewAuthor) {
         this.movieReview = movieReview;
         this.reviewAuthor = reviewAuthor;
     }
@@ -41,7 +40,6 @@ public class MovieReview implements Parcelable {
         return reviewAuthor;
     }
 
-
     protected MovieReview(Parcel in) {
 
         movieReview = in.readString();
@@ -59,6 +57,7 @@ public class MovieReview implements Parcelable {
         dest.writeString(movieReview);
         dest.writeString(reviewAuthor);
     }
+
     @SuppressWarnings("unused")
     public static final Parcelable.Creator<MovieReview> CREATOR = new Parcelable.Creator<MovieReview>() {
         @Override
@@ -71,5 +70,4 @@ public class MovieReview implements Parcelable {
             return new MovieReview[size];
         }
     };
-
 }

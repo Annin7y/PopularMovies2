@@ -13,4 +13,5 @@
     <string name="movie_trailer">Watch the trailer!</string>
     <string name="action_share">Watch the trailer!</string>
     <string name="movie_review_title">Review</string>
+    <string name="favorites_button_text">Add to Favorites</string>
 </resources>

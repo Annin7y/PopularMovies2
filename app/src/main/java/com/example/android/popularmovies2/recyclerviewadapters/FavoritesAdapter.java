@@ -56,21 +56,19 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             String releaseDate = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_DATE));
             String movieId = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID));
 
-            Movie movie = new Movie(posterUrl, originalTitle, movieOverview, voteAverage, releaseDate,movieId);
+            Movie movie = new Movie(posterUrl, originalTitle, movieOverview, voteAverage, releaseDate, movieId);
 
             mClickHandler.onClick(movie);
-
         }
     }
-
 
     @Override
     public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position) {
 
-        cursor.moveToPosition(position); // get to the right location in the cursor
+        // get to the right location in the cursor
+        cursor.moveToPosition(position);
 
         // Determine the values of the wanted data
-
         int movieIdIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_ID);
         int moviePosterPathIndex = cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH);
 
@@ -98,7 +96,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         return new FavoritesAdapter.FavoritesAdapterViewHolder(view);
     }
 
-
     public Cursor swapCursor(Cursor c) {
         // check if this cursor is the same as the previous cursor (mCursor)
         if (cursor == c) {
@@ -121,7 +118,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             return 0;
         return cursor.getCount();
     }
-    }
+}
 
 
 

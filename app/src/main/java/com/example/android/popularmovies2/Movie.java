@@ -52,7 +52,6 @@ public class Movie implements Parcelable {
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
         this.movieId = movieId;
-
     }
 
     public void setPosterUrl(String poster) {
@@ -125,7 +124,6 @@ public class Movie implements Parcelable {
         dest.writeString(voteAverage);
         dest.writeString(releaseDate);
         dest.writeString(movieId);
-
     }
 
     @SuppressWarnings("unused")

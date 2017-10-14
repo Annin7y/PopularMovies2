@@ -24,10 +24,10 @@
             android:id="@+id/favorites_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="205dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginLeft="@dimen/favorites_button_margin_left"
+            android:layout_marginTop="@dimen/favorites_button_margin_top"
             android:focusable="false"
-            android:text="Add to Favorites" />
+            android:text="@string/favorites_button_text" />
 
         <TextView
             android:id="@+id/original_title"

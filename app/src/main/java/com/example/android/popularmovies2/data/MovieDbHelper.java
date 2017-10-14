@@ -16,20 +16,18 @@ public class MovieDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version
     private static final int VERSION = 9;
 
-
     // Constructor
     MovieDbHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
-
     /**
-     * Called when the tasks database is created for the first time.
+     * Called when the movies database is created for the first time.
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        // Create tasks table (careful to follow SQL formatting rules)
+        // Create movies table (careful to follow SQL formatting rules)
         final String CREATE_TABLE = "CREATE TABLE " + MovieContract.MovieEntry.TABLE_NAME + " (" +
                 MovieContract.MovieEntry._ID + " INTEGER PRIMARY KEY , " +
                 MovieContract.MovieEntry.COLUMN_MOVIES_ID + " TEXT NOT NULL , " +
@@ -39,7 +37,7 @@ public class MovieDbHelper extends SQLiteOpenHelper {
                 MovieContract.MovieEntry.COLUMN_MOVIES_DATE + " TEXT NOT NULL, " +
                 MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH + " TEXT NOT NULL, " +
 
-        " UNIQUE (" + MovieContract.MovieEntry.COLUMN_MOVIES_TITLE + ") ON CONFLICT REPLACE);";
+                " UNIQUE (" + MovieContract.MovieEntry.COLUMN_MOVIES_TITLE + ") ON CONFLICT REPLACE);";
 
 
         db.execSQL(CREATE_TABLE);

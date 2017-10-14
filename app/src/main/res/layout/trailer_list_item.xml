@@ -12,7 +12,7 @@
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginRight="@dimen/text_margin"
         android:padding="@dimen/text_padding"
-        android:textSize="25sp"
+        android:textSize="@dimen/movie_trailer_text_size"
         tools:text="@string/movie_trailer" />
 
 

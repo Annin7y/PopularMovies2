@@ -19,12 +19,10 @@ public class MovieTrailer implements Parcelable {
      */
     private String trailerKey;
 
-    public MovieTrailer(String trailerName, String trailerKey)
-    {
+    public MovieTrailer(String trailerName, String trailerKey) {
         this.trailerName = trailerName;
         this.trailerKey = trailerKey;
     }
-
 
     public void setTrailerName(String trailerName) {
         this.trailerName = trailerName;
@@ -72,5 +70,4 @@ public class MovieTrailer implements Parcelable {
             return new MovieTrailer[size];
         }
     };
-
 }

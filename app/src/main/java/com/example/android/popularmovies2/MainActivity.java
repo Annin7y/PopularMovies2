@@ -100,10 +100,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
     int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
     int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-    if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR) {
+    if (selectedSortOrder.equals(NetworkUtils.SORT_BY_POPULAR)) {
         return 0;
     }
-    if (selectedSortOrder == NetworkUtils.SORT_BY_RATING){
+    if (selectedSortOrder.equals(NetworkUtils.SORT_BY_RATING)){
         return 0;
     }
     return makeMovementFlags(dragFlags, swipeFlags);
