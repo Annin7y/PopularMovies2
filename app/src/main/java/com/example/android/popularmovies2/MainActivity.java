@@ -162,9 +162,6 @@ public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder v
     }
 
 
-
-
-
     @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);

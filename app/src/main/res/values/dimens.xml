@@ -50,4 +50,13 @@
     <dimen name="favorites_button_margin_left">205dp</dimen>
     <dimen name="favorites_button_margin_top">90dp</dimen>
 
+    <!-- RecyclerView trailer marginTop in activity_detail -->
+    <dimen name="trailer_view_margin_top">75dp</dimen>
+
+    <!-- RecyclerView review marginBottom in activity_detail -->
+    <dimen name="review_view_margin_bottom">35dp</dimen>
+
+    <!-- ImageView YouTube height and width in activity_detail -->
+    <dimen name="image_youtube_size">90dp</dimen>
+
 </resources>
