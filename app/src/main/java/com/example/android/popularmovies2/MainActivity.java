@@ -98,15 +98,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 //            }
 @Override
 public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-    if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR && selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
+    int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+    int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+    if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR) {
         return 0;
     }
-    else {
-        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-        return makeMovementFlags(dragFlags, swipeFlags);
+    if (selectedSortOrder == NetworkUtils.SORT_BY_RATING){
+        return 0;
     }
-
+    return makeMovementFlags(dragFlags, swipeFlags);
 }
 //
 //    int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
