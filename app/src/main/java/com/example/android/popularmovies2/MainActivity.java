@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private static final String KEY_SORT_ORDER = "sort_order";
 
-    private String selectedSortOrder = "most_popular";
+    private String selectedSortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,23 +91,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 return false;
             }
 
-//            @Override
-//            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-//                if (viewHolder instanceof MovieAdapter.MovieAdapterViewHolder) return 0;
-//                return super.getSwipeDirs(recyclerView, viewHolder);
-//            }
-@Override
-public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-    int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-    int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-    if (selectedSortOrder.equals(NetworkUtils.SORT_BY_POPULAR)) {
-        return 0;
-    }
-    if (selectedSortOrder.equals(NetworkUtils.SORT_BY_RATING)){
-        return 0;
-    }
-    return makeMovementFlags(dragFlags, swipeFlags);
-}
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                if (viewHolder instanceof MovieAdapter.MovieAdapterViewHolder) return 0;
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }
 
             // Called when a user swipes left or right on a ViewHolder
             @Override
@@ -133,7 +121,7 @@ public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder v
 
             }
         }).attachToRecyclerView(mRecyclerViewFavorites);
-        getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+   //     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
