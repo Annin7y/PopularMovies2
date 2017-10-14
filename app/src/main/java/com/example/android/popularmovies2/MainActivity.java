@@ -113,8 +113,6 @@ public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder v
 //    int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
 //    return makeMovementFlags(dragFlags, swipeFlags);
 
-
-
             // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
