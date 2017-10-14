@@ -91,11 +91,29 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 return false;
             }
 
-            @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                if (viewHolder instanceof MovieAdapter.MovieAdapterViewHolder) return 0;
-                return super.getSwipeDirs(recyclerView, viewHolder);
-            }
+//            @Override
+//            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+//                if (viewHolder instanceof MovieAdapter.MovieAdapterViewHolder) return 0;
+//                return super.getSwipeDirs(recyclerView, viewHolder);
+//            }
+@Override
+public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+    if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR && selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
+        return 0;
+    }
+    else {
+        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+        int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+        return makeMovementFlags(dragFlags, swipeFlags);
+    }
+
+}
+//
+//    int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+//    int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+//    return makeMovementFlags(dragFlags, swipeFlags);
+
+
 
             // Called when a user swipes left or right on a ViewHolder
             @Override
