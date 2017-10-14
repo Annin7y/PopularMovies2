@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private static final String KEY_SORT_ORDER = "sort_order";
 
-    private String selectedSortOrder;
+    private String selectedSortOrder = "most_popular";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,11 +108,7 @@ public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder v
     }
     return makeMovementFlags(dragFlags, swipeFlags);
 }
-//
-//    int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-//    int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-//    return makeMovementFlags(dragFlags, swipeFlags);
-
+            
             // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
