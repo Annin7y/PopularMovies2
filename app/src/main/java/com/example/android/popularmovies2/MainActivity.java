@@ -129,11 +129,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
-            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-            MovieAsyncTask myTask = new MovieAsyncTask(this);
-            myTask.execute(selectedSortOrder);
+//            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+//            MovieAsyncTask myTask = new MovieAsyncTask(this);
+//            myTask.execute(selectedSortOrder);
+            simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
+            mRecyclerView.setAdapter(movieAdapter);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
+
+        getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -281,7 +285,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString(KEY_SORT_ORDER, selectedSortOrder);
+//        outState.putString(KEY_SORT_ORDER, selectedSortOrder);
+//        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(KEY_SORT_ORDER, simpleJsonMovieData);
         super.onSaveInstanceState(outState);
 
     }
