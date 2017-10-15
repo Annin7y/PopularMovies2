@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private Context context;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView mRecyclerViewFavorites;
 
     private MovieAdapter movieAdapter;
 
@@ -69,18 +68,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         context = getApplicationContext();
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
-        mRecyclerViewFavorites = (RecyclerView) findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, context);
         mRecyclerView.setAdapter(movieAdapter);
 
         favoritesAdapter = new FavoritesAdapter(this, context);
-        mRecyclerViewFavorites.setAdapter(favoritesAdapter);
+
         //specifying that the images will be displayed in two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        RecyclerView.LayoutManager mLayoutFavoritesManager = new GridLayoutManager(context, 2);
-        mRecyclerViewFavorites.setLayoutManager(mLayoutFavoritesManager);
 
         mErrorMessageDisplay = (TextView) findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
@@ -120,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 
             }
-        }).attachToRecyclerView(mRecyclerViewFavorites);
+        }).attachToRecyclerView(mRecyclerView);
    //     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
@@ -134,10 +129,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 //            myTask.execute(selectedSortOrder);
             simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
             mRecyclerView.setAdapter(movieAdapter);
-            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
+//            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
 
-        getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+     //   getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -146,7 +141,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                         R.drawable.item_decorator)));
     }
-
 
     @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
@@ -217,9 +211,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 super.deliverResult(data);
             }
         };
-
     }
-
 
     /**
      * Called when a previously created loader has finished its load.
@@ -232,7 +224,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         // Update the data that the adapter uses to create ViewHolders
         favoritesAdapter.swapCursor(data);
     }
-
 
     /**
      * Called when a previously created loader is being reset, and thus
@@ -285,10 +276,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-//        outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-//        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(KEY_SORT_ORDER, simpleJsonMovieData);
+        outState.putString(KEY_SORT_ORDER, selectedSortOrder);
         super.onSaveInstanceState(outState);
+//        outState.putParcelableArrayList(KEY_SORT_ORDER, simpleJsonMovieData);
+//        super.onSaveInstanceState(outState);
 
     }
 }
