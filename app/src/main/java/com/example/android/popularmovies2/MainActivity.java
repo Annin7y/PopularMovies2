@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     SharedPreferences sharedpreferences;
 
+    private static final String KEY_MOVIES_LIST = "movies_list";
+
     private static final String KEY_SORT_ORDER = "sort_order";
 
     private String selectedSortOrder = "most_popular";
@@ -280,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-        outState.putParcelableArrayList(KEY_SORT_ORDER, moviesList);
+        outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesList);
         super.onSaveInstanceState(outState);
 
     }
