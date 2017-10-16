@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private ArrayList<Movie> simpleJsonMovieData = new ArrayList<>();
 
+    private ArrayList<Movie> moviesList;
+
     private Context context;
 
     private RecyclerView mRecyclerView;
@@ -127,9 +129,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 //            MovieAsyncTask myTask = new MovieAsyncTask(this);
 //            myTask.execute(selectedSortOrder);
-            simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
+            moviesList = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
             mRecyclerView.setAdapter(movieAdapter);
-//            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
+            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
 
         //   getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
@@ -146,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
+        moviesList = simpleJsonMovieData;
         mRecyclerView.setAdapter(movieAdapter);
     }
 
