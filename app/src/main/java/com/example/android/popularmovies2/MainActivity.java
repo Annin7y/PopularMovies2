@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 //            MovieAsyncTask myTask = new MovieAsyncTask(this);
 //            myTask.execute(selectedSortOrder);
-            moviesList = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
+            simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
             mRecyclerView.setAdapter(movieAdapter);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-        outState.putParcelableArrayList(KEY_SORT_ORDER, simpleJsonMovieData);
+        outState.putParcelableArrayList(KEY_SORT_ORDER, moviesList);
         super.onSaveInstanceState(outState);
 
     }
