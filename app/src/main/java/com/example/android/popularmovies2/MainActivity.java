@@ -33,7 +33,7 @@ import com.example.android.popularmovies2.utils.NetworkUtils;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>  {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private static final String KEY_SORT_ORDER = "sort_order";
 
-    private String selectedSortOrder;
+    private String selectedSortOrder = "most_popular";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,14 +109,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 uri = uri.buildUpon().appendPath(stringId).build();
 
                 // TODO (2) Delete a single row of data using a ContentResolver
-                int rowsDeleted =  getContentResolver().delete(uri, null, null);
+                int rowsDeleted = getContentResolver().delete(uri, null, null);
                 Log.v("CatalogActivity", rowsDeleted + " rows deleted from the movie database");
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 
             }
         }).attachToRecyclerView(mRecyclerView);
-   //     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+        //     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
-//            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 //            MovieAsyncTask myTask = new MovieAsyncTask(this);
 //            myTask.execute(selectedSortOrder);
             simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 //            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
 
-     //   getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+        //   getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -277,9 +277,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
+        outState.putParcelableArrayList(KEY_SORT_ORDER, simpleJsonMovieData);
         super.onSaveInstanceState(outState);
-//        outState.putParcelableArrayList(KEY_SORT_ORDER, simpleJsonMovieData);
-//        super.onSaveInstanceState(outState);
 
     }
 }
