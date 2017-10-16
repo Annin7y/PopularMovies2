@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private ArrayList<Movie> simpleJsonMovieData = new ArrayList<>();
 
-    private ArrayList<Movie> moviesList;
+   // private ArrayList<Movie> moviesList =new ArrayList<>(); ;
 
     private Context context;
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private static final String KEY_SORT_ORDER = "sort_order";
 
-    private String selectedSortOrder = "most_popular";
+    private String selectedSortOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,10 +129,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-//            MovieAsyncTask myTask = new MovieAsyncTask(this);
-//            myTask.execute(selectedSortOrder);
-            simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-            mRecyclerView.setAdapter(movieAdapter);
+            MovieAsyncTask myTask = new MovieAsyncTask(this);
+            myTask.execute(selectedSortOrder);
+
+            //  moviesList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
+        //    mRecyclerView.setAdapter(movieAdapter);
+
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
 
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
-        moviesList = simpleJsonMovieData;
+     //   moviesList = simpleJsonMovieData;
         mRecyclerView.setAdapter(movieAdapter);
     }
 
@@ -282,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-        outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesList);
+     //   outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesList);
         super.onSaveInstanceState(outState);
 
     }
