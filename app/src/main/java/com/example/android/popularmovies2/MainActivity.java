@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 //            MovieAsyncTask myTask = new MovieAsyncTask(this);
 //            myTask.execute(selectedSortOrder);
-            simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_SORT_ORDER);
+            simpleJsonMovieData = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
             mRecyclerView.setAdapter(movieAdapter);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
