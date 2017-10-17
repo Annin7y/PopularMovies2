@@ -261,13 +261,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             case R.id.most_popular:
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
                 selectedSortOrder = NetworkUtils.SORT_BY_POPULAR;
-                returnData(moviesArrayList);
+         //       returnData(moviesArrayList);
                 return true;
 
             case R.id.top_rated:
                 myTask.execute(NetworkUtils.SORT_BY_RATING);
                 selectedSortOrder = NetworkUtils.SORT_BY_RATING;
-                returnData(moviesArrayList);
+         //       returnData(moviesArrayList);
                 return true;
 
             case R.id.movie_favorites:
