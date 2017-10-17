@@ -2,7 +2,6 @@ package com.example.android.popularmovies2;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private static final int FAVORITES_LOADER_ID = 0;
 
-    //private ArrayList<Movie> simpleJsonMovieData = new ArrayList<>();
-
     private ArrayList<Movie> moviesArrayList = new ArrayList<>();
 
     private Context context;
@@ -57,13 +54,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private ProgressBar mLoadingIndicator;
 
-    SharedPreferences sharedpreferences;
-
     private static final String KEY_MOVIES_LIST = "movies_list";
 
     private static final String KEY_SORT_ORDER = "sort_order";
 
-    private String selectedSortOrder;
+    private String selectedSortOrder = "most_popular";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,11 +124,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-            MovieAsyncTask myTask = new MovieAsyncTask(this);
-            myTask.execute(selectedSortOrder);
-
-            //  moviesList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-            //    mRecyclerView.setAdapter(movieAdapter);
+            moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
+            movieAdapter.setMovieList(moviesArrayList);
 
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
@@ -152,8 +144,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
-       //  moviesList = simpleJsonMovieData;
+        moviesArrayList = simpleJsonMovieData;
         mRecyclerView.setAdapter(movieAdapter);
+        movieAdapter.setMovieList(moviesArrayList);
     }
 
     private void showErrorMessage() {
@@ -261,13 +254,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             case R.id.most_popular:
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
                 selectedSortOrder = NetworkUtils.SORT_BY_POPULAR;
-                //       returnData(moviesArrayList);
                 return true;
 
             case R.id.top_rated:
                 myTask.execute(NetworkUtils.SORT_BY_RATING);
                 selectedSortOrder = NetworkUtils.SORT_BY_RATING;
-                //       returnData(moviesArrayList);
                 return true;
 
             case R.id.movie_favorites:
@@ -284,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-        //   outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesList);
+        outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesArrayList);
         super.onSaveInstanceState(outState);
 
     }
