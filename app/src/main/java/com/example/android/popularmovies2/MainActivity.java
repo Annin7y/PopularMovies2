@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 Log.v("CatalogActivity", rowsDeleted + " rows deleted from the movie database");
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-
             }
         }).attachToRecyclerView(mRecyclerView);
         //     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
@@ -277,6 +276,5 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
         outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesArrayList);
         super.onSaveInstanceState(outState);
-
     }
 }
