@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
             moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-        //    movieAdapter.setMovieList(moviesArrayList);
+            movieAdapter.setMovieList(moviesArrayList);
 
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
         }
