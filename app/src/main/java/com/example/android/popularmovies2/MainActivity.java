@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private String selectedSortOrder = "most_popular";
 
+    private int mPosition = RecyclerView.NO_POSITION;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,11 +126,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
             moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-
+            movieAdapter.setMovieList(moviesArrayList);
             //  Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
-        }
 
+
+        }
         //   getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
@@ -220,8 +223,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
      */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update the data that the adapter uses to create ViewHolders
         favoritesAdapter.swapCursor(data);
+        if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
+        mRecyclerView.setAdapter(favoritesAdapter);
+        mRecyclerView.smoothScrollToPosition(mPosition);
+
+
+
     }
 
     /**
