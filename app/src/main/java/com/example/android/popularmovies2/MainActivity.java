@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
             }
         }).attachToRecyclerView(mRecyclerView);
-        //     getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+      
         /**
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
