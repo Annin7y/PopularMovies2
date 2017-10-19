@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private String selectedSortOrder = "most_popular";
 
-    public static final String SORT_BY_FAVORITES = "favorites";
-
     private int mPosition = RecyclerView.NO_POSITION;
 
     @Override
@@ -130,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
             movieAdapter.setMovieList(moviesArrayList);
             mLoadingIndicator.setVisibility(View.INVISIBLE);
-               Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
+            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
         }
         //specifying the space between images
@@ -140,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                         R.drawable.item_decorator)));
-
     }
 
     @Override
@@ -270,7 +267,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
-                selectedSortOrder = SORT_BY_FAVORITES;
                 return true;
 
             default:
