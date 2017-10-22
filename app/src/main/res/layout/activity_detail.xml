@@ -8,7 +8,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.example.android.popularmovies2.DetailActivity">
+        tools:context="com.example.android.popularmovies2.annin.example.android.popularmovies2.DetailActivity">
 
         <ImageView
             android:id="@+id/imageView"
