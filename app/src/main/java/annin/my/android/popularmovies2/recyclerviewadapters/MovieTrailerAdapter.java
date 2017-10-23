@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.android.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.MovieTrailer;
+import annin.my.android.popularmovies2.R;
 
 /**
  * Created by Maino96-10022 on 9/4/2017.
@@ -84,10 +84,8 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
 
         Picasso.with(context)
-                .load((movieTrailerView.getYoutubeSiteUrl())
-                        .into(holder.imageView));
-
-
+                .load(movieTrailerView.getYoutubeSiteUrl())
+                        .into(holder.imageView);
     }
 
     @Override

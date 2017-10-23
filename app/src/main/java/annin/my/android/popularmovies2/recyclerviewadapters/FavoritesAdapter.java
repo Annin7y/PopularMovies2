@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.android.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
 import annin.my.android.popularmovies2.Movie;
+import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.data.MovieContract;
 
 /**

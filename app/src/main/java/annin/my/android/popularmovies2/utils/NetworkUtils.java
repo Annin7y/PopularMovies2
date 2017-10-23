@@ -4,8 +4,6 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.android.popularmovies2.BuildConfig;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +18,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import annin.my.android.popularmovies2.BuildConfig;
 import annin.my.android.popularmovies2.Movie;
 import annin.my.android.popularmovies2.MovieReview;
 import annin.my.android.popularmovies2.MovieTrailer;

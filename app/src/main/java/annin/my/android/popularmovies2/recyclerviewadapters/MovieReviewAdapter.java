@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.popularmovies2.R;
-
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.MovieReview;
+import annin.my.android.popularmovies2.R;
 
 /**
  * Created by Maino96-10022 on 8/17/2017.

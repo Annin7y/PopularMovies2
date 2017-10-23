@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.popularmovies2">
+    package="annin.my.android.popularmovies2">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -29,7 +29,7 @@
 
         <provider
             android:name="annin.my.android.popularmovies2.data.MovieContentProvider"
-            android:authorities="com.example.android.popularmovies2"
+            android:authorities="annin.my.android.popularmovies2"
             android:exported="false" />
     </application>
 

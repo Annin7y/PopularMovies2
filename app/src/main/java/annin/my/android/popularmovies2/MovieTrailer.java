@@ -32,7 +32,7 @@ public class MovieTrailer implements Parcelable {
     }
 
     public String getYoutubeSiteUrl() {
-        return BASE_YOUTUBE_URL_IMAGE + youtubeSiteUrl + "/0.jpg";
+        return BASE_YOUTUBE_URL_IMAGE + trailerKey + "/0.jpg";
     }
 
     public void setTrailerKey(String trailerKey) {

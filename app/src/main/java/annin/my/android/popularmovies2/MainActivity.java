@@ -22,8 +22,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.android.popularmovies2.R;
-
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.asynctask.AsyncTaskInterface;
