@@ -90,21 +90,11 @@
             android:layout_marginTop="@dimen/trailer_view_margin_top"
             android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
-        <ImageView
-            android:id="@+id/imageViewYoutube"
-            android:layout_width="@dimen/image_youtube_size"
-            android:layout_height="@dimen/image_youtube_size"
-            android:layout_below="@+id/recyclerview_trailer"
-            android:layout_marginEnd="@dimen/text_margin"
-            android:layout_marginLeft="@dimen/text_margin"
-            android:layout_marginRight="@dimen/text_margin"
-            android:layout_marginStart="@dimen/text_margin" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imageViewYoutube"
+            android:layout_below="@id/recyclerview_trailer"
             android:layout_marginBottom="@dimen/review_view_margin_bottom"
             android:scrollbars="vertical">
 

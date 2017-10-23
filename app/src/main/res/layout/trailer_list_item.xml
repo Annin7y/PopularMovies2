@@ -3,13 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
 
     <ImageView
         android:id="@+id/imageViewYoutube"
         android:layout_width="@dimen/image_youtube_size"
         android:layout_height="@dimen/image_youtube_size"
-        android:layout_below="@+id/recyclerview_trailer"
         android:layout_marginEnd="@dimen/text_margin"
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginRight="@dimen/text_margin"
