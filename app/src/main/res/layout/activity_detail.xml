@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/release_date"
             android:layout_marginTop="@dimen/trailer_view_margin_top"
-            android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
+            android:scrollbars="horizontal"></android.support.v7.widget.RecyclerView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_review"
