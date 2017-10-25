@@ -131,7 +131,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         if (savedInstanceState == null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
-            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+          //  selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+            {
             if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR || selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                     new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                             R.drawable.item_decorator)));
         }
-    }
+    }}
 
     private void setupSharedPreferences() {
         SharedPreferences settings = getSharedPreferences(SORT__ORDER_PREFERENCES, MODE_PRIVATE);
