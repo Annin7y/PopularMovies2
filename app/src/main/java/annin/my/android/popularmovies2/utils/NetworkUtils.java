@@ -52,8 +52,6 @@ public class NetworkUtils {
 
     private static final String KEY_TRAILER_SITE = "site";
 
-    // private static final String KEY_TRAILER_PATH = "name";
-
     public static final String KEY_TRAILER_KEY = "key";
 
     public static final String SORT_BY_POPULAR = "most_popular";

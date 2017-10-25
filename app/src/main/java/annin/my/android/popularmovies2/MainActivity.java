@@ -34,7 +34,7 @@ import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>,SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -62,10 +62,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private String selectedSortOrder = "most_popular";
 
+    private static final String SORT_BY_FAVORITES = "favorites";
+
     private int mPosition = RecyclerView.NO_POSITION;
 
     public static final String SORT__ORDER_PREFERENCES = "SortPrefs";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,22 +131,26 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         if (savedInstanceState == null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
-        } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-            moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-            movieAdapter.setMovieList(moviesArrayList);
-            mLoadingIndicator.setVisibility(View.INVISIBLE);
-            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
-            Log.i("list", moviesArrayList.size() + "");
-        }
-        //specifying the space between images
-        mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
+            if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR || selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
+                moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
+                movieAdapter.setMovieList(moviesArrayList);
+                mLoadingIndicator.setVisibility(View.INVISIBLE);
+                Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
+                Log.i("list", moviesArrayList.size() + "");
+            } else {
+                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+            }
+            //specifying the space between images
+            mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
-        //the vertical divider
-        mRecyclerView.addItemDecoration(
-                new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
-                        R.drawable.item_decorator)));
+            //the vertical divider
+            mRecyclerView.addItemDecoration(
+                    new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
+                            R.drawable.item_decorator)));
+        }
     }
+
     private void setupSharedPreferences() {
         SharedPreferences settings = getSharedPreferences(SORT__ORDER_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor prefeditor = settings.edit();
@@ -154,7 +159,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         prefeditor.putString("SortOrder", "movie_favorites");
         prefeditor.apply();
 
-    } public static int calculateNoOfColumns(Context context) {
+    }
+
+    public static int calculateNoOfColumns(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         int scalingFactor = 180;
@@ -261,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void onLoaderReset(Loader<Cursor> loader) {
         favoritesAdapter.swapCursor(null);
     }
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
     }
@@ -294,6 +302,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
+                selectedSortOrder = SORT_BY_FAVORITES;
                 return true;
 
             default:
