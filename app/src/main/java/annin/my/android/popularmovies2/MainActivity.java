@@ -2,6 +2,7 @@ package annin.my.android.popularmovies2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>,SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -63,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private int mPosition = RecyclerView.NO_POSITION;
 
+    public static final String SORT__ORDER_PREFERENCES = "SortPrefs";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mErrorMessageDisplay = (TextView) findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+
+        setupSharedPreferences();
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -140,8 +146,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                         R.drawable.item_decorator)));
     }
+    private void setupSharedPreferences() {
+        SharedPreferences settings = getSharedPreferences(SORT__ORDER_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor prefeditor = settings.edit();
+        prefeditor.putString("SortOrder", "most_popular");
+        prefeditor.putString("SortOrder", "top_rated");
+        prefeditor.putString("SortOrder", "movie_favorites");
+        prefeditor.apply();
 
-    public static int calculateNoOfColumns(Context context) {
+    } public static int calculateNoOfColumns(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         int scalingFactor = 180;
@@ -248,6 +261,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void onLoaderReset(Loader<Cursor> loader) {
         favoritesAdapter.swapCursor(null);
     }
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

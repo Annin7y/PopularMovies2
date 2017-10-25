@@ -21,7 +21,7 @@ public class MovieContract {
      * content authority is the package name for the app, which is guaranteed to be unique on the
      * device.
      */
-    public static final String CONTENT_AUTHORITY = "com.example.android.popularmovies2";
+    public static final String CONTENT_AUTHORITY = "annin.my.android.popularmovies2";
 
     /**
      * Use CONTENT_AUTHORITY to create the base of all URI's which apps will use to contact

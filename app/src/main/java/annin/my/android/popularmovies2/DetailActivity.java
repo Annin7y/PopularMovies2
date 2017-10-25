@@ -104,7 +104,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         RecyclerView.LayoutManager mReviewLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerViewReview.setLayoutManager(mReviewLayoutManager);
 
-        RecyclerView.LayoutManager mTrailerLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager mTrailerLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerViewTrailer.setLayoutManager(mTrailerLayoutManager);
 
         poster = (ImageView) findViewById(imageView);
