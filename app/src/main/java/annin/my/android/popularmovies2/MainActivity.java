@@ -132,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         }
-      //      selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
        else if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR || selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
              selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
