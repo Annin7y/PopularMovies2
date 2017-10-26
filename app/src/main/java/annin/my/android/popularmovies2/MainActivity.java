@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private String selectedSortOrder = "most_popular";
 
-    private static final String SORT_BY_FAVORITES = "favorites";
+    private static final String SORT_BY_FAVORITES = "movie_favorites";
 
     private int mPosition = RecyclerView.NO_POSITION;
 
@@ -125,23 +125,24 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        /**
+        /*
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
         if (savedInstanceState == null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
-          //  selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-            {
-            if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR || selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
+        }
+      //      selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+       else if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR || selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
+             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
                 Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
                 Log.i("list", moviesArrayList.size() + "");
             } else {
-                getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-            }
+              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+         //   }
             //specifying the space between images
             mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -149,8 +150,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mRecyclerView.addItemDecoration(
                     new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                             R.drawable.item_decorator)));
-        }
-    }}
+        }}
+
 
     private void setupSharedPreferences() {
         SharedPreferences settings = getSharedPreferences(SORT__ORDER_PREFERENCES, MODE_PRIVATE);
