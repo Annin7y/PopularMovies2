@@ -131,17 +131,21 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         if (savedInstanceState == null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
-        }
-       else if (selectedSortOrder == NetworkUtils.SORT_BY_POPULAR || selectedSortOrder == NetworkUtils.SORT_BY_RATING) {
-             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-                moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-                movieAdapter.setMovieList(moviesArrayList);
-                mLoadingIndicator.setVisibility(View.INVISIBLE);
-                Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
-                Log.i("list", moviesArrayList.size() + "");
-            } else {
-              getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-         //   }
+        } else if (selectedSortOrder == SORT_BY_FAVORITES) {
+            //  selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+            getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//            moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
+//            movieAdapter.setMovieList(moviesArrayList);
+//            mLoadingIndicator.setVisibility(View.INVISIBLE);
+//            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
+//            Log.i("list", moviesArrayList.size() + "");
+        } else {
+            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+            moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
+            movieAdapter.setMovieList(moviesArrayList);
+            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
+            Log.i("list", moviesArrayList.size() + "");
+            //   }
             //specifying the space between images
             mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -149,7 +153,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mRecyclerView.addItemDecoration(
                     new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                             R.drawable.item_decorator)));
-        }}
+        }
+    }
 
 
     private void setupSharedPreferences() {
