@@ -191,17 +191,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
-//     if (simpleJsonMovieTrailerData.size() > 0) {
-//            firstTrailer = simpleJsonMovieTrailerData.get(0);
-////            youtubeKey = firstTrailer.getTrailerKey();
-////            youtubeImage = BASE_YOUTUBE_URL_IMAGE + youtubeKey + "/0.jpg";
-//
-////            Picasso.with(context)
-////                    .load(youtubeImage)
-////                    .into(youtube_thumbnail);
-//        } else {
-//            Toast.makeText(DetailActivity.this, "Trailer currently unavailable", Toast.LENGTH_SHORT).show();
-//        }
+
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareIntent());
         }

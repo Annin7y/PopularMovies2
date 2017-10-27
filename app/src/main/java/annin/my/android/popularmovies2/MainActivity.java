@@ -131,29 +131,30 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         if (savedInstanceState == null) {
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
-        } else if (selectedSortOrder == SORT_BY_FAVORITES) {
-            //  selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-            getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-//            moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-//            movieAdapter.setMovieList(moviesArrayList);
-//            mLoadingIndicator.setVisibility(View.INVISIBLE);
-//            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
-//            Log.i("list", moviesArrayList.size() + "");
         } else {
-            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+         selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+          //  if (selectedSortOrder == NetworkUtils.SORT_BY_RATING || selectedSortOrder == NetworkUtils.SORT_BY_POPULAR)
+            if (selectedSortOrder == SORT_BY_FAVORITES) {
+                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+
+            }
             moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
             movieAdapter.setMovieList(moviesArrayList);
+
+
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
-            //   }
-            //specifying the space between images
-            mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
-
-            //the vertical divider
-            mRecyclerView.addItemDecoration(
-                    new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
-                            R.drawable.item_decorator)));
         }
+     //   getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+
+        //specifying the space between images
+        mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
+
+        //the vertical divider
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
+                        R.drawable.item_decorator)));
     }
 
 
