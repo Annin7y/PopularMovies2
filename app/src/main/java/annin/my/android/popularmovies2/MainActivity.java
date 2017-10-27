@@ -138,10 +138,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 
             }
-            moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
-            movieAdapter.setMovieList(moviesArrayList);
+            else {
+                moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
+                movieAdapter.setMovieList(moviesArrayList);
 
-
+            }
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
