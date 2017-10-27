@@ -136,12 +136,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
           //  if (selectedSortOrder == NetworkUtils.SORT_BY_RATING || selectedSortOrder == NetworkUtils.SORT_BY_POPULAR)
             if (selectedSortOrder == SORT_BY_FAVORITES) {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-
+                mRecyclerView.setAdapter(favoritesAdapter);
             }
             else {
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
-
             }
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
@@ -176,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         int noOfColumns = (int) (dpWidth / scalingFactor);
         return noOfColumns;
     }
-
 
     @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
