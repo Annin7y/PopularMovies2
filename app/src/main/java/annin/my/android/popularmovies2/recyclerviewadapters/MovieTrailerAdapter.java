@@ -44,14 +44,12 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
      */
     public class MovieTrailerAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        //  public TextView trailerName;
         public ImageView imageView;
 
         public MovieTrailerAdapterViewHolder(View view) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageViewYoutube);
             view.setOnClickListener(this);
-
         }
 
         @Override
@@ -78,11 +76,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
         //Binding data
         final MovieTrailer movieTrailerView = movieTrailerList.get(position);
 
-        //  holder.trailerName.setText(movieTrailerView.getTrailerName());
-//        String youtubeKey = firstTrailer.getTrailerKey();
-//        String youtubeImage = BASE_YOUTUBE_URL_IMAGE + youtubeKey + "/0.jpg";
-
-
+        //load youtube image using Picasso
         Picasso.with(context)
                 .load(movieTrailerView.getYoutubeSiteUrl())
                         .into(holder.imageView);

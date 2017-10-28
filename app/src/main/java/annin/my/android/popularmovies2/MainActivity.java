@@ -2,7 +2,6 @@ package annin.my.android.popularmovies2;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,7 +33,7 @@ import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -66,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private int mPosition = RecyclerView.NO_POSITION;
 
-    public static final String SORT__ORDER_PREFERENCES = "SortPrefs";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,14 +77,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         favoritesAdapter = new FavoritesAdapter(this, context);
 
-        //specifying that the images will be displayed in two columns
+        //specifying how the images will be displayed
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mErrorMessageDisplay = (TextView) findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
-
-        setupSharedPreferences();
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -132,8 +127,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
-         selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-          //  if (selectedSortOrder == NetworkUtils.SORT_BY_RATING || selectedSortOrder == NetworkUtils.SORT_BY_POPULAR)
+
+            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+
             if (selectedSortOrder == SORT_BY_FAVORITES) {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
@@ -146,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
         }
-     //   getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
@@ -155,17 +150,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.addItemDecoration(
                 new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
                         R.drawable.item_decorator)));
-    }
-
-
-    private void setupSharedPreferences() {
-        SharedPreferences settings = getSharedPreferences(SORT__ORDER_PREFERENCES, MODE_PRIVATE);
-        SharedPreferences.Editor prefeditor = settings.edit();
-        prefeditor.putString("SortOrder", "most_popular");
-        prefeditor.putString("SortOrder", "top_rated");
-        prefeditor.putString("SortOrder", "movie_favorites");
-        prefeditor.apply();
-
     }
 
     public static int calculateNoOfColumns(Context context) {
@@ -274,11 +258,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public void onLoaderReset(Loader<Cursor> loader) {
         favoritesAdapter.swapCursor(null);
     }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

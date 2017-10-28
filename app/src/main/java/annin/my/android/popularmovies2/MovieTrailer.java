@@ -9,16 +9,17 @@ import android.os.Parcelable;
 
 public class MovieTrailer implements Parcelable {
 
-//    /**
-//     * Movie trailer name
-//     */
-//    private String trailerName;
-
+    /**
+     * Base YouTube Image URL
+     */
     private String BASE_YOUTUBE_URL_IMAGE = "http://img.youtube.com/vi/";
 
+    /**
+     * YouTube URL
+     */
     private String youtubeSiteUrl;
     /**
-     * Movie trailer YouTube key
+     * Movie trailer key
      */
     private String trailerKey;
 

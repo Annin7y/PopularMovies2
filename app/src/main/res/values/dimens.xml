@@ -12,8 +12,14 @@
     <!-- TextView size in review_list_item -->
     <dimen name="review_title_text_size">18sp</dimen>
 
-    <!-- TextView size in trailer_list_item -->
-    <dimen name="movie_trailer_text_size">25sp</dimen>
+    <!-- ImageView YouTube height and width in trailer_list_item -->
+    <dimen name="YouTube_image_size">80dp</dimen>
+
+   <!-- ImageView End and Right in trailer_list_item -->
+    <dimen name="YouTube_image_end">5dp</dimen>
+
+    <!-- ImageView Start in trailer_list_item -->
+    <dimen name="YouTube_image_start">15dp</dimen>
 
     <!-- Error message padding and text size specifications in activity_main -->
     <dimen name="error_padding">16dp</dimen>
@@ -55,8 +61,5 @@
 
     <!-- RecyclerView review marginBottom in activity_detail -->
     <dimen name="review_view_margin_bottom">35dp</dimen>
-
-    <!-- ImageView YouTube height and width in activity_detail -->
-    <dimen name="image_youtube_size">90dp</dimen>
 
 </resources>

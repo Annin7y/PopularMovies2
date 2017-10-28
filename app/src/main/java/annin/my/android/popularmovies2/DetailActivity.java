@@ -75,8 +75,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     private static final String BASE_YOUTUBE_URL_SHARE = "http://www.youtube.com/watch?v=";
 
-    private static final String BASE_YOUTUBE_URL_IMAGE = "http://img.youtube.com/vi/";
-
     ImageView poster;
 
     ImageView youtube_thumbnail;
@@ -162,7 +160,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             TextView releaseDate = (TextView) findViewById(R.id.release_date);
             releaseDate.setText(movie.getReleaseDate());
 
-
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = null;
 
@@ -184,14 +181,19 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
         if (simpleJsonMovieReviewData.size() == 0) {
-            Toast.makeText(DetailActivity.this, "Review currently unavailable", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DetailActivity.this, R.string.review_unavailable, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
-
+        if (simpleJsonMovieTrailerData.size() > 0) {
+            firstTrailer = simpleJsonMovieTrailerData.get(0);
+            youtubeKey = firstTrailer.getTrailerKey();
+        }  else {
+            Toast.makeText(DetailActivity.this, R.string.trailer_unavailable, Toast.LENGTH_SHORT).show();
+        }
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
