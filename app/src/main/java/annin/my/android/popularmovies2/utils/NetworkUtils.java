@@ -19,9 +19,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.BuildConfig;
-import annin.my.android.popularmovies2.Movie;
-import annin.my.android.popularmovies2.MovieReview;
-import annin.my.android.popularmovies2.MovieTrailer;
+import annin.my.android.popularmovies2.ui.Movie;
+import annin.my.android.popularmovies2.ui.MovieReview;
+import annin.my.android.popularmovies2.ui.MovieTrailer;
 
 import static android.content.ContentValues.TAG;
 

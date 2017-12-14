@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import annin.my.android.popularmovies2.Movie;
 import annin.my.android.popularmovies2.R;
+import annin.my.android.popularmovies2.ui.Movie;
 
 /**
  * Created by Maino96-10022 on 8/17/2017.

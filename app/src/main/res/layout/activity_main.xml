@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.android.popularmovies2.annin.example.android.popularmovies2.MainActivity">
+    tools:context="annin.my.android.popularmovies2.ui.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_main"

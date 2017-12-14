@@ -2,7 +2,7 @@ package annin.my.android.popularmovies2.asynctask;
 
 import java.util.ArrayList;
 
-import annin.my.android.popularmovies2.MovieReview;
+import annin.my.android.popularmovies2.ui.MovieReview;
 
 /**
  * Created by Maino96-10022 on 8/20/2017.

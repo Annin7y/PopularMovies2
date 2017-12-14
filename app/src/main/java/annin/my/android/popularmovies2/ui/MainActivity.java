@@ -1,4 +1,4 @@
-package annin.my.android.popularmovies2;
+package annin.my.android.popularmovies2.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskInterface;
 import annin.my.android.popularmovies2.asynctask.MovieAsyncTask;
 import annin.my.android.popularmovies2.data.MovieContract;

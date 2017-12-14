@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import annin.my.android.popularmovies2.MovieReview;
 import annin.my.android.popularmovies2.R;
+import annin.my.android.popularmovies2.ui.MovieReview;
 
 /**
  * Created by Maino96-10022 on 8/17/2017.

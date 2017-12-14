@@ -1,4 +1,4 @@
-package annin.my.android.popularmovies2;
+package annin.my.android.popularmovies2.ui;
 
 import android.os.Parcel;
 import android.os.Parcelable;

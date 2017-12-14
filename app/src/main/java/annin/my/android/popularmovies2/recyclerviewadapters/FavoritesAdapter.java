@@ -11,9 +11,9 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import annin.my.android.popularmovies2.Movie;
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.data.MovieContract;
+import annin.my.android.popularmovies2.ui.Movie;
 
 /**
  * Created by Maino96-10022 on 9/24/2017.

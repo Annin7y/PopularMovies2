@@ -1,4 +1,4 @@
-package annin.my.android.popularmovies2;
+package annin.my.android.popularmovies2.ui;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
 import annin.my.android.popularmovies2.asynctask.MovieReviewAsyncTask;

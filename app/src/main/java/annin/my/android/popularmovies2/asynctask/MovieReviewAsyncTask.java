@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import java.net.URL;
 import java.util.ArrayList;
 
-import annin.my.android.popularmovies2.MovieReview;
+import annin.my.android.popularmovies2.ui.MovieReview;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 
 /**
