@@ -129,7 +129,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 if (uri != null) {
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                 }
-                finish();
             }
 
         });
