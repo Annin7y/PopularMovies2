@@ -26,8 +26,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     private ArrayList<Movie> moviesList = new ArrayList<Movie>();
     private Context context;
     private MovieAdapterOnClickHandler mClickHandler;
-    public static final int IMAGE_HEIGHT= 185;
-    public static final int IMAGE_WIDTH= 50;
+    public static final int IMAGE_HEIGHT = 185;
+    public static final int IMAGE_WIDTH = 50;
 
     /**
      * The interface that receives onClick messages.
@@ -96,8 +96,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         //Binding data
         final Movie movieView = moviesList.get(position);
 
-      //  holder.itemView.setTag(id);
-
+        //  holder.itemView.setTag(id);
 
         Picasso.with(context)
                 .load(movieView.getPosterUrl())
@@ -117,7 +116,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     public void setMovieList(ArrayList<Movie> mMovieList) {
-        this.moviesList= mMovieList;
+        this.moviesList = mMovieList;
         notifyDataSetChanged();
     }
 }
