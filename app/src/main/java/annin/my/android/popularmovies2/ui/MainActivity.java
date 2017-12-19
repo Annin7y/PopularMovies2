@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskInterface;
 import annin.my.android.popularmovies2.asynctask.MovieAsyncTask;
+import annin.my.android.popularmovies2.custom.Movie;
 import annin.my.android.popularmovies2.data.MovieContract;
 import annin.my.android.popularmovies2.decoration.DividerItemDecoration;
 import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;

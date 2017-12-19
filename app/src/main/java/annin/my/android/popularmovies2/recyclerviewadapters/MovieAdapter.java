@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
-import annin.my.android.popularmovies2.ui.Movie;
+import annin.my.android.popularmovies2.custom.Movie;
 
 /**
  * Created by Maino96-10022 on 8/17/2017.
@@ -103,7 +103,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
                 .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
                 .centerCrop()
                 //if the image can't be loaded the following error message/image will be displayed
-                .placeholder(R.drawable.user_placeholder)
                 .error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);
     }

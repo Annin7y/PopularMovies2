@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
-import annin.my.android.popularmovies2.ui.MovieTrailer;
+import annin.my.android.popularmovies2.custom.MovieTrailer;
 
 /**
  * Created by Maino96-10022 on 9/4/2017.
