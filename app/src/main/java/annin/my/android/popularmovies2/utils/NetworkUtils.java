@@ -364,11 +364,11 @@ public class NetworkUtils {
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(movieJSON);
 
-            // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or earthquakes).
+            // Extract the JSONArray associated with the key called "results",
+            // which represents a list of features (or movies).
             JSONArray movieArray = baseJsonResponse.getJSONArray("results");
 
-// For each earthquake in the earthquakeArray, create an {@link Movie} object
+// For each movie in the movieArray, create an {@link Movie} object
             for (int i = 0; i < movieArray.length(); i++) {
 
                 // Get a single movie description at position i within the list of movies
@@ -381,13 +381,13 @@ public class NetworkUtils {
 
                 String overviewName = currentMovie.getString(KEY_OVERVIEW);
 
-                String voteName = currentMovie.getString(KEY_VOTE_AVERAGE);
+                String voteAverage = currentMovie.getString(KEY_VOTE_AVERAGE);
 
                 String releaseDate = currentMovie.getString(KEY_RELEASE_DATE);
 
                 String movieId = currentMovie.getString(MOVIE_ID);
 
-                Movie movie = new Movie(posterName, movieName, overviewName, voteName, releaseDate, movieId);
+                Movie movie = new Movie(posterName, movieName, overviewName, voteAverage, releaseDate, movieId);
                 movies.add(movie);
 
             }

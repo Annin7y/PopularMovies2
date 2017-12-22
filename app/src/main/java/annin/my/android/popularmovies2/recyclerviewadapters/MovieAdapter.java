@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -54,12 +53,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView imageView;
-        public TextView releaseDate;
+    //    public TextView releaseDate;
 
         public MovieAdapterViewHolder(View view) {
             super(view);
             imageView = (ImageView) view.findViewById(R.id.imageView);
-            releaseDate = (TextView) view.findViewById(R.id.release_date);
+          //  releaseDate = (TextView) view.findViewById(R.id.release_date);
             view.setOnClickListener(this);
         }
 
@@ -75,9 +74,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             mClickHandler.onClick(posterClick);
         }
 
-        public TextView getReleaseDate() {
-            return releaseDate;
-        }
+      //  public TextView getReleaseDate() {
+       //     return releaseDate;
+     //   }
     }
 
     @Override
