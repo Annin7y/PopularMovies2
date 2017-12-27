@@ -74,26 +74,6 @@ public class NetworkUtils {
     public NetworkUtils() {
     }
 
-    private static ArrayList<Movie> fetchMoviesData(String requestUrl) {
-
-        // Create a URL object
-        URL url = buildUrl(requestUrl);
-
-        // Perform HTTP request to the URL and receive a JSON response back
-        String jsonResponse = null;
-        try {
-            jsonResponse = makeHttpRequest(url);
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
-        }
-
-        // Extract relevant fields from the JSON response and create a list of {@link Movie}s
-        ArrayList<Movie> moviesList = extractFeatureFromJson(jsonResponse);
-
-        // Return the list of {@link Movie}s
-        return moviesList;
-    }
-
     /**
      * @param sortMode
      * @return either most popular or top rated movies
@@ -119,25 +99,6 @@ public class NetworkUtils {
         return url;
     }
 
-    private static ArrayList<MovieReview> fetchMoviesReviewData(String requestReviewUrl) {
-
-        // Create a URL object
-        URL urlReview = buildUrlReview(requestReviewUrl);
-
-        // Perform HTTP request to the URL and receive a JSON response back
-        String jsonReviewResponse = null;
-        try {
-            jsonReviewResponse = makeHttpReviewRequest(urlReview);
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
-        }
-
-        // Extract relevant fields from the JSON response and create a list of {@link Movie}s
-        ArrayList<MovieReview> moviesReviewList = extractFeatureFromReviewJson(jsonReviewResponse);
-
-        // Return the list of {@link Movie}s
-        return moviesReviewList;
-    }
 
     public static URL buildUrlReview(String movieId) {
         URL urlReview = null;
@@ -157,27 +118,7 @@ public class NetworkUtils {
 
         return urlReview;
     }
-
-    private static ArrayList<MovieTrailer> fetchMoviesTrailerData(String requestTrailerUrl) {
-
-        // Create a URL object
-        URL urlTrailer = buildUrlTrailer(requestTrailerUrl);
-
-        // Perform HTTP request to the URL and receive a JSON response back
-        String jsonTrailerResponse = null;
-        try {
-            jsonTrailerResponse = makeHttpTrailerRequest(urlTrailer);
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
-        }
-
-        // Extract relevant fields from the JSON response and create a list of {@link Movie}s
-        ArrayList<MovieTrailer> moviesTrailerList = extractFeatureFromTrailerJson(jsonTrailerResponse);
-
-        // Return the list of {@link Movie}s
-        return moviesTrailerList;
-    }
-
+    
     public static URL buildUrlTrailer(String movieId) {
         URL urlTrailer = null;
         try {
