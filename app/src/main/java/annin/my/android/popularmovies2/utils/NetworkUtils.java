@@ -118,7 +118,7 @@ public class NetworkUtils {
 
         return urlReview;
     }
-    
+
     public static URL buildUrlTrailer(String movieId) {
         URL urlTrailer = null;
         try {
