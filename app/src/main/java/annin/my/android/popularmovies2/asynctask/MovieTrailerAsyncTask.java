@@ -34,16 +34,14 @@ public class MovieTrailerAsyncTask extends AsyncTask<String, Void, ArrayList<Mov
             return null;
         }
         String movieId = params[0];
-        URL movieRequestUrl = NetworkUtils.buildUrlTrailer(movieId);
+        URL trailerRequestUrl = NetworkUtils.buildUrlTrailer(movieId);
 
         try {
             String jsonMovieTrailerResponse = NetworkUtils
-                    .makeHttpTrailerRequest(movieRequestUrl);
+                    .makeHttpTrailerRequest(trailerRequestUrl);
 
-            ArrayList simpleJsonMovieTrailerData = NetworkUtils
-                    .extractFeatureFromTrailerJson(jsonMovieTrailerResponse);
+            return NetworkUtils.extractFeatureFromTrailerJson(jsonMovieTrailerResponse);
 
-            return simpleJsonMovieTrailerData;
 
         } catch (Exception e) {
             e.printStackTrace();

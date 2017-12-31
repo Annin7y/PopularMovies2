@@ -39,10 +39,7 @@ public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>> {
             String jsonMovieResponse = NetworkUtils
                     .makeHttpRequest(movieRequestUrl);
 
-            ArrayList simpleJsonMovieData = NetworkUtils
-                    .extractFeatureFromJson(jsonMovieResponse);
-
-            return simpleJsonMovieData;
+            return NetworkUtils.extractFeatureFromJson(jsonMovieResponse);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -33,16 +33,13 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
             return null;
         }
         String movieId = params[0];
-        URL movieRequestUrl = NetworkUtils.buildUrlReview(movieId);
+        URL reviewRequestUrl = NetworkUtils.buildUrlReview(movieId);
 
         try {
             String jsonMovieReviewResponse = NetworkUtils
-                    .makeHttpReviewRequest(movieRequestUrl);
+                    .makeHttpReviewRequest(reviewRequestUrl);
 
-            ArrayList simpleJsonMovieReviewData = NetworkUtils
-                    .extractFeatureFromReviewJson(jsonMovieReviewResponse);
-
-            return simpleJsonMovieReviewData;
+            return NetworkUtils.extractFeatureFromReviewJson(jsonMovieReviewResponse);
 
         } catch (Exception e) {
             e.printStackTrace();
