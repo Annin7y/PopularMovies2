@@ -16,5 +16,6 @@
     <string name="favorites_button_text">Add to Favorites</string>
     <string name="review_unavailable">Review currently unavailable</string>
     <string name="trailer_unavailable">Trailer currently unavailable</string>
+    <string name="favorites_added">Movie added to favorites</string>
 
 </resources>

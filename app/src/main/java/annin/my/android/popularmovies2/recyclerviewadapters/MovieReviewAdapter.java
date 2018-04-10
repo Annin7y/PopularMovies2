@@ -23,8 +23,6 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     private ArrayList<MovieReview> movieReviewList = new ArrayList<MovieReview>();
     private Context context;
 
-
-
     /**
      * Creates a MovieAdapter.
      */

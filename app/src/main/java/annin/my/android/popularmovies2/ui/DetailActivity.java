@@ -131,11 +131,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
                 if (uri != null) {
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                    favoritesButton.setVisibility(View.GONE);
+                   // favoritesButton.setEnabled(false);
                 }
             }
 
         });
-
 
         if (getIntent() != null && getIntent().getExtras() != null) {
             movie = getIntent().getExtras().getParcelable("Movie");
