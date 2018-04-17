@@ -3,6 +3,7 @@ package annin.my.android.popularmovies2.ui;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -41,6 +42,7 @@ import annin.my.android.popularmovies2.utils.NetworkUtils;
 
 import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
+import static annin.my.android.popularmovies2.data.MovieContentProvider.MOVIE_WITH_ID;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
         AsyncTaskTrailerInterface {
@@ -146,6 +148,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     .into(poster);
 
             movieId = movie.getMovieId();
+
+            Cursor cursor = getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
+
+            if(cursor.getCount() != 0) {
+                favoritesButton.setVisibility(View.GONE);
+
+            }
 
 
 
