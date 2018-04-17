@@ -149,7 +149,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             movieId = movie.getMovieId();
 
-            Cursor cursor = getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
+            Cursor cursor = getContentResolver().query(MovieContract.MovieEntry, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
 
             if(cursor.getCount() != 0) {
                 favoritesButton.setVisibility(View.GONE);
