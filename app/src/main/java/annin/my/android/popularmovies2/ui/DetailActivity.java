@@ -1,5 +1,6 @@
 package annin.my.android.popularmovies2.ui;
 
+import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -45,7 +46,7 @@ import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
 import static annin.my.android.popularmovies2.data.MovieContentProvider.MOVIE_WITH_ID;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
-        AsyncTaskTrailerInterface {
+        AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
