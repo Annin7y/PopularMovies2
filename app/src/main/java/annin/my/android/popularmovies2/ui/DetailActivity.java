@@ -4,6 +4,7 @@ import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,7 +44,6 @@ import annin.my.android.popularmovies2.utils.NetworkUtils;
 
 import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
-import static annin.my.android.popularmovies2.data.MovieContentProvider.MOVIE_WITH_ID;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
         AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor> {
@@ -150,15 +150,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             movieId = movie.getMovieId();
 
-            Cursor cursor = getContentResolver().query(MovieContract.MovieEntry, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
+           //
+            // Cursor cursor = getContentResolver().query(MovieContract.MovieEntry, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
 
-            if(cursor.getCount() != 0) {
-                favoritesButton.setVisibility(View.GONE);
-
-            }
-
-
-
+//            if(cursor.getCount() != 0) {
+//                favoritesButton.setVisibility(View.GONE);
+//
+//            }
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
 
@@ -193,6 +191,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             releaseDate.setText(finalDate);
         }
     }
+        @Override
+        public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+
+        }
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
