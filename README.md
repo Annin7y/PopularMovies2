@@ -3,3 +3,4 @@
 ### **Installation**
 Clone or download this repository. Import into Android Studio.
 ### **Screenshots**
+### **License**
