@@ -46,7 +46,7 @@ import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
-        AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor> {
+        AsyncTaskTrailerInterface,LoaderManager.LoaderCallbacks<Cursor>   {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -191,10 +191,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             releaseDate.setText(finalDate);
         }
     }
-        @Override
-        public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 
-        }
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
@@ -247,4 +244,17 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         shareIntent.putExtra(Intent.EXTRA_TEXT, BASE_YOUTUBE_URL_SHARE + youtubeKey);
         return shareIntent;
     }
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+
+    }
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+    }
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+
+    }
+
+
+
+
 }
