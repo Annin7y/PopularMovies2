@@ -3,6 +3,7 @@ package annin.my.android.popularmovies2.ui;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -91,6 +92,12 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     TextView reviewAuthor;
 
     Button favoritesButton;
+
+    /**
+     * Identifier for the favorites data loader
+     */
+    private static final int FAVORITES_LOADER = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,8 +253,12 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     }
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-
+        return new CursorLoader(this,
+                Uri.parse("content://com.github.browep.cursorloader.data")
+                , new String[]{"col1"}, null, null, null);
     }
+
+
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
     }
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
