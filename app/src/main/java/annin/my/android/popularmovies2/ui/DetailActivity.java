@@ -47,7 +47,7 @@ import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
-        AsyncTaskTrailerInterface,LoaderManager.LoaderCallbacks<Cursor>   {
+        AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -143,7 +143,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                     Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
                     favoritesButton.setVisibility(View.GONE);
-                   // favoritesButton.setEnabled(false);
+                    // favoritesButton.setEnabled(false);
                 }
             }
 
@@ -157,7 +157,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             movieId = movie.getMovieId();
 
-           //
+            //
             // Cursor cursor = getContentResolver().query(MovieContract.MovieEntry, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
 
 //            if(cursor.getCount() != 0) {
@@ -214,7 +214,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         if (simpleJsonMovieTrailerData.size() > 0) {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
-        }  else {
+        } else {
             Toast.makeText(DetailActivity.this, R.string.trailer_unavailable, Toast.LENGTH_SHORT).show();
         }
         if (mShareActionProvider != null) {
@@ -251,21 +251,32 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         shareIntent.putExtra(Intent.EXTRA_TEXT, BASE_YOUTUBE_URL_SHARE + youtubeKey);
         return shareIntent;
     }
+
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this,
-                Uri.parse("content://com.github.browep.cursorloader.data")
-                , new String[]{"col1"}, null, null, null);
+        // This loader will execute the ContentProvider's query method on a background thread
+
+        String[] projection = { MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID ,};
+
+        return new CursorLoader(this,   // Parent activity context
+                MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
+                projection,             // Columns to include in the resulting Cursor
+                null,                   // No selection clause
+                null,                   // No selection arguments
+                null);                  // Default sort order
     }
 
 
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        if ((cursor != null) && (cursor.getCount() > 0)) {
+            favoritesButton.setEnabled(false);
+        }
+
     }
+
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
 
     }
-
-
 
 
 }
