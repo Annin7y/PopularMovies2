@@ -258,8 +258,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
-        // This loader will execute the ContentProvider's query method on a background thread
-
+        
         String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
 
         switch (loaderId) {
