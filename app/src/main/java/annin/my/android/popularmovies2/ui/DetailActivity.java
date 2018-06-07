@@ -259,14 +259,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
 
-      //  String[] selection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
+       String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
 
         switch (loaderId) {
 
             case FAVORITES_LOADER:
                 return new CursorLoader(this,   // Parent activity context
                         MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
-                        null,             // Columns to include in the resulting Cursor
+                        projection,             // Columns to include in the resulting Cursor
                         MovieContract.MovieEntry.COLUMN_MOVIES_ID,                   // No selection clause
                         null,                   // No selection arguments
                         null);                  // Default sort order
