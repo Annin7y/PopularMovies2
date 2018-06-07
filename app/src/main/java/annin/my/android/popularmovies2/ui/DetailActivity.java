@@ -94,7 +94,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     Button favoritesButton;
 
 
-
     /**
      * Identifier for the favorites data loader
      */
@@ -258,27 +257,33 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
         // This loader will execute the ContentProvider's query method on a background thread
 
-        String[] projection = { MovieContract.MovieEntry.COLUMN_MOVIES_ID ,};
+        String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
 
-        return new CursorLoader(this,   // Parent activity context
-                MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
-                projection,             // Columns to include in the resulting Cursor
-                null,                   // No selection clause
-                null,                   // No selection arguments
-                null);                  // Default sort order
-    }
+        switch (loaderId) {
 
+            case FAVORITES_LOADER:
+                return new CursorLoader(this,   // Parent activity context
+                        MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
+                        projection,             // Columns to include in the resulting Cursor
+                        null,                   // No selection clause
+                        null,                   // No selection arguments
+                        null);                  // Default sort order
 
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if ((cursor != null) && (cursor.getCount() > 0)) {
-            favoritesButton.setVisibility(View.GONE);
+            default:
+                throw new RuntimeException("Loader Not Implemented: " + loaderId);
         }
     }
 
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+        public void onLoadFinished (Loader < Cursor > cursorLoader, Cursor cursor){
+       if ((cursor != null) && (cursor.getCount() > 0)) {
+           favoritesButton.setVisibility(View.GONE);
+       }
+        }
 
+        public void onLoaderReset (Loader < Cursor > cursorLoader) {
+
+        }
     }
-}
