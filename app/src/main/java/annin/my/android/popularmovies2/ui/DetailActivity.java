@@ -266,8 +266,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             case FAVORITES_LOADER:
                 return new CursorLoader(this,   // Parent activity context
                         MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
-                        projection,             // Columns to include in the resulting Cursor
-                        selection,                   // No selection clause
+                        null,             // Columns to include in the resulting Cursor
+                        MovieContract.MovieEntry.COLUMN_MOVIES_ID,                   // No selection clause
                         null,                   // No selection arguments
                         null);                  // Default sort order
 
@@ -276,13 +276,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         }
     }
 
-        public void onLoadFinished (Loader < Cursor > cursorLoader, Cursor cursor){
-       if ((cursor != null) && (cursor.getCount() > 0)) {
-           favoritesButton.setVisibility(View.GONE);
-       }
-        }
-
-        public void onLoaderReset (Loader < Cursor > cursorLoader) {
-
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        if ((cursor != null) && (cursor.getCount() > 0)) {
+            favoritesButton.setVisibility(View.GONE);
         }
     }
+
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+
+    }
+}
