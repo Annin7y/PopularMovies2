@@ -93,6 +93,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     Button favoritesButton;
 
+
+
     /**
      * Identifier for the favorites data loader
      */
@@ -197,6 +199,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             releaseDate.setText(finalDate);
         }
+        // Kick off the loader
+        getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
+
     }
 
 
@@ -256,7 +261,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         // This loader will execute the ContentProvider's query method on a background thread
 
-        String[] projection = { MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID ,};
+        String[] projection = { MovieContract.MovieEntry.COLUMN_MOVIES_ID ,};
 
         return new CursorLoader(this,   // Parent activity context
                 MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
@@ -269,14 +274,11 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         if ((cursor != null) && (cursor.getCount() > 0)) {
-            favoritesButton.setEnabled(false);
+            favoritesButton.setVisibility(View.GONE);
         }
-
     }
 
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
 
     }
-
-
 }
