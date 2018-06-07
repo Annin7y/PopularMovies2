@@ -268,7 +268,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 return new CursorLoader(this,   // Parent activity context
                         MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
                         projection,             // Columns to include in the resulting Cursor
-                        MovieContract.MovieEntry.COLUMN_MOVIES_TITLE + "=?" ,                   // No selection clause
+                        MovieContract.MovieEntry._ID + "=?" ,                   // No selection clause
                         selectionArgs,            // No selection arguments
                         null);                  // Default sort order
 
