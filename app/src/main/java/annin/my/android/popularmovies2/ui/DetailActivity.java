@@ -259,7 +259,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
 
-        String[] selection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
+      //  String[] selection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
 
         switch (loaderId) {
 
