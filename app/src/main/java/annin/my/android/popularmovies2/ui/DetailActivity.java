@@ -260,7 +260,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
 
        String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
-        String[] selectionArgs = { MovieContract.MovieEntry.COLUMN_MOVIES_ID };
+        String[] selectionArgs = new String[]{movieId};
 
         switch (loaderId) {
 
@@ -268,7 +268,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 return new CursorLoader(this,   // Parent activity context
                         MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
                         projection,             // Columns to include in the resulting Cursor
-                        MovieContract.MovieEntry._ID + "=?" ,                   // No selection clause
+                        MovieContract.MovieEntry.COLUMN_MOVIES_ID + "=?" ,                   // No selection clause
                         selectionArgs,            // No selection arguments
                         null);                  // Default sort order
 
