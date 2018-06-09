@@ -17,5 +17,6 @@
     <string name="review_unavailable">Review currently unavailable</string>
     <string name="trailer_unavailable">Trailer currently unavailable</string>
     <string name="favorites_added">Movie added to favorites</string>
+    <string name="favorites_already_added">Movie already stored in favorites</string>
 
 </resources>

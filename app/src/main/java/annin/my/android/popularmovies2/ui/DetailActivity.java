@@ -144,7 +144,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                     Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
                     favoritesButton.setVisibility(View.GONE);
-                    // favoritesButton.setEnabled(false);
                 }
             }
 
@@ -158,13 +157,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             movieId = movie.getMovieId();
 
-            //
-            // Cursor cursor = getContentResolver().query(MovieContract.MovieEntry, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
-
-//            if(cursor.getCount() != 0) {
-//                favoritesButton.setVisibility(View.GONE);
-//
-//            }
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
 
@@ -280,6 +272,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         if ((cursor != null) && (cursor.getCount() > 0)) {
             favoritesButton.setVisibility(View.GONE);
+            Toast.makeText(DetailActivity.this, R.string.favorites_already_added, Toast.LENGTH_SHORT).show();
+
         }
     }
 
