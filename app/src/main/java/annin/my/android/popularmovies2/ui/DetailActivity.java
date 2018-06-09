@@ -92,8 +92,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     TextView reviewAuthor;
 
     Button favoritesButton;
-
-
+    
     /**
      * Identifier for the favorites data loader
      */
@@ -195,7 +194,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     }
 
-
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
@@ -273,7 +271,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         if ((cursor != null) && (cursor.getCount() > 0)) {
             favoritesButton.setVisibility(View.GONE);
             Toast.makeText(DetailActivity.this, R.string.favorites_already_added, Toast.LENGTH_SHORT).show();
-
         }
     }
 
