@@ -270,8 +270,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         if ((cursor != null) && (cursor.getCount() > 0)) {
 
+            //"Add to Favorites" button is disabled in the Detail Activity when the user clicks on a movie stored in Favorites 
             favoritesButton.setEnabled(false);
-           // favoritesButton.setVisibility(View.GONE);
+
         }
     }
 
