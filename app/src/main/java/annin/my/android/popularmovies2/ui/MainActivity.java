@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_main);
+        mRecyclerView = findViewById(R.id.recyclerview_main);
         movieAdapter = new MovieAdapter(this, moviesArrayList, context);
         mRecyclerView.setAdapter(movieAdapter);
 
@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mErrorMessageDisplay = (TextView) findViewById(R.id.movie_error_message_display);
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+        mErrorMessageDisplay = findViewById(R.id.movie_error_message_display);
+        mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
+            mErrorMessageDisplay.setVisibility(View.VISIBLE);
         }
 
         //specifying the space between images
@@ -175,7 +176,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /* First, hide the currently visible data */
         mRecyclerView.setVisibility(View.INVISIBLE);
         /* Then, show the error */
-        mErrorMessageDisplay.setVisibility(View.VISIBLE);
+        if (moviesArrayList.size() == 0) {
+
+            mErrorMessageDisplay.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

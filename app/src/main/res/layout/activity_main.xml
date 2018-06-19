@@ -18,7 +18,11 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/error_padding"
         android:textSize="@dimen/error_text"
-        android:visibility="invisible"
+        android:layout_marginEnd="@dimen/text_margin"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"
+        android:layout_marginStart="@dimen/text_margin"
+        android:visibility="visible"
         tools:text="@string/error_message" />
 
     <ProgressBar
@@ -31,6 +35,6 @@
         android:layout_marginLeft="@dimen/progress_bar_left"
         android:layout_marginRight="@dimen/progress_bar_right"
         android:layout_marginTop="@dimen/progress_bar_top"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 </RelativeLayout>

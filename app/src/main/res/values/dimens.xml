@@ -22,7 +22,7 @@
     <dimen name="YouTube_image_start">15dp</dimen>
 
     <!-- Error message padding and text size specifications in activity_main -->
-    <dimen name="error_padding">16dp</dimen>
+    <dimen name="error_padding">3dp</dimen>
     <dimen name="error_text">20sp</dimen>
 
     <!-- Progress bar width and height specifications in activity_main -->
