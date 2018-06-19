@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     RecyclerView.LayoutManager mLayoutManager;
 
     private TextView mErrorMessageDisplay;
+
+    private TextView mConnectionMessage;
 
     private ProgressBar mLoadingIndicator;
 
@@ -143,9 +146,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
-            mErrorMessageDisplay.setVisibility(View.VISIBLE);
-        }
 
+        }
+        showErrorMessage();
+        mConnectionMessage = findViewById(R.id.no_connection);
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -170,18 +174,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         moviesArrayList = simpleJsonMovieData;
         mRecyclerView.setAdapter(movieAdapter);
         movieAdapter.setMovieList(moviesArrayList);
+
     }
-
-    private void showErrorMessage() {
-        /* First, hide the currently visible data */
-        mRecyclerView.setVisibility(View.INVISIBLE);
-        /* Then, show the error */
-        if (moviesArrayList.size() == 0) {
-
-            mErrorMessageDisplay.setVisibility(View.VISIBLE);
-        }
-    }
-
     @Override
     public void onClick(Movie movie) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
@@ -299,6 +293,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showErrorMessage() {
+            Toast.makeText(getApplicationContext(), "No internet connection",
+                    Toast.LENGTH_SHORT).show();
+            mRecyclerView.setVisibility(View.INVISIBLE);
+          //  mConnectionMessage.setVisibility(View.VISIBLE);
+        //    mLoadingIndicator.setVisibility(View.VISIBLE);
+
     }
 
     @Override
