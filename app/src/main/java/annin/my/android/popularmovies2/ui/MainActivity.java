@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 //Construct the URI for the item to delete
                 //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
                 // Retrieve the id of the task to delete
-
                 int id = (int) viewHolder.itemView.getTag();
 
                 // Build appropriate uri with String row id appended
@@ -149,7 +148,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             Log.i("list", moviesArrayList.size() + "");
 
         }
-        showErrorMessage();
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -296,12 +294,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     private void showErrorMessage() {
+        if (moviesArrayList.size() == 0) {
+
             Toast.makeText(getApplicationContext(), "No internet connection",
                     Toast.LENGTH_SHORT).show();
             mRecyclerView.setVisibility(View.INVISIBLE);
             mConnectionMessage.setVisibility(View.VISIBLE);
-        //    mLoadingIndicator.setVisibility(View.VISIBLE);
-
+            //    mLoadingIndicator.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

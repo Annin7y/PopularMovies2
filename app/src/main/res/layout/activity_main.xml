@@ -32,7 +32,7 @@
         android:layout_marginRight="@dimen/text_margin"
         android:layout_marginStart="@dimen/text_margin"
         android:visibility="visible"
-        tools:text="@string/error_message" />
+        android:text="@string/error_message" />
 
     <TextView
         android:id="@+id/no_connection"
@@ -43,7 +43,7 @@
         android:textSize="@dimen/error_text"
         android:layout_gravity="center"
         android:visibility="visible"
-        tools:text="No Internet Connection" />
+        android:text="No Internet Connection" />
 
     <ProgressBar
         android:id="@+id/pb_loading_indicator"
