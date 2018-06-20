@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        mConnectionMessage = findViewById(R.id.no_connection);
         mErrorMessageDisplay = findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
 
@@ -149,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         }
         showErrorMessage();
-        mConnectionMessage = findViewById(R.id.no_connection);
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             Toast.makeText(getApplicationContext(), "No internet connection",
                     Toast.LENGTH_SHORT).show();
             mRecyclerView.setVisibility(View.INVISIBLE);
-          //  mConnectionMessage.setVisibility(View.VISIBLE);
+            mConnectionMessage.setVisibility(View.VISIBLE);
         //    mLoadingIndicator.setVisibility(View.VISIBLE);
 
     }

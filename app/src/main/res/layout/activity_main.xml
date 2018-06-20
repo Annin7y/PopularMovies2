@@ -21,8 +21,6 @@
         android:layout_gravity="center"
         android:gravity="center" />
 
-
-
     <TextView
         android:id="@+id/movie_error_message_display"
         android:layout_width="wrap_content"
@@ -44,7 +42,7 @@
         android:padding="8dp"
         android:textSize="@dimen/error_text"
         android:layout_gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:text="No Internet Connection" />
 
     <ProgressBar
