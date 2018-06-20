@@ -54,5 +54,8 @@ public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>> {
             listener.returnData(mMovieList);
         }
     }
-}
+
+    }
+
+
 

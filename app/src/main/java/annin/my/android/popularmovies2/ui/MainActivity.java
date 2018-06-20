@@ -138,8 +138,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             if (selectedSortOrder == SORT_BY_FAVORITES) {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
-            }
-            else {
+            } else {
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
             }
@@ -170,10 +169,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
         moviesArrayList = simpleJsonMovieData;
-        mRecyclerView.setAdapter(movieAdapter);
-        movieAdapter.setMovieList(moviesArrayList);
 
+        if (moviesArrayList.size() ==0) {
+            showErrorMessage();
+        } else {
+            mRecyclerView.setAdapter(movieAdapter);
+            movieAdapter.setMovieList(moviesArrayList);
+        }
     }
+
     @Override
     public void onClick(Movie movie) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
@@ -293,16 +297,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
-    private void showErrorMessage() {
-        if (moviesArrayList.size() == 0) {
-
+    public void showErrorMessage() {
             Toast.makeText(getApplicationContext(), "No internet connection",
                     Toast.LENGTH_SHORT).show();
-            mRecyclerView.setVisibility(View.INVISIBLE);
+          //  mRecyclerView.setVisibility(View.INVISIBLE);
             mConnectionMessage.setVisibility(View.VISIBLE);
             //    mLoadingIndicator.setVisibility(View.VISIBLE);
         }
-    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
