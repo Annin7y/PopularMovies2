@@ -169,12 +169,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
         moviesArrayList = simpleJsonMovieData;
-
-        if (moviesArrayList.size() ==0) {
-            showErrorMessage();
-        } else {
+        if(null != simpleJsonMovieData) {
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
+        }
+        else{
+            showErrorMessage();
         }
     }
 
@@ -298,13 +298,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     public void showErrorMessage() {
+
             Toast.makeText(getApplicationContext(), "No internet connection",
                     Toast.LENGTH_SHORT).show();
-          //  mRecyclerView.setVisibility(View.INVISIBLE);
+            mRecyclerView.setVisibility(View.INVISIBLE);
             mConnectionMessage.setVisibility(View.VISIBLE);
             //    mLoadingIndicator.setVisibility(View.VISIBLE);
-        }
 
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

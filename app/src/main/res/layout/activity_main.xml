@@ -42,7 +42,7 @@
         android:padding="8dp"
         android:textSize="@dimen/error_text"
         android:layout_gravity="center"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:text="No Internet Connection" />
 
     <ProgressBar
