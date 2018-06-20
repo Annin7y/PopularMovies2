@@ -50,9 +50,9 @@ public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>> {
     @Override
     protected void onPostExecute(ArrayList<Movie> mMovieList) {
         super.onPostExecute(mMovieList);
-        if (mMovieList != null) {
+      //  if (mMovieList != null) {
             listener.returnData(mMovieList);
-        }
+     //   }
     }
     }
 
