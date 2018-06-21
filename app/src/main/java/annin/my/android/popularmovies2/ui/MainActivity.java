@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
-//Display if there is no internet connection or
+//Display if there is no internet connection
     public void showErrorMessage() {
             Toast.makeText(getApplicationContext(), "No internet connection",
                     Toast.LENGTH_SHORT).show();
