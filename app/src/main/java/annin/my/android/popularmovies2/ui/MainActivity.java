@@ -167,9 +167,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
-        movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
-        moviesArrayList = simpleJsonMovieData;
         if(null != simpleJsonMovieData) {
+            movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
+            moviesArrayList = simpleJsonMovieData;
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
         }
@@ -297,13 +297,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
+//Display if there is no internet connection or
     public void showErrorMessage() {
-
             Toast.makeText(getApplicationContext(), "No internet connection",
                     Toast.LENGTH_SHORT).show();
             mRecyclerView.setVisibility(View.INVISIBLE);
             mConnectionMessage.setVisibility(View.VISIBLE);
-            //    mLoadingIndicator.setVisibility(View.VISIBLE);
+            mLoadingIndicator.setVisibility(View.VISIBLE);
 
     }
 

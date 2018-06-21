@@ -50,6 +50,10 @@ public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>> {
     @Override
     protected void onPostExecute(ArrayList<Movie> mMovieList) {
         super.onPostExecute(mMovieList);
+        /*the if method is commented out because the error message will be displayed if there is no internet connection
+        the if statement is included in the returnData method in the Main Activity
+        */
+
       //  if (mMovieList != null) {
             listener.returnData(mMovieList);
      //   }
