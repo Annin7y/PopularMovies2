@@ -3,6 +3,8 @@ package annin.my.android.popularmovies2.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -125,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             }
         }).attachToRecyclerView(mRecyclerView);
 
+        if(isNetworkStatusAvailable (getApplicationContext())) {
+
         /*
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
@@ -132,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             MovieAsyncTask myTask = new MovieAsyncTask(this);
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
-
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 
             if (selectedSortOrder == SORT_BY_FAVORITES) {
@@ -145,7 +148,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
-
+        }
+        }
+        else {
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
@@ -174,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             movieAdapter.setMovieList(moviesArrayList);
         }
         else{
-            showErrorMessage();
+          //  showErrorMessage();
         }
     }
 
@@ -297,15 +303,27 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
-//Display if there is no internet connection
-    public void showErrorMessage() {
-            Toast.makeText(getApplicationContext(), "No internet connection",
-                    Toast.LENGTH_SHORT).show();
-            mRecyclerView.setVisibility(View.INVISIBLE);
-            mConnectionMessage.setVisibility(View.VISIBLE);
-            mLoadingIndicator.setVisibility(View.VISIBLE);
+
+    public static boolean isNetworkStatusAvailable (Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
 
     }
+
+
+//Display if there is no internet connection
+//    public void showErrorMessage() {
+//            Toast.makeText(getApplicationContext(), "No internet connection",
+//                    Toast.LENGTH_SHORT).show();
+//            mRecyclerView.setVisibility(View.INVISIBLE);
+//            mConnectionMessage.setVisibility(View.VISIBLE);
+//            mLoadingIndicator.setVisibility(View.VISIBLE);
+//
+//    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
