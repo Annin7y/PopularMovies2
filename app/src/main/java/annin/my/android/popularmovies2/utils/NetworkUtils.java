@@ -152,7 +152,6 @@ public class NetworkUtils {
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-
     public static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
         Log.i("URL: ", url.toString());
@@ -408,7 +407,6 @@ public class NetworkUtils {
 
                 MovieTrailer trailer = new MovieTrailer(trailerSite, trailerKey);
                 moviesTrailerList.add(trailer);
-
             }
 
         } catch (JSONException e) {
@@ -421,5 +419,4 @@ public class NetworkUtils {
         // Return the list of movies
         return moviesTrailerList;
     }
-
 }
