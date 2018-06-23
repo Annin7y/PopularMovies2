@@ -99,8 +99,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
         Picasso.with(context)
                 .load(movieView.getPosterUrl())
-                .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
-                .centerCrop()
                 //if the image can't be loaded the following error message/image will be displayed
                 .error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);

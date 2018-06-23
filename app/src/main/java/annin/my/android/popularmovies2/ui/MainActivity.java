@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             myTask.execute(NetworkUtils.SORT_BY_POPULAR);
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
-
             if (selectedSortOrder == SORT_BY_FAVORITES) {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
