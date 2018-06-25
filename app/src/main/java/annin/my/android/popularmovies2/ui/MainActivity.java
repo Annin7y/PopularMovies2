@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.ContextCompat;
@@ -140,6 +141,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
             } else {
                 Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                retryButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "The First SnackBar Button was clicked.", Snackbar.LENGTH_SHORT)
+                                .setAction("Retry", null).show();
+                        MovieAsyncTask myTask = new MovieAsyncTask(this);
+                        myTask.execute(selectedSortOrder);
+
+                    }
+
+                });
+
             }
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
