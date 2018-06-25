@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 MovieAsyncTask myTask = new MovieAsyncTask(this);
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
             } else {
-                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                 retryButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -148,11 +148,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                                 .setAction("Retry", null).show();
                         MovieAsyncTask myTask = new MovieAsyncTask(this);
                         myTask.execute(selectedSortOrder);
-
                     }
 
                 });
-
             }
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
