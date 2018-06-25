@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private TextView mConnectionMessage;
 
+    private Button retryButton;
+
     private ProgressBar mLoadingIndicator;
 
     private static final String KEY_MOVIES_LIST = "movies_list";
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mConnectionMessage = findViewById(R.id.no_connection);
         mErrorMessageDisplay = findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
+        retryButton = findViewById(R.id.button);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -127,16 +131,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        if(isNetworkStatusAvailable (getApplicationContext())) {
-
         /*
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
         if (savedInstanceState == null) {
-            MovieAsyncTask myTask = new MovieAsyncTask(this);
-            myTask.execute(NetworkUtils.SORT_BY_POPULAR);
+            if (isNetworkStatusAvailable(this)) {
+                MovieAsyncTask myTask = new MovieAsyncTask(this);
+                myTask.execute(NetworkUtils.SORT_BY_POPULAR);
+            } else {
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+
             if (selectedSortOrder == SORT_BY_FAVORITES) {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
@@ -144,14 +151,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
             }
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
         }
-        }
-        else {
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-        }
+
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
@@ -172,14 +178,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
-        if(null != simpleJsonMovieData) {
+        if (null != simpleJsonMovieData) {
             movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
             moviesArrayList = simpleJsonMovieData;
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
-        }
-        else{
-          //  showErrorMessage();
+        } else {
+            //  showErrorMessage();
         }
     }
 
@@ -303,15 +308,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
 
-    public static boolean isNetworkStatusAvailable (Context context) {
+    public static boolean isNetworkStatusAvailable(Context context) {
         ConnectivityManager cm =
-                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
 
     }
+    // Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
 
 
 //Display if there is no internet connection
