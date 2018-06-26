@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
             } else {
                 Snackbar
-                        .make(mCoordinatorLayout, "Welcome to AndroidHive", Snackbar.LENGTH_LONG)
+                        .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_LONG)
                         .setAction("Retry", new MyClickListener())
                         .show();
             }

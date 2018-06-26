@@ -82,7 +82,7 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
         //load youtube image using Picasso
         Picasso.with(context)
                 .load(movieTrailerView.getYoutubeSiteUrl())
-                        .into(holder.imageView);
+                .into(holder.imageView);
     }
 
     @Override
