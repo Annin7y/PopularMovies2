@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
             }
-            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
 
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
@@ -185,8 +185,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
             myTask.execute(selectedSortOrder);
         }
-
-    }
+        }
             @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
@@ -196,11 +195,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
         } else {
-            //  showErrorMessage();
-            Snackbar
-                    .make(view, "No Internet connection", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Retry", new MyClickListener())
-                    .show();
+         showErrorMessage();
+
         }
     }
 
@@ -336,17 +332,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
 
 //Display if there is no internet connection
-//    public void showErrorMessage() {
-//            Toast.makeText(getApplicationContext(), "No internet connection",
-//                    Toast.LENGTH_SHORT).show();
-//            mRecyclerView.setVisibility(View.INVISIBLE);
-//            mConnectionMessage.setVisibility(View.VISIBLE);
-//            mLoadingIndicator.setVisibility(View.VISIBLE);
-//
-//    }
+    public void showErrorMessage() {
+            Toast.makeText(getApplicationContext(), "No internet connection",
+                    Toast.LENGTH_SHORT).show();
+            mRecyclerView.setVisibility(View.INVISIBLE);
+            mConnectionMessage.setVisibility(View.VISIBLE);
+            mLoadingIndicator.setVisibility(View.VISIBLE);
 
-
-
+    }
 
 
     @Override
