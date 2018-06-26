@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso;
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.custom.Movie;
 import annin.my.android.popularmovies2.data.MovieContract;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Maino96-10022 on 9/24/2017.
@@ -37,13 +39,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imageView;
+        @BindView(R.id.imageView)
+        ImageView imageView;
 
         public FavoritesAdapterViewHolder(View view) {
             super(view);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            itemView.setOnClickListener(this);
-
+            ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
         }
 
         @Override
@@ -80,8 +82,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
         Picasso.with(context)
                 .load(posterPath)
-                .resize(IMAGE_HEIGHT, IMAGE_WIDTH)
-                .centerCrop()
+                .error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);
         Log.e(TAG, "Failed to load image.");
 
