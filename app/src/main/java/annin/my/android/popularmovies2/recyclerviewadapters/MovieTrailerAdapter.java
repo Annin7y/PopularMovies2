@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.custom.MovieTrailer;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Maino96-10022 on 9/4/2017.
@@ -44,11 +46,12 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
      */
     public class MovieTrailerAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        @BindView(R.id.imageViewYoutube)
         public ImageView imageView;
 
         public MovieTrailerAdapterViewHolder(View view) {
             super(view);
-            imageView = (ImageView) view.findViewById(R.id.imageViewYoutube);
+            ButterKnife.bind(this, view);
             view.setOnClickListener(this);
         }
 

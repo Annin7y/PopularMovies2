@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.custom.MovieReview;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Maino96-10022 on 8/17/2017.
@@ -34,18 +36,19 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     /**
      * Cache of the children views for a movie list item.
      */
-    public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder  {
+    public class MovieReviewAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView movieReview;
-        public TextView reviewAuthor;
+        @BindView(R.id.movie_review)
+        TextView movieReview;
 
+        @BindView(R.id.author_review)
+        TextView reviewAuthor;
 
         public MovieReviewAdapterViewHolder(View view) {
             super(view);
-            movieReview = (TextView) view.findViewById(R.id.movie_review);
-            reviewAuthor  = (TextView) view.findViewById(R.id.author_review);
+            ButterKnife.bind(this, view);
         }
-   }
+    }
 
     @Override
     public MovieReviewAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -61,7 +64,7 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
     public void onBindViewHolder(MovieReviewAdapterViewHolder holder, int position) {
 
         //Binding data
-       final MovieReview movieReviewView = movieReviewList.get(position);
+        final MovieReview movieReviewView = movieReviewList.get(position);
 
         holder.movieReview.setText(movieReviewView.getMovieReview());
         holder.reviewAuthor.setText(movieReviewView.getReviewAuthor());

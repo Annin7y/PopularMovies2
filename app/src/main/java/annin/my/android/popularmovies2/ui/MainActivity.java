@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mConnectionMessage = findViewById(R.id.no_connection);
         mErrorMessageDisplay = findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
-        retryButton = findViewById(R.id.button);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
