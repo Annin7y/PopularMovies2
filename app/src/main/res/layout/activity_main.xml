@@ -45,15 +45,6 @@
         android:visibility="invisible"
         android:text="No Internet Connection" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Retry"
-        android:id="@+id/button"
-        android:visibility="invisible"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <ProgressBar
         android:id="@+id/pb_loading_indicator"
         android:layout_width="@dimen/progress_bar"

@@ -140,18 +140,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 MovieAsyncTask myTask = new MovieAsyncTask(this);
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
             } else {
-              //  Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-                retryButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar.make(view, "The First SnackBar Button was clicked.", Snackbar.LENGTH_SHORT)
-                                .setAction("Retry", null).show();
-                        MovieAsyncTask myTask = new MovieAsyncTask(this);
-                        myTask.execute(selectedSortOrder);
+                Snackbar
+                        .make(view, "No Internet connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Retry", new MyClickListener())
+                        .show();
                     }
-
-                });
-            }
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 
@@ -185,8 +178,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         int noOfColumns = (int) (dpWidth / scalingFactor);
         return noOfColumns;
     }
+    public class MyClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            // Run the AsyncTask in response to the click
+            MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
+            myTask.execute(selectedSortOrder);
+        }
 
-    @Override
+    }
+            @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         if (null != simpleJsonMovieData) {
@@ -196,6 +197,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             movieAdapter.setMovieList(moviesArrayList);
         } else {
             //  showErrorMessage();
+            Snackbar
+                    .make(view, "No Internet connection", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Retry", new MyClickListener())
+                    .show();
         }
     }
 
@@ -318,7 +323,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
-
     public static boolean isNetworkStatusAvailable(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -340,6 +344,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 //            mLoadingIndicator.setVisibility(View.VISIBLE);
 //
 //    }
+
+
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
