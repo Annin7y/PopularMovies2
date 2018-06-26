@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.custom.Movie;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 /**
  * Created by Maino96-10022 on 8/17/2017.
@@ -52,13 +55,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
      */
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imageView;
-    //    public TextView releaseDate;
+        @BindView(R.id.imageView)
+        ImageView imageView;
 
         public MovieAdapterViewHolder(View view) {
             super(view);
-            imageView = (ImageView) view.findViewById(R.id.imageView);
-          //  releaseDate = (TextView) view.findViewById(R.id.release_date);
+            ButterKnife.bind(this, view);
             view.setOnClickListener(this);
         }
 
@@ -73,10 +75,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             Movie posterClick = moviesList.get(adapterPosition);
             mClickHandler.onClick(posterClick);
         }
-
-      //  public TextView getReleaseDate() {
-       //     return releaseDate;
-     //   }
     }
 
     @Override
@@ -94,8 +92,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
         //Binding data
         final Movie movieView = moviesList.get(position);
-
-        //  holder.itemView.setTag(id);
 
         Picasso.with(context)
                 .load(movieView.getPosterUrl())
