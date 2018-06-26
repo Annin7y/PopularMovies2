@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private Button retryButton;
 
+    private CoordinatorLayout mCoordinatorLayout;
+
     private ProgressBar mLoadingIndicator;
 
     private static final String KEY_MOVIES_LIST = "movies_list";
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mErrorMessageDisplay = findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
         retryButton = findViewById(R.id.button);
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -141,10 +145,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
             } else {
                 Snackbar
-                        .make(view, "No Internet connection", Snackbar.LENGTH_INDEFINITE)
+                        .make(mCoordinatorLayout, "Welcome to AndroidHive", Snackbar.LENGTH_LONG)
                         .setAction("Retry", new MyClickListener())
                         .show();
-                    }
+            }
         } else {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 
@@ -155,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
             }
-         //   Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            //   Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
 
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
@@ -178,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         int noOfColumns = (int) (dpWidth / scalingFactor);
         return noOfColumns;
     }
+
     public class MyClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -185,8 +190,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
             myTask.execute(selectedSortOrder);
         }
-        }
-            @Override
+    }
+
+    @Override
     public void returnData(ArrayList<Movie> simpleJsonMovieData) {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         if (null != simpleJsonMovieData) {
@@ -195,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
         } else {
-         showErrorMessage();
+            showErrorMessage();
 
         }
     }
@@ -331,13 +337,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     // Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
 
 
-//Display if there is no internet connection
+    //Display if there is no internet connection
     public void showErrorMessage() {
-            Toast.makeText(getApplicationContext(), "No internet connection",
-                    Toast.LENGTH_SHORT).show();
-            mRecyclerView.setVisibility(View.INVISIBLE);
-            mConnectionMessage.setVisibility(View.VISIBLE);
-            mLoadingIndicator.setVisibility(View.VISIBLE);
+        Toast.makeText(getApplicationContext(), "No internet connection",
+                Toast.LENGTH_SHORT).show();
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        mConnectionMessage.setVisibility(View.VISIBLE);
+        mLoadingIndicator.setVisibility(View.VISIBLE);
 
     }
 
