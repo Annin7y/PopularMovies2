@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +39,8 @@ import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;
 import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private Context context;
 
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerview_main)
+    RecyclerView mRecyclerView;
 
     private MovieAdapter movieAdapter;
 
@@ -59,13 +61,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     RecyclerView.LayoutManager mLayoutManager;
 
-    private TextView mErrorMessageDisplay;
+
 
     private TextView mConnectionMessage;
 
-    private Button retryButton;
-
-    private CoordinatorLayout mCoordinatorLayout;
+    CoordinatorLayout mCoordinatorLayout;
 
     private ProgressBar mLoadingIndicator;
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
-        mRecyclerView = findViewById(R.id.recyclerview_main);
+        ButterKnife.bind(this);
         movieAdapter = new MovieAdapter(this, moviesArrayList, context);
         mRecyclerView.setAdapter(movieAdapter);
 
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mConnectionMessage = findViewById(R.id.no_connection);
-        mErrorMessageDisplay = findViewById(R.id.movie_error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
