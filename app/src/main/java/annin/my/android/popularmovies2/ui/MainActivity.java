@@ -24,7 +24,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private FavoritesAdapter favoritesAdapter;
 
     RecyclerView.LayoutManager mLayoutManager;
-    
+
     CoordinatorLayout mCoordinatorLayout;
 
     private ProgressBar mLoadingIndicator;
@@ -151,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
             }
-            //   Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
 
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
@@ -331,13 +329,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     //Display if there is no internet connection
     public void showErrorMessage() {
-        Toast.makeText(getApplicationContext(), "No internet connection",
-                Toast.LENGTH_SHORT).show();
+        Snackbar
+                .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_LONG)
+                .setAction("Retry", new MyClickListener())
+                .show();
         mRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
 
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
