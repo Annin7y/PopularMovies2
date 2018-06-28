@@ -192,7 +192,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             movieAdapter.setMovieList(moviesArrayList);
         } else {
             showErrorMessage();
-
         }
     }
 
@@ -322,10 +321,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
-
     }
-    // Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
-
 
     //Display if there is no internet connection
     public void showErrorMessage() {
@@ -335,7 +331,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 .show();
         mRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
-
     }
 
     @Override
