@@ -24,7 +24,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -60,11 +59,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private FavoritesAdapter favoritesAdapter;
 
     RecyclerView.LayoutManager mLayoutManager;
-
-
-
-    private TextView mConnectionMessage;
-
+    
     CoordinatorLayout mCoordinatorLayout;
 
     private ProgressBar mLoadingIndicator;
@@ -95,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mConnectionMessage = findViewById(R.id.no_connection);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
@@ -340,7 +334,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         Toast.makeText(getApplicationContext(), "No internet connection",
                 Toast.LENGTH_SHORT).show();
         mRecyclerView.setVisibility(View.INVISIBLE);
-        mConnectionMessage.setVisibility(View.VISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
 
     }
