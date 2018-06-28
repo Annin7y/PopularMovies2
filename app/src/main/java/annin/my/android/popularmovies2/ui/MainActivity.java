@@ -59,9 +59,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     RecyclerView.LayoutManager mLayoutManager;
 
+    @BindView(R.id.coordinatorLayout)
     CoordinatorLayout mCoordinatorLayout;
 
-    private ProgressBar mLoadingIndicator;
+    @BindView(R.id.pb_loading_indicator)
+    ProgressBar mLoadingIndicator;
 
     private static final String KEY_MOVIES_LIST = "movies_list";
 
@@ -90,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
-        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
