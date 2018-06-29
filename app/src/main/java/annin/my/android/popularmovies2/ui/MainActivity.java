@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 myTask.execute(NetworkUtils.SORT_BY_POPULAR);
             } else {
                 Snackbar
-                        .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_LONG)
+                        .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Retry", new MyClickListener())
                         .show();
             }
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     //Display if there is no internet connection
     public void showErrorMessage() {
         Snackbar
-                .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_LONG)
+                .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                 .setAction("Retry", new MyClickListener())
                 .show();
         mRecyclerView.setVisibility(View.INVISIBLE);

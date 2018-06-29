@@ -6,12 +6,10 @@
 
     <ImageView
         android:id="@+id/imageViewYoutube"
-        android:layout_width="@dimen/YouTube_image_size"
-        android:layout_height="@dimen/YouTube_image_size"
-        android:layout_marginEnd="@dimen/YouTube_image_end"
-        android:layout_marginLeft="@dimen/text_margin"
-        android:layout_marginRight="@dimen/YouTube_image_end"
-        android:layout_marginStart="@dimen/YouTube_image_start"
-        android:adjustViewBounds="true" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:padding="@dimen/image_view_padding"/>
 
 </LinearLayout>
