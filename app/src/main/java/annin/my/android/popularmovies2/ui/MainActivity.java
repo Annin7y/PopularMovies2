@@ -40,6 +40,7 @@ import annin.my.android.popularmovies2.utils.NetworkUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -149,19 +150,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
             }
-
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
         }
-
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));
 
         //the vertical divider
-        mRecyclerView.addItemDecoration(
-                new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
-                        R.drawable.item_decorator)));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
+                R.drawable.item_decorator)));
     }
 
     public static int calculateNoOfColumns(Context context) {
@@ -170,15 +168,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         int scalingFactor = 180;
         int noOfColumns = (int) (dpWidth / scalingFactor);
         return noOfColumns;
-    }
-
-    public class MyClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            // Run the AsyncTask in response to the click
-            MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
-            myTask.execute(selectedSortOrder);
-        }
     }
 
     @Override
@@ -331,6 +320,20 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView.setVisibility(View.INVISIBLE);
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
+
+    public class MyClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            // Run the AsyncTask in response to the click
+//            MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
+//            myTask.execute(selectedSortOrder);
+            if (selectedSortOrder == SORT_BY_FAVORITES) {
+                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+                mRecyclerView.setAdapter(favoritesAdapter);
+            }
+        }
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
