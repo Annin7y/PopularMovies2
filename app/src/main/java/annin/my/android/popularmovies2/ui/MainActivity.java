@@ -324,21 +324,21 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public class MyClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            // Run the AsyncTask in response to the click
-//            MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
-//            myTask.execute(selectedSortOrder);
+            // Run the AsyncTask in response to the click; first run Favorites since they're stored in a CP and are available offline
             if (selectedSortOrder == SORT_BY_FAVORITES) {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
+            } else {
+                MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
+                myTask.execute(selectedSortOrder);
             }
         }
     }
 
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-        outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesArrayList);
-        super.onSaveInstanceState(outState);
+        @Override
+        protected void onSaveInstanceState(Bundle outState) {
+            outState.putString(KEY_SORT_ORDER, selectedSortOrder);
+            outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesArrayList);
+            super.onSaveInstanceState(outState);
+        }
     }
-}
