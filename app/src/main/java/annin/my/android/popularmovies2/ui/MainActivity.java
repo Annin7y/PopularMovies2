@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
     private FavoritesAdapter favoritesAdapter;
 
-    RecyclerView.LayoutManager mLayoutManager;
-
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout mCoordinatorLayout;
 
@@ -335,10 +333,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
-        @Override
-        protected void onSaveInstanceState(Bundle outState) {
-            outState.putString(KEY_SORT_ORDER, selectedSortOrder);
-            outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesArrayList);
-            super.onSaveInstanceState(outState);
-        }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_SORT_ORDER, selectedSortOrder);
+        outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesArrayList);
+        super.onSaveInstanceState(outState);
     }
+}
