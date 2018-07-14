@@ -36,9 +36,11 @@ import annin.my.android.popularmovies2.decoration.DividerItemDecoration;
 import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;
 import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
-import annin.my.android.popularmovies2.utils.NetworkUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_POPULAR;
+import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_RATING;
 
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         if (savedInstanceState == null) {
             if (isNetworkStatusAvailable(this)) {
                 MovieAsyncTask myTask = new MovieAsyncTask(this);
-                myTask.execute(NetworkUtils.SORT_BY_POPULAR);
+                myTask.execute(SORT_BY_POPULAR);
             } else {
                 Snackbar
                         .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
@@ -279,13 +281,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         MovieAsyncTask myTask = new MovieAsyncTask(this);
         switch (item.getItemId()) {
             case R.id.most_popular:
-                myTask.execute(NetworkUtils.SORT_BY_POPULAR);
-                selectedSortOrder = NetworkUtils.SORT_BY_POPULAR;
+                myTask.execute(SORT_BY_POPULAR);
+                selectedSortOrder = SORT_BY_POPULAR;
                 return true;
 
             case R.id.top_rated:
-                myTask.execute(NetworkUtils.SORT_BY_RATING);
-                selectedSortOrder = NetworkUtils.SORT_BY_RATING;
+                myTask.execute(SORT_BY_RATING);
+                selectedSortOrder = SORT_BY_RATING;
                 return true;
 
             case R.id.movie_favorites:
@@ -322,14 +324,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     public class MyClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+
+            //Part of the code commented out. Working on fixing loading Favorites after clicking on Retry in Snackbar
             // Run the AsyncTask in response to the click; first run Favorites since they're stored in a CP and are available offline
-            if (selectedSortOrder == SORT_BY_FAVORITES) {
-               getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-               mRecyclerView.setAdapter(favoritesAdapter);
-        }  else {
+//            if (selectedSortOrder == SORT_BY_FAVORITES) {
+//               getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+//               mRecyclerView.setAdapter(favoritesAdapter);
+//        }  else {
                 MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
                 myTask.execute(selectedSortOrder);
-            } }}
+        }}
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
