@@ -324,14 +324,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         public void onClick(View v) {
             // Run the AsyncTask in response to the click; first run Favorites since they're stored in a CP and are available offline
             if (selectedSortOrder == SORT_BY_FAVORITES) {
-                getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                mRecyclerView.setAdapter(favoritesAdapter);
-            } else {
+               getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
+               mRecyclerView.setAdapter(favoritesAdapter);
+        }  else {
                 MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
                 myTask.execute(selectedSortOrder);
-            }
-        }
-    }
+            } }}
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
