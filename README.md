@@ -7,7 +7,7 @@ Users will download movies from a movie database. Movies will be sorted by most 
 ### **Installation**
 Clone or download this repository. Import into Android Studio.
 ### **Screenshots**
-![](Screenshot_20180717-PopMov2)
+![screenshot_20180717-popmov2](https://user-images.githubusercontent.com/22602021/42856675-383426da-8a14-11e8-829b-4da6e5cc8d0e.jpg)
 
 ### **License**
 Copyright A. Annin and Udacity 2017/2018. This project is part of the Udacity Android Developer Nanodegree.
