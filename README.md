@@ -9,6 +9,8 @@ Clone or download this repository. Import into Android Studio.
 ### **Screenshots**
 ![screenshot_20180717-popmov2](https://user-images.githubusercontent.com/22602021/42856675-383426da-8a14-11e8-829b-4da6e5cc8d0e.jpg)
 
+![screenshot_20180717-popmov2detail](https://user-images.githubusercontent.com/22602021/42973120-f87e4f80-8b7f-11e8-91c5-6bcc47e4f8cd.jpg)
+
 ### **License**
 Copyright A. Annin and Udacity 2017/2018. This project is part of the Udacity Android Developer Nanodegree.
 The MIT License (MIT)
