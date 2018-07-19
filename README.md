@@ -2,7 +2,7 @@
  A project for the Android Developer Nanodegree @ Udacity
  
 ### **Description**
-Users will download movies from a movie database. Movies will be sorted by most popular and top rated by clicking on the menu option. Main Activity displays movie images. Clicking on an image takes users to the Detail Activity where additional info, incl. reviews and trailer links are displayed. Users also can add a movie to "Favorites" by clicking on "Add To Favorites" button in the Detail Activity. They can view the movies added to Favorites by clicking on the same menu option in the Main Activity which also allows them to sort movies by top rated and most popular. A movie is deleted from Favorites by swiping the image.  
+A follow-up to PopularMovies1.Users will download movies from a movie database. Movies will be sorted by most popular and top rated by clicking on the menu option. Main Activity displays movie images. Clicking on an image takes users to the Detail Activity where additional info, incl. reviews and trailer links are displayed. Users also can add a movie to "Favorites" by clicking on "Add To Favorites" button in the Detail Activity. They can view the movies added to Favorites by clicking on the same menu option in the Main Activity which also allows them to sort movies by top rated and most popular. A movie is deleted from Favorites by swiping the image.  
  
 ### **Installation**
 Clone or download this repository. Import into Android Studio.
