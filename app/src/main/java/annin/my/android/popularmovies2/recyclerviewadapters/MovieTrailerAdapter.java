@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
-import annin.my.android.popularmovies2.custom.MovieTrailer;
+import annin.my.android.popularmovies2.model.MovieTrailer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

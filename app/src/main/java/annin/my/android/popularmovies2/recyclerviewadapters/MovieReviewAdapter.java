@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
-import annin.my.android.popularmovies2.custom.MovieReview;
+import annin.my.android.popularmovies2.model.MovieReview;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
