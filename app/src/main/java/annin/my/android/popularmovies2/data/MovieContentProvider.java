@@ -59,7 +59,6 @@ public class MovieContentProvider extends ContentProvider
     {
         // Complete onCreate() and initialize a MovieDbhelper on startup
         // [Hint] Declare the DbHelper as a global variable
-
         Context context = getContext();
         mMovieDbHelper = new MovieDbHelper(context);
         return true;
@@ -142,6 +141,36 @@ public class MovieContentProvider extends ContentProvider
         return retCursor;
     }
 
+    /**
+     * Update inventory in the database with the given content values. Apply the changes to the rows
+     * specified in the selection and selection arguments (which could be 0 or 1 or more pets).
+     * Return the number of rows that were successfully updated.
+     */
+    @Override
+    public int update(@NonNull Uri uri, ContentValues values, String selection,
+                      String[] selectionArgs)
+    {
+        //Keep track of if an update occurs
+        int rowsUpdated;
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case MOVIE_WITH_ID:
+                String id = uri.getPathSegments().get(1);
+                rowsUpdated = mMovieDbHelper.getWritableDatabase().update(MovieContract.MovieEntry.TABLE_NAME, values, "_id=?", new String[]{id});
+                break;
+            default:
+                throw new UnsupportedOperationException("Not yet implemented");
+        }
+        if (rowsUpdated != 0)
+        {
+            //set notifications if a row was updated
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        // return number of rows updated
+        return rowsUpdated;
+    }
+
     // Implement delete to delete a single row of data
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs)
@@ -180,36 +209,6 @@ public class MovieContentProvider extends ContentProvider
 
         // Return the number of rows deleted
         return rowsDeleted;
-    }
-
-    /**
-     * Update inventory in the database with the given content values. Apply the changes to the rows
-     * specified in the selection and selection arguments (which could be 0 or 1 or more pets).
-     * Return the number of rows that were successfully updated.
-     */
-    @Override
-    public int update(@NonNull Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs)
-    {
-        //Keep track of if an update occurs
-        int rowsUpdated;
-        final int match = sUriMatcher.match(uri);
-        switch (match) {
-            case MOVIE_WITH_ID:
-                String id = uri.getPathSegments().get(1);
-                rowsUpdated = mMovieDbHelper.getWritableDatabase().update(MovieContract.MovieEntry.TABLE_NAME, values, "_id=?", new String[]{id});
-                break;
-            default:
-                throw new UnsupportedOperationException("Not yet implemented");
-        }
-        if (rowsUpdated != 0)
-        {
-            //set notifications if a row was updated
-            getContext().getContentResolver().notifyChange(uri, null);
-        }
-
-        // return number of rows updated
-        return rowsUpdated;
     }
 
     @Override
