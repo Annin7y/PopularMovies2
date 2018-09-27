@@ -16,16 +16,32 @@ import android.support.annotation.NonNull;
 
 public class MovieContentProvider extends ContentProvider
 {
+    //Tag for the log messages
     public static final String LOG_TAG = MovieContentProvider.class.getSimpleName();
 
+    /**
+     * URI matcher code for the content URI for the movies table
+     */
     public static final int MOVIES = 100;
+
+    /**
+     * URI matcher code for the content URI for one movie in the movie table
+     */
     public static final int MOVIE_WITH_ID = 101;
 
+    /**
+     * UriMatcher object to match a content URI to a corresponding code.
+     * The input passed into the constructor represents the code to return for the root URI.
+     * It's common to use NO_MATCH as the input for this case.
+     */
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
+    // Static initializer. This is run the first time anything is called from this class.
     public static UriMatcher buildUriMatcher()
     {
-
+        // The calls to addURI() go here, for all of the content URI patterns that the provider
+        // should recognize. All paths added to the UriMatcher have a corresponding code to return
+        // when a match is found.
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(MovieContract.CONTENT_AUTHORITY, MovieContract.PATH_MOVIES, MOVIES);
         uriMatcher.addURI(MovieContract.CONTENT_AUTHORITY, MovieContract.PATH_MOVIES + "/#", MOVIE_WITH_ID);
@@ -33,6 +49,9 @@ public class MovieContentProvider extends ContentProvider
         return uriMatcher;
     }
 
+    /**
+     * Database helper object
+     */
     private MovieDbHelper mMovieDbHelper;
 
     @Override
@@ -163,6 +182,11 @@ public class MovieContentProvider extends ContentProvider
         return rowsDeleted;
     }
 
+    /**
+     * Update inventory in the database with the given content values. Apply the changes to the rows
+     * specified in the selection and selection arguments (which could be 0 or 1 or more pets).
+     * Return the number of rows that were successfully updated.
+     */
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs)

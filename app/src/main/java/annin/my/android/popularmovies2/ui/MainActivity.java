@@ -46,6 +46,7 @@ import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_RATING;
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>
 {
 
+     //Tag for the log messages
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int FAVORITES_LOADER_ID = 0;
@@ -102,7 +103,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             // Called when a user swipes left or right on a ViewHolder
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
+            {
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete

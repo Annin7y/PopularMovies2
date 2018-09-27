@@ -49,6 +49,7 @@ import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
         AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor>
 {
+    //Tag for the log messages
     private static final String TAG = DetailActivity.class.getSimpleName();
 
     private ArrayList<MovieReview> simpleJsonMovieReviewData = new ArrayList<>();
@@ -56,15 +57,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     private Context context;
     private RecyclerView mRecyclerViewReview;
     private RecyclerView mRecyclerViewTrailer;
-    Movie movie;
     private String youtubeKey;
-    private String youtubeImage;
-    MovieTrailer firstTrailer;
     private MovieReviewAdapter movieReviewAdapter;
     private MovieTrailerAdapter movieTrailerAdapter;
     public String movieId;
     private ShareActionProvider mShareActionProvider;
     private static final String BASE_YOUTUBE_URL_SHARE = "http://www.youtube.com/watch?v=";
+    Movie movie;
+    MovieTrailer firstTrailer;
     ImageView poster;
     ImageView youtube_thumbnail;
     TextView movieReview;
@@ -174,6 +174,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             releaseDate.setText(finalDate);
         }
+
         // Kick off the loader
         getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
     }
@@ -243,7 +244,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     @Override
     public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle)
     {
-
         String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
         String[] selectionArgs = new String[]{movieId};
 

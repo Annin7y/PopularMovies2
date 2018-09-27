@@ -16,6 +16,7 @@ public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>>
 {
 
     private static final String TAG = MovieAsyncTask.class.getSimpleName();
+
     private AsyncTaskInterface listener;
 
     public MovieAsyncTask(AsyncTaskInterface listener)

@@ -58,7 +58,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
      */
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-
         @BindView(R.id.imageView)
         ImageView imageView;
 
