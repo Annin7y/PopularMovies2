@@ -31,46 +31,28 @@ import static android.content.ContentValues.TAG;
 
 public class NetworkUtils
 {
-
     /**
      * Tag for the log messages
      */
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
 
     private static final String KEY_POSTER_PATH = "poster_path";
-
     private static final String KEY_ORIGINAL_TITLE = "original_title";
-
     private static final String KEY_OVERVIEW = "overview";
-
     private static final String KEY_VOTE_AVERAGE = "vote_average";
-
     private static final String KEY_RELEASE_DATE = "release_date";
-
     private static final String KEY_REVIEW_AUTHOR = "author";
-
     private static final String KEY_REVIEW_CONTENT = "content";
-
     private static final String KEY_TRAILER_SITE = "site";
-
-    public static final String KEY_TRAILER_KEY = "key";
-
-    public static final String SORT_BY_POPULAR = "most_popular";
-
-    public static final String SORT_BY_RATING = "top_rated";
-
     private static final String API_KEY = "api_key";
-
     private static final String MOVIE_ID = "id";
-
     private static final String BASE_URL = "https://api.themoviedb.org/3/movie";
-
     private static final String BASE_URL_POPULAR = "https://api.themoviedb.org/3/movie/popular";
-
     private static final String BASE_URL_TOP_RATED = "https://api.themoviedb.org/3/movie/top_rated";
-
     private static final String BASE_YOUTUBE_URL = "https://www.youtube.com/watch";
-
+    public static final String KEY_TRAILER_KEY = "key";
+    public static final String SORT_BY_POPULAR = "most_popular";
+    public static final String SORT_BY_RATING = "top_rated";
 
     public NetworkUtils()
     {
@@ -142,7 +124,8 @@ public class NetworkUtils
                     .build();
             urlTrailer = new URL(movieTrailerQueryUri.toString());
         }
-        catch (MalformedURLException e) {
+        catch (MalformedURLException e)
+        {
             e.printStackTrace();
         }
 
@@ -153,7 +136,6 @@ public class NetworkUtils
 
     public static Uri buildUrlYouTube(String trailerKey)
     {
-
         Uri movieTrailerQueryUri = Uri.parse(BASE_YOUTUBE_URL).buildUpon()
                 .appendQueryParameter("v", String.valueOf(trailerKey))
                 .build();
@@ -357,7 +339,6 @@ public class NetworkUtils
         ArrayList<Movie> movies = new ArrayList<>();
         try
         {
-
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(movieJSON);
 
@@ -368,28 +349,20 @@ public class NetworkUtils
 // For each movie in the movieArray, create an {@link Movie} object
             for (int i = 0; i < movieArray.length(); i++)
             {
-
                 // Get a single movie description at position i within the list of movies
                 JSONObject currentMovie = movieArray.getJSONObject(i);
 
-                // Extract the value for the key called "poster_title"
+                // Extract values for the following keys
                 String posterName = currentMovie.getString(KEY_POSTER_PATH);
-
                 String movieName = currentMovie.getString(KEY_ORIGINAL_TITLE);
-
                 String overviewName = currentMovie.getString(KEY_OVERVIEW);
-
                 String voteAverage = currentMovie.getString(KEY_VOTE_AVERAGE);
-
                 String releaseDate = currentMovie.getString(KEY_RELEASE_DATE);
-
                 String movieId = currentMovie.getString(MOVIE_ID);
 
                 Movie movie = new Movie(posterName, movieName, overviewName, voteAverage, releaseDate, movieId);
                 movies.add(movie);
-
             }
-
         }
         catch (JSONException e)
         {
@@ -399,7 +372,7 @@ public class NetworkUtils
             Log.e("QueryUtils", "Problem parsing movies JSON results", e);
         }
 
-        // Return the list of movies
+        // Return a list of movies
         return movies;
     }
 
@@ -415,7 +388,6 @@ public class NetworkUtils
         ArrayList<MovieReview> moviesReviewList = new ArrayList<>();
         try
         {
-
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(movieReviewJSON);
 
@@ -427,15 +399,13 @@ public class NetworkUtils
                 // Get a single movie description at position i within the list of movies
                 JSONObject currentMovieReview = movieReviewArray.getJSONObject(i);
 
+                // Extract values for the following keys
                 String authorName = currentMovieReview.getString(KEY_REVIEW_AUTHOR);
-
                 String reviewName = currentMovieReview.getString(KEY_REVIEW_CONTENT);
 
                 MovieReview review = new MovieReview(authorName, reviewName);
                 moviesReviewList.add(review);
-
             }
-
         }
         catch (JSONException e)
         {
@@ -445,7 +415,7 @@ public class NetworkUtils
             Log.e("QueryUtils", "Problem parsing movies JSON review results", e);
         }
 
-        // Return the list of movies
+        // Return a list of movie reviews
         return moviesReviewList;
     }
 
@@ -471,8 +441,8 @@ public class NetworkUtils
                 // Get a single movie description at position i within the list of movies
                 JSONObject currentMovieTrailer = movieTrailerArray.getJSONObject(i);
 
+                 // Extract values for the following keys
                 String trailerSite = currentMovieTrailer.getString(KEY_TRAILER_SITE);
-
                 String trailerKey = currentMovieTrailer.getString(KEY_TRAILER_KEY);
 
                 MovieTrailer trailer = new MovieTrailer(trailerSite, trailerKey);
@@ -488,7 +458,7 @@ public class NetworkUtils
             Log.e("QueryUtils", "Problem parsing movies JSON review results", e);
         }
 
-        // Return the list of movies
+        // Return a list of movie trailers
         return moviesTrailerList;
     }
 }
