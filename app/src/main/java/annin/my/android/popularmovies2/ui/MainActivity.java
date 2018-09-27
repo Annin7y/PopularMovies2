@@ -43,22 +43,24 @@ import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_POPULAR
 import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_RATING;
 
 
-public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>
+{
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int FAVORITES_LOADER_ID = 0;
-
     private ArrayList<Movie> moviesArrayList = new ArrayList<>();
-
     private Context context;
+    private MovieAdapter movieAdapter;
+    private FavoritesAdapter favoritesAdapter;
+    private static final String KEY_MOVIES_LIST = "movies_list";
+    private static final String KEY_SORT_ORDER = "sort_order";
+    private String selectedSortOrder = "most_popular";
+    private static final String SORT_BY_FAVORITES = "movie_favorites";
+    private int mPosition = RecyclerView.NO_POSITION;
 
     @BindView(R.id.recyclerview_main)
     RecyclerView mRecyclerView;
-
-    private MovieAdapter movieAdapter;
-
-    private FavoritesAdapter favoritesAdapter;
 
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout mCoordinatorLayout;
@@ -66,18 +68,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @BindView(R.id.pb_loading_indicator)
     ProgressBar mLoadingIndicator;
 
-    private static final String KEY_MOVIES_LIST = "movies_list";
-
-    private static final String KEY_SORT_ORDER = "sort_order";
-
-    private String selectedSortOrder = "most_popular";
-
-    private static final String SORT_BY_FAVORITES = "movie_favorites";
-
-    private int mPosition = RecyclerView.NO_POSITION;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -92,14 +85,17 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
+        {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
+            {
                 return false;
             }
 
             @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder)
+            {
                 if (viewHolder instanceof MovieAdapter.MovieAdapterViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
@@ -130,23 +126,32 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         /*
          *  Starting the asyncTask so that movies load upon launching the app. most popular are loaded first.
          */
-        if (savedInstanceState == null) {
-            if (isNetworkStatusAvailable(this)) {
+        if (savedInstanceState == null)
+        {
+            if (isNetworkStatusAvailable(this))
+            {
                 MovieAsyncTask myTask = new MovieAsyncTask(this);
                 myTask.execute(SORT_BY_POPULAR);
-            } else {
+            }
+            else
+                {
                 Snackbar
                         .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Retry", new MyClickListener())
                         .show();
             }
-        } else {
+        }
+        else
+            {
             selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 
-            if (selectedSortOrder == SORT_BY_FAVORITES) {
+            if (selectedSortOrder == SORT_BY_FAVORITES)
+            {
                 getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesAdapter);
-            } else {
+            }
+            else
+                {
                 moviesArrayList = savedInstanceState.getParcelableArrayList(KEY_MOVIES_LIST);
                 movieAdapter.setMovieList(moviesArrayList);
             }
@@ -162,7 +167,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 R.drawable.item_decorator)));
     }
 
-    public static int calculateNoOfColumns(Context context) {
+    public static int calculateNoOfColumns(Context context)
+    {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         int scalingFactor = 180;
@@ -171,40 +177,51 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     @Override
-    public void returnData(ArrayList<Movie> simpleJsonMovieData) {
+    public void returnData(ArrayList<Movie> simpleJsonMovieData)
+    {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
-        if (null != simpleJsonMovieData) {
+        if (null != simpleJsonMovieData)
+        {
             movieAdapter = new MovieAdapter(this, simpleJsonMovieData, MainActivity.this);
             moviesArrayList = simpleJsonMovieData;
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
-        } else {
+        }
+        else
+            {
             showErrorMessage();
         }
     }
 
     @Override
-    public void onClick(Movie movie) {
+    public void onClick(Movie movie)
+    {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("Movie", movie);
         startActivity(intent);
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
+    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs)
+    {
 
-        return new AsyncTaskLoader<Cursor>(this) {
+        return new AsyncTaskLoader<Cursor>(this)
+        {
 
             // Initialize a Cursor, this will hold all the task data
             Cursor mFavoritesData = null;
 
             // onStartLoading() is called when a loader first starts loading data
             @Override
-            protected void onStartLoading() {
-                if (mFavoritesData != null) {
+            protected void onStartLoading()
+            {
+                if (mFavoritesData != null)
+                {
                     // Delivers any previously loaded data immediately
                     deliverResult(mFavoritesData);
-                } else {
+                }
+                else
+                    {
                     // Force a new load
                     forceLoad();
                 }
@@ -212,20 +229,24 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             // loadInBackground() performs asynchronous loading of data
             @Override
-            public Cursor loadInBackground() {
+            public Cursor loadInBackground()
+            {
                 // Will implement to load data
 
                 // Query and load all task data in the background; sort by priority
                 // [Hint] use a try/catch block to catch any errors in loading data
 
-                try {
+                try
+                {
                     return getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI,
                             null,
                             null,
                             null,
                             MovieContract.MovieEntry.COLUMN_MOVIES_ID);
 
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     Log.e(TAG, "Failed to asynchronously load data.");
                     e.printStackTrace();
                     return null;
@@ -233,7 +254,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             }
 
             // deliverResult sends the result of the load, a Cursor, to the registered listener
-            public void deliverResult(Cursor data) {
+            public void deliverResult(Cursor data)
+            {
                 mFavoritesData = data;
                 super.deliverResult(data);
             }
@@ -247,7 +269,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
      * @param data   The data generated by the Loader.
      */
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data)
+    {
         favoritesAdapter.swapCursor(data);
         if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
         mRecyclerView.smoothScrollToPosition(mPosition);
@@ -262,12 +285,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
      * @param loader The Loader that is being reset.
      */
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(Loader<Cursor> loader)
+    {
         favoritesAdapter.swapCursor(null);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
         MenuInflater inflater = getMenuInflater();
         /* Use the inflater's inflate method to inflate our menu layout to this menu */
@@ -277,9 +302,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         MovieAsyncTask myTask = new MovieAsyncTask(this);
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.most_popular:
                 myTask.execute(SORT_BY_POPULAR);
                 selectedSortOrder = SORT_BY_POPULAR;
@@ -302,7 +329,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
     }
 
-    public static boolean isNetworkStatusAvailable(Context context) {
+    public static boolean isNetworkStatusAvailable(Context context)
+    {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -312,7 +340,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     //Display if there is no internet connection
-    public void showErrorMessage() {
+    public void showErrorMessage()
+    {
         Snackbar
                 .make(mCoordinatorLayout, "Please check your internet connection", Snackbar.LENGTH_INDEFINITE)
                 .setAction("Retry", new MyClickListener())
@@ -321,9 +350,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
-    public class MyClickListener implements View.OnClickListener {
+    public class MyClickListener implements View.OnClickListener
+    {
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
 
             //Part of the code commented out. Working on fixing loading Favorites after clicking on Retry in Snackbar
             // Run the AsyncTask in response to the click; first run Favorites since they're stored in a CP and are available offline
@@ -331,12 +362,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 //               getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //               mRecyclerView.setAdapter(favoritesAdapter);
 //        }  else {
-                MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
-                myTask.execute(selectedSortOrder);
-        }}
+            MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
+            myTask.execute(selectedSortOrder);
+        }
+    }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(Bundle outState)
+    {
         outState.putString(KEY_SORT_ORDER, selectedSortOrder);
         outState.putParcelableArrayList(KEY_MOVIES_LIST, moviesArrayList);
         super.onSaveInstanceState(outState);

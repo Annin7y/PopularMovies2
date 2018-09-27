@@ -14,8 +14,8 @@ import android.support.annotation.NonNull;
  * Created by Maino96-10022 on 9/6/2017.
  */
 
-public class MovieContentProvider extends ContentProvider {
-
+public class MovieContentProvider extends ContentProvider
+{
     public static final String LOG_TAG = MovieContentProvider.class.getSimpleName();
 
     public static final int MOVIES = 100;
@@ -23,7 +23,8 @@ public class MovieContentProvider extends ContentProvider {
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
-    public static UriMatcher buildUriMatcher() {
+    public static UriMatcher buildUriMatcher()
+    {
 
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(MovieContract.CONTENT_AUTHORITY, MovieContract.PATH_MOVIES, MOVIES);
@@ -35,7 +36,8 @@ public class MovieContentProvider extends ContentProvider {
     private MovieDbHelper mMovieDbHelper;
 
     @Override
-    public boolean onCreate() {
+    public boolean onCreate()
+    {
         // Complete onCreate() and initialize a MovieDbhelper on startup
         // [Hint] Declare the DbHelper as a global variable
 
@@ -46,7 +48,8 @@ public class MovieContentProvider extends ContentProvider {
 
     // Implement insert to handle requests to insert a single new row of data
     @Override
-    public Uri insert(@NonNull Uri uri, ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values)
+    {
         // Get access to the movie database (to write new data to)
         final SQLiteDatabase db = mMovieDbHelper.getWritableDatabase();
 
@@ -54,14 +57,18 @@ public class MovieContentProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         Uri returnUri; // URI to be returned
 
-        switch (match) {
+        switch (match)
+        {
             case MOVIES:
                 // Insert new values into the database
                 // Inserting values into movies table
                 long id = db.insert(MovieContract.MovieEntry.TABLE_NAME, null, values);
-                if (id > 0) {
+                if (id > 0)
+                {
                     returnUri = ContentUris.withAppendedId(MovieContract.MovieEntry.CONTENT_URI, id);
-                } else {
+                }
+                else
+                    {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
                 break;
@@ -81,7 +88,8 @@ public class MovieContentProvider extends ContentProvider {
     // Implement query to handle requests for data by URI
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
-                        String[] selectionArgs, String sortOrder) {
+                        String[] selectionArgs, String sortOrder)
+    {
 
         // Get access to underlying database (read-only for query)
         final SQLiteDatabase db = mMovieDbHelper.getReadableDatabase();
@@ -91,7 +99,8 @@ public class MovieContentProvider extends ContentProvider {
         Cursor retCursor;
 
         // Query for the movies directory and write a default case
-        switch (match) {
+        switch (match)
+        {
             // Query for the movies directory
             case MOVIES:
                 retCursor = db.query(MovieContract.MovieEntry.TABLE_NAME,
@@ -116,7 +125,8 @@ public class MovieContentProvider extends ContentProvider {
 
     // Implement delete to delete a single row of data
     @Override
-    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs)
+    {
 
         // Get access to the database and write URI matching code to recognize a single item
         final SQLiteDatabase db = mMovieDbHelper.getWritableDatabase();
@@ -125,10 +135,11 @@ public class MovieContentProvider extends ContentProvider {
         // Keep track of the number of deleted rows
         int rowsDeleted; // starts as 0
 
-      //  if (null == selection) selection = "1";
+        //if (null == selection) selection = "1";
         // Write the code to delete a single row of data
         // [Hint] Use selections to delete an item by its row ID
-        switch (match) {
+        switch (match)
+        {
             // Handle the single item case, recognized by the ID included in the URI path
             case MOVIE_WITH_ID:
                 // Get the movie ID from the URI path
@@ -142,7 +153,8 @@ public class MovieContentProvider extends ContentProvider {
         }
 
         // Notify the resolver of a change and return the number of items deleted
-        if (rowsDeleted != 0) {
+        if (rowsDeleted != 0)
+        {
             // A movie was deleted, set notification
             getContext().getContentResolver().notifyChange(uri, null);
         }
@@ -153,7 +165,8 @@ public class MovieContentProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs) {
+                      String[] selectionArgs)
+    {
         //Keep track of if an update occurs
         int rowsUpdated;
         final int match = sUriMatcher.match(uri);
@@ -165,7 +178,8 @@ public class MovieContentProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
         }
-        if (rowsUpdated != 0) {
+        if (rowsUpdated != 0)
+        {
             //set notifications if a row was updated
             getContext().getContentResolver().notifyChange(uri, null);
         }
@@ -175,7 +189,8 @@ public class MovieContentProvider extends ContentProvider {
     }
 
     @Override
-    public String getType(@NonNull Uri uri) {
+    public String getType(@NonNull Uri uri)
+    {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case MOVIES:

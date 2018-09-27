@@ -20,7 +20,8 @@ import butterknife.ButterKnife;
  * Created by Maino96-10022 on 9/4/2017.
  */
 
-public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapter.MovieTrailerAdapterViewHolder> {
+public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapter.MovieTrailerAdapterViewHolder>
+{
 
     private static final String TAG = MovieTrailerAdapter.class.getSimpleName();
 
@@ -28,14 +29,16 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     private Context context;
     private MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler mClickHandler;
 
-    public interface MovieTrailerAdapterOnClickHandler {
+    public interface MovieTrailerAdapterOnClickHandler
+    {
         void onClick(MovieTrailer movieTrailer);
     }
 
     /**
      * Creates a MovieTrailerAdapter.
      */
-    public MovieTrailerAdapter(MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler clickHandler, ArrayList<MovieTrailer> movieTrailerList, Context context) {
+    public MovieTrailerAdapter(MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler clickHandler, ArrayList<MovieTrailer> movieTrailerList, Context context)
+    {
         this.movieTrailerList = movieTrailerList;
         this.context = context;
         mClickHandler = clickHandler;
@@ -44,19 +47,21 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     /**
      * Cache of the children views for a movie list item.
      */
-    public class MovieTrailerAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+    public class MovieTrailerAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         @BindView(R.id.imageViewYoutube)
         public ImageView imageView;
 
-        public MovieTrailerAdapterViewHolder(View view) {
+        public MovieTrailerAdapterViewHolder(View view)
+        {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             int adapterPosition = getAdapterPosition();
             MovieTrailer movieTrailer = movieTrailerList.get(adapterPosition);
             mClickHandler.onClick(movieTrailer);
@@ -64,7 +69,8 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     }
 
     @Override
-    public MovieTrailerAdapter.MovieTrailerAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public MovieTrailerAdapter.MovieTrailerAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.trailer_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -74,8 +80,8 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     }
 
     @Override
-    public void onBindViewHolder(MovieTrailerAdapter.MovieTrailerAdapterViewHolder holder, int position) {
-
+    public void onBindViewHolder(MovieTrailerAdapter.MovieTrailerAdapterViewHolder holder, int position)
+    {
         //Binding data
         final MovieTrailer movieTrailerView = movieTrailerList.get(position);
 
@@ -86,11 +92,13 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return movieTrailerList.size();
     }
 
-    public void setMovieTrailerList(ArrayList<MovieTrailer> mMovieTrailerList) {
+    public void setMovieTrailerList(ArrayList<MovieTrailer> mMovieTrailerList)
+    {
         this.movieTrailerList = mMovieTrailerList;
         notifyDataSetChanged();
     }

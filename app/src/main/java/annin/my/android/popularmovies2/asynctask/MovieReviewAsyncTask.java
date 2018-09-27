@@ -12,45 +12,55 @@ import annin.my.android.popularmovies2.utils.NetworkUtils;
  * Created by Maino96-10022 on 8/19/2017.
  */
 
-public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<MovieReview>> {
+public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<MovieReview>>
+{
 
     private static final String TAG = MovieReviewAsyncTask.class.getSimpleName();
     private AsyncTaskReviewInterface listener;
 
-    public MovieReviewAsyncTask(AsyncTaskReviewInterface listener) {
+    public MovieReviewAsyncTask(AsyncTaskReviewInterface listener)
+    {
         this.listener = listener;
     }
 
     @Override
-    protected void onPreExecute() {
+    protected void onPreExecute()
+    {
         super.onPreExecute();
     }
 
     @Override
-    protected ArrayList<MovieReview> doInBackground(String... params) {
+    protected ArrayList<MovieReview> doInBackground(String... params)
+    {
 
-        if (params.length == 0) {
+        if (params.length == 0)
+        {
             return null;
         }
         String movieId = params[0];
         URL reviewRequestUrl = NetworkUtils.buildUrlReview(movieId);
 
-        try {
+        try
+        {
             String jsonMovieReviewResponse = NetworkUtils
                     .makeHttpReviewRequest(reviewRequestUrl);
 
             return NetworkUtils.extractFeatureFromReviewJson(jsonMovieReviewResponse);
 
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
             return null;
         }
     }
 
     @Override
-    protected void onPostExecute(ArrayList<MovieReview> mMovieReviewList) {
+    protected void onPostExecute(ArrayList<MovieReview> mMovieReviewList)
+    {
         super.onPostExecute(mMovieReviewList);
-        if (mMovieReviewList != null) {
+        if (mMovieReviewList != null)
+        {
             listener.returnReviewData(mMovieReviewList);
         }
     }

@@ -8,11 +8,13 @@ import android.provider.BaseColumns;
  * Created by Maino96-10022 on 9/6/2017.
  */
 
-public class MovieContract {
+public class MovieContract
+{
 
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
-    private MovieContract() {
+    private MovieContract()
+    {
     }
 
     /**
@@ -34,7 +36,8 @@ public class MovieContract {
      */
     public static final String PATH_MOVIES = "movies";
 
-    public static final class MovieEntry implements BaseColumns {
+    public static final class MovieEntry implements BaseColumns
+    {
 
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIES).build();
@@ -45,7 +48,6 @@ public class MovieContract {
 
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
-
 
         public final static String _ID = BaseColumns._ID;
 

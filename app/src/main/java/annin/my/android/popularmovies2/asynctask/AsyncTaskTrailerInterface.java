@@ -8,7 +8,8 @@ import annin.my.android.popularmovies2.model.MovieTrailer;
  * Created by Maino96-10022 on 9/3/2017.
  */
 
-public interface AsyncTaskTrailerInterface {
+public interface AsyncTaskTrailerInterface
+{
     void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData);
 }
 

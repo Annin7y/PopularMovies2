@@ -21,8 +21,8 @@ import butterknife.ButterKnife;
  * Created by Maino96-10022 on 9/24/2017.
  */
 
-public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesAdapterViewHolder> {
-
+public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoritesAdapterViewHolder>
+{
     private static final String TAG = FavoritesAdapter.class.getSimpleName();
 
     private Context context;
@@ -32,24 +32,27 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     public static final int IMAGE_WIDTH = 50;
 
 
-    public FavoritesAdapter(MovieAdapter.MovieAdapterOnClickHandler clickHandler, Context context) {
+    public FavoritesAdapter(MovieAdapter.MovieAdapterOnClickHandler clickHandler, Context context)
+    {
         mClickHandler = clickHandler;
         this.context = context;
     }
 
-    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+    public class FavoritesAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         @BindView(R.id.imageView)
         ImageView imageView;
 
-        public FavoritesAdapterViewHolder(View view) {
+        public FavoritesAdapterViewHolder(View view)
+        {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             cursor.moveToPosition(getAdapterPosition());
 
             String posterUrl = cursor.getString(cursor.getColumnIndexOrThrow(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH));
@@ -66,8 +69,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     }
 
     @Override
-    public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position) {
-
+    public void onBindViewHolder(FavoritesAdapter.FavoritesAdapterViewHolder holder, int position)
+    {
         // get to the right location in the cursor
         cursor.moveToPosition(position);
 
@@ -89,7 +92,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
     }
 
     @Override
-    public FavoritesAdapter.FavoritesAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public FavoritesAdapter.FavoritesAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.movie_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -98,24 +102,28 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         return new FavoritesAdapter.FavoritesAdapterViewHolder(view);
     }
 
-    public Cursor swapCursor(Cursor c) {
+    public Cursor swapCursor(Cursor c)
+    {
         // check if this cursor is the same as the previous cursor (mCursor)
-        if (cursor == c) {
+        if (cursor == c)
+        {
             return null; // bc nothing has changed
         }
+
         Cursor temp = cursor;
         this.cursor = c; // new cursor value assigned
 
         //check if this is a valid cursor, then update the cursor
-        if (c != null) {
+        if (c != null)
+        {
             this.notifyDataSetChanged();
         }
         return temp;
     }
 
     @Override
-    public int getItemCount() {
-
+    public int getItemCount()
+    {
         if (null == cursor)
             return 0;
         return cursor.getCount();

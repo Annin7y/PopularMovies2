@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by Maino96-10022 on 9/6/2017.
  */
 
-public class MovieDbHelper extends SQLiteOpenHelper {
-
+public class MovieDbHelper extends SQLiteOpenHelper
+{
     // The name of the database
     private static final String DATABASE_NAME = "tasksDb.db";
 
@@ -25,7 +25,8 @@ public class MovieDbHelper extends SQLiteOpenHelper {
      * Called when the movies database is created for the first time.
      */
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    {
 
         // Create movies table (careful to follow SQL formatting rules)
         final String CREATE_TABLE = "CREATE TABLE " + MovieContract.MovieEntry.TABLE_NAME + " (" +
@@ -48,7 +49,8 @@ public class MovieDbHelper extends SQLiteOpenHelper {
      * This only occurs when the version number for this database (DATABASE_VERSION) is incremented.
      */
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
         db.execSQL("ALTER TABLE  " + MovieContract.MovieEntry.TABLE_NAME);
         onCreate(db);
     }

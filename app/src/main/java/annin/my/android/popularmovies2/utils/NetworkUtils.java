@@ -29,7 +29,8 @@ import static android.content.ContentValues.TAG;
  * Created by Maino96-10022 on 8/16/2017.
  */
 
-public class NetworkUtils {
+public class NetworkUtils
+{
 
     /**
      * Tag for the log messages
@@ -71,38 +72,46 @@ public class NetworkUtils {
     private static final String BASE_YOUTUBE_URL = "https://www.youtube.com/watch";
 
 
-    public NetworkUtils() {
+    public NetworkUtils()
+    {
     }
 
     /**
      * @param sortMode
      * @return either most popular or top rated movies
      */
-    public static URL buildUrl(String sortMode) {
+    public static URL buildUrl(String sortMode)
+    {
         URL url = null;
         try {
-            if (sortMode.equals(SORT_BY_POPULAR)) {
+            if (sortMode.equals(SORT_BY_POPULAR))
+            {
                 Uri builtUri = Uri.parse(BASE_URL_POPULAR).buildUpon()
                         .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                         .build();
                 url = new URL(builtUri.toString());
-            } else if (sortMode.equals(SORT_BY_RATING)) {
+            }
+            else if (sortMode.equals(SORT_BY_RATING))
+            {
                 Uri builtUri = Uri.parse(BASE_URL_TOP_RATED).buildUpon()
                         .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                         .build();
                 url = new URL(builtUri.toString());
             }
-
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             e.printStackTrace();
         }
         return url;
     }
 
 
-    public static URL buildUrlReview(String movieId) {
+    public static URL buildUrlReview(String movieId)
+    {
         URL urlReview = null;
-        try {
+        try
+        {
             Uri movieReviewQueryUri = Uri.parse(BASE_URL).buildUpon()
                     .appendPath(movieId)
                     .appendPath("reviews")
@@ -110,7 +119,9 @@ public class NetworkUtils {
                     .build();
             urlReview = new URL(movieReviewQueryUri.toString());
 
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e)
+        {
             e.printStackTrace();
         }
 
@@ -119,16 +130,19 @@ public class NetworkUtils {
         return urlReview;
     }
 
-    public static URL buildUrlTrailer(String movieId) {
+    public static URL buildUrlTrailer(String movieId)
+    {
         URL urlTrailer = null;
-        try {
+        try
+        {
             Uri movieTrailerQueryUri = Uri.parse(BASE_URL).buildUpon()
                     .appendPath(movieId)
                     .appendPath("videos")
                     .appendQueryParameter(API_KEY, BuildConfig.OPEN_MOVIES_API_KEY)
                     .build();
             urlTrailer = new URL(movieTrailerQueryUri.toString());
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
@@ -137,7 +151,8 @@ public class NetworkUtils {
         return urlTrailer;
     }
 
-    public static Uri buildUrlYouTube(String trailerKey) {
+    public static Uri buildUrlYouTube(String trailerKey)
+    {
 
         Uri movieTrailerQueryUri = Uri.parse(BASE_YOUTUBE_URL).buildUpon()
                 .appendQueryParameter("v", String.valueOf(trailerKey))
@@ -146,23 +161,25 @@ public class NetworkUtils {
         Log.v(TAG, "Built URI " + movieTrailerQueryUri);
 
         return movieTrailerQueryUri;
-
     }
 
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    public static String makeHttpRequest(URL url) throws IOException {
+    public static String makeHttpRequest(URL url) throws IOException
+    {
         String jsonResponse = "";
         Log.i("URL: ", url.toString());
         // If the URL is null, then return early.
-        if (url == null) {
+        if (url == null)
+        {
             return jsonResponse;
         }
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
-        try {
+        try
+        {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(10000 /* milliseconds */);
             urlConnection.setConnectTimeout(15000 /* milliseconds */);
@@ -171,19 +188,28 @@ public class NetworkUtils {
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == 200)
+            {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            } else {
+            }
+            else
+                {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, "Problem retrieving movie JSON results.", e);
-        } finally {
-            if (urlConnection != null) {
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
                 urlConnection.disconnect();
             }
-            if (inputStream != null) {
+            if (inputStream != null)
+            {
                 // Closing the input stream could throw an IOException, which is why
                 // the makeHttpRequest(URL url) method signature specifies than an IOException
                 // could be thrown.
@@ -193,17 +219,20 @@ public class NetworkUtils {
         return jsonResponse;
     }
 
-    public static String makeHttpReviewRequest(URL urlReview) throws IOException {
+    public static String makeHttpReviewRequest(URL urlReview) throws IOException
+    {
         String jsonReviewResponse = "";
         Log.i("URLREVIEW: ", urlReview.toString());
         // If the URL is null, then return early.
-        if (urlReview == null) {
+        if (urlReview == null)
+        {
             return jsonReviewResponse;
         }
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
-        try {
+        try
+        {
             urlConnection = (HttpURLConnection) urlReview.openConnection();
             urlConnection.setReadTimeout(10000 /* milliseconds */);
             urlConnection.setConnectTimeout(15000 /* milliseconds */);
@@ -212,19 +241,28 @@ public class NetworkUtils {
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == 200)
+            {
                 inputStream = urlConnection.getInputStream();
                 jsonReviewResponse = readFromStream(inputStream);
-            } else {
+            }
+            else
+                {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, "Problem retrieving movie review JSON results.", e);
-        } finally {
-            if (urlConnection != null) {
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
                 urlConnection.disconnect();
             }
-            if (inputStream != null) {
+            if (inputStream != null)
+            {
                 // Closing the input stream could throw an IOException, which is why
                 // the makeHttpRequest(URL url) method signature specifies than an IOException
                 // could be thrown.
@@ -234,17 +272,20 @@ public class NetworkUtils {
         return jsonReviewResponse;
     }
 
-    public static String makeHttpTrailerRequest(URL urlTrailer) throws IOException {
+    public static String makeHttpTrailerRequest(URL urlTrailer) throws IOException
+    {
         String jsonTrailerResponse = "";
         Log.i("URLTRAILER: ", urlTrailer.toString());
         // If the URL is null, then return early.
-        if (urlTrailer == null) {
+        if (urlTrailer == null)
+        {
             return jsonTrailerResponse;
         }
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
-        try {
+        try
+        {
             urlConnection = (HttpURLConnection) urlTrailer.openConnection();
             urlConnection.setReadTimeout(10000 /* milliseconds */);
             urlConnection.setConnectTimeout(15000 /* milliseconds */);
@@ -253,19 +294,28 @@ public class NetworkUtils {
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == 200)
+            {
                 inputStream = urlConnection.getInputStream();
                 jsonTrailerResponse = readFromStream(inputStream);
-            } else {
+            }
+            else
+                {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             Log.e(LOG_TAG, "Problem retrieving movie trailer JSON results.", e);
-        } finally {
-            if (urlConnection != null) {
+        }
+        finally
+        {
+            if (urlConnection != null)
+            {
                 urlConnection.disconnect();
             }
-            if (inputStream != null) {
+            if (inputStream != null)
+            {
                 // Closing the input stream could throw an IOException, which is why
                 // the makeHttpRequest(URL url) method signature specifies than an IOException
                 // could be thrown.
@@ -279,13 +329,16 @@ public class NetworkUtils {
      * Convert the {@link InputStream} into a String which contains the
      * whole JSON response from the server.
      */
-    private static String readFromStream(InputStream inputStream) throws IOException {
+    private static String readFromStream(InputStream inputStream) throws IOException
+    {
         StringBuilder output = new StringBuilder();
-        if (inputStream != null) {
+        if (inputStream != null)
+        {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
-            while (line != null) {
+            while (line != null)
+            {
                 output.append(line);
                 line = reader.readLine();
             }
@@ -293,13 +346,17 @@ public class NetworkUtils {
         return output.toString();
     }
 
-    public static ArrayList<Movie> extractFeatureFromJson(String movieJSON) {
+    public static ArrayList<Movie> extractFeatureFromJson(String movieJSON)
+    {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(movieJSON)) {
+        if (TextUtils.isEmpty(movieJSON))
+        {
             return null;
         }
+
         ArrayList<Movie> movies = new ArrayList<>();
-        try {
+        try
+        {
 
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(movieJSON);
@@ -309,7 +366,8 @@ public class NetworkUtils {
             JSONArray movieArray = baseJsonResponse.getJSONArray("results");
 
 // For each movie in the movieArray, create an {@link Movie} object
-            for (int i = 0; i < movieArray.length(); i++) {
+            for (int i = 0; i < movieArray.length(); i++)
+            {
 
                 // Get a single movie description at position i within the list of movies
                 JSONObject currentMovie = movieArray.getJSONObject(i);
@@ -332,7 +390,9 @@ public class NetworkUtils {
 
             }
 
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
@@ -343,13 +403,18 @@ public class NetworkUtils {
         return movies;
     }
 
-    public static ArrayList<MovieReview> extractFeatureFromReviewJson(String movieReviewJSON) {
+    public static ArrayList<MovieReview> extractFeatureFromReviewJson(String movieReviewJSON)
+    {
+
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(movieReviewJSON)) {
+        if (TextUtils.isEmpty(movieReviewJSON))
+        {
             return null;
         }
+
         ArrayList<MovieReview> moviesReviewList = new ArrayList<>();
-        try {
+        try
+        {
 
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(movieReviewJSON);
@@ -357,8 +422,8 @@ public class NetworkUtils {
             JSONArray movieReviewArray = baseJsonResponse.getJSONArray("results");
 
 // For each movie review in the movieReviewArray, create an {@link MovieReview} object
-            for (int i = 0; i < movieReviewArray.length(); i++) {
-
+            for (int i = 0; i < movieReviewArray.length(); i++)
+            {
                 // Get a single movie description at position i within the list of movies
                 JSONObject currentMovieReview = movieReviewArray.getJSONObject(i);
 
@@ -371,7 +436,9 @@ public class NetworkUtils {
 
             }
 
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
@@ -382,22 +449,25 @@ public class NetworkUtils {
         return moviesReviewList;
     }
 
-    public static ArrayList<MovieTrailer> extractFeatureFromTrailerJson(String movieTrailerJSON) {
+    public static ArrayList<MovieTrailer> extractFeatureFromTrailerJson(String movieTrailerJSON)
+    {
         // If the JSON string is empty or null, then return early.
-        if (TextUtils.isEmpty(movieTrailerJSON)) {
+        if (TextUtils.isEmpty(movieTrailerJSON))
+        {
             return null;
         }
-        ArrayList<MovieTrailer> moviesTrailerList = new ArrayList<>();
-        try {
 
+        ArrayList<MovieTrailer> moviesTrailerList = new ArrayList<>();
+        try
+        {
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(movieTrailerJSON);
 
             JSONArray movieTrailerArray = baseJsonResponse.getJSONArray("results");
 
 // For each movie review in the movieReviewArray, create an {@link MovieReview} object
-            for (int i = 0; i < movieTrailerArray.length(); i++) {
-
+            for (int i = 0; i < movieTrailerArray.length(); i++)
+            {
                 // Get a single movie description at position i within the list of movies
                 JSONObject currentMovieTrailer = movieTrailerArray.getJSONObject(i);
 
@@ -409,7 +479,9 @@ public class NetworkUtils {
                 moviesTrailerList.add(trailer);
             }
 
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.

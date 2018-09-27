@@ -21,7 +21,8 @@ import butterknife.ButterKnife;
  * Created by Maino96-10022 on 8/17/2017.
  */
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder>
+{
 
     private static final String TAG = MovieAdapter.class.getSimpleName();
 
@@ -34,7 +35,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     /**
      * The interface that receives onClick messages.
      */
-    public interface MovieAdapterOnClickHandler {
+    public interface MovieAdapterOnClickHandler
+    {
         void onClick(Movie posterClick);
     }
 
@@ -44,7 +46,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
      * @param clickHandler The on-click handler for this adapter. This single handler is called
      *                     when an item is clicked.
      */
-    public MovieAdapter(MovieAdapterOnClickHandler clickHandler, ArrayList<Movie> moviesList, Context context) {
+    public MovieAdapter(MovieAdapterOnClickHandler clickHandler, ArrayList<Movie> moviesList, Context context)
+    {
         this.moviesList = moviesList;
         this.context = context;
         mClickHandler = clickHandler;
@@ -53,12 +56,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     /**
      * Cache of the children views for a movie list item.
      */
-    public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
 
         @BindView(R.id.imageView)
         ImageView imageView;
 
-        public MovieAdapterViewHolder(View view) {
+        public MovieAdapterViewHolder(View view)
+        {
             super(view);
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
@@ -70,7 +75,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
          * @param v The View that was clicked
          */
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             int adapterPosition = getAdapterPosition();
             Movie posterClick = moviesList.get(adapterPosition);
             mClickHandler.onClick(posterClick);
@@ -78,7 +84,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     @Override
-    public MovieAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public MovieAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    {
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.movie_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -88,8 +95,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     @Override
-    public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
-
+    public void onBindViewHolder(MovieAdapterViewHolder holder, int position)
+    {
         //Binding data
         final Movie movieView = moviesList.get(position);
 
@@ -102,12 +109,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public int getItemCount()
-
     {
         return moviesList.size();
     }
 
-    public void setMovieList(ArrayList<Movie> mMovieList) {
+    public void setMovieList(ArrayList<Movie> mMovieList)
+    {
         this.moviesList = mMovieList;
         notifyDataSetChanged();
     }

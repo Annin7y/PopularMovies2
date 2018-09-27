@@ -47,50 +47,28 @@ import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
-        AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor> {
-
+        AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor>
+{
     private static final String TAG = DetailActivity.class.getSimpleName();
 
     private ArrayList<MovieReview> simpleJsonMovieReviewData = new ArrayList<>();
-
     private ArrayList<MovieTrailer> simpleJsonMovieTrailerData = new ArrayList<>();
-
     private Context context;
-
     private RecyclerView mRecyclerViewReview;
-
     private RecyclerView mRecyclerViewTrailer;
-
     Movie movie;
-
     private String youtubeKey;
-
     private String youtubeImage;
-
     MovieTrailer firstTrailer;
-
     private MovieReviewAdapter movieReviewAdapter;
-
     private MovieTrailerAdapter movieTrailerAdapter;
-
     public String movieId;
-
-    RecyclerView.LayoutManager mReviewLayoutManager;
-
-    RecyclerView.LayoutManager mTrailerLayoutManager;
-
     private ShareActionProvider mShareActionProvider;
-
     private static final String BASE_YOUTUBE_URL_SHARE = "http://www.youtube.com/watch?v=";
-
     ImageView poster;
-
     ImageView youtube_thumbnail;
-
     TextView movieReview;
-
     TextView reviewAuthor;
-
     Button favoritesButton;
     
     /**
@@ -98,9 +76,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
      */
     private static final int FAVORITES_LOADER = 0;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
@@ -127,9 +105,11 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         reviewAuthor = (TextView) findViewById(R.id.author_review);
 
         //add to favorites
-        favoritesButton.setOnClickListener(new View.OnClickListener() {
+        favoritesButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 ContentValues values = new ContentValues();
                 values.put(MovieContract.MovieEntry.COLUMN_MOVIES_ID, movie.getMovieId());
                 values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
@@ -139,7 +119,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 values.put(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH, movie.getPosterUrl());
                 Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
-                if (uri != null) {
+                if (uri != null)
+                {
                     Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
                     Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
                     favoritesButton.setVisibility(View.GONE);
@@ -148,7 +129,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         });
 
-        if (getIntent() != null && getIntent().getExtras() != null) {
+        if (getIntent() != null && getIntent().getExtras() != null)
+        {
             movie = getIntent().getExtras().getParcelable("Movie");
             Picasso.with(this)
                     .load(movie.getPosterUrl())
@@ -177,11 +159,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = null;
 
-            try {
+            try
+            {
                 date = simpleDateFormat.parse(movie.getReleaseDate());
                 date.toString();
 
-            } catch (ParseException e) {
+            }
+            catch (ParseException e)
+            {
                 e.printStackTrace();
             }
             SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -191,33 +176,40 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         }
         // Kick off the loader
         getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
-
     }
 
-    public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData) {
+    public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData)
+    {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
-        if (simpleJsonMovieReviewData.size() == 0) {
+        if (simpleJsonMovieReviewData.size() == 0)
+        {
             Toast.makeText(DetailActivity.this, R.string.review_unavailable, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData) {
+    public void returnTrailerData(ArrayList<MovieTrailer> simpleJsonMovieTrailerData)
+    {
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, DetailActivity.this);
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
-        if (simpleJsonMovieTrailerData.size() > 0) {
+        if (simpleJsonMovieTrailerData.size() > 0)
+        {
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
-        } else {
+        }
+        else
+            {
             Toast.makeText(DetailActivity.this, R.string.trailer_unavailable, Toast.LENGTH_SHORT).show();
         }
-        if (mShareActionProvider != null) {
+        if (mShareActionProvider != null)
+        {
             mShareActionProvider.setShareIntent(createShareIntent());
         }
     }
 
     @Override
-    public void onClick(MovieTrailer movieTrailer) {
+    public void onClick(MovieTrailer movieTrailer)
+    {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -226,7 +218,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         /* Use AppCompatActivity's method getMenuInflater to get a handle on the menu inflater */
         MenuInflater inflater = getMenuInflater();
         /* Use the inflater's inflate method to inflate our menu layout to this menu */
@@ -239,7 +232,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         return super.onCreateOptionsMenu(menu);
     }
 
-    public Intent createShareIntent() {
+    public Intent createShareIntent()
+    {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, BASE_YOUTUBE_URL_SHARE + youtubeKey);
@@ -247,13 +241,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
+    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle)
+    {
 
         String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
         String[] selectionArgs = new String[]{movieId};
 
-        switch (loaderId) {
-
+        switch (loaderId)
+        {
             case FAVORITES_LOADER:
                 return new CursorLoader(this,   // Parent activity context
                         MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
@@ -267,16 +262,16 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         }
     }
 
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if ((cursor != null) && (cursor.getCount() > 0)) {
-
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
+    {
+        if ((cursor != null) && (cursor.getCount() > 0))
+        {
             //"Add to Favorites" button is disabled in the Detail Activity when the user clicks on a movie stored in Favorites
             favoritesButton.setEnabled(false);
-
         }
     }
 
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
+    public void onLoaderReset(Loader<Cursor> cursorLoader)
+    {
     }
 }
