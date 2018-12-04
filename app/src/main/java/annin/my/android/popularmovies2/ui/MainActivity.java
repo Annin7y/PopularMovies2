@@ -1,5 +1,6 @@
 package annin.my.android.popularmovies2.ui;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 {
 
      //Tag for the log messages
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private static final int FAVORITES_LOADER_ID = 0;
     private ArrayList<Movie> moviesArrayList = new ArrayList<>();
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 movieAdapter.setMovieList(moviesArrayList);
             }
             mLoadingIndicator.setVisibility(View.INVISIBLE);
-            Log.v(TAG, "SORT ORDER= ." + selectedSortOrder);
+            Log.v(LOG_TAG, "SORT ORDER= ." + selectedSortOrder);
             Log.i("list", moviesArrayList.size() + "");
         }
         //specifying the space between images
@@ -200,7 +201,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra("Movie", movie);
-        startActivity(intent);
+
+        //the animation transition explode code is based on the third answer in the following stackoverflow post:
+        //https://stackoverflow.com/questions/24517620/activityoptions-makescenetransitionanimation-doesnt-seem-to-exist
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+       //startActivity(intent);
     }
 
     @Override
@@ -249,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 }
                 catch (Exception e)
                 {
-                    Log.e(TAG, "Failed to asynchronously load data.");
+                    Log.e(LOG_TAG, "Failed to asynchronously load data.");
                     e.printStackTrace();
                     return null;
                 }
@@ -357,13 +362,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         @Override
         public void onClick(View v)
         {
-
-            //Part of the code commented out. Working on fixing loading Favorites after clicking on Retry in Snackbar
-            // Run the AsyncTask in response to the click; first run Favorites since they're stored in a CP and are available offline
-//            if (selectedSortOrder == SORT_BY_FAVORITES) {
+            /**
+             * Part of the code commented out. Working on fixing loading Favorites after clicking on Retry in Snackbar
+             * Run the AsyncTask in response to the click; first run Favorites since they're stored in a CP and are available offline
+             *  if (selectedSortOrder == SORT_BY_FAVORITES) {
 //               getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
 //               mRecyclerView.setAdapter(favoritesAdapter);
 //        }  else {
+             */
             MovieAsyncTask myTask = new MovieAsyncTask(MainActivity.this);
             myTask.execute(selectedSortOrder);
         }

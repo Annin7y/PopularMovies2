@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.model.MovieReview;
+import annin.my.android.popularmovies2.utils.JSONUtils;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 
 /**
@@ -45,7 +46,7 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
             String jsonMovieReviewResponse = NetworkUtils
                     .makeHttpReviewRequest(reviewRequestUrl);
 
-            return NetworkUtils.extractFeatureFromReviewJson(jsonMovieReviewResponse);
+            return JSONUtils.extractFeatureFromReviewJson(jsonMovieReviewResponse);
 
         }
         catch (Exception e)

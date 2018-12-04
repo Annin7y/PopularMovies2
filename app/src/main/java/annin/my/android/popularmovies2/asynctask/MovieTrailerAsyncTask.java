@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.model.MovieTrailer;
+import annin.my.android.popularmovies2.utils.JSONUtils;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 
 /**
@@ -44,7 +45,7 @@ public class MovieTrailerAsyncTask extends AsyncTask<String, Void, ArrayList<Mov
             String jsonMovieTrailerResponse = NetworkUtils
                     .makeHttpTrailerRequest(trailerRequestUrl);
 
-            return NetworkUtils.extractFeatureFromTrailerJson(jsonMovieTrailerResponse);
+            return JSONUtils.extractFeatureFromTrailerJson(jsonMovieTrailerResponse);
         }
         catch (Exception e)
         {

@@ -67,8 +67,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     MovieTrailer firstTrailer;
     ImageView poster;
     ImageView youtube_thumbnail;
-    TextView movieReview;
-    TextView reviewAuthor;
     Button favoritesButton;
     
     /**
@@ -100,9 +98,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         poster = (ImageView) findViewById(imageView);
 
         youtube_thumbnail = (ImageView) findViewById(imageViewYoutube);
-
-        movieReview = (TextView) findViewById(R.id.movie_review);
-        reviewAuthor = (TextView) findViewById(R.id.author_review);
 
         //add to favorites
         favoritesButton.setOnClickListener(new View.OnClickListener()
@@ -183,6 +178,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     {
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
+
         if (simpleJsonMovieReviewData.size() == 0)
         {
             Toast.makeText(DetailActivity.this, R.string.review_unavailable, Toast.LENGTH_SHORT).show();
@@ -195,6 +191,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         mRecyclerViewTrailer.setAdapter(movieTrailerAdapter);
         if (simpleJsonMovieTrailerData.size() > 0)
         {
+
             firstTrailer = simpleJsonMovieTrailerData.get(0);
             youtubeKey = firstTrailer.getTrailerKey();
         }
