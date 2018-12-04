@@ -205,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         //the animation transition explode code is based on the third answer in the following stackoverflow post:
         //https://stackoverflow.com/questions/24517620/activityoptions-makescenetransitionanimation-doesnt-seem-to-exist
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-       //startActivity(intent);
     }
 
     @Override
