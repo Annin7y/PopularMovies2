@@ -54,7 +54,7 @@ public class JSONUtils {
             // which represents a list of features (or movies).
             JSONArray movieArray = baseJsonResponse.getJSONArray("results");
 
-// For each movie in the movieArray, create an {@link Movie} object
+            // For each movie in the movieArray, create an {@link Movie} object
             for (int i = 0; i < movieArray.length(); i++)
             {
                 // Get a single movie description at position i within the list of movies
@@ -87,7 +87,6 @@ public class JSONUtils {
 
     public static ArrayList<MovieReview> extractFeatureFromReviewJson(String movieReviewJSON)
     {
-
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(movieReviewJSON))
         {
@@ -102,7 +101,7 @@ public class JSONUtils {
 
             JSONArray movieReviewArray = baseJsonResponse.getJSONArray("results");
 
-// For each movie review in the movieReviewArray, create an {@link MovieReview} object
+            // For each movie review in the movieReviewArray, create an {@link MovieReview} object
             for (int i = 0; i < movieReviewArray.length(); i++)
             {
                 // Get a single movie description at position i within the list of movies
@@ -144,7 +143,7 @@ public class JSONUtils {
 
             JSONArray movieTrailerArray = baseJsonResponse.getJSONArray("results");
 
-// For each movie review in the movieReviewArray, create an {@link MovieReview} object
+            // For each movie review in the movieReviewArray, create an {@link MovieReview} object
             for (int i = 0; i < movieTrailerArray.length(); i++)
             {
                 // Get a single movie description at position i within the list of movies
