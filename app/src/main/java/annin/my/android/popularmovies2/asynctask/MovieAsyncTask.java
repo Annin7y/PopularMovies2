@@ -15,7 +15,6 @@ import annin.my.android.popularmovies2.utils.NetworkUtils;
 
 public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>>
 {
-
     private static final String TAG = MovieAsyncTask.class.getSimpleName();
 
     private AsyncTaskInterface listener;
@@ -34,7 +33,6 @@ public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>>
     @Override
     protected ArrayList<Movie> doInBackground(String... params)
     {
-
         if (params.length == 0)
         {
             return null;

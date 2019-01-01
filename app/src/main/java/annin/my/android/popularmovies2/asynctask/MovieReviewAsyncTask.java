@@ -15,7 +15,6 @@ import annin.my.android.popularmovies2.utils.NetworkUtils;
 
 public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<MovieReview>>
 {
-
     private static final String TAG = MovieReviewAsyncTask.class.getSimpleName();
     private AsyncTaskReviewInterface listener;
 
@@ -33,7 +32,6 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
     @Override
     protected ArrayList<MovieReview> doInBackground(String... params)
     {
-
         if (params.length == 0)
         {
             return null;
@@ -47,7 +45,6 @@ public class MovieReviewAsyncTask extends AsyncTask<String, Void, ArrayList<Movi
                     .makeHttpReviewRequest(reviewRequestUrl);
 
             return JSONUtils.extractFeatureFromReviewJson(jsonMovieReviewResponse);
-
         }
         catch (Exception e)
         {
