@@ -63,7 +63,7 @@ public class MovieAsyncTask extends AsyncTask<String, Void, ArrayList<Movie>>
         /*the if method is commented out because an error message will be displayed if there is no internet connection
         the if statement is included in the returnData method in the Main Activity
         */
-      //  if (mMovieList != null){}
+       //  if (mMovieList != null){}
 
             listener.returnData(mMovieList);
     }
