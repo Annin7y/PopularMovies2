@@ -158,7 +158,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             {
                 date = simpleDateFormat.parse(movie.getReleaseDate());
                 date.toString();
-
             }
             catch (ParseException e)
             {
