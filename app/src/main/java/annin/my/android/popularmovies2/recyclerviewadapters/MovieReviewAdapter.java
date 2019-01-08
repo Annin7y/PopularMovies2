@@ -82,7 +82,7 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
 
     public void setMovieReviewList(ArrayList<MovieReview> mMovieReviewList)
     {
-        this.movieReviewList.addAll(mMovieReviewList);
+        this.movieReviewList = mMovieReviewList;
         notifyDataSetChanged();
     }
 }
