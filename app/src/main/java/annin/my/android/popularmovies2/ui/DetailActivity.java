@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +43,8 @@ import annin.my.android.popularmovies2.model.MovieTrailer;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
@@ -55,8 +58,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     private ArrayList<MovieReview> simpleJsonMovieReviewData = new ArrayList<>();
     private ArrayList<MovieTrailer> simpleJsonMovieTrailerData = new ArrayList<>();
     private Context context;
-    private RecyclerView mRecyclerViewReview;
-    private RecyclerView mRecyclerViewTrailer;
+    @BindView(R.id.recyclerview_review)
+    RecyclerView mRecyclerViewReview;
+    @BindView(R.id.recyclerview_trailer)
+    RecyclerView mRecyclerViewTrailer;
     private String youtubeKey;
     private MovieReviewAdapter movieReviewAdapter;
     private MovieTrailerAdapter movieTrailerAdapter;
@@ -67,8 +72,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     MovieTrailer firstTrailer;
     ImageView poster;
     ImageView youtube_thumbnail;
+    @BindView(R.id.favorites_button)
     Button favoritesButton;
-    
+    @BindView(R.id.empty_view_review)
+    TextView emptyReview;
+    @BindView(R.id.empty_view_trailer)
+    TextView emptyTrailer;
+
     /**
      * Identifier for the favorites data loader
      */
@@ -81,9 +91,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         setContentView(R.layout.activity_detail);
 
         context = getApplicationContext();
-        favoritesButton = (Button) findViewById(R.id.favorites_button);
-        mRecyclerViewReview = (RecyclerView) findViewById(R.id.recyclerview_review);
-        mRecyclerViewTrailer = (RecyclerView) findViewById(R.id.recyclerview_trailer);
+        ButterKnife.bind(this);
+
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
@@ -132,6 +141,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     .into(poster);
 
             movieId = movie.getMovieId();
+            Log.i("movieId: ", movie.getMovieId());
 
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
@@ -175,12 +185,18 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData)
     {
-        movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
-        mRecyclerViewReview.setAdapter(movieReviewAdapter);
-
-        if (simpleJsonMovieReviewData.size() == 0)
+        if (simpleJsonMovieReviewData.size() >0)
         {
-            Toast.makeText(DetailActivity.this, R.string.review_unavailable, Toast.LENGTH_SHORT).show();
+            movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
+            mRecyclerViewReview.setAdapter(movieReviewAdapter);
+        }
+        else
+        {
+            //Toast message commented out; replaced with the text message below
+           // Toast.makeText(DetailActivity.this, R.string.review_unavailable_toast, Toast.LENGTH_SHORT).show();
+           //Code below(and the trailer code) based on the highest rated answer in this stackoverflow post:
+           //https://stackoverflow.com/questions/28217436/how-to-show-an-empty-view-with-a-recyclerview
+            emptyReview.setVisibility(View.VISIBLE);
         }
     }
 
@@ -195,7 +211,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         }
         else
             {
-            Toast.makeText(DetailActivity.this, R.string.trailer_unavailable, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(DetailActivity.this, R.string.trailer_unavailable_toast, Toast.LENGTH_SHORT).show();
+                emptyTrailer.setVisibility(View.VISIBLE);
         }
         if (mShareActionProvider != null)
         {

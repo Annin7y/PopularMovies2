@@ -15,9 +15,11 @@
     <string name="action_share">Watch the trailer!</string>
     <string name="movie_review_title">Review</string>
     <string name="favorites_button_text">Add to Favorites</string>
-    <string name="review_unavailable">Review currently unavailable</string>
-    <string name="trailer_unavailable">Trailer currently unavailable</string>
+    <string name="review_unavailable_toast">Review currently unavailable</string>
+    <string name="trailer_unavailable_toast">Trailer currently unavailable</string>
     <string name="favorites_added">Movie added to favorites</string>
     <string name="favorites_already_added">Movie already stored in Favorites. "Add to Favorites" button disabled. </string>
+    <string name="review_currently_unavailable_text">Review currently unavailable</string>
+    <string name="trailer_currently_unavailable_text">Trailer currently unavailable</string>
 
 </resources>

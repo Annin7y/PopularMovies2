@@ -90,15 +90,39 @@
             android:layout_marginTop="@dimen/trailer_view_margin_top"
             android:scrollbars="horizontal"></android.support.v7.widget.RecyclerView>
 
+        <TextView
+            android:id="@+id/empty_view_trailer"
+            style="@style/EmptyViewStyle"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:padding="@dimen/text_padding"
+            android:visibility="gone"
+            android:layout_below="@+id/release_date"
+            tools:text="@string/movie_author"
+            android:text ="@string/trailer_currently_unavailable_text"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recyclerview_trailer"
+            android:layout_below="@+id/recyclerview_trailer"
             android:layout_marginBottom="@dimen/review_view_margin_bottom"
             android:scrollbars="vertical">
 
         </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/empty_view_review"
+            style="@style/EmptyViewStyle"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/review_view_margin_bottom"
+            android:padding="@dimen/text_padding"
+            android:visibility="gone"
+            android:layout_below="@+id/recyclerview_trailer"
+            tools:text="@string/movie_author"
+            android:text ="@string/review_currently_unavailable_text"/>
 
     </RelativeLayout>
 </ScrollView>

@@ -46,8 +46,7 @@ import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_RATING;
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler, AsyncTaskInterface, LoaderManager.LoaderCallbacks<Cursor>
 {
-
-     //Tag for the log messages
+    //Tag for the log messages
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private static final int FAVORITES_LOADER_ID = 0;
