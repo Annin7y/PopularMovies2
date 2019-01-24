@@ -37,9 +37,9 @@ import annin.my.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
 import annin.my.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import annin.my.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
 import annin.my.android.popularmovies2.data.MovieContract;
-import annin.my.android.popularmovies2.model.Movie;
-import annin.my.android.popularmovies2.model.MovieReview;
-import annin.my.android.popularmovies2.model.MovieTrailer;
+import annin.my.android.popularmovies2.pojo.Movie;
+import annin.my.android.popularmovies2.pojo.MovieReview;
+import annin.my.android.popularmovies2.pojo.MovieTrailer;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
@@ -185,7 +185,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData)
     {
-        if (simpleJsonMovieReviewData.size() >0)
+        if (simpleJsonMovieReviewData.size() > 0)
         {
             movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
             mRecyclerViewReview.setAdapter(movieReviewAdapter);

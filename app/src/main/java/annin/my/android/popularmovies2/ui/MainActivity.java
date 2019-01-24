@@ -34,7 +34,7 @@ import annin.my.android.popularmovies2.asynctask.MovieAsyncTask;
 import annin.my.android.popularmovies2.data.MovieContract;
 import annin.my.android.popularmovies2.decoration.DividerItemDecoration;
 import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;
-import annin.my.android.popularmovies2.model.Movie;
+import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 import butterknife.BindView;
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         }
         else
             {
-            selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
+           selectedSortOrder = savedInstanceState.getString(KEY_SORT_ORDER, "most_popular");
 
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {

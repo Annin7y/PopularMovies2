@@ -9,9 +9,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import annin.my.android.popularmovies2.model.Movie;
-import annin.my.android.popularmovies2.model.MovieReview;
-import annin.my.android.popularmovies2.model.MovieTrailer;
+import annin.my.android.popularmovies2.pojo.Movie;
+import annin.my.android.popularmovies2.pojo.MovieReview;
+import annin.my.android.popularmovies2.pojo.MovieTrailer;
 
 import static annin.my.android.popularmovies2.utils.NetworkUtils.KEY_TRAILER_KEY;
 

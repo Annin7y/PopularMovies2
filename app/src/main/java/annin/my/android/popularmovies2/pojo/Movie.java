@@ -1,4 +1,4 @@
-package annin.my.android.popularmovies2.model;
+package annin.my.android.popularmovies2.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
