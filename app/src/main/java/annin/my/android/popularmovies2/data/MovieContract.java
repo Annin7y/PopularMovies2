@@ -76,9 +76,7 @@ public class MovieContract
          */
         public final static String COLUMN_MOVIES_TITLE = "original_title";
 
-        /**
-         * Movie synopsis. Type: TEXT
-         */
+
         public final static String COLUMN_MOVIES_OVERVIEW = "overview";
 
         /**
