@@ -36,6 +36,7 @@ import annin.my.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
 import annin.my.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import annin.my.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
+import annin.my.android.popularmovies2.data.AppDatabase;
 import annin.my.android.popularmovies2.data.MovieContract;
 import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.pojo.MovieReview;
@@ -78,6 +79,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     TextView emptyReview;
     @BindView(R.id.empty_view_trailer)
     TextView emptyTrailer;
+    // Create AppDatabase member variable for the Database
+    // Member variable for the Database
+     private AppDatabase mDb;
+
 
     /**
      * Identifier for the favorites data loader
