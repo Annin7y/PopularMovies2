@@ -39,6 +39,7 @@ import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_POPULAR;
 import static annin.my.android.popularmovies2.utils.NetworkUtils.SORT_BY_RATING;
@@ -119,7 +120,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
                 // TODO (2) Delete a single row of data using a ContentResolver
                 int rowsDeleted = getContentResolver().delete(uri, null, null);
-                Log.v("CatalogActivity", rowsDeleted + " rows deleted from the movie database");
+               // Log.v("CatalogActivity", rowsDeleted + " rows deleted from the movie database");
+                Timber.v( "%s rows deleted from the movie database", rowsDeleted);
+
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
                 getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
             }
@@ -159,7 +162,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             }
             mLoadingIndicator.setVisibility(View.INVISIBLE);
             Log.v(LOG_TAG, "SORT ORDER= ." + selectedSortOrder);
-            Log.i("list", moviesArrayList.size() + "");
+           // Log.i("list", moviesArrayList.size() + "");
+                 Timber.i("list: " + moviesArrayList.size());
         }
         //specifying the space between images
         mRecyclerView.addItemDecoration(new VerticalSpacingDecoration(64));

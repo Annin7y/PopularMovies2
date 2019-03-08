@@ -15,6 +15,7 @@ import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.pojo.Movie;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 
 /**
@@ -104,6 +105,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
                 //if the image can't be loaded the following error message/image will be displayed
                 .error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);
+
+        Timber.e("Failed to load image.");
     }
 
     @Override
