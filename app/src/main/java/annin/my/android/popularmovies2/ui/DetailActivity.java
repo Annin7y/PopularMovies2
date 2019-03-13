@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,6 +45,7 @@ import annin.my.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
@@ -146,7 +146,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     .into(poster);
 
             movieId = movie.getMovieId();
-            Log.i("movieId: ", movie.getMovieId());
+            //Log.i("movieId: ", movie.getMovieId());
+            Timber.i("movieId: " + movie.getMovieId());
 
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
