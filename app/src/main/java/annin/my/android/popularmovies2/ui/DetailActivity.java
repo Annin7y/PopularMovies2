@@ -147,7 +147,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             movieId = movie.getMovieId();
             //Log.i("movieId: ", movie.getMovieId());
-            Timber.i("movieId: " + movie.getMovieId());
+            Timber.i( "movieId:" +  movie.getMovieId());
 
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
