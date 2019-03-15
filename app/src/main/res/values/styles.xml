@@ -15,4 +15,34 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <!-- Movie Widget List Theme -->
+    <style name="MovieWidgetListStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">#09C</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
+    <!-- Movie Widget Label Theme -->
+    <style name="MovieWidgetLabelStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!-- Movie Widget Name Theme -->
+    <style name="MovieWidgetNameStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 </resources>

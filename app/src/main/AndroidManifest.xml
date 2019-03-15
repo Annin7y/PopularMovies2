@@ -36,7 +36,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/schedule_widget_provider_info" />
+                android:resource="@xml/movie_widget_provider_info" />
         </receiver>
         <service android:name=".widget.MovieWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />

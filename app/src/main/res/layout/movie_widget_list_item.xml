@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/movie_widget_list">
+
+    <TextView
+        android:id="@+id/schedule_widget_name_label"
+        style="@style/MovieWidgetLabelStyle"
+        android:layout_marginStart="@dimen/movie_review_margin_start"
+        android:layout_marginEnd="@dimen/movie_review_margin_end"
+        android:text="@string/widget_review_label"
+        />
+
+    <TextView
+        android:id="@+id/movie_review_widget_name"
+        style="@style/MovieWidgetNameStyle"
+        android:layout_marginStart="@dimen/movie_review_margin_start"
+        android:layout_marginEnd="@dimen/movie_review_margin_end"
+        android:padding="@dimen/widget_list_pad"
+        tools:text="@string/widget_review_name"
+        />
+
+</LinearLayout>

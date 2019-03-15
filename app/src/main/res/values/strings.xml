@@ -21,5 +21,8 @@
     <string name="favorites_already_added">Movie already stored in Favorites. "Add to Favorites" button disabled. </string>
     <string name="review_currently_unavailable_text">Review currently unavailable</string>
     <string name="trailer_currently_unavailable_text">Trailer currently unavailable</string>
+    <string name="empty_view">Empty view</string>
+    <string name="widget_review_label">Review:</string>
+    <string name="widget_review_name">Canary Wharf</string>
 
 </resources>
