@@ -7,7 +7,7 @@
     android:id="@+id/movie_widget_list">
 
     <TextView
-        android:id="@+id/schedule_widget_name_label"
+        android:id="@+id/movie_widget_name_label"
         style="@style/MovieWidgetLabelStyle"
         android:layout_marginStart="@dimen/movie_review_margin_start"
         android:layout_marginEnd="@dimen/movie_review_margin_end"

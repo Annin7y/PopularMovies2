@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -85,6 +84,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     TextView emptyReview;
     @BindView(R.id.empty_view_trailer)
     TextView emptyTrailer;
+    public static final String Name = "nameKey";
+
+
     // Create AppDatabase member variable for the Database
     // Member variable for the Database
      private AppDatabase mDb;
@@ -164,6 +166,23 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             TextView originalTitle = (TextView) findViewById(R.id.original_title);
             originalTitle.setText(movie.getOriginalTitle());
 
+            String origTitleWidget = originalTitle.getText().toString();
+
+            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+
+            prefsEditor.putString("Movie_name", origTitleWidget);
+            prefsEditor.apply();
+
+            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
+            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+            Context context = getApplicationContext();
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName thisWidget = new ComponentName(context, MovieWidgetProvider.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+
+
             TextView movieOverview = (TextView) findViewById(R.id.movie_overview);
             movieOverview.setText(movie.getMovieOverview());
 
@@ -191,6 +210,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             releaseDate.setText(finalDate);
         }
 
+
         // Kick off the loader
         getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
     }
@@ -201,23 +221,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         {
             movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, DetailActivity.this);
             mRecyclerViewReview.setAdapter(movieReviewAdapter);
-
-            //Store Schedule Info in SharedPreferences
-            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-
-            Gson gson = new Gson();
-            String json = gson.toJson(simpleJsonMovieReviewData);
-            prefsEditor.putString("MovieReviewList_Widget", json);
-            prefsEditor.apply();
-
-            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
-            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-            Context context = getApplicationContext();
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName thisWidget = new ComponentName(context, MovieWidgetProvider.class);
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
         }
         else
         {

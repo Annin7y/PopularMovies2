@@ -6,11 +6,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.ui.DetailActivity;
+import timber.log.Timber;
 
 public class MovieWidgetProvider extends AppWidgetProvider
 {
@@ -44,7 +44,8 @@ public class MovieWidgetProvider extends AppWidgetProvider
             Intent intent = new Intent(context.getApplicationContext(),
                     MovieWidgetService.class);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            Log.d("onUpdate", "method working");
+            //Log.d("onUpdate", "method working");
+            Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
             views.setRemoteAdapter(R.id.appwidget_list, intent);
             views.setEmptyView(R.id.appwidget_list, R.id.empty);
@@ -57,7 +58,6 @@ public class MovieWidgetProvider extends AppWidgetProvider
         }
 
         super.onUpdate(context, appWidgetManager, appWidgetIds);
-
     }
 
     @Override
@@ -70,7 +70,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
         if (ACTION_VIEW_DETAILS.equals(intent.getAction()))
         {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName thisAppWidget = new ComponentName(context.getPackageName(), ScheduleWidgetProvider.class.getName());
+            ComponentName thisAppWidget = new ComponentName(context.getPackageName(), MovieWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
 
             onUpdate(context, appWidgetManager, appWidgetIds);
