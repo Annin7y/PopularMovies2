@@ -22,7 +22,7 @@
     <string name="review_currently_unavailable_text">Review currently unavailable</string>
     <string name="trailer_currently_unavailable_text">Trailer currently unavailable</string>
     <string name="empty_view">Empty view</string>
-    <string name="widget_review_label">Review:</string>
-    <string name="widget_review_name">Canary Wharf</string>
+    <string name="widget_movie_name_label">Movie:</string>
+    <string name="widget_movie_name">Captain Marvel</string>
 
 </resources>

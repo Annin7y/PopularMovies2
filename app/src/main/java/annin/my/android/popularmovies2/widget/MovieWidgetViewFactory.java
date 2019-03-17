@@ -7,7 +7,12 @@ import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.pojo.Movie;
@@ -31,11 +36,14 @@ public void onCreate()
 @Override
 public void onDataSetChanged()
         {
-        //code structure based on the code in this link:
-        //https://stackoverflow.com/questions/37927113/how-to-store-and-retrieve-an-object-from-gson-in-android
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+                //code structure based on the code in this link:
+                //https://stackoverflow.com/questions/37927113/how-to-store-and-retrieve-an-object-from-gson-in-android
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
-        String gsonString = sharedPreferences.getString("Movie_name", "");
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<Movie>>() {}.getType();
+                String gsonString = sharedPreferences.getString("MovieList_Widget", "");
+                mMovieNameList = gson.fromJson(gsonString, type);
         }
 
 @Override
@@ -51,7 +59,7 @@ public RemoteViews getViewAt(int position)
 
         RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.movie_widget_list_item);
 
-        itemView.setTextViewText(R.id.movie_review_widget_name, movieName.getOriginalTitle());
+        itemView.setTextViewText(R.id.movie_widget_name, movieName.getOriginalTitle());
 
         Intent intent = new Intent();
         intent.putExtra(MovieWidgetProvider.EXTRA_ITEM, movieName);

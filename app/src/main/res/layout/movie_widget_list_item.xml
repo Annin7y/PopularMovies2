@@ -11,16 +11,16 @@
         style="@style/MovieWidgetLabelStyle"
         android:layout_marginStart="@dimen/movie_review_margin_start"
         android:layout_marginEnd="@dimen/movie_review_margin_end"
-        android:text="@string/widget_review_label"
+        android:text="@string/widget_movie_name_label"
         />
 
     <TextView
-        android:id="@+id/movie_review_widget_name"
+        android:id="@+id/movie_widget_name"
         style="@style/MovieWidgetNameStyle"
         android:layout_marginStart="@dimen/movie_review_margin_start"
         android:layout_marginEnd="@dimen/movie_review_margin_end"
         android:padding="@dimen/widget_list_pad"
-        tools:text="@string/widget_review_name"
+        tools:text="@string/widget_movie_name"
         />
 
 </LinearLayout>

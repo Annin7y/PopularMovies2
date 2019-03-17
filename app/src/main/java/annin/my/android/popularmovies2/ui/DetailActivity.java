@@ -1,18 +1,14 @@
 package annin.my.android.popularmovies2.ui;
 
 import android.app.LoaderManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,7 +43,6 @@ import annin.my.android.popularmovies2.pojo.MovieTrailer;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
-import annin.my.android.popularmovies2.widget.MovieWidgetProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -157,6 +152,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             //Log.i("movieId: ", movie.getMovieId());
             Timber.i( "movieId:" +  movie.getMovieId());
 
+
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
 
@@ -165,23 +161,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             TextView originalTitle = (TextView) findViewById(R.id.original_title);
             originalTitle.setText(movie.getOriginalTitle());
-
-            String origTitleWidget = originalTitle.getText().toString();
-
-            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-
-            prefsEditor.putString("Movie_name", origTitleWidget);
-            prefsEditor.apply();
-
-            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
-            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-            Context context = getApplicationContext();
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName thisWidget = new ComponentName(context, MovieWidgetProvider.class);
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
-
 
             TextView movieOverview = (TextView) findViewById(R.id.movie_overview);
             movieOverview.setText(movie.getMovieOverview());

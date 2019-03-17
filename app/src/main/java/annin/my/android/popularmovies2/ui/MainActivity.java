@@ -1,13 +1,17 @@
 package annin.my.android.popularmovies2.ui;
 
 import android.app.ActivityOptions;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
@@ -26,6 +30,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import annin.my.android.popularmovies2.R;
@@ -37,6 +43,7 @@ import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;
 import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
+import annin.my.android.popularmovies2.widget.MovieWidgetProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -192,6 +199,25 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             moviesArrayList = simpleJsonMovieData;
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
+
+            //Store Schedule Info in SharedPreferences
+            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+
+            Gson gson = new Gson();
+            String json = gson.toJson(moviesArrayList);
+            prefsEditor.putString("MovieList_Widget", json);
+            prefsEditor.apply();
+
+            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
+            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
+            Context context = getApplicationContext();
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName thisWidget = new ComponentName(context, MovieWidgetProvider.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+
+
         }
         else
             {
