@@ -11,9 +11,11 @@ import android.util.Log;
 public abstract class AppDatabase extends RoomDatabase
 {
 
+    public abstract MovieDao movieDao();
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();
     private static final String DATABASE_NAME = "movieFavorites";
+
     private static AppDatabase sInstance;
 
     public static AppDatabase getInstance(Context context) {
@@ -32,7 +34,5 @@ public abstract class AppDatabase extends RoomDatabase
         Log.d(LOG_TAG, "Getting the database instance");
         return sInstance;
     }
-
-    public abstract MovieDao movieDao();
 
 }
