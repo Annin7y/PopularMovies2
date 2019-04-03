@@ -101,6 +101,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         context = getApplicationContext();
         ButterKnife.bind(this);
 
+        mDb = AppDatabase.getInstance(getApplicationContext());
+
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, context);
         mRecyclerViewReview.setAdapter(movieReviewAdapter);
