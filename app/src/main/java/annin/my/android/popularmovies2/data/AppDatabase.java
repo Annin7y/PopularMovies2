@@ -10,7 +10,6 @@ import android.util.Log;
 
 public abstract class AppDatabase extends RoomDatabase
 {
-
     public abstract MovieDao movieDao();
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();
@@ -18,9 +17,12 @@ public abstract class AppDatabase extends RoomDatabase
 
     private static AppDatabase sInstance;
 
-    public static AppDatabase getInstance(Context context) {
-        if (sInstance == null) {
-            synchronized (LOCK) {
+    public static AppDatabase getInstance(Context context)
+    {
+        if (sInstance == null)
+        {
+            synchronized (LOCK)
+            {
                 Log.d(LOG_TAG, "Creating new database instance");
                 sInstance = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, AppDatabase.DATABASE_NAME)
@@ -34,5 +36,4 @@ public abstract class AppDatabase extends RoomDatabase
         Log.d(LOG_TAG, "Getting the database instance");
         return sInstance;
     }
-
 }
