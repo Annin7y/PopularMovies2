@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
 
-//            //Store Schedule Info in SharedPreferences
+//            //Store Movie Info in SharedPreferences
 //            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 //            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
 //

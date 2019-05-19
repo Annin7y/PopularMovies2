@@ -59,9 +59,9 @@ public int getCount()
 @Override
 public RemoteViews getViewAt(int position)
         {
-        Movie movieName = mMovieNameList.get(position);
+      Movie movieName = mMovieNameList.get(position);
 
-        RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.movie_widget_list_item);
+      RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.movie_widget_list_item);
 
         itemView.setTextViewText(R.id.movie_widget_name, movieName.getOriginalTitle());
 

@@ -160,7 +160,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             //Log.i("movieId: ", movie.getMovieId());
             Timber.i( "movieId:" +  movie.getMovieId());
 
-            //Store Schedule Info in SharedPreferences
+            //Store MovieInfo in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
 
