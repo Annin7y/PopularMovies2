@@ -21,6 +21,8 @@ public class MovieWidgetViewFactory implements RemoteViewsService.RemoteViewsFac
 {
 private ArrayList<Movie> mMovieNameList;
 
+Movie movie;
+
 private Context mContext;
 
 public MovieWidgetViewFactory(Context context)
@@ -41,9 +43,11 @@ public void onDataSetChanged()
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
                 Gson gson = new Gson();
-                Type type = new TypeToken<List<Movie>>() {}.getType();
-                String gsonString = sharedPreferences.getString("MovieList_Widget", "");
-                mMovieNameList = gson.fromJson(gsonString, type);
+                String json = sharedPreferences.getString("MovieList_Widget","");
+                //Type type = new TypeToken<List<Movie>>() {}.getType();
+               // String gsonString = sharedPreferences.getString("MovieList_Widget", "");
+               // mMovieNameList = gson.fromJson(gsonString, type);
+                 movie = gson.fromJson(json, Movie.class);
         }
 
 @Override
