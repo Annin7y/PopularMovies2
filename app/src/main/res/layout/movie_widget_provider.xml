@@ -6,11 +6,13 @@
     android:orientation="vertical"
     android:background="@android:color/background_light" >
 
-    <ListView
-        android:id="@+id/appwidget_list"
-        style="@style/MovieWidgetListStyle"
-        android:gravity="center"
-        />
+    <TextView
+        android:id="@+id/movie_widget_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/movie_title_widget"
+        android:layout_gravity="center"
+        android:textSize="18dp"/>
 
     <TextView android:id="@+id/empty"
         android:layout_width="wrap_content"

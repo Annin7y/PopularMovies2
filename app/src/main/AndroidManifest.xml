@@ -41,10 +41,6 @@
 
         <action android:name = "com.example.myapp.ACTION_DATA_UPDATED" />
 
-        <service android:name=".widget.MovieWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-
 
         <provider
             android:name="annin.my.android.popularmovies2.data.MovieContentProvider"

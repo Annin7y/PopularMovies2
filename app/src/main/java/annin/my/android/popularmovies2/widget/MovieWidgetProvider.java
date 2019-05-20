@@ -36,28 +36,28 @@ public class MovieWidgetProvider extends AppWidgetProvider
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds)
     {
-        for (int i = 0; i < appWidgetIds.length; i++)
-        {
-            int widgetId = appWidgetIds[i];
+//        for (int i = 0; i < appWidgetIds.length; i++)
+//        {
+//            int widgetId = appWidgetIds[i];
+//
+//            //    Build the intent to call the service
+//            Intent intent = new Intent(context.getApplicationContext(),
+//                    MovieWidgetService.class);
+//            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+//            //Log.d("onUpdate", "method working");
+//            Timber.d("method working");
+//            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
+//            views.setRemoteAdapter(R.id.appwidget_list, intent);
+//            views.setEmptyView(R.id.appwidget_list, R.id.empty);
+//
+//            Intent detailIntent = new Intent(context, DetailActivity.class);
+//            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
+//
+//            appWidgetManager.updateAppWidget(widgetId, views);
+//        }
 
-            //    Build the intent to call the service
-            Intent intent = new Intent(context.getApplicationContext(),
-                    MovieWidgetService.class);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            //Log.d("onUpdate", "method working");
-            Timber.d("method working");
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
-            views.setRemoteAdapter(R.id.appwidget_list, intent);
-            views.setEmptyView(R.id.appwidget_list, R.id.empty);
-
-            Intent detailIntent = new Intent(context, DetailActivity.class);
-            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
-
-            appWidgetManager.updateAppWidget(widgetId, views);
-        }
-
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        //super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
 
             onUpdate(context, appWidgetManager, appWidgetIds);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.movie_widget_title);
         }
     }
 

@@ -24,5 +24,6 @@
     <string name="empty_view">Empty view</string>
     <string name="widget_movie_name_label">Movie:</string>
     <string name="widget_movie_name">Captain Marvel</string>
+    <string name="movie_title_widget">Avengers</string>
 
 </resources>

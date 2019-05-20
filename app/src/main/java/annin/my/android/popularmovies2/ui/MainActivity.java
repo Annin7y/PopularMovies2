@@ -200,24 +200,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
 
-//            //Store Movie Info in SharedPreferences
-//            SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//            SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-//
-//            Gson gson = new Gson();
-//            String json = gson.toJson(moviesArrayList);
-//            prefsEditor.putString("MovieList_Widget", json);
-//            prefsEditor.apply();
-
-//            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
-//            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-//            Context context = getApplicationContext();
-//            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-//            ComponentName thisWidget = new ComponentName(context, MovieWidgetProvider.class);
-//            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-//            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
-
-
         }
         else
             {
