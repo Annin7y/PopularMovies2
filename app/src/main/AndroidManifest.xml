@@ -38,6 +38,9 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/movie_widget_provider_info" />
         </receiver>
+
+        <action android:name = "com.example.myapp.ACTION_DATA_UPDATED" />
+
         <service android:name=".widget.MovieWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 

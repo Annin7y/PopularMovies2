@@ -43,11 +43,11 @@ public void onDataSetChanged()
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
 
                 Gson gson = new Gson();
-                String json = sharedPreferences.getString("MovieList_Widget","");
-                //Type type = new TypeToken<List<Movie>>() {}.getType();
-               // String gsonString = sharedPreferences.getString("MovieList_Widget", "");
-               // mMovieNameList = gson.fromJson(gsonString, type);
-                 movie = gson.fromJson(json, Movie.class);
+               // String json = sharedPreferences.getString("MovieList_Widget","");
+                Type type = new TypeToken<List<Movie>>() {}.getType();
+                String gsonString = sharedPreferences.getString("MovieList_Widget", "");
+                mMovieNameList = gson.fromJson(gsonString, type);
+                // movie = gson.fromJson(json, Movie.class);
         }
 
 @Override
@@ -60,6 +60,7 @@ public int getCount()
 public RemoteViews getViewAt(int position)
         {
       Movie movieName = mMovieNameList.get(position);
+     // movie = mMovieNameList.get(position);
 
       RemoteViews itemView = new RemoteViews(mContext.getPackageName(), R.layout.movie_widget_list_item);
 

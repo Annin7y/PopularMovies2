@@ -86,7 +86,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     @BindView(R.id.empty_view_trailer)
     TextView emptyTrailer;
     public static final String Name = "nameKey";
-
+    public static final String ACTION_DATA_UPDATED =
+            "com.example.myapp.ACTION_DATA_UPDATED";
 
     // Create AppDatabase member variable for the Database
     // Member variable for the Database
@@ -169,14 +170,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             prefsEditor.putString("MovieList_Widget", json);
             prefsEditor.apply();
 
-            //Send to Widget Provider code based on the answer with 9 upvotes in this post:
-            //https://stackoverflow.com/questions/3455123/programmatically-update-widget-from-activity-service-receiver
-            Context context = getApplicationContext();
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName thisWidget = new ComponentName(context, MovieWidgetProvider.class);
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
-
+            Intent intent = new Intent (ACTION_DATA_UPDATED)
+                    .setPackage (context.getPackageName ());
+            context.sendBroadcast (intent);
 
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
