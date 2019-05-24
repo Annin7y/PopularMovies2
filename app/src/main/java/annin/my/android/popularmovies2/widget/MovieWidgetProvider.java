@@ -57,6 +57,18 @@ public class MovieWidgetProvider extends AppWidgetProvider
 //            appWidgetManager.updateAppWidget(widgetId, views);
 //        }
 
+       //Picasso code based on:
+       //https://www.codota.com/code/java/classes/android.widget.RemoteViews
+       // Picasso picasso = PicassoProvider.get();
+        //  picasso.load(Data.URLS[new Random().nextInt(Data.URLS.length)]) //
+        //    .placeholder(R.drawable.placeholder) //
+        //    .error(R.drawable.error) //
+        //   .transform(new GrayscaleTransformation(picasso)) //
+        //    .into(updateViews, R.id.image, appWidgetIds);
+
+
+
+
         //super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
