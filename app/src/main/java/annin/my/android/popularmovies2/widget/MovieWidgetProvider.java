@@ -36,35 +36,34 @@ public class MovieWidgetProvider extends AppWidgetProvider
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds)
     {
-//        for (int i = 0; i < appWidgetIds.length; i++)
-//        {
-//            int widgetId = appWidgetIds[i];
-//
-//            //    Build the intent to call the service
-//            Intent intent = new Intent(context.getApplicationContext(),
-//                    MovieWidgetService.class);
-//            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-//            //Log.d("onUpdate", "method working");
-//            Timber.d("method working");
-//            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
-//            views.setRemoteAdapter(R.id.appwidget_list, intent);
-//            views.setEmptyView(R.id.appwidget_list, R.id.empty);
-//
-//            Intent detailIntent = new Intent(context, DetailActivity.class);
-//            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//            views.setPendingIntentTemplate(R.id.appwidget_list, pIntent);
-//
-//            appWidgetManager.updateAppWidget(widgetId, views);
-//        }
+        for (int i = 0; i < appWidgetIds.length; i++)
+        {
+            int widgetId = appWidgetIds[i];
 
-       //Picasso code based on:
-       //https://www.codota.com/code/java/classes/android.widget.RemoteViews
-       // Picasso picasso = PicassoProvider.get();
-        //  picasso.load(Data.URLS[new Random().nextInt(Data.URLS.length)]) //
-        //    .placeholder(R.drawable.placeholder) //
-        //    .error(R.drawable.error) //
-        //   .transform(new GrayscaleTransformation(picasso)) //
-        //    .into(updateViews, R.id.image, appWidgetIds);
+            //    Build the intent to call the service
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            //Log.d("onUpdate", "method working");
+            Timber.d("method working");
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
+            views.setEmptyView(R.id.movie_widget_title, R.id.empty);
+
+            Intent detailIntent = new Intent(context, DetailActivity.class);
+            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setPendingIntentTemplate(R.id.movie_widget_title, pIntent);
+
+            appWidgetManager.updateAppWidget(widgetId, views);
+        }
+
+//       Picasso code based on:
+//       https://www.codota.com/code/java/classes/android.widget.RemoteViews
+//        Picasso picasso = PicassoProvider.get();
+//          picasso.load(Data.URLS[new Random().nextInt(Data.URLS.length)]) //
+//            .placeholder(R.drawable.placeholder) //
+//            .error(R.drawable.error) //
+//           .transform(new GrayscaleTransformation(picasso)) //
+//            .into(updateViews, R.id.image, appWidgetIds);
 
 
 

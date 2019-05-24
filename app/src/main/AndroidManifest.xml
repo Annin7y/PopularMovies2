@@ -31,16 +31,13 @@
 
         <receiver android:name=".widget.MovieWidgetProvider">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.ACTION_DATA_UPDATED" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/movie_widget_provider_info" />
         </receiver>
-
-        <action android:name = "com.example.myapp.ACTION_DATA_UPDATED" />
-
 
         <provider
             android:name="annin.my.android.popularmovies2.data.MovieContentProvider"
