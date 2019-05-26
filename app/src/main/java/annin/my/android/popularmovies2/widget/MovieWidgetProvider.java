@@ -68,10 +68,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
 //           .transform(new GrayscaleTransformation(picasso)) //
 //            .into(updateViews, R.id.image, appWidgetIds);
 
-
-
-
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        //super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
