@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import annin.my.android.popularmovies2.R;
+import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.ui.DetailActivity;
 import timber.log.Timber;
 
@@ -19,8 +20,8 @@ public class MovieWidgetProvider extends AppWidgetProvider
     //http://www.vogella.com/tutorials/AndroidWidgets/article.html
     //https://medium.com/android-bits/android-widgets-ad3d166458d3
 
-    public static final String ACTION_VIEW_DETAILS =
-            "annin.my.android.MovieWidgetProvider.ACTION_VIEW_DETAILS";
+    public static final String ACTION_DATA_UPDATED =
+            "annin.my.android.MovieWidgetProvider.ACTION_DATA_UPDATED";
 
     public static final String EXTRA_ITEM =
             "annin.my.android.MovieWidgetProvider.EXTRA_ITEM";
@@ -28,6 +29,8 @@ public class MovieWidgetProvider extends AppWidgetProvider
     public void setPendingIntentTemplate(int viewId, PendingIntent pendingIntentTemplate)
     {
     }
+
+    Movie movie;
 
     /*
     This method is called once a new widget is created as well as every update interval.
@@ -41,13 +44,13 @@ public class MovieWidgetProvider extends AppWidgetProvider
             int widgetId = appWidgetIds[i];
 
             //    Build the intent to call the service
-            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Intent intent = new Intent(context, MovieWidgetProvider.class);
 
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
             //Log.d("onUpdate", "method working");
             Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
-            views.setEmptyView(R.id.movie_widget_title, R.id.empty);
+            views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
 
             Intent detailIntent = new Intent(context, DetailActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -68,7 +71,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
 
 
 
-        //super.onUpdate(context, appWidgetManager, appWidgetIds);
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
@@ -78,14 +81,13 @@ public class MovieWidgetProvider extends AppWidgetProvider
         //http://android-er.blogspot.com/2010/10/update-widget-in-onreceive-method.html
         super.onReceive(context, intent);
 
-        if (ACTION_VIEW_DETAILS.equals(intent.getAction()))
+        if (ACTION_DATA_UPDATED.equals(intent.getAction()))
         {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             ComponentName thisAppWidget = new ComponentName(context.getPackageName(), MovieWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
 
             onUpdate(context, appWidgetManager, appWidgetIds);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.movie_widget_title);
         }
     }
 
