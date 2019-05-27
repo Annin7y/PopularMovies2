@@ -14,10 +14,4 @@
         android:layout_gravity="center"
         android:textSize="18dp"/>
 
-    <TextView android:id="@+id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/empty_view" />
-
 </LinearLayout>

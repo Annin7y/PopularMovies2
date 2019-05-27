@@ -50,8 +50,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
             //Log.d("onUpdate", "method working");
             Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
-            views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
-
+            
             Intent detailIntent = new Intent(context, DetailActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.movie_widget_title, pIntent);
@@ -68,7 +67,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
 //           .transform(new GrayscaleTransformation(picasso)) //
 //            .into(updateViews, R.id.image, appWidgetIds);
 
-        //super.onUpdate(context, appWidgetManager, appWidgetIds);
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
