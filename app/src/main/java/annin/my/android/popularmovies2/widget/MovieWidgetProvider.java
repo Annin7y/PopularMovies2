@@ -6,7 +6,15 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.pojo.Movie;
@@ -43,6 +51,13 @@ public class MovieWidgetProvider extends AppWidgetProvider
         {
             int widgetId = appWidgetIds[i];
 
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            Gson gson = new Gson();
+            Type type = new TypeToken<Class<Movie>>() {}.getType();
+            String gsonString = sharedPreferences.getString("MovieList_Widget", "");
+            movie = gson.fromJson(gsonString, type);
+
             //    Build the intent to call the service
             Intent intent = new Intent(context, MovieWidgetProvider.class);
 
@@ -50,7 +65,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
             //Log.d("onUpdate", "method working");
             Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
-            
+
             Intent detailIntent = new Intent(context, DetailActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.movie_widget_title, pIntent);
