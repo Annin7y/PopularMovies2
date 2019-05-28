@@ -38,7 +38,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
     {
     }
 
-    Movie movie;
+    private Movie movie;
 
     /*
     This method is called once a new widget is created as well as every update interval.
@@ -54,9 +54,8 @@ public class MovieWidgetProvider extends AppWidgetProvider
 
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             Gson gson = new Gson();
-            Type type = new TypeToken<Class<Movie>>() {}.getType();
             String gsonString = sharedPreferences.getString("MovieList_Widget", "");
-            movie = gson.fromJson(gsonString, type);
+
 
             //    Build the intent to call the service
             Intent intent = new Intent(context, MovieWidgetProvider.class);
@@ -65,6 +64,9 @@ public class MovieWidgetProvider extends AppWidgetProvider
             //Log.d("onUpdate", "method working");
             Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
+            views.setTextViewText(R.id.movie_widget_title, gsonString);
+
+            
 
             Intent detailIntent = new Intent(context, DetailActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
