@@ -87,7 +87,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     TextView emptyTrailer;
     public static final String Name = "nameKey";
     public static final String ACTION_DATA_UPDATED =
-            "com.example.myapp.ACTION_DATA_UPDATED";
+            "annin.my.android.MovieWidgetProvider.ACTION_DATA_UPDATED";
 
     // Create AppDatabase member variable for the Database
     // Member variable for the Database

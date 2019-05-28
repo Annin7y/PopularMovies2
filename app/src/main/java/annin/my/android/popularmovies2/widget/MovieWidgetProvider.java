@@ -67,9 +67,6 @@ public class MovieWidgetProvider extends AppWidgetProvider
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
             views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
 
-
-
-
             Intent detailIntent = new Intent(context, DetailActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.movie_widget_title, pIntent);
