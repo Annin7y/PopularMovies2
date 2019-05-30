@@ -19,6 +19,7 @@ import java.lang.reflect.Type;
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.ui.DetailActivity;
+import annin.my.android.popularmovies2.ui.MainActivity;
 import timber.log.Timber;
 
 public class MovieWidgetProvider extends AppWidgetProvider
@@ -59,14 +60,13 @@ public class MovieWidgetProvider extends AppWidgetProvider
             movie = gson.fromJson(gsonString, Movie.class);
 
 
-
             //Log.d("onUpdate", "method working");
             Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
             views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
 
-            Intent detailIntent = new Intent(context, DetailActivity.class);
-            PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            Intent detailIntent = new Intent(context, MainActivity.class);
+            PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setOnClickPendingIntent(R.id.movie_widget_title, pIntent);
 
             appWidgetManager.updateAppWidget(widgetId, views);
