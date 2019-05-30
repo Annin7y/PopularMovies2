@@ -67,7 +67,7 @@ public class MovieWidgetProvider extends AppWidgetProvider
 
             Intent detailIntent = new Intent(context, DetailActivity.class);
             PendingIntent pIntent = PendingIntent.getBroadcast(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setPendingIntentTemplate(R.id.movie_widget_title, pIntent);
+            views.setOnClickPendingIntent(R.id.movie_widget_title, pIntent);
 
             appWidgetManager.updateAppWidget(widgetId, views);
         }
