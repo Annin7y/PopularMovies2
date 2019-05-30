@@ -58,10 +58,8 @@ public class MovieWidgetProvider extends AppWidgetProvider
             String gsonString = sharedPreferences.getString("MovieList_Widget", "");
             movie = gson.fromJson(gsonString, Movie.class);
 
-            //    Build the intent to call the service
-            Intent intent = new Intent(context, MovieWidgetProvider.class);
 
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+
             //Log.d("onUpdate", "method working");
             Timber.d("method working");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);

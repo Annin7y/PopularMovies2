@@ -31,7 +31,7 @@
 
         <receiver android:name=".widget.MovieWidgetProvider">
             <intent-filter>
-                <action android:name="android.appwidget.action.ACTION_DATA_UPDATED" />
+                <action android:name="annin.my.android.MovieWidgetProvider.ACTION_DATA_UPDATED" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
