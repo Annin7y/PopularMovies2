@@ -68,7 +68,7 @@
     <dimen name="sch_widget_top_padding">3dp</dimen>
     <dimen name="movie_review_margin_end">40dp</dimen>
     <dimen name="movie_review_margin_start">10dp</dimen>
-
+    <dimen name="widget_text_size">22sp</dimen>
 
 
 </resources>

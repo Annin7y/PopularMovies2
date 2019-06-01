@@ -12,6 +12,16 @@
         android:layout_height="wrap_content"
         android:text="@string/movie_title_widget"
         android:layout_gravity="center"
-        android:textSize="18dp"/>
+        android:textSize="@dimen/widget_text_size"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/imageView_margin"
+        android:layout_marginLeft="@dimen/imageView_margin"
+        android:layout_marginRight="@dimen/imageView_margin"
+        android:layout_marginStart="@dimen/imageView_margin"
+        android:layout_marginTop="@dimen/imageView_top" />
 
 </LinearLayout>
