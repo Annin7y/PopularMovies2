@@ -15,7 +15,7 @@
         android:textSize="@dimen/widget_text_size"/>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/imageView_margin"

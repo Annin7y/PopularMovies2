@@ -73,7 +73,7 @@ public class MovieWidgetProvider extends AppWidgetProvider {
                     try
                     {
                         Bitmap b = Picasso.with(context).load(movie.getPosterUrl()).get();
-                        views.setImageViewBitmap(R.drawable.user_placeholder_error,b);
+                        views.setImageViewBitmap(R.id.imageViewWidget,b);
                        appWidgetManager.updateAppWidget(widgetId, views);
 
                     }
