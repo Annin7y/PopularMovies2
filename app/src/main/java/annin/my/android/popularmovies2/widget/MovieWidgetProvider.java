@@ -43,13 +43,15 @@ public class MovieWidgetProvider extends AppWidgetProvider {
 
     private Movie movie;
     private String movieString;
+    private Context context;
 
     /*
     This method is called once a new widget is created as well as every update interval.
      */
     @Override
-    public void onUpdate(Context context, final AppWidgetManager appWidgetManager,
+    public void onUpdate(final Context context, final AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
+
         for (int i = 0; i < appWidgetIds.length; i++) {
             final int widgetId = appWidgetIds[i];
 
@@ -62,7 +64,7 @@ public class MovieWidgetProvider extends AppWidgetProvider {
 
             //Log.d("onUpdate", "method working");
             Timber.d("method working");
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
+            final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
             views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
 
             MovieAsyncTask.execute(new Runnable() {
@@ -72,7 +74,7 @@ public class MovieWidgetProvider extends AppWidgetProvider {
                     {
                         Bitmap b = Picasso.with(context).load(movie.getPosterUrl()).get();
                         views.setImageViewBitmap(R.drawable.user_placeholder_error,b);
-                        appWidgetManager.updateAppWidget(widgetId, views);
+                       appWidgetManager.updateAppWidget(widgetId, views);
 
                     }
                     catch(IOException e) {
