@@ -67,9 +67,11 @@ public class MovieWidgetProvider extends AppWidgetProvider {
             final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
             views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
 
-            MovieAsyncTask.execute(new Runnable() {
+            MovieAsyncTask.execute(new Runnable()
+            {
                 @Override
-                public void run() {
+                public void run()
+                {
                     try
                     {
                         Bitmap b = Picasso.with(context).load(movie.getPosterUrl())
@@ -78,20 +80,23 @@ public class MovieWidgetProvider extends AppWidgetProvider {
                        appWidgetManager.updateAppWidget(widgetId, views);
 
                     }
-                    catch(IOException e) {
+                    catch(IOException e)
+                    {
                         e.printStackTrace();
                     }
                 }
                                    });
 
 
-                    Intent detailIntent = new Intent(context, DetailActivity.class);
+            Intent detailIntent = new Intent(context, DetailActivity.class);
             detailIntent.putExtra("Movie", movie);
-            PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setOnClickPendingIntent(R.id.movie_widget_title, pIntent);
+          PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+         //Multiple widget clicks based on the code below:
+         //http://www.bogdanirimia.ro/android-widget-click-event-multiple-instances/269
+           views.setOnClickPendingIntent(R.id.widgetLinearLayout, pIntent);
 
-            appWidgetManager.updateAppWidget(widgetId, views);
-        }
+          appWidgetManager.updateAppWidget(widgetId, views);
+     }
 
 //       Picasso code based on:
 //       https://www.codota.com/code/java/classes/android.widget.RemoteViews

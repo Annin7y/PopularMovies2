@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/widget_prov_pad"
     android:orientation="vertical"
+    android:id="@+id/widgetLinearLayout"
     android:background="@android:color/background_light" >
 
     <TextView
