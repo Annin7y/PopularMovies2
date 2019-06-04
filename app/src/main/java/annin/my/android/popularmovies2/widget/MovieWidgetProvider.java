@@ -1,6 +1,7 @@
 package annin.my.android.popularmovies2.widget;
 
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -67,30 +68,23 @@ public class MovieWidgetProvider extends AppWidgetProvider {
             final RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.movie_widget_provider);
             views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
 
-            MovieAsyncTask.execute(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    try
-                    {
-                        Bitmap b = Picasso.with(context).load(movie.getPosterUrl())
-                                .error(R.drawable.user_placeholder_error).get();
-                        views.setImageViewBitmap(R.id.imageViewWidget,b);
-                       appWidgetManager.updateAppWidget(widgetId, views);
 
-                    }
-                    catch(IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                                   });
+            Picasso.with(context).load(movie.getPosterUrl())
+                                .error(R.drawable.user_placeholder_error)
+                        .into(views, R.id.imageViewWidget,new int[] {widgetId});
+                       appWidgetManager.updateAppWidget(widgetId, views);
 
 
             Intent detailIntent = new Intent(context, DetailActivity.class);
             detailIntent.putExtra("Movie", movie);
-          PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context) ;
+            stackBuilder.addNextIntent(new Intent(context, MainActivity.class));
+            stackBuilder.addNextIntent(detailIntent);
+
+          PendingIntent pIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+          //PendingIntent pIntent = PendingIntent.getActivity(context, 0, detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
          //Multiple widget clicks based on the code below:
          //http://www.bogdanirimia.ro/android-widget-click-event-multiple-instances/269
            views.setOnClickPendingIntent(R.id.widgetLinearLayout, pIntent);
