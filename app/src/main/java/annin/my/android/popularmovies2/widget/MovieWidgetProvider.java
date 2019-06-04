@@ -72,7 +72,8 @@ public class MovieWidgetProvider extends AppWidgetProvider {
                 public void run() {
                     try
                     {
-                        Bitmap b = Picasso.with(context).load(movie.getPosterUrl()).get();
+                        Bitmap b = Picasso.with(context).load(movie.getPosterUrl())
+                                .error(R.drawable.user_placeholder_error).get();
                         views.setImageViewBitmap(R.id.imageViewWidget,b);
                        appWidgetManager.updateAppWidget(widgetId, views);
 
