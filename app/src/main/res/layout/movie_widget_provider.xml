@@ -17,7 +17,7 @@
 
     <ImageView
         android:id="@+id/imageViewWidget"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/imageView_margin"
         android:layout_marginLeft="@dimen/imageView_margin"
