@@ -1,5 +1,8 @@
 package annin.my.android.popularmovies2.pojo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,8 +10,18 @@ import android.os.Parcelable;
  * Created by Maino96-10022 on 8/16/2017.
  */
 
+@Entity(tableName = "movies")
 public class Movie implements Parcelable
 {
+    @PrimaryKey(autoGenerate = true)
+
+    /**
+     * Unique ID number for the movies table(only for use in the database table). Type: INTEGER
+     */
+    private int id;
+
+
+
     /**
      * Image URL
      */
@@ -44,6 +57,8 @@ public class Movie implements Parcelable
      */
     private String movieId;
 
+
+    @Ignore
     public Movie(String posterUrl, String originalTitle, String movieOverview, String voteAverage, String releaseDate, String movieId)
     {
         this.posterUrl = posterUrl;
@@ -53,6 +68,18 @@ public class Movie implements Parcelable
         this.releaseDate = releaseDate;
         this.movieId = movieId;
     }
+
+    public Movie(int id, String originalTitle, String overview, String voteAverage, String releaseDate, String posterPath )
+    {
+        this.id = id;
+        this.originalTitle = originalTitle;
+        this.movieOverview= overview;
+        this.voteAverage = voteAverage;
+        this.releaseDate = releaseDate;
+        this.posterUrl = posterPath;
+    }
+
+
 
     public void setPosterUrl(String poster)
     {
