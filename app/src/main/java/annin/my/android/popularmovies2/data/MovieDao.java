@@ -9,20 +9,22 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-    @Dao
+import annin.my.android.popularmovies2.pojo.Movie;
+
+@Dao
     public interface MovieDao
     {
         @Query("SELECT * FROM movies ORDER BY originalTitle")
-        List<MovieEntry> loadAllMovies();
+        List<Movie> loadAllMovies();
 
         @Insert
-        void insertMovie(MovieEntry movieEntry);
+        void insertMovie(Movie movieEntry);
 
         @Update(onConflict = OnConflictStrategy.REPLACE)
-        void updateMovie(MovieEntry movieEntry);
+        void updateMovie(Movie movieEntry);
 
         @Delete
-        void deleteMovie(MovieEntry movieEntry);
+        void deleteMovie(Movie movieEntry);
     }
 
 

@@ -50,10 +50,10 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
     public void onClick(View v)
     {
 
+        int adapterPosition = getAdapterPosition();
+        Movie posterClick = roomMoviesList.get(adapterPosition);
+        mClickHandler.onClick(posterClick);
 
-        Movie movie = new Movie(posterUrl, originalTitle, movieOverview, voteAverage, releaseDate, movieId);
-
-        mClickHandler.onClick(movie);
     }
 }
 
@@ -63,9 +63,8 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
         //Binding data
         final Movie movieView = roomMoviesList.get(position);
 
-
         Picasso.with(context)
-                .load(posterPath)
+                .load(movieView.getPosterUrl())
                 .error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);
         // Log.e(TAG, "Failed to load image.");
@@ -86,10 +85,10 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
 
             public int getItemCount()
             {
+                if(roomMoviesList != null)
                 return roomMoviesList.size();
+                else return 0;
             }
-
-
 }
 
 
