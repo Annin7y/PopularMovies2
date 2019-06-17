@@ -13,14 +13,12 @@ import android.os.Parcelable;
 @Entity(tableName = "movies")
 public class Movie implements Parcelable
 {
-    @PrimaryKey(autoGenerate = true)
 
     /**
      * Unique ID number for the movies table(only for use in the database table). Type: INTEGER
      */
+   @PrimaryKey(autoGenerate = true)
     private int id;
-
-
 
     /**
      * Image URL
@@ -79,7 +77,15 @@ public class Movie implements Parcelable
         this.posterUrl = posterPath;
     }
 
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
+    public int getId()
+    {
+        return id;
+    }
 
     public void setPosterUrl(String poster)
     {
@@ -143,6 +149,7 @@ public class Movie implements Parcelable
 
     protected Movie(Parcel in)
     {
+        id = in.readInt();
         posterUrl = in.readString();
         originalTitle = in.readString();
         movieOverview = in.readString();
@@ -160,6 +167,7 @@ public class Movie implements Parcelable
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
+        dest.writeInt(id);
         dest.writeString(posterUrl);
         dest.writeString(originalTitle);
         dest.writeString(movieOverview);

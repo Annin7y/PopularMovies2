@@ -11,6 +11,4 @@ public class MovieRepository
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
 
-
-
 }

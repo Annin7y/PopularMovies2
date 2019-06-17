@@ -1,8 +1,6 @@
 package annin.my.android.popularmovies2.ui;
 
 import android.app.LoaderManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -48,7 +46,6 @@ import annin.my.android.popularmovies2.pojo.MovieTrailer;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieReviewAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
-import annin.my.android.popularmovies2.widget.MovieWidgetProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -91,7 +88,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
     // Create AppDatabase member variable for the Database
     // Member variable for the Database
-     private AppDatabase mDb;
+   private AppDatabase mDb;
 
 
     /**
