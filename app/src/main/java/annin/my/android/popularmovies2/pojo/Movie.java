@@ -5,6 +5,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Maino96-10022 on 8/16/2017.
@@ -13,12 +14,6 @@ import android.os.Parcelable;
 @Entity(tableName = "movies")
 public class Movie implements Parcelable
 {
-
-    /**
-     * Unique ID number for the movies table(only for use in the database table). Type: INTEGER
-     */
-   @PrimaryKey(autoGenerate = true)
-    private int id;
 
     /**
      * Image URL
@@ -53,6 +48,8 @@ public class Movie implements Parcelable
     /**
      * Movie id
      */
+    @PrimaryKey
+    @NonNull
     private String movieId;
 
 
@@ -65,26 +62,6 @@ public class Movie implements Parcelable
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
         this.movieId = movieId;
-    }
-
-    public Movie(int id, String originalTitle, String overview, String voteAverage, String releaseDate, String posterPath )
-    {
-        this.id = id;
-        this.originalTitle = originalTitle;
-        this.movieOverview= overview;
-        this.voteAverage = voteAverage;
-        this.releaseDate = releaseDate;
-        this.posterUrl = posterPath;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public int getId()
-    {
-        return id;
     }
 
     public void setPosterUrl(String poster)
@@ -149,7 +126,6 @@ public class Movie implements Parcelable
 
     protected Movie(Parcel in)
     {
-        id = in.readInt();
         posterUrl = in.readString();
         originalTitle = in.readString();
         movieOverview = in.readString();
@@ -167,7 +143,6 @@ public class Movie implements Parcelable
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
-        dest.writeInt(id);
         dest.writeString(posterUrl);
         dest.writeString(originalTitle);
         dest.writeString(movieOverview);
