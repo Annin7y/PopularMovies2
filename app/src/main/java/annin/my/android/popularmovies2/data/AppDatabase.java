@@ -8,12 +8,12 @@ import android.util.Log;
 
 import annin.my.android.popularmovies2.pojo.Movie;
 
-@Database(entities = {Movie.class}, version = 1, exportSchema = false)
+@Database(entities = {MovieEntry.class}, version = 1, exportSchema = false)
 
 public abstract class AppDatabase extends RoomDatabase
 {
     public abstract MovieDao movieDao();
-   private static final String LOG_TAG = AppDatabase.class.getSimpleName();
+    private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();
     private static final String DATABASE_NAME = "movieFavorites";
 

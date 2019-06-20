@@ -1,19 +1,19 @@
-package annin.my.android.popularmovies2.pojo;
+package annin.my.android.popularmovies2.data;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-/**
- * Created by Maino96-10022 on 8/16/2017.
- */
+import annin.my.android.popularmovies2.pojo.Movie;
 
 
-public class Movie implements Parcelable
+@Entity(tableName = "movies")
+public class MovieEntry
 {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     /**
      * Image URL
@@ -51,14 +51,25 @@ public class Movie implements Parcelable
     private String movieId;
 
 
-    public Movie(String posterUrl, String originalTitle, String movieOverview, String voteAverage, String releaseDate, String movieId)
+    public MovieEntry(int id,String posterUrl, String originalTitle, String movieOverview, String voteAverage, String releaseDate, String movieId)
     {
+        this.id = id;
         this.posterUrl = posterUrl;
         this.originalTitle = originalTitle;
         this.movieOverview = movieOverview;
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
         this.movieId = movieId;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 
     public void setPosterUrl(String poster)
@@ -121,47 +132,7 @@ public class Movie implements Parcelable
         return movieId;
     }
 
-    protected Movie(Parcel in)
-    {
-        posterUrl = in.readString();
-        originalTitle = in.readString();
-        movieOverview = in.readString();
-        voteAverage = in.readString();
-        releaseDate = in.readString();
-        movieId = in.readString();
-    }
 
-    @Override
-    public int describeContents()
-    {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
-        dest.writeString(posterUrl);
-        dest.writeString(originalTitle);
-        dest.writeString(movieOverview);
-        dest.writeString(voteAverage);
-        dest.writeString(releaseDate);
-        dest.writeString(movieId);
-    }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>()
-    {
-        @Override
-        public Movie createFromParcel(Parcel in)
-        {
-            return new Movie(in);
-        }
-
-        @Override
-        public Movie[] newArray(int size)
-        {
-            return new Movie[size];
-        }
-    };
 }
+
 
