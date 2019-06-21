@@ -48,7 +48,7 @@ public class Movie implements Parcelable
     /**
      * Movie id
      */
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @NonNull
     private String movieId;
 
