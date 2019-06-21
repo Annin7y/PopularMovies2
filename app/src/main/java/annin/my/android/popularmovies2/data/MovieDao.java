@@ -15,16 +15,16 @@ import annin.my.android.popularmovies2.pojo.Movie;
     public interface MovieDao
     {
         @Query("SELECT * FROM movies ORDER BY originalTitle")
-        List<MovieEntry> loadAllMovies();
+        List<Movie> loadAllMovies();
 
         @Insert
-        void insertMovie(MovieEntry movieEntry);
+        void insertMovie(Movie movieEntry);
 
         @Update(onConflict = OnConflictStrategy.REPLACE)
-        void updateMovie(MovieEntry movieEntry);
+        void updateMovie(Movie movieEntry);
 
         @Delete
-        void deleteMovie(MovieEntry movieEntry);
+        void deleteMovie(Movie movieEntry);
     }
 
 

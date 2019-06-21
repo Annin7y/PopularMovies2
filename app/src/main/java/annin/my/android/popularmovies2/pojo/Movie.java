@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
  * Created by Maino96-10022 on 8/16/2017.
  */
 
-
+@Entity(tableName = "movies")
 public class Movie implements Parcelable
 {
 
@@ -48,8 +48,9 @@ public class Movie implements Parcelable
     /**
      * Movie id
      */
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     private String movieId;
-
 
     public Movie(String posterUrl, String originalTitle, String movieOverview, String voteAverage, String releaseDate, String movieId)
     {
