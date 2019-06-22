@@ -27,9 +27,9 @@ public class MovieRepository
         return mAllMovies;
     }
 
-    public void insert(Movie movie)
+    public void insert(Movie movieEntry)
     {
-        new insertAsyncTask(mMovieDao).execute(movie);
+        new insertAsyncTask(mMovieDao).execute(movieEntry);
     }
 
     private static class insertAsyncTask extends AsyncTask<Movie, Void, Void>
@@ -44,10 +44,11 @@ public class MovieRepository
         @Override
         protected Void doInBackground(final Movie... params)
         {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.insertMovie(params[0]);
             return null;
 
         }
     }
+
 
 }
