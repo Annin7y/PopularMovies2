@@ -10,8 +10,6 @@ import annin.my.android.popularmovies2.pojo.Movie;
 
 public class MovieRepository
 {
-
-
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
 
