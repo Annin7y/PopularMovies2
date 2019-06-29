@@ -1,5 +1,6 @@
 package annin.my.android.popularmovies2.pojo;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
@@ -18,6 +19,7 @@ public class Movie implements Parcelable
     /**
      * Image URL
      */
+    @ColumnInfo(name = "poster_url")
     private String posterUrl;
 
     /**
@@ -28,21 +30,25 @@ public class Movie implements Parcelable
     /**
      * Title of the movie
      */
+    @ColumnInfo(name = "original_title")
     private String originalTitle;
 
     /**
      * Overview of the movie
      */
+    @ColumnInfo(name = "movie_overview")
     private String movieOverview;
 
     /**
      * Movie rating
      */
+    @ColumnInfo(name = "vote_average")
     private String voteAverage;
 
     /**
      * Movie release date
      */
+    @ColumnInfo(name = "release_date")
     private String releaseDate;
 
     /**
