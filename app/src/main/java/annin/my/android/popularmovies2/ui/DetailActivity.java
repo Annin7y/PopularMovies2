@@ -36,6 +36,7 @@ import java.util.Date;
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
+import annin.my.android.popularmovies2.asynctask.MovieAsyncTask;
 import annin.my.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import annin.my.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
 import annin.my.android.popularmovies2.data.AppDatabase;
@@ -54,7 +55,7 @@ import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
-        AsyncTaskTrailerInterface, LoaderManager.LoaderCallbacks<Cursor>
+        AsyncTaskTrailerInterface, //LoaderManager.LoaderCallbacks<Cursor>
 {
     //Tag for the log messages
     private static final String TAG = DetailActivity.class.getSimpleName();
@@ -105,7 +106,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         context = getApplicationContext();
         ButterKnife.bind(this);
 
-        mDb = AppDatabase.getInstance(getApplicationContext());
+        mDb = AppDatabase.getDatabase(getApplicationContext());
 
         movieReviewAdapter = new MovieReviewAdapter(simpleJsonMovieReviewData, context);
         movieTrailerAdapter = new MovieTrailerAdapter(this, simpleJsonMovieTrailerData, context);
@@ -128,23 +129,24 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             @Override
             public void onClick(View view)
             {
-                ContentValues values = new ContentValues();
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_ID, movie.getMovieId());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
-                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH, movie.getPosterUrl());
-                Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
-                if (uri != null)
-                {
-                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                    favoritesButton.setVisibility(View.GONE);
-                }
-            }
+//                ContentValues values = new ContentValues();
+//                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_ID, movie.getMovieId());
+//                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
+//                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_OVERVIEW, movie.getMovieOverview());
+//                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_VOTE, movie.getVoteAverage());
+//                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_DATE, movie.getReleaseDate());
+//                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_POSTER_PATH, movie.getPosterUrl());
+//                Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, values);
 
+//                if (uri != null)
+//                {
+//                    Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+//                    Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+//                    favoritesButton.setVisibility(View.GONE);
+//                }
+           }
+//
         });
 
         if (getIntent() != null && getIntent().getExtras() != null)
@@ -209,7 +211,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
 
         // Kick off the loader
-        getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
+       // getLoaderManager().initLoader(FAVORITES_LOADER, null, this);
     }
 
     public void returnReviewData(ArrayList<MovieReview> simpleJsonMovieReviewData)
@@ -282,37 +284,37 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         return shareIntent;
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle)
-    {
-        String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
-        String[] selectionArgs = new String[]{movieId};
-
-        switch (loaderId)
-        {
-            case FAVORITES_LOADER:
-                return new CursorLoader(this,   // Parent activity context
-                        MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
-                        projection,             // Columns to include in the resulting Cursor
-                        MovieContract.MovieEntry.COLUMN_MOVIES_ID + "=?",
-                        selectionArgs,
-                        null);                  // Default sort order
-
-            default:
-                throw new RuntimeException("Loader Not Implemented: " + loaderId);
-        }
-    }
-
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
-    {
-        if ((cursor != null) && (cursor.getCount() > 0))
-        {
-            //"Add to Favorites" button is disabled in the Detail Activity when the user clicks on a movie stored in Favorites
-            favoritesButton.setEnabled(false);
-        }
-    }
-
-    public void onLoaderReset(Loader<Cursor> cursorLoader)
-    {
-    }
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle)
+//    {
+//        String[] projection = {MovieContract.MovieEntry._ID, MovieContract.MovieEntry.COLUMN_MOVIES_ID,};
+//        String[] selectionArgs = new String[]{movieId};
+//
+//        switch (loaderId)
+//        {
+//            case FAVORITES_LOADER:
+//                return new CursorLoader(this,   // Parent activity context
+//                        MovieContract.MovieEntry.CONTENT_URI,   // Provider content URI to query
+//                        projection,             // Columns to include in the resulting Cursor
+//                        MovieContract.MovieEntry.COLUMN_MOVIES_ID + "=?",
+//                        selectionArgs,
+//                        null);                  // Default sort order
+//
+//            default:
+//                throw new RuntimeException("Loader Not Implemented: " + loaderId);
+//        }
+//    }
+//
+//    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
+//    {
+//        if ((cursor != null) && (cursor.getCount() > 0))
+//        {
+//            //"Add to Favorites" button is disabled in the Detail Activity when the user clicks on a movie stored in Favorites
+//            favoritesButton.setEnabled(false);
+//        }
+//    }
+//
+//    public void onLoaderReset(Loader<Cursor> cursorLoader)
+//    {
+//    }
 }

@@ -43,6 +43,7 @@ public class MovieRepository
         protected Void doInBackground(final Movie... params)
         {
             mAsyncTaskDao.insertMovie(params[0]);
+
             return null;
 
         }
