@@ -1,6 +1,7 @@
 package annin.my.android.popularmovies2.ui;
 
 import android.app.LoaderManager;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -41,6 +42,7 @@ import annin.my.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import annin.my.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
 import annin.my.android.popularmovies2.data.AppDatabase;
 import annin.my.android.popularmovies2.data.MovieContract;
+import annin.my.android.popularmovies2.data.MovieViewModel;
 import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.pojo.MovieReview;
 import annin.my.android.popularmovies2.pojo.MovieTrailer;
@@ -55,7 +57,7 @@ import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
 
 public class DetailActivity extends AppCompatActivity implements MovieTrailerAdapter.MovieTrailerAdapterOnClickHandler, AsyncTaskReviewInterface,
-        AsyncTaskTrailerInterface, //LoaderManager.LoaderCallbacks<Cursor>
+        AsyncTaskTrailerInterface //LoaderManager.LoaderCallbacks<Cursor>
 {
     //Tag for the log messages
     private static final String TAG = DetailActivity.class.getSimpleName();
@@ -91,6 +93,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     // Member variable for the Database
    private AppDatabase mDb;
 
+   //ViewModel variable
+    private MovieViewModel mMovieViewModel;
+
 
     /**
      * Identifier for the favorites data loader
@@ -122,6 +127,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         poster = (ImageView) findViewById(imageView);
 
         youtube_thumbnail = (ImageView) findViewById(imageViewYoutube);
+
+        mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
         //add to favorites
         favoritesButton.setOnClickListener(new View.OnClickListener()
