@@ -137,6 +137,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             public void onClick(View view)
             {
 
+                mMovieViewModel.insert(movie);
 //                ContentValues values = new ContentValues();
 //                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_ID, movie.getMovieId());
 //                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());

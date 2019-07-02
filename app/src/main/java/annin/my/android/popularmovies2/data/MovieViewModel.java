@@ -10,7 +10,6 @@ import annin.my.android.popularmovies2.pojo.Movie;
 
 public class MovieViewModel extends AndroidViewModel
 {
-
     private MovieRepository mRepository;
     private LiveData<List<Movie>> mAllMovies;
 
