@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import annin.my.android.popularmovies2.pojo.Movie;
@@ -41,13 +42,21 @@ public class MovieRepository
         }
 
         @Override
-        protected Void doInBackground(final Movie... params)
+        protected List<Movie> doInBackground(final Movie... params)
         {
-            mAsyncTaskDao.insertMovie(params[0]);
+           mAsyncTaskDao.insertMovie(params[0]);
 
             return null;
 
         }
+
+        @Override
+        protected void onPostExecute(List<Movie> movieList)
+        {
+            super.onPostExecute(movieList);
+        }
+
+
     }
 
 
