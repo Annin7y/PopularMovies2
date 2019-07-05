@@ -12,6 +12,7 @@ public class MovieRepository
 {
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
+    private boolean MutableLiveData;
 
     MovieRepository(Application application)
     {
@@ -30,7 +31,7 @@ public class MovieRepository
         new insertAsyncTask(mMovieDao).execute(movieEntry);
     }
 
-    private static class insertAsyncTask extends AsyncTask<Movie, Void, Void>
+    private static class insertAsyncTask extends AsyncTask<String, Void, Movie>
     {
         private MovieDao mAsyncTaskDao;
 
