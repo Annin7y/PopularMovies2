@@ -19,7 +19,7 @@ import annin.my.android.popularmovies2.pojo.Movie;
         LiveData<List<Movie>> loadAllMovies();
 
         @Insert
-        int insertMovie(Movie movieEntry);
+        long insertMovie(Movie movieEntry);
 
         @Update(onConflict = OnConflictStrategy.REPLACE)
         void updateMovie(Movie movieEntry);
