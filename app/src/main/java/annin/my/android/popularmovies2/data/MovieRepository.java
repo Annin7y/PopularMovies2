@@ -13,7 +13,7 @@ public class MovieRepository
 {
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
-    private boolean MutableLiveData;
+    private boolean mutableLiveData;
 
     MovieRepository(Application application)
     {
@@ -48,17 +48,7 @@ public class MovieRepository
 
 
         }
-
-        @Override
-        protected Long onPostExecute(List<Movie> movieList)
-        {
-
-
-        }
-
-
-
-
+        
     }
 
 
