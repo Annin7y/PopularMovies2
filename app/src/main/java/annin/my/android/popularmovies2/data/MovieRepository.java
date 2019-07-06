@@ -32,7 +32,7 @@ public class MovieRepository
         new insertAsyncTask(mMovieDao).execute(movieEntry);
     }
 
-    private static class insertAsyncTask extends AsyncTask<String, Void, Movie>
+    private static class insertAsyncTask extends AsyncTask<Movie, Void, Long>
     {
         private MovieDao mAsyncTaskDao;
 
@@ -42,19 +42,21 @@ public class MovieRepository
         }
 
         @Override
-        protected List<Movie> doInBackground(final Movie... params)
+        protected Long doInBackground(final Movie... params)
         {
-           mAsyncTaskDao.insertMovie(params[0]);
+           return mAsyncTaskDao.insertMovie(params[0]);
 
-            return null;
 
         }
 
         @Override
-        protected void onPostExecute(List<Movie> movieList)
+        protected Long onPostExecute(List<Movie> movieList)
         {
-            super.onPostExecute(movieList);
+
+
         }
+
+
 
 
     }
