@@ -46,9 +46,14 @@ public class MovieRepository
         {
            return mAsyncTaskDao.insertMovie(params[0]);
 
-
         }
-        
+
+        @Override
+        protected void onPostExecute(Long id)
+    {
+
+    }
+
     }
 
 
