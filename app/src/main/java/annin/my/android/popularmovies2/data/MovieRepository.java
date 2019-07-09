@@ -2,6 +2,7 @@ package annin.my.android.popularmovies2.data;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class MovieRepository
 {
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
-    private boolean mutableLiveData;
+    private static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
 
     MovieRepository(Application application)
     {
@@ -30,6 +31,11 @@ public class MovieRepository
     public void insert(Movie movieEntry)
     {
         new insertAsyncTask(mMovieDao).execute(movieEntry);
+    }
+
+    public void setInsertOk(boolean value)
+    {
+        isInsertOk.setValue(value);
     }
 
     private static class insertAsyncTask extends AsyncTask<Movie, Void, Long>
@@ -51,6 +57,14 @@ public class MovieRepository
         @Override
         protected void onPostExecute(Long id)
     {
+          if(id != -1)
+          {
+              MovieRepository.this.setInsertOk(true);
+          }
+          else
+          {
+              MovieRepository.this.setInsertOk(false);
+          }
 
     }
 

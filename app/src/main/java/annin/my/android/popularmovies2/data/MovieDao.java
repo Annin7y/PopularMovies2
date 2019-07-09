@@ -18,7 +18,7 @@ import annin.my.android.popularmovies2.pojo.Movie;
         @Query("SELECT * FROM movies ORDER BY originalTitle")
         LiveData<List<Movie>> loadAllMovies();
 
-        @Insert
+        @Insert(onConflict = OnConflictStrategy.IGNORE)
         long insertMovie(Movie movieEntry);
 
         @Update(onConflict = OnConflictStrategy.REPLACE)
