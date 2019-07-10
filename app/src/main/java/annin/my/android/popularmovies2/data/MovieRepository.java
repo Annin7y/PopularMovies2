@@ -38,7 +38,7 @@ public class MovieRepository
         isInsertOk.setValue(value);
     }
 
-    private static class insertAsyncTask extends AsyncTask<Movie, Void, Long>
+    private class insertAsyncTask extends AsyncTask<Movie, Void, Long>
     {
         private MovieDao mAsyncTaskDao;
 
