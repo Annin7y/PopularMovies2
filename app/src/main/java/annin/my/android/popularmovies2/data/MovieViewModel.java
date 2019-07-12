@@ -24,9 +24,11 @@ public class MovieViewModel extends AndroidViewModel
         return  mAllMovies;
     }
 
-     public void insert(Movie movieEntry)
+     public LiveData<Boolean> insert(Movie movieEntry)
      {
          mRepository.insert(movieEntry);
+         return MovieRepository.isInsertOk;
+
      }
 
 }

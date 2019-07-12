@@ -14,7 +14,7 @@ public class MovieRepository
 {
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
-    private static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
 
     MovieRepository(Application application)
     {

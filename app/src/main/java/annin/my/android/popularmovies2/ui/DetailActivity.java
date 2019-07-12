@@ -1,6 +1,7 @@
 package annin.my.android.popularmovies2.ui;
 
 import android.app.LoaderManager;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -137,7 +139,20 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             public void onClick(View view)
             {
 
-                mMovieViewModel.insert(movie);
+                mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>()
+                {
+                    @Override
+                    public void onChanged(@Nullable Boolean isInsertOk)
+                    {
+                        if (isInsertOk)
+                        {
+                            Toast.makeText(getBaseContext(), isInsertOk.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                    favoritesButton.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
 //                ContentValues values = new ContentValues();
 //                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_ID, movie.getMovieId());
 //                values.put(MovieContract.MovieEntry.COLUMN_MOVIES_TITLE, movie.getOriginalTitle());
