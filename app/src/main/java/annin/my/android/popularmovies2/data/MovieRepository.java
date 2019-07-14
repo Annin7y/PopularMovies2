@@ -15,6 +15,7 @@ public class MovieRepository
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
     public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
+    private Movie movie;
 
 
     MovieRepository(Application application)
@@ -38,6 +39,7 @@ public class MovieRepository
 
     public void select(String id)
     {
+
         mMovieDao.getSelectedMovie(id);
     }
 
