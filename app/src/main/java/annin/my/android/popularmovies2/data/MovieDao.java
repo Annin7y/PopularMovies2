@@ -18,6 +18,9 @@ import annin.my.android.popularmovies2.pojo.Movie;
         @Query("SELECT * FROM movies ORDER BY originalTitle")
         LiveData<List<Movie>> loadAllMovies();
 
+        @Query("SELECT * FROM movies WHERE movieId =:id")
+        Movie getSelectedMovie(String id);
+
         @Insert(onConflict = OnConflictStrategy.IGNORE)
         long insertMovie(Movie movieEntry);
 
@@ -26,6 +29,7 @@ import annin.my.android.popularmovies2.pojo.Movie;
 
         @Delete
         void deleteMovie(Movie movieEntry);
+
     }
 
 

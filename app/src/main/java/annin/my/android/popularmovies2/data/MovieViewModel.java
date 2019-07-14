@@ -12,12 +12,14 @@ public class MovieViewModel extends AndroidViewModel
 {
     private MovieRepository mRepository;
     private LiveData<List<Movie>> mAllMovies;
+    private Movie movieId;
 
     public MovieViewModel (Application application)
     {
         super(application);
         mRepository = new MovieRepository(application);
         mAllMovies = mRepository.loadAllMovies();
+        movieId = mRepository.select(id);
     }
     LiveData<List<Movie>> loadAllMovies()
     {

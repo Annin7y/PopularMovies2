@@ -16,11 +16,13 @@ public class MovieRepository
     private LiveData<List<Movie>> mAllMovies;
     public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
 
+
     MovieRepository(Application application)
     {
         AppDatabase db = AppDatabase.getDatabase(application);
         mMovieDao = db.movieDao();
         mAllMovies = mMovieDao.loadAllMovies();
+
     }
 
     LiveData<List<Movie>> loadAllMovies()
@@ -28,15 +30,23 @@ public class MovieRepository
         return mAllMovies;
     }
 
+
     public void insert(Movie movieEntry)
     {
         new insertAsyncTask(mMovieDao).execute(movieEntry);
     }
 
+    public void select(String id)
+    {
+        mMovieDao.getSelectedMovie(id);
+    }
+
+
     public void setInsertOk(boolean value)
     {
         isInsertOk.setValue(value);
     }
+
 
     private class insertAsyncTask extends AsyncTask<Movie, Void, Long>
     {
