@@ -15,8 +15,6 @@ public class MovieRepository
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
     public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
-    private Movie movie;
-
 
     MovieRepository(Application application)
     {
@@ -37,10 +35,18 @@ public class MovieRepository
         new insertAsyncTask(mMovieDao).execute(movieEntry);
     }
 
-    public void select(String id)
+    public Boolean select(String id)
     {
+        Movie movie = mMovieDao.getSelectedMovie(id);
 
-        mMovieDao.getSelectedMovie(id);
+        if(movie == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
 
