@@ -12,7 +12,6 @@ public class MovieViewModel extends AndroidViewModel
 {
     private MovieRepository mRepository;
     private LiveData<List<Movie>> mAllMovies;
-    private Movie movieId;
 
     public MovieViewModel (Application application)
     {

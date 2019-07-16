@@ -132,6 +132,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
+        boolean isFavorite = mMovieViewModel.select(movieId);
+
+        if(isFavorite)
+        {
+            Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                   favoritesButton.setVisibility(View.GONE);
+        }
+
         //add to favorites
         favoritesButton.setOnClickListener(new View.OnClickListener()
         {
