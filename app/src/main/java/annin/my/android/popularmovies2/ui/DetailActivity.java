@@ -136,8 +136,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         if(isFavorite)
         {
-            Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                   favoritesButton.setVisibility(View.GONE);
+            favoritesButton.setEnabled(false);
+
         }
 
         //add to favorites
