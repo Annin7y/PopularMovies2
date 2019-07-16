@@ -19,7 +19,6 @@ public class MovieViewModel extends AndroidViewModel
         super(application);
         mRepository = new MovieRepository(application);
         mAllMovies = mRepository.loadAllMovies();
-        movieId = mRepository.select(id);
     }
     LiveData<List<Movie>> loadAllMovies()
     {
@@ -31,6 +30,11 @@ public class MovieViewModel extends AndroidViewModel
          mRepository.insert(movieEntry);
          return MovieRepository.isInsertOk;
 
+     }
+
+     public boolean select(String movieId)
+     {
+         return mRepository.select(movieId);
      }
 
 }

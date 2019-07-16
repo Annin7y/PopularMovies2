@@ -35,7 +35,7 @@ public class MovieRepository
         new insertAsyncTask(mMovieDao).execute(movieEntry);
     }
 
-    public Boolean select(String id)
+    public boolean select(String id)
     {
         Movie movie = mMovieDao.getSelectedMovie(id);
 
