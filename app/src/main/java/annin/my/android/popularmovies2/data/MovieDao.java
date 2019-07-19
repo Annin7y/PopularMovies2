@@ -15,7 +15,7 @@ import annin.my.android.popularmovies2.pojo.Movie;
 @Dao
     public interface MovieDao
     {
-        @Query("SELECT * FROM movies ORDER BY originalTitle")
+        @Query("SELECT * FROM movies ORDER BY original_title")
         LiveData<List<Movie>> loadAllMovies();
 
         @Query("SELECT * FROM movies WHERE movieId =:id")

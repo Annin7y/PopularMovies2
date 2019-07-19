@@ -40,10 +40,7 @@
                 android:resource="@xml/movie_widget_provider_info" />
         </receiver>
 
-        <provider
-            android:name="annin.my.android.popularmovies2.data.MovieContentProvider"
-            android:authorities="annin.my.android.popularmovies2"
-            android:exported="false" />
+
     </application>
 
 </manifest>

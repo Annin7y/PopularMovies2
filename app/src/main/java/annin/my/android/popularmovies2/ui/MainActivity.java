@@ -42,6 +42,7 @@ import annin.my.android.popularmovies2.decoration.DividerItemDecoration;
 import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;
 import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
+import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesRoomAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
 import annin.my.android.popularmovies2.widget.MovieWidgetProvider;
 import butterknife.BindView;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private ArrayList<Movie> moviesArrayList = new ArrayList<>();
     private Context context;
     private MovieAdapter movieAdapter;
-    private FavoritesAdapter favoritesAdapter;
+   // private FavoritesRoomAdapter favoritesRoomAdapter;
     private static final String KEY_MOVIES_LIST = "movies_list";
     private static final String KEY_SORT_ORDER = "sort_order";
     private String selectedSortOrder = "most_popular";
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         movieAdapter = new MovieAdapter(this, moviesArrayList, context);
         mRecyclerView.setAdapter(movieAdapter);
 
-        favoritesAdapter = new FavoritesAdapter(this, context);
+       // favoritesRoomAdapter = new FavoritesRoomAdapter(this, context);
 
         //specifying how the images will be displayed
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {
               //  getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                mRecyclerView.setAdapter(favoritesAdapter);
+               // mRecyclerView.setAdapter(favoritesRoomAdapter);
             }
             else
                 {
@@ -336,8 +337,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             case R.id.movie_favorites:
                // getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-                favoritesAdapter = new FavoritesAdapter(this, MainActivity.this);
-                mRecyclerView.setAdapter(favoritesAdapter);
+               // favoritesRoomAdapter = new FavoritesRoomAdapter(this, MainActivity.this);
+              //  mRecyclerView.setAdapter(favoritesRoomAdapter);
                 selectedSortOrder = SORT_BY_FAVORITES;
                 return true;
 
