@@ -8,13 +8,14 @@
     <string name="movie_title">Avatar</string>
     <string name="movie_overview">Fantasy</string>
     <string name="movie_vote_average">8.5/10</string>
-    <string name="release_date">2012-07-14</string>
+    <string name="release_date">2012#821107#821114</string>
     <string name="movie_review">A solid thriller</string>
     <string name="movie_author">Bob Smith</string>
     <string name="movie_trailer">Watch the trailer!</string>
     <string name="action_share">Watch the trailer!</string>
     <string name="movie_review_title">Review</string>
-    <string name="favorites_button_text">Add to Favorites</string>
+    <string name="favorites_button_text_add">Add to Favorites</string>
+    <string name="favorites_button_text_remove">Remove from Favorites</string>
     <string name="review_unavailable_toast">Review currently unavailable</string>
     <string name="trailer_unavailable_toast">Trailer currently unavailable</string>
     <string name="favorites_added">Movie added to favorites</string>

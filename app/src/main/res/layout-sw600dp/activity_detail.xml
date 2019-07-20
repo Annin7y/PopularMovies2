@@ -27,7 +27,7 @@
             android:layout_marginStart="@dimen/favorites_button_margin_left"
             android:layout_marginTop="@dimen/favorites_button_margin_top"
             android:focusable="false"
-            android:text="@string/favorites_button_text" />
+            android:text="@string/favorites_button_text_add" />
 
         <TextView
             android:id="@+id/original_title"
