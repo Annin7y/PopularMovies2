@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private ArrayList<Movie> moviesArrayList = new ArrayList<>();
     private Context context;
     private MovieAdapter movieAdapter;
-   // private FavoritesRoomAdapter favoritesRoomAdapter;
+    private FavoritesRoomAdapter favoritesRoomAdapter;
     private static final String KEY_MOVIES_LIST = "movies_list";
     private static final String KEY_SORT_ORDER = "sort_order";
     private String selectedSortOrder = "most_popular";
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         movieAdapter = new MovieAdapter(this, moviesArrayList, context);
         mRecyclerView.setAdapter(movieAdapter);
 
-       // favoritesRoomAdapter = new FavoritesRoomAdapter(this, context);
+        favoritesRoomAdapter = new FavoritesRoomAdapter(this, context);
 
         //specifying how the images will be displayed
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 int id = (int) viewHolder.itemView.getTag();
 
                 // Build appropriate uri with String row id appended
-                String stringId = Integer.toString(id);
+               // String stringId = Integer.toString(id);
               //  Uri uri = MovieContract.MovieEntry.CONTENT_URI;
               //  uri = uri.buildUpon().appendPath(stringId).build();
 
