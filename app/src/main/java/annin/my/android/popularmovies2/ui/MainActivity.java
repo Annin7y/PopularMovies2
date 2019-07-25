@@ -2,6 +2,7 @@ package annin.my.android.popularmovies2.ui;
 
 import android.app.ActivityOptions;
 import android.appwidget.AppWidgetManager;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskInterface;
 import annin.my.android.popularmovies2.asynctask.MovieAsyncTask;
 import annin.my.android.popularmovies2.data.MovieContract;
+import annin.my.android.popularmovies2.data.MovieViewModel;
 import annin.my.android.popularmovies2.decoration.DividerItemDecoration;
 import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;
 import annin.my.android.popularmovies2.pojo.Movie;
@@ -78,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @BindView(R.id.pb_loading_indicator)
     ProgressBar mLoadingIndicator;
 
+    //ViewModel variable
+    private MovieViewModel mMovieViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -91,9 +96,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         favoritesRoomAdapter = new FavoritesRoomAdapter(this, context);
 
+        mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+
         //specifying how the images will be displayed
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
         mRecyclerView.setLayoutManager(mLayoutManager);
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
         {
