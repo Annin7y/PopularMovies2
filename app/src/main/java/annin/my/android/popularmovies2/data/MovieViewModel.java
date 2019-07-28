@@ -20,7 +20,7 @@ public class MovieViewModel extends AndroidViewModel
         mAllMovies = mRepository.loadAllMovies();
     }
 
-    LiveData<List<Movie>> loadAllMovies()
+    public LiveData<List<Movie>> loadAllMovies()
     {
         return  mAllMovies;
     }

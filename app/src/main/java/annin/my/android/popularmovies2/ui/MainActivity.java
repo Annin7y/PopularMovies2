@@ -2,6 +2,7 @@ package annin.my.android.popularmovies2.ui;
 
 import android.app.ActivityOptions;
 import android.appwidget.AppWidgetManager;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
@@ -34,6 +36,7 @@ import android.widget.ProgressBar;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskInterface;
@@ -97,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         favoritesRoomAdapter = new FavoritesRoomAdapter(this, context);
 
         mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+
+
 
         //specifying how the images will be displayed
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
@@ -170,6 +175,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             {
               //  getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                // mRecyclerView.setAdapter(favoritesRoomAdapter);
+                mMovieViewModel.loadAllMovies().observe(this, new Observer<List<Movie>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Movie> movies) {
+
+                    }
+                });
             }
             else
                 {
