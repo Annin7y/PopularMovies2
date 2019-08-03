@@ -101,8 +101,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
-
-
         //specifying how the images will be displayed
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, calculateNoOfColumns(context));
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             if (selectedSortOrder == SORT_BY_FAVORITES)
             {
               //  getSupportLoaderManager().initLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-               // mRecyclerView.setAdapter(favoritesRoomAdapter);
+                mRecyclerView.setAdapter(favoritesRoomAdapter);
                 mMovieViewModel.loadAllMovies().observe(this, new Observer<List<Movie>>() {
                     @Override
                     public void onChanged(@Nullable List<Movie> movies) {
