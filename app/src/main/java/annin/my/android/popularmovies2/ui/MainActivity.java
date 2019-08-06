@@ -353,8 +353,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             case R.id.movie_favorites:
                // getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-               // favoritesRoomAdapter = new FavoritesRoomAdapter(this, MainActivity.this);
-              //  mRecyclerView.setAdapter(favoritesRoomAdapter);
+                favoritesRoomAdapter = new FavoritesRoomAdapter(this, MainActivity.this);
+                mRecyclerView.setAdapter(favoritesRoomAdapter);
                 selectedSortOrder = SORT_BY_FAVORITES;
                 return true;
 
