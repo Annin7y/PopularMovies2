@@ -174,8 +174,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 mRecyclerView.setAdapter(favoritesRoomAdapter);
                 mMovieViewModel.loadAllMovies().observe(this, new Observer<List<Movie>>() {
                     @Override
-                    public void onChanged(@Nullable List<Movie> movies) {
-
+                    public void onChanged(@Nullable List<Movie> movies)
+                    {
+                        favoritesRoomAdapter.setMovies(movies);
                     }
                 });
             }

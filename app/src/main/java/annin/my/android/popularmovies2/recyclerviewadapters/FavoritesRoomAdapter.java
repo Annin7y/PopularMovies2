@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.pojo.Movie;
@@ -22,7 +23,7 @@ public class FavoritesRoomAdapter extends RecyclerView.Adapter<FavoritesRoomAdap
 private static final String TAG = FavoritesRoomAdapter.class.getSimpleName();
 
 private Context context;
-private ArrayList<Movie> roomMoviesList = new ArrayList<Movie>();
+public List<Movie> roomMoviesList;
 private MovieAdapter.MovieAdapterOnClickHandler mClickHandler;
 public static final int IMAGE_HEIGHT = 185;
 public static final int IMAGE_WIDTH = 50;
@@ -70,6 +71,12 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
         // Log.e(TAG, "Failed to load image.");
         Timber.e("Failed to load image.");
 
+    }
+
+    public void setMovies(List<Movie> movies)
+    {
+        roomMoviesList = movies;
+        notifyDataSetChanged();
     }
 
     @Override
