@@ -356,6 +356,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                // getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
                 favoritesRoomAdapter = new FavoritesRoomAdapter(this, MainActivity.this);
                 mRecyclerView.setAdapter(favoritesRoomAdapter);
+                mMovieViewModel.loadAllMovies().observe(this, new Observer<List<Movie>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Movie> movies)
+                    {
+                        favoritesRoomAdapter.setMovies(movies);
+                    }
+                });
                 selectedSortOrder = SORT_BY_FAVORITES;
                 return true;
 
