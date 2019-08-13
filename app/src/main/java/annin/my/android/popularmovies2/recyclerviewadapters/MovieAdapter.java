@@ -101,7 +101,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         final Movie movieView = moviesList.get(position);
 
         Picasso.with(context)
-                .load(movieView.getPosterUrl())
+                .load(movieView.getFullPosterUrl())
                 //if the image can't be loaded the following error message/image will be displayed
                 .error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);
