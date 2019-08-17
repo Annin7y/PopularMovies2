@@ -73,14 +73,20 @@ public class Movie implements Parcelable
         this.posterUrl = poster;
     }
 
-    public String getFullPosterUrl()
-    {
-        return BASE_POSTER_URL + posterUrl;
-    }
-
     public String getPosterUrl()
     {
         return posterUrl;
+    }
+
+    public void setFullPosterUrl(String poster)
+    {
+        this.posterUrl = poster;
+    }
+
+
+    public String getFullPosterUrl()
+    {
+        return BASE_POSTER_URL + posterUrl;
     }
 
 

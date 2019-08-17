@@ -217,7 +217,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             moviesArrayList = simpleJsonMovieData;
             mRecyclerView.setAdapter(movieAdapter);
             movieAdapter.setMovieList(moviesArrayList);
-
         }
         else
             {
