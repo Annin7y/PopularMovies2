@@ -65,7 +65,7 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
         final Movie movieView = roomMoviesList.get(position);
 
         Picasso.with(context)
-                .load(movieView.getPosterUrl())
+                .load(movieView.getFullPosterUrl())
                 .error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);
         // Log.e(TAG, "Failed to load image.");

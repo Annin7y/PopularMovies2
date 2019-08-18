@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
         {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
+            public boolean onMove(RecyclerView mRecyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
             {
                 return false;
             }
@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
             {
+                viewHolder.getAdapterPosition()
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete
