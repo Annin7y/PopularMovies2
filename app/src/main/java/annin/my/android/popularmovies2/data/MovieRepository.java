@@ -35,6 +35,11 @@ public class MovieRepository
         new insertAsyncTask(mMovieDao).execute(movieEntry);
     }
 
+    public void delete(Movie movieEntry)
+    {
+
+    }
+    
     public boolean select(String id)
     {
         Movie movie = mMovieDao.getSelectedMovie(id);

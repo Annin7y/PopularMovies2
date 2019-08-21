@@ -50,11 +50,9 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
     @Override
     public void onClick(View v)
     {
-
         int adapterPosition = getAdapterPosition();
         Movie posterClick = roomMoviesList.get(adapterPosition);
         mClickHandler.onClick(posterClick);
-
     }
 }
 
@@ -78,6 +76,12 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
         roomMoviesList = movies;
         notifyDataSetChanged();
     }
+
+    public Movie getMovieAt(int position)
+    {
+        return roomMoviesList.get(position);
+    }
+
 
     @Override
     public FavoritesRoomAdapter.FavoritesRoomAdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
