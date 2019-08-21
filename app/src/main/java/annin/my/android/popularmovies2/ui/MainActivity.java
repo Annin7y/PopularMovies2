@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
         {
+            //This method is for drag and drop; not presently used.
             @Override
             public boolean onMove(RecyclerView mRecyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)
             {

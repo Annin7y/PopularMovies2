@@ -39,7 +39,7 @@ public class MovieRepository
     {
 
     }
-    
+
     public boolean select(String id)
     {
         Movie movie = mMovieDao.getSelectedMovie(id);
