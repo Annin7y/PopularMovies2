@@ -30,6 +30,9 @@ import annin.my.android.popularmovies2.pojo.Movie;
         @Delete
         void deleteMovie(Movie movieEntry);
 
+        @Query("DELETE  FROM movies")
+        void deleteAllMovies();
+
     }
 
 
