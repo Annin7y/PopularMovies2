@@ -40,6 +40,11 @@ public class MovieRepository
         new deleteAsyncTask(mMovieDao).execute(movieEntry);
     }
 
+    public void deleteAllMovies()
+    {
+        new deleteAllMoviesAsyncTask(mMovieDao).execute();
+    }
+
     public boolean select(String id)
     {
         Movie movie = mMovieDao.getSelectedMovie(id);
@@ -54,11 +59,16 @@ public class MovieRepository
         }
     }
 
-
     public  void setInsertOk(boolean value)
     {
         isInsertOk.setValue(value);
     }
+
+//    public void setDeleteOk(boolean value)
+//    {
+//        isDeletetOk.setValue(value);
+//    }
+
 
 
     private class insertAsyncTask extends AsyncTask<Movie, Void, Long>
@@ -76,6 +86,21 @@ public class MovieRepository
             return mAsyncTaskDao.insertMovie(params[0]);
 
         }
+
+        @Override
+        protected void onPostExecute(Long id)
+        {
+            if(id != -1)
+            {
+                MovieRepository.this.setInsertOk(true);
+            }
+            else
+            {
+                MovieRepository.this.setInsertOk(false);
+            }
+
+        }
+
     }
         private class deleteAsyncTask extends AsyncTask<Movie, Void, Long>
         {
@@ -93,35 +118,31 @@ public class MovieRepository
 
             }
 
-            private class deleteAllMoviesAsyncTask extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected void onPostExecute(Long id)
+            {
+            }
+            }
+
+            private class deleteAllMoviesAsyncTask extends AsyncTask<Movie, Void, Void>
+            {
                 private MovieDao mAsyncTaskDao;
 
-                deleteAllMoviesAsyncTask(MovieDao dao) {
+                deleteAllMoviesAsyncTask(MovieDao dao)
+                {
                     mAsyncTaskDao = dao;
                 }
 
                 @Override
-                protected Void doInBackground(final Void... voids) {
-                    mAsyncTaskDao.deleteAllMovies();
-                    return null;
+                protected  Void doInBackground(final Movie... voids)
+                {
+                     mAsyncTaskDao.deleteAllMovies();
+                     return null;
+
                 }
 
             }
-        @Override
-        protected void onPostExecute(Long id)
-    {
-          if(id != -1)
-          {
-              MovieRepository.this.setInsertOk(true);
-          }
-          else
-          {
-              MovieRepository.this.setInsertOk(false);
-          }
-
     }
-
-    }}
 
 
 
