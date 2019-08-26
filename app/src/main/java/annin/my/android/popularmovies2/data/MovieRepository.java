@@ -37,7 +37,7 @@ public class MovieRepository
 
     public void delete(Movie movieEntry)
     {
-
+        new deleteAsyncTask(mMovieDao).execute(movieEntry);
     }
 
     public boolean select(String id)
@@ -55,13 +55,13 @@ public class MovieRepository
     }
 
 
-    public void setInsertOk(boolean value)
+    public static void setInsertOk(boolean value)
     {
         isInsertOk.setValue(value);
     }
 
 
-    private class insertAsyncTask extends AsyncTask<Movie, Void, Long>
+    private static class insertAsyncTask extends AsyncTask<Movie, Void, Long>
     {
         private MovieDao mAsyncTaskDao;
 
@@ -73,9 +73,25 @@ public class MovieRepository
         @Override
         protected Long doInBackground(final Movie... params)
         {
-           return mAsyncTaskDao.insertMovie(params[0]);
+            return mAsyncTaskDao.insertMovie(params[0]);
 
         }
+    }
+        private static class deleteAsyncTask extends AsyncTask<Movie, Void, Long>
+        {
+            private MovieDao mAsyncTaskDao;
+
+            deleteAsyncTask(MovieDao dao)
+            {
+                mAsyncTaskDao = dao;
+            }
+
+            @Override
+            protected Long doInBackground(final Movie... params)
+            {
+                return mAsyncTaskDao.deleteMovie(params[0]);
+
+            }
 
         @Override
         protected void onPostExecute(Long id)
@@ -91,7 +107,7 @@ public class MovieRepository
 
     }
 
-    }
+    }}}
 
 
-}
+
