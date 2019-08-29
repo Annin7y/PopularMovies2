@@ -13,38 +13,37 @@ public class MovieViewModel extends AndroidViewModel
     private MovieRepository mRepository;
     private LiveData<List<Movie>> mAllMovies;
 
-    public MovieViewModel (Application application)
+    public MovieViewModel(Application application)
     {
         super(application);
         mRepository = new MovieRepository(application);
         mAllMovies = mRepository.loadAllMovies();
     }
 
-    public LiveData<List<Movie>> loadAllMovies()
-    {
-        return  mAllMovies;
+    public LiveData<List<Movie>> loadAllMovies() {
+        return mAllMovies;
     }
 
-     public LiveData<Boolean> insert(Movie movieEntry)
-     {
-         mRepository.insert(movieEntry);
-         return MovieRepository.isInsertOk;
+    public LiveData<Boolean> insert(Movie movieEntry)
+    {
+        mRepository.insert(movieEntry);
+        return MovieRepository.isInsertOk;
 
-     }
+    }
 
-     public LiveData<Boolean> delete(Movie movieEntry)
-     {
-         mRepository.delete(movieEntry);
-         return MovieRepository.isDeleteOk;
-     }
+    public LiveData<Boolean> delete(Movie movieEntry)
+    {
+        mRepository.delete(movieEntry);
+        return MovieRepository.isDeleteOk;
+    }
 
-     public void deleteAllMovies()
-{
-     mRepository.deleteAllMovies();
-}
-     public boolean select(String movieId)
-     {
-         return mRepository.select(movieId);
-     }
+    public void deleteAllMovies()
+    {
+        mRepository.deleteAllMovies();
+    }
+
+    public boolean select(String movieId) {
+        return mRepository.select(movieId);
+    }
 
 }

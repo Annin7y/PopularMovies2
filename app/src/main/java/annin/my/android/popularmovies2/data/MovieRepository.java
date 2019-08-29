@@ -134,7 +134,6 @@ public class MovieRepository
 
             }
 
-
             private class deleteAllMoviesAsyncTask extends AsyncTask<Movie, Void, Void>
             {
                 private MovieDao mAsyncTaskDao;
