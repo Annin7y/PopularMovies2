@@ -121,7 +121,7 @@ public class MovieRepository
             @Override
             protected void onPostExecute(Integer id)
             {
-                if(id != -1)
+                if(id > 0)
                 {
                     MovieRepository.this.setDeleteOk(true);
                 }

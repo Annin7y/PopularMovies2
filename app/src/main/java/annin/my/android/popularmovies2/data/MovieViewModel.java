@@ -32,6 +32,16 @@ public class MovieViewModel extends AndroidViewModel
 
      }
 
+     public LiveData<Boolean> delete(Movie movieEntry)
+     {
+         mRepository.delete(movieEntry);
+         return MovieRepository.isDeleteOk;
+     }
+
+     public void deleteAllMovies()
+{
+     mRepository.deleteAllMovies();
+}
      public boolean select(String movieId)
      {
          return mRepository.select(movieId);
