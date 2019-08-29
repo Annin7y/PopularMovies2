@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
             {
-                mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+             //   mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete

@@ -15,6 +15,7 @@ public class MovieRepository
     private MovieDao mMovieDao;
     private LiveData<List<Movie>> mAllMovies;
     public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
 
     MovieRepository(Application application)
     {
@@ -59,17 +60,10 @@ public class MovieRepository
         }
     }
 
-    public  void setInsertOk(boolean value)
+    public void setInsertOk(boolean value)
     {
         isInsertOk.setValue(value);
     }
-
-//    public void setDeleteOk(boolean value)
-//    {
-//        isDeletetOk.setValue(value);
-//    }
-
-
 
     private class insertAsyncTask extends AsyncTask<Movie, Void, Long>
     {
@@ -102,7 +96,13 @@ public class MovieRepository
         }
 
     }
-        private class deleteAsyncTask extends AsyncTask<Movie, Void, Long>
+
+    public void setDeleteOk(boolean value)
+    {
+        isDeleteOk.setValue(value);
+    }
+
+        private class deleteAsyncTask extends AsyncTask<Movie, Void, Integer>
         {
             private MovieDao mAsyncTaskDao;
 
@@ -112,17 +112,28 @@ public class MovieRepository
             }
 
             @Override
-            protected Long doInBackground(final Movie... params)
+            protected Integer doInBackground(final Movie... params)
             {
                 return mAsyncTaskDao.deleteMovie(params[0]);
 
             }
 
             @Override
-            protected void onPostExecute(Long id)
+            protected void onPostExecute(Integer id)
             {
+                if(id != -1)
+                {
+                    MovieRepository.this.setDeleteOk(true);
+                }
+            else
+                {
+                    MovieRepository.this.setDeleteOk(false);
+                }
+
             }
+
             }
+
 
             private class deleteAllMoviesAsyncTask extends AsyncTask<Movie, Void, Void>
             {
@@ -138,7 +149,6 @@ public class MovieRepository
                 {
                      mAsyncTaskDao.deleteAllMovies();
                      return null;
-
                 }
 
             }
