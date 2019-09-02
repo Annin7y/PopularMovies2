@@ -184,7 +184,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         {
             movie = getIntent().getExtras().getParcelable("Movie");
             Picasso.with(this)
-                    .load(movie.getPosterUrl())
+                    .load(movie.getFullPosterUrl())
                     .into(poster);
 
             movieId = movie.getMovieId();
