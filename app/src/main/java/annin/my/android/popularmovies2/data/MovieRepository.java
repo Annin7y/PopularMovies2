@@ -41,10 +41,6 @@ public class MovieRepository
         new deleteAsyncTask(mMovieDao).execute(movieEntry);
     }
 
-    public void deleteAllMovies()
-    {
-        new deleteAllMoviesAsyncTask(mMovieDao).execute();
-    }
 
     public boolean select(String id)
     {
@@ -134,23 +130,6 @@ public class MovieRepository
 
             }
 
-            private class deleteAllMoviesAsyncTask extends AsyncTask<Movie, Void, Void>
-            {
-                private MovieDao mAsyncTaskDao;
-
-                deleteAllMoviesAsyncTask(MovieDao dao)
-                {
-                    mAsyncTaskDao = dao;
-                }
-
-                @Override
-                protected  Void doInBackground(final Movie... voids)
-                {
-                     mAsyncTaskDao.deleteAllMovies();
-                     return null;
-                }
-
-            }
     }
 
 
