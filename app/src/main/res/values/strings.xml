@@ -26,5 +26,7 @@
     <string name="widget_movie_name_label">Movie:</string>
     <string name="widget_movie_name">Captain Marvel</string>
     <string name="movie_title_widget">Avengers</string>
+    <string name="movie_removed_from_favorites">Movie removed from Favorites</string>
+    <string name="remove_from_favorites">Remove from Favorites</string>
 
 </resources>

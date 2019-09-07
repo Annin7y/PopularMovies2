@@ -93,7 +93,6 @@ public class FavoritesRoomAdapterViewHolder extends RecyclerView.ViewHolder impl
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         return new FavoritesRoomAdapter.FavoritesRoomAdapterViewHolder(view);
     }
-
             public int getItemCount()
             {
                 if(roomMoviesList != null)

@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 // Retrieve the id of the task to delete
                 int id = (int) viewHolder.itemView.getTag();
 
+
                 // Build appropriate uri with String row id appended
                // String stringId = Integer.toString(id);
               //  Uri uri = MovieContract.MovieEntry.CONTENT_URI;

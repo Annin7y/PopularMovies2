@@ -30,7 +30,6 @@ public class MovieRepository
         return mAllMovies;
     }
 
-
     public void insert(Movie movieEntry)
     {
         new insertAsyncTask(mMovieDao).execute(movieEntry);
@@ -41,22 +40,17 @@ public class MovieRepository
         new deleteAsyncTask(mMovieDao).execute(movieEntry);
     }
 
-
+    public void deleteAllMovies() {
+        new deleteAllMoviesAsyncTask(mMovieDao).execute();
+    }
     public boolean select(String id)
     {
         Movie movie = mMovieDao.getSelectedMovie(id);
 
-        if(movie == null)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return movie != null;
     }
 
-    public void setInsertOk(boolean value)
+    public static void setInsertOk(boolean value)
     {
         isInsertOk.setValue(value);
     }
@@ -93,7 +87,7 @@ public class MovieRepository
 
     }
 
-    public void setDeleteOk(boolean value)
+    public static void setDeleteOk(boolean value)
     {
         isDeleteOk.setValue(value);
     }
@@ -115,9 +109,9 @@ public class MovieRepository
             }
 
             @Override
-            protected void onPostExecute(Integer id)
+            protected void onPostExecute(Integer  rowsDeleted)
             {
-                if(id > 0)
+                if(rowsDeleted > 0)
                 {
                     MovieRepository.this.setDeleteOk(true);
                 }
@@ -125,11 +119,24 @@ public class MovieRepository
                 {
                     MovieRepository.this.setDeleteOk(false);
                 }
-
             }
-
             }
+    public static class deleteAllMoviesAsyncTask extends AsyncTask<Movie, Void, Void>
+    {
+        private final MovieDao mAsyncTaskDao;
 
+        deleteAllMoviesAsyncTask(MovieDao dao)
+        {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Movie... voids)
+        {
+            mAsyncTaskDao.deleteAllMovies();
+            return null;
+        }
+    }
     }
 
 
