@@ -131,7 +131,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 //Construct the URI for the item to delete
                 //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
                 // Retrieve the id of the task to delete
-                int id = (int) viewHolder.itemView.getTag();
+              //  int id = (int) viewHolder.itemView.getTag();
+                mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
 
 
                 // Build appropriate uri with String row id appended
