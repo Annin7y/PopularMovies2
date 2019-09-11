@@ -125,15 +125,17 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir)
             {
-             //   mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+
+                mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+            }
+            //CP code commented out
+//   mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete
                 //[Hint] Use getTag (from the adapter code) to get the id of the swiped item
                 // Retrieve the id of the task to delete
-              //  int id = (int) viewHolder.itemView.getTag();
-                mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
-
+                //  int id = (int) viewHolder.itemView.getTag();
 
                 // Build appropriate uri with String row id appended
                // String stringId = Integer.toString(id);
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
               //  getSupportLoaderManager().restartLoader(FAVORITES_LOADER_ID, null, MainActivity.this);
-            }
+
         }).attachToRecyclerView(mRecyclerView);
 
         /*
