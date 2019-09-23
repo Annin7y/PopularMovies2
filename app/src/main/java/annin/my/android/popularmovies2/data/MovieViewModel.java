@@ -37,6 +37,11 @@ public class MovieViewModel extends AndroidViewModel
         return MovieRepository.isDeleteOk;
     }
 
+    public void deleteAllMovies()
+    {
+        mRepository.deleteAllMovies();
+    }
+
     public boolean select(String movieId)
     {
         return mRepository.select(movieId);

@@ -22,4 +22,10 @@
         android:title="Favorite movies"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/delete_all_movie_favorites"
+        android:orderInCategory="1"
+        android:title="@string/delete_all_movies_from_favorites"
+        app:showAsAction="never" />
+
 </menu>

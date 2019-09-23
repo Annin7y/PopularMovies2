@@ -28,5 +28,7 @@
     <string name="movie_title_widget">Avengers</string>
     <string name="movie_removed_from_favorites">Movie removed from Favorites</string>
     <string name="remove_from_favorites">Remove from Favorites</string>
+    <string name="delete_all_movies_from_favorites">Delete All Movies from Favorites</string>
+    <string name="movies_deleted_toast">All Movies Deleted</string>
 
 </resources>

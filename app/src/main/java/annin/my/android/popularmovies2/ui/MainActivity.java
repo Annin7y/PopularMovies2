@@ -32,6 +32,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -369,6 +370,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                     }
                 });
                 selectedSortOrder = SORT_BY_FAVORITES;
+                return true;
+
+            case R.id.delete_all_movie_favorites:
+                mMovieViewModel.deleteAllMovies();
+                Toast.makeText(MainActivity.this, getString(R.string.movies_deleted_toast), Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
