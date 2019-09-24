@@ -1,16 +1,10 @@
 package annin.my.android.popularmovies2.ui;
 
-import android.app.LoaderManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -40,11 +34,9 @@ import java.util.Objects;
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskReviewInterface;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskTrailerInterface;
-import annin.my.android.popularmovies2.asynctask.MovieAsyncTask;
 import annin.my.android.popularmovies2.asynctask.MovieReviewAsyncTask;
 import annin.my.android.popularmovies2.asynctask.MovieTrailerAsyncTask;
 import annin.my.android.popularmovies2.data.AppDatabase;
-import annin.my.android.popularmovies2.data.MovieContract;
 import annin.my.android.popularmovies2.data.MovieViewModel;
 import annin.my.android.popularmovies2.pojo.Movie;
 import annin.my.android.popularmovies2.pojo.MovieReview;
@@ -102,15 +94,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     // Keep track of whether the selected movie is Favorite or not
     private boolean isFavorite;
 
-
     /**
      * Identifier for the favorites data loader
      */
     private static final int FAVORITES_LOADER = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
@@ -137,48 +127,46 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
         // Set a click listener for the Favorite button
-        favoritesButton.setOnClickListener(new View.OnClickListener()
-        {
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
 
-        if(isFavorite)
-        {
-            // If the movie is already favorite, we remove it from the DB
-            mMovieViewModel.delete(movie).observe(DetailActivity.this, new Observer<Boolean>() {
-                @Override
-                public void onChanged(@Nullable Boolean isDeleteOk) {
-                    if (isDeleteOk != null && isDeleteOk) {
-                        // If everything was OK,
-                        // we change the button text and set isFavorite to false
-                        Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
-                        favoritesButton.setText(R.string.favorites_button_text_add);
-                        isFavorite = false;
-                    }
-                }
-            });
-
-        } else {
-            // If the movie is not favorite, we add it to the DB
-            mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>()
-            {
-                @Override
-                public void onChanged(@Nullable Boolean isInsertOk)
-                {
-                    if (isInsertOk != null && isInsertOk)
+                if (isFavorite) {
+                    // If the movie is already favorite, we remove it from the DB
+                    mMovieViewModel.delete(movie).observe(DetailActivity.this, new Observer<Boolean>()
                     {
-                        // If everything was OK,
-                        // we change the button text and set isFavorite to true
-                        Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                        favoritesButton.setText((R.string.remove_from_favorites));
-                        isFavorite = true;
-                    }
+                        @Override
+                        public void onChanged(@Nullable Boolean isDeleteOk)
+                        {
+                            if (isDeleteOk != null && isDeleteOk)
+                            {
+                                // If everything was OK,
+                                // we change the button text and set isFavorite to false
+                                Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
+                                favoritesButton.setText(R.string.favorites_button_text_add);
+                                isFavorite = false;
+                            }
+                        }
+                    });
+
+                } else
+                    {
+                    // If the movie is not favorite, we add it to the DB
+                    mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>() {
+                        @Override
+                        public void onChanged(@Nullable Boolean isInsertOk) {
+                            if (isInsertOk != null && isInsertOk) {
+                                // If everything was OK,
+                                // we change the button text and set isFavorite to true
+                                Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                                favoritesButton.setText((R.string.remove_from_favorites));
+                                isFavorite = true;
+                            }
+                        }
+                    });
                 }
-            });
-        }
-    }
-});
+            }
+        });
 
         if (getIntent() != null && getIntent().getExtras() != null)
         {
@@ -187,21 +175,56 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                     .load(movie.getFullPosterUrl())
                     .into(poster);
 
-        // Extract the movie ID from the selected movie
-        String movieId = Objects.requireNonNull(movie).getMovieId();
+            // Extract the movie ID from the selected movie
+            String movieId = Objects.requireNonNull(movie).getMovieId();
 
-        // Query the DB for the selected movie.
-        // This can return true (if the movie is already favorite),
-        // or false (if the movie is not favorite)
-        isFavorite = mMovieViewModel.select(movieId);
+            // Query the DB for the selected movie.
+            // This can return true (if the movie is already favorite),
+            // or false (if the movie is not favorite)
+            // isFavorite = mMovieViewModel.select(movieId);
 
             // If the movie is favorite, we show the "Remove from Favorites" text.
             // Otherwise, we show "Add to Favorites".
-            if (isFavorite) {
-                favoritesButton.setText(getString(R.string.remove_from_favorites));
-            } else {
-                favoritesButton.setText(getString(R.string.favorites_button_text_add));
+//            if (isFavorite) {
+//                favoritesButton.setText(getString(R.string.remove_from_favorites));
+//            } else {
+//                favoritesButton.setText(getString(R.string.favorites_button_text_add));
+//            }
+
+            if (isFavorite)
+            {
+                // If the movie is already favorite, we remove it from the DB
+                mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Boolean>()
+                {
+                    @Override
+                    public void onChanged(@Nullable Boolean isFavorite)
+                    {
+                        if (isFavorite != null)
+                        {
+                            favoritesButton.setText(getString(R.string.remove_from_favorites));
+                        }
+                    }
+                });
+
+            } else
+                {
+                    // If the movie is not favorite, we add it to the DB
+                    mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Boolean>()
+                    {
+                        @Override
+                        public void onChanged(@Nullable Boolean isFavorite)
+                        {
+                            if (isFavorite == null)
+                            {
+                                favoritesButton.setText(getString(R.string.favorites_button_text_add));
+                            }
+                        }
+                    });
+
+
             }
+    }
+
 
         //Log.i("movieId: ", movie.getMovieId());
             Timber.i( "movieId:" +  movie.getMovieId());
@@ -253,7 +276,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             String finalDate = newDateFormat.format(date);
 
             releaseDate.setText(finalDate);
-        }}
+        }
 
         //Content Provider code commented out
 //                ContentValues values = new ContentValues();

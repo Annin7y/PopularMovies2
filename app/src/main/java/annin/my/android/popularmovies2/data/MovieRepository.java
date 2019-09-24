@@ -16,6 +16,7 @@ public class MovieRepository
     private LiveData<List<Movie>> mAllMovies;
     public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
     public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
+    public static MutableLiveData<Boolean> isFavorite = new MutableLiveData<>();
 
     MovieRepository(Application application)
     {
@@ -43,11 +44,32 @@ public class MovieRepository
     public void deleteAllMovies() {
         new deleteAllMoviesAsyncTask(mMovieDao).execute();
     }
-    public boolean select(String id)
+//    public boolean select(String id)
+//    {
+//        Movie movie = mMovieDao.getSelectedMovie(id);
+//
+//        return movie != null;
+//    }
+
+    public static void setIsFavorite(boolean value)
+    {
+        isFavorite.setValue(value);
+    }
+
+
+    public LiveData<Boolean> select(String id)
     {
         Movie movie = mMovieDao.getSelectedMovie(id);
 
-        return movie != null;
+        if(movie != null)
+        {
+            MovieRepository.this.setIsFavorite(true);
+        }
+        else
+        {
+            MovieRepository.this.setIsFavorite(false);
+        }
+        return isFavorite;
     }
 
     public static void setInsertOk(boolean value)
