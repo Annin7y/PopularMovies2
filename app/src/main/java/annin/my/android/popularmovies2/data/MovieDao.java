@@ -19,7 +19,7 @@ import annin.my.android.popularmovies2.pojo.Movie;
         LiveData<List<Movie>> loadAllMovies();
 
         @Query("SELECT * FROM movies WHERE movieId =:id")
-        Movie getSelectedMovie(String id);
+        LiveData<Movie> getSelectedMovie(String id);
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)
         long insertMovie(Movie movieEntry);
