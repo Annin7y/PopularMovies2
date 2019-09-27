@@ -127,11 +127,14 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
         mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
         // Set a click listener for the Favorite button
-        favoritesButton.setOnClickListener(new View.OnClickListener() {
+        favoritesButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
-                if (isFavorite) {
+                if (isFavorite)
+                {
                     // If the movie is already favorite, we remove it from the DB
                     mMovieViewModel.delete(movie).observe(DetailActivity.this, new Observer<Boolean>()
                     {
@@ -152,10 +155,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 } else
                     {
                     // If the movie is not favorite, we add it to the DB
-                    mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>() {
+                    mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>()
+                    {
                         @Override
-                        public void onChanged(@Nullable Boolean isInsertOk) {
-                            if (isInsertOk != null && isInsertOk) {
+                        public void onChanged(@Nullable Boolean isInsertOk)
+                        {
+                            if (isInsertOk != null && isInsertOk)
+                            {
                                 // If everything was OK,
                                 // we change the button text and set isFavorite to true
                                 Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
@@ -191,16 +197,15 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //                favoritesButton.setText(getString(R.string.favorites_button_text_add));
 //            }
 
-            if (isFavorite)
-            {
                 // If the movie is already favorite, we remove it from the DB
-                mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Boolean>()
+                mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Movie>()
                 {
                     @Override
-                    public void onChanged(@Nullable Boolean isFavorite)
+                    public void onChanged(@Nullable Movie movie)
                     {
-                        if (isFavorite != null)
+                        if (movie != null)
                         {
+                            isFavorite = true;
                             favoritesButton.setText(getString(R.string.remove_from_favorites));
                         }
                     }
@@ -208,26 +213,13 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
             } else
                 {
-                    // If the movie is not favorite, we add it to the DB
-                    mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Boolean>()
-                    {
-                        @Override
-                        public void onChanged(@Nullable Boolean isFavorite)
-                        {
-                            if (isFavorite == null)
-                            {
-                                favoritesButton.setText(getString(R.string.favorites_button_text_add));
+                    favoritesButton.setText(getString(R.string.favorites_button_text_add));
+                    isFavorite = false;
                             }
-                        }
-                    });
-
-
-            }
-    }
 
 
         //Log.i("movieId: ", movie.getMovieId());
-            Timber.i( "movieId:" +  movie.getMovieId());
+          //  Timber.i( "movieId:" +  movie.getMovieId());
 
             //Store MovieInfo in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
