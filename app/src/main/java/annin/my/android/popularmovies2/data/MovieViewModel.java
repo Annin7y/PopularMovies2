@@ -47,4 +47,10 @@ public class MovieViewModel extends AndroidViewModel
 
         return mRepository.select(id);
     }
+
+    //Method used when testing running the database on the main thread
+//    public boolean select(String movieId)
+//    {
+//        return mRepository.select(movieId);
+//    }
 }

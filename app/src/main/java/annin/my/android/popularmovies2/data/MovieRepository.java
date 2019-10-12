@@ -43,6 +43,8 @@ public class MovieRepository
     public void deleteAllMovies() {
         new deleteAllMoviesAsyncTask(mMovieDao).execute();
     }
+
+    //Method used when testing running the database on the main thread
 //    public boolean select(String id)
 //    {
 //        Movie movie = mMovieDao.getSelectedMovie(id);
