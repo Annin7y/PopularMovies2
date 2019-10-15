@@ -1,15 +1,5 @@
 package annin.my.android.popularmovies2.data;
 
-import android.content.ContentProvider;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.UriMatcher;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-
 /**
  * Created by Maino96-10022 on 9/6/2017.
  */

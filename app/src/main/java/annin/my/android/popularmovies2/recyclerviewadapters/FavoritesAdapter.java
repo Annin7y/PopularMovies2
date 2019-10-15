@@ -1,21 +1,6 @@
 package annin.my.android.popularmovies2.recyclerviewadapters;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
-import annin.my.android.popularmovies2.R;
-import annin.my.android.popularmovies2.data.MovieContract;
-import annin.my.android.popularmovies2.pojo.Movie;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import timber.log.Timber;
 
 /**
  * Created by Maino96-10022 on 9/24/2017.

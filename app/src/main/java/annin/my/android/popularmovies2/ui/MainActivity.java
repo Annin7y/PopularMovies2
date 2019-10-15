@@ -1,30 +1,27 @@
 package annin.my.android.popularmovies2.ui;
 
 import android.app.ActivityOptions;
-import android.appwidget.AppWidgetManager;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.ComponentName;
+
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+
+import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -34,23 +31,18 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.asynctask.AsyncTaskInterface;
 import annin.my.android.popularmovies2.asynctask.MovieAsyncTask;
-import annin.my.android.popularmovies2.data.MovieContract;
 import annin.my.android.popularmovies2.data.MovieViewModel;
 import annin.my.android.popularmovies2.decoration.DividerItemDecoration;
 import annin.my.android.popularmovies2.decoration.VerticalSpacingDecoration;
 import annin.my.android.popularmovies2.pojo.Movie;
-import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.FavoritesRoomAdapter;
 import annin.my.android.popularmovies2.recyclerviewadapters.MovieAdapter;
-import annin.my.android.popularmovies2.widget.MovieWidgetProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -64,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     //Tag for the log messages
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private static final int FAVORITES_LOADER_ID = 0;
+    //private static final int FAVORITES_LOADER_ID = 0;
     private ArrayList<Movie> moviesArrayList = new ArrayList<>();
     private Context context;
     private MovieAdapter movieAdapter;

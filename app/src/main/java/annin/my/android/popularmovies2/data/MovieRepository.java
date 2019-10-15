@@ -1,11 +1,10 @@
 package annin.my.android.popularmovies2.data;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import annin.my.android.popularmovies2.pojo.Movie;
@@ -22,7 +21,6 @@ public class MovieRepository
         AppDatabase db = AppDatabase.getDatabase(application);
         mMovieDao = db.movieDao();
         mAllMovies = mMovieDao.loadAllMovies();
-
     }
 
     LiveData<List<Movie>> loadAllMovies()

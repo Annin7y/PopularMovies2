@@ -2,8 +2,8 @@ package annin.my.android.popularmovies2.decoration;
 
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by Maino96-10022 on 8/16/2017.

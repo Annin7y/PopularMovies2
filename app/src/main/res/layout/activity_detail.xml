@@ -82,13 +82,13 @@
             android:text="@string/release_date"
             android:textSize="@dimen/text_size" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.appcompat.widget.RecyclerView
             android:id="@+id/recyclerview_trailer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/release_date"
             android:layout_marginTop="@dimen/trailer_view_margin_top"
-            android:scrollbars="horizontal"></android.support.v7.widget.RecyclerView>
+            android:scrollbars="horizontal"></androidx.appcompat.widget.RecyclerView>
 
         <TextView
             android:id="@+id/empty_view_trailer"
@@ -101,7 +101,7 @@
             tools:text="@string/movie_author"
             android:text ="@string/trailer_currently_unavailable_text"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.appcompat.widget.RecyclerView
             android:id="@+id/recyclerview_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
             android:layout_marginBottom="@dimen/review_view_margin_bottom"
             android:scrollbars="vertical">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.appcompat.widget.RecyclerView>
 
         <TextView
             android:id="@+id/empty_view_review"
