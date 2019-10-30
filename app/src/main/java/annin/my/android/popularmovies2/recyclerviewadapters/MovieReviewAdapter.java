@@ -1,7 +1,6 @@
 package annin.my.android.popularmovies2.recyclerviewadapters;
 
 import android.content.Context;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,6 @@ import annin.my.android.popularmovies2.R;
 import annin.my.android.popularmovies2.pojo.MovieReview;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-/**
- * Created by Maino96-10022 on 8/17/2017.
- */
 
 public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.MovieReviewAdapterViewHolder>
 {
@@ -88,3 +83,10 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
         notifyDataSetChanged();
     }
 }
+
+
+
+
+
+
+

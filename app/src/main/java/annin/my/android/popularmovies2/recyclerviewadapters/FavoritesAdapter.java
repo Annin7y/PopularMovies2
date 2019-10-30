@@ -1,11 +1,5 @@
 package annin.my.android.popularmovies2.recyclerviewadapters;
 
-
-
-/**
- * Created by Maino96-10022 on 9/24/2017.
- */
-
 public class FavoritesAdapter //extends RecyclerView.Adapter<FavoritesAdapter.FavoritesAdapterViewHolder>
 {
 //    private static final String TAG = FavoritesAdapter.class.getSimpleName();

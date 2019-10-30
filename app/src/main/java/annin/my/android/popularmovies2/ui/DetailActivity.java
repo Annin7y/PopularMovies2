@@ -136,7 +136,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
                 if (isFavorite)
                 {
-                    // If the movie is already favorite, we remove it from the DB
+                    // If the movie is already a favorite, we remove it from the DB
                     mMovieViewModel.delete(movie).observe(DetailActivity.this, new Observer<Boolean>()
                     {
                         @Override
@@ -185,6 +185,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             // Extract the movie ID from the selected movie
             String movieId = Objects.requireNonNull(movie).getMovieId();
 
+            //The code below was used when running the Room Database on the main thread
             // Query the DB for the selected movie.
             // This can return true (if the movie is already favorite),
             // or false (if the movie is not favorite)
@@ -198,7 +199,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //                favoritesButton.setText(getString(R.string.favorites_button_text_add));
 //            }
 
-                // If the movie is already favorite, we remove it from the DB
+                //The code below is to set the button in the Detail Activity to "Remove from Favorites"
+                //when we click on a movie in the Favorites list
                 mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Movie>()
                 {
                     @Override
@@ -216,7 +218,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 {
                     favoritesButton.setText(getString(R.string.favorites_button_text_add));
                     isFavorite = false;
-                            }
+                           }
 
 
         //Log.i("movieId: ", movie.getMovieId());

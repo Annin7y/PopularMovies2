@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
                 mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
             }
             //CP code commented out
-//   mMovieViewModel.delete(favoritesRoomAdapter.getMovieAt(viewHolder.getAdapterPosition()));
+
                 // Here is where you'll implement swipe to delete
 
                 //Construct the URI for the item to delete
