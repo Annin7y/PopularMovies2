@@ -136,37 +136,32 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
                 if (isFavorite)
                 {
-                    // If the movie is already a favorite, we remove it from the DB
-                    mMovieViewModel.delete(movie).observe(DetailActivity.this, new Observer<Boolean>()
-                    {
-                        @Override
-                        public void onChanged(@Nullable Boolean isDeleteOk)
-                        {
-                            if (isDeleteOk != null && isDeleteOk)
-                            {
-                                // If everything was OK,
-                                // we change the button text and set isFavorite to false
-                                Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
-                                favoritesButton.setText(R.string.favorites_button_text_add);
-                                isFavorite = false;
-                            }
-                        }
-                    });
+                    mMovieViewModel.delete(movie);
 
-                } else
-                    {
+                    // If the movie is already a favorite, we remove it from the DB
+//                    mMovieViewModel.delete(movie).observe(DetailActivity.this, new Observer<Boolean>() {
+//                        @Override
+//                        public void onChanged(@Nullable Boolean isDeleteOk) {
+//                            if (isDeleteOk != null && isDeleteOk) {
+//                                // If everything was OK,
+//                                // we change the button text and set isFavorite to false
+//                                Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
+//                                favoritesButton.setText(R.string.favorites_button_text_add);
+//                                isFavorite = false;
+//                            }
+//                        }
+//                    });
+
+                } else {
                     // If the movie is not favorite, we add it to the DB
-                    mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>()
-                    {
+                    mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>() {
                         @Override
-                        public void onChanged(@Nullable Boolean isInsertOk)
-                        {
-                            if (isInsertOk != null && isInsertOk)
-                            {
+                        public void onChanged(@Nullable Boolean isInsertOk) {
+                            if (isInsertOk != null && isInsertOk) {
                                 // If everything was OK,
                                 // we change the button text and set isFavorite to true
                                 Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                                favoritesButton.setText((R.string.remove_from_favorites));
+                                favoritesButton.setText((R.string.favorites_button_text_remove));
                                 isFavorite = true;
                             }
                         }
@@ -175,8 +170,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             }
         });
 
-        if (getIntent() != null && getIntent().getExtras() != null)
-        {
+        if (getIntent() != null && getIntent().getExtras() != null) {
             movie = getIntent().getExtras().getParcelable("Movie");
             Picasso.with(this)
                     .load(movie.getFullPosterUrl())
@@ -198,31 +192,47 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //            } else {
 //                favoritesButton.setText(getString(R.string.favorites_button_text_add));
 //            }
-
-                //The code below is to set the button in the Detail Activity to "Remove from Favorites"
-                //when we click on a movie in the Favorites list
-                mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Movie>()
+            mMovieViewModel.select(movieId);
+            //The code below is to set the button in the Detail Activity to "Remove from Favorites"
+            //when we click on a movie in the Favorites list
+            // mMovieViewModel.isFavorite().observe(this, new Observer<Boolean>() {
+            //   @Override
+            //  public void onChanged(Boolean value) {
+            //Implementing a lambda expression
+            mMovieViewModel.isFavorite().observe(this, value ->
+            {
+                isFavorite = value;
+                if (isFavorite)
                 {
-                    @Override
-                    public void onChanged(@Nullable Movie movie)
-                    {
-                        if (movie != null)
-                        {
-                            isFavorite = true;
-                            favoritesButton.setText(getString(R.string.remove_from_favorites));
-                        }
-                    }
-                });
-
-            } else
-                {
+                    favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+                } else {
                     favoritesButton.setText(getString(R.string.favorites_button_text_add));
-                    isFavorite = false;
-                           }
+                }
+            });
 
 
-        //Log.i("movieId: ", movie.getMovieId());
-          //  Timber.i( "movieId:" +  movie.getMovieId());
+//                mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Movie>()
+//                {
+//                    @Override
+//                    public void onChanged(@Nullable Movie movie)
+//                    {
+//                        if (movie != null)
+//                        {
+//                            isFavorite = true;
+//                            favoritesButton.setText(getString(R.string.favorites_button_text_remove));
+//                        }
+//                    }
+//                });
+//
+//            } else
+//                {
+//                    favoritesButton.setText(getString(R.string.favorites_button_text_add));
+//                    isFavorite = false;
+//                           }
+
+
+            //Log.i("movieId: ", movie.getMovieId());
+            //  Timber.i( "movieId:" +  movie.getMovieId());
 
             //Store MovieInfo in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -233,9 +243,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             prefsEditor.putString("MovieList_Widget", json);
             prefsEditor.apply();
 
-            Intent intent = new Intent (ACTION_DATA_UPDATED)
-                    .setPackage (context.getPackageName ());
-            context.sendBroadcast (intent);
+            Intent intent = new Intent(ACTION_DATA_UPDATED)
+                    .setPackage(context.getPackageName());
+            context.sendBroadcast(intent);
 
             MovieReviewAsyncTask myReviewTask = new MovieReviewAsyncTask(this);
             myReviewTask.execute(movieId);
@@ -258,13 +268,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = null;
 
-            try
-            {
+            try {
                 date = simpleDateFormat.parse(movie.getReleaseDate());
                 date.toString();
-            }
-            catch (ParseException e)
-            {
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
             SimpleDateFormat newDateFormat = new SimpleDateFormat("MMM dd, yyyy");
