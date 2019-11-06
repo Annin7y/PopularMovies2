@@ -42,6 +42,7 @@ public class MovieViewModel extends AndroidViewModel
 
     public void insert(Movie movieEntry) {
         mRepository.insert(movieEntry);
+
     }
 
     public void delete(Movie movieEntry) {
@@ -54,15 +55,15 @@ public class MovieViewModel extends AndroidViewModel
         mRepository.deleteAllMovies();
     }
 
-    public LiveData<Boolean> isFavorite() {
-        mRepository.isFavorite();
-        return isFavorite;
+    public LiveData<Boolean> isFavorite()
+    {
+       return mRepository.isFavorite();
+
     }
 
-    public LiveData<Movie> select(String id)
+    public LiveData<Movie> select(String movieId)
     {
-
-        return mRepository.select(id);
+        return mRepository.select(movieId);
     }
 
     //Method used when testing running the database on the main thread

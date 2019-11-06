@@ -97,14 +97,14 @@ public class MovieRepository
             if(id != -1)
             {
               //  MovieRepository.this.setInsertOk(true);
-                if (id != -1) {
-                    // since the query was OK, we set isFavorite to true
+                // since the query was OK, we set isFavorite to true
                     setFavorite(true);
                 }
-            }
+
             else
             {
               //  MovieRepository.this.setInsertOk(false);
+                setFavorite(false);
             }
 
         }
@@ -143,6 +143,7 @@ public class MovieRepository
             else
                 {
                    // MovieRepository.this.setDeleteOk(false);
+                    setFavorite(true);
                 }
             }
             }

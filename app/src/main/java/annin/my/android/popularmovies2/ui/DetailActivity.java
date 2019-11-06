@@ -48,6 +48,7 @@ import annin.my.android.popularmovies2.recyclerviewadapters.MovieTrailerAdapter;
 import annin.my.android.popularmovies2.utils.NetworkUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 import static annin.my.android.popularmovies2.R.id.imageView;
 import static annin.my.android.popularmovies2.R.id.imageViewYoutube;
@@ -237,7 +238,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
 
             //Log.i("movieId: ", movie.getMovieId());
-            //  Timber.i( "movieId:" +  movie.getMovieId());
+              Timber.i( "movieId:" +  movie.getMovieId());
 
             //Store MovieInfo in SharedPreferences
             SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
