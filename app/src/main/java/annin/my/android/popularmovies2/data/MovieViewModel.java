@@ -57,7 +57,7 @@ public class MovieViewModel extends AndroidViewModel
 
     public LiveData<Boolean> isFavorite()
     {
-       return mRepository.isFavorite();
+       return isFavorite;
 
     }
 
