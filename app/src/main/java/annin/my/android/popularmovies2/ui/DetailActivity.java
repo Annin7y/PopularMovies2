@@ -128,6 +128,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         mMovieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
 
+
         // Set a click listener for the Favorite button
         favoritesButton.setOnClickListener(view -> {
 //        favoritesButton.setOnClickListener(new View.OnClickListener()
@@ -146,9 +147,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //                            if (isDeleteOk != null && isDeleteOk) {
 //                                // If everything was OK,
 //                                // we change the button text and set isFavorite to false
-//                                Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
-//                                favoritesButton.setText(R.string.favorites_button_text_add);
-//                                isFavorite = false;
+ //                               Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
+  //                              favoritesButton.setText(R.string.favorites_button_text_add);
+ //                               isFavorite = false;
 //                            }
 //                        }
 //                    });
@@ -166,9 +167,9 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //                            if (isInsertOk != null && isInsertOk) {
 //                                // If everything was OK,
 //                                // we change the button text and set isFavorite to true
-//                                Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
- //                              favoritesButton.setText((R.string.favorites_button_text_remove));
-//                                isFavorite = true;
+ //                               Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+//                               favoritesButton.setText((R.string.favorites_button_text_remove));
+  //                              isFavorite = true;
 //                            }
 //                        }
 //                    });

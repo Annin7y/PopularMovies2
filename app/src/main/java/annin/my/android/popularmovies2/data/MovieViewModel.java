@@ -55,10 +55,10 @@ public class MovieViewModel extends AndroidViewModel
         mRepository.deleteAllMovies();
     }
 
+
     public LiveData<Boolean> isFavorite()
     {
-       return mRepository.isFavorite();
-
+        return mRepository.isFavorite();
     }
 
     public LiveData<Movie> select(String movieId)

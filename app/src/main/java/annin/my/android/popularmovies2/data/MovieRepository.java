@@ -16,7 +16,7 @@ public class MovieRepository
    // public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
    // public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
     public static MutableLiveData<Boolean> isFavorite = new MutableLiveData<>();
-
+    private LiveData<Movie> movie;
 
     MovieRepository(Application application)
     {
@@ -30,8 +30,7 @@ public class MovieRepository
         return mAllMovies;
     }
 
-    //Insert and delete methods commented out: combined into a single isFavorite variable
-    //will be checked in the Repository instead of the DetailActivity
+
     public void insert(Movie movieEntry)
     {
         new insertAsyncTask(mMovieDao).execute(movieEntry);
@@ -58,8 +57,17 @@ public class MovieRepository
 
     public LiveData<Movie> select(String id)
     {
+        if(movie != null)
+        {
+            MovieRepository.this.setFavorite(true);
+        }
+        else
+        {
+            MovieRepository.this.setFavorite(false);
+        }
         return mMovieDao.getSelectedMovie(id);
     }
+
 
     public void setFavorite(boolean value) {
         isFavorite.setValue(value);
@@ -69,7 +77,8 @@ public class MovieRepository
         return isFavorite;
     }
 
-
+    //isInsertOk and isDeleteOk methods commented out: combined into a single isFavorite variable
+    //will be checked in the Repository instead of the DetailActivity
 //    public static void setInsertOk(boolean value)
 //    {
 //        isInsertOk.setValue(value);
@@ -98,14 +107,14 @@ public class MovieRepository
             {
               //  MovieRepository.this.setInsertOk(true);
                 // since the query was OK, we set isFavorite to true
-                    setFavorite(true);
+                MovieRepository.this.setFavorite(true);
                 }
 
-            else
-            {
-              //  MovieRepository.this.setInsertOk(false);
-                setFavorite(false);
-            }
+//            else
+//            {
+//              //  MovieRepository.this.setInsertOk(false);
+//                setFavorite(false);
+//            }
 
         }
 
@@ -137,17 +146,18 @@ public class MovieRepository
             {
                 if(rowsDeleted > 0)
                 {
-                    setFavorite(false);
+                    MovieRepository.this.setFavorite(true);
                   //  MovieRepository.this.setDeleteOk(true);
                 }
-            else
-                {
-                   // MovieRepository.this.setDeleteOk(false);
-                    setFavorite(true);
-                }
+//            else
+//                {
+//                   // MovieRepository.this.setDeleteOk(false);
+//                    setFavorite(false);
+//                }
+           }
             }
-            }
-    public static class deleteAllMoviesAsyncTask extends AsyncTask<Movie, Void, Void>
+
+            public static class deleteAllMoviesAsyncTask extends AsyncTask<Movie, Void, Void>
     {
         private final MovieDao mAsyncTaskDao;
 
