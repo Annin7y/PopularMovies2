@@ -9,7 +9,7 @@ import java.util.List;
 
 import annin.my.android.popularmovies2.pojo.Movie;
 
-import static annin.my.android.popularmovies2.data.MovieRepository.isFavorite;
+//import static annin.my.android.popularmovies2.data.MovieRepository.isFavorite;
 
 public class MovieViewModel extends AndroidViewModel
 {
@@ -28,17 +28,17 @@ public class MovieViewModel extends AndroidViewModel
     }
 
 //    public LiveData<Boolean> insert(Movie movieEntry)
-//    {
-//        mRepository.insert(movieEntry);
-//        return MovieRepository.isInsertOk;
-//
-//    }
-//
-//    public LiveData<Boolean> delete(Movie movieEntry)
-//    {
-//        mRepository.delete(movieEntry);
-//        return MovieRepository.isDeleteOk;
-//   }
+////    {
+////        mRepository.insert(movieEntry);
+////        return MovieRepository.isInsertOk;
+////
+////    }
+////
+////    public LiveData<Boolean> delete(Movie movieEntry)
+////    {
+////        mRepository.delete(movieEntry);
+////        return MovieRepository.isDeleteOk;
+////   }
 
     public void insert(Movie movieEntry) {
         mRepository.insert(movieEntry);
@@ -55,16 +55,20 @@ public class MovieViewModel extends AndroidViewModel
         mRepository.deleteAllMovies();
     }
 
+    public void select(String movieId) {
+        mRepository.select(movieId);
+    }
+
 
     public LiveData<Boolean> isFavorite()
     {
         return mRepository.isFavorite();
     }
 
-    public LiveData<Movie> select(String movieId)
-    {
-        return mRepository.select(movieId);
-    }
+//    public LiveData<Movie> select(String movieId)
+//    {
+//        return mRepository.select(movieId);
+//    }
 
     //Method used when testing running the database on the main thread
 //    public boolean select(String movieId)

@@ -19,9 +19,9 @@ import annin.my.android.popularmovies2.pojo.Movie;
         LiveData<List<Movie>> loadAllMovies();
 
         @Query("SELECT * FROM movies WHERE movieId =:id")
-        LiveData<Movie> getSelectedMovie(String id);
+        //LiveData<Movie> getSelectedMovie(String id);
         //Method used when testing running the database on the main thread
-        //Movie getSelectedMovie(String id);
+         Movie getSelectedMovie(String id);
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)
         long insertMovie(Movie movieEntry);

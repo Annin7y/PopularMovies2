@@ -16,7 +16,7 @@ public class MovieRepository
    // public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
    // public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
     public static MutableLiveData<Boolean> isFavorite = new MutableLiveData<>();
-    private LiveData<Movie> movie;
+   // private LiveData<Movie> movie;
 
     MovieRepository(Application application)
     {
@@ -55,25 +55,48 @@ public class MovieRepository
 //        return movie != null;
 //    }
 
-    public LiveData<Movie> select(String id)
+//   public LiveData<Movie> select(String id)
+//    {
+////        if(movie != null)
+////        {
+////            MovieRepository.this.setFavorite(true);
+////        }
+////        else
+////        {
+////            MovieRepository.this.setFavorite(false);
+////        }
+//       return mMovieDao.getSelectedMovie(id);
+//   }
+
+    public void select(String id)
     {
-        if(movie != null)
-        {
-            MovieRepository.this.setFavorite(true);
-        }
-        else
-        {
-            MovieRepository.this.setFavorite(false);
-        }
-        return mMovieDao.getSelectedMovie(id);
+        new selectAsyncTask().execute(id);
     }
 
+    private class selectAsyncTask extends AsyncTask<String, Void, Movie>
+    {
 
-    public void setFavorite(boolean value) {
+        @Override
+        protected Movie doInBackground(final String... params) {
+            return mMovieDao.getSelectedMovie(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Movie movie) {
+            if (movie != null) {
+                setFavorite(true);
+            } else {
+                setFavorite(false);
+            }
+        }
+    }
+    public void setFavorite(boolean value)
+    {
         isFavorite.setValue(value);
     }
 
-    public MutableLiveData<Boolean> isFavorite() {
+    public MutableLiveData<Boolean> isFavorite()
+    {
         return isFavorite;
     }
 
@@ -105,17 +128,16 @@ public class MovieRepository
         {
             if(id != -1)
             {
-              //  MovieRepository.this.setInsertOk(true);
+//               MovieRepository.this.setInsertOk(true);
                 // since the query was OK, we set isFavorite to true
-                MovieRepository.this.setFavorite(true);
+               MovieRepository.this.setFavorite(true);
                 }
 
 //            else
 //            {
-//              //  MovieRepository.this.setInsertOk(false);
-//                setFavorite(false);
+     // MovieRepository.this.setInsertOk(false);
+            MovieRepository.this.setFavorite(false);
 //            }
-
         }
 
     }
@@ -146,13 +168,13 @@ public class MovieRepository
             {
                 if(rowsDeleted > 0)
                 {
-                    MovieRepository.this.setFavorite(true);
-                  //  MovieRepository.this.setDeleteOk(true);
+                    MovieRepository.this.setFavorite(false);
+                    //MovieRepository.this.setDeleteOk(true);
                 }
 //            else
 //                {
-//                   // MovieRepository.this.setDeleteOk(false);
-//                    setFavorite(false);
+                 // MovieRepository.this.setDeleteOk(false);
+                MovieRepository.this.setFavorite(true);
 //                }
            }
             }
