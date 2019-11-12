@@ -94,7 +94,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
     private MovieViewModel mMovieViewModel;
 
     // Keep track of whether the selected movie is Favorite or not
-    private boolean isFavorite;
+    //private boolean isFavorite;
 
     /**
      * Identifier for the favorites data loader
@@ -135,7 +135,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                                              //  @Override
                                              //  public void onClick(View view) {
 
-                                                 if (isFavorite) {
+                                                // if (isFavorite) {
+           if (favoritesButton.getText().equals(getString(R.string.favorites_button_text_remove))) {
                                                        mMovieViewModel.delete(movie);
                                                      Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
                                                      favoritesButton.setText(R.string.favorites_button_text_add);
@@ -153,8 +154,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                                                        //    }
                                                      //  }
                                                //    });
-
-                                                   } else {
+           }
+                                                    else {
 //                                                       // If the movie is not favorite, we add it to the DB
                                                       mMovieViewModel.insert(movie);
                                                      Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
@@ -212,9 +213,10 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
             //   @Override
             //  public void onChanged(Boolean value) {
             //Implementing a lambda expression
-            mMovieViewModel.isFavorite().observe(this, value ->
-            {
-                isFavorite = value;
+//            mMovieViewModel.isFavorite().observe(this, value ->
+//            {
+//                isFavorite = value;
+            mMovieViewModel.isFavorite().observe(this, isFavorite -> {
                 if (isFavorite) {
                     favoritesButton.setText(getString(R.string.favorites_button_text_remove));
 

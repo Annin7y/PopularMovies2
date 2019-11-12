@@ -133,11 +133,11 @@ public class MovieRepository
                MovieRepository.this.setFavorite(true);
                 }
 
-//            else
-//            {
+            else
+           {
      // MovieRepository.this.setInsertOk(false);
             MovieRepository.this.setFavorite(false);
-//            }
+           }
         }
 
     }
@@ -171,7 +171,7 @@ public class MovieRepository
                     MovieRepository.this.setFavorite(false);
                     //MovieRepository.this.setDeleteOk(true);
                 }
-//            else
+           else
 //                {
                  // MovieRepository.this.setDeleteOk(false);
                 MovieRepository.this.setFavorite(true);
