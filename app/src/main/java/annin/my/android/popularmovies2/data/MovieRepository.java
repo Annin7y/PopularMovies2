@@ -16,7 +16,6 @@ public class MovieRepository
    // public static MutableLiveData<Boolean> isInsertOk = new MutableLiveData<>();
    // public static MutableLiveData<Boolean> isDeleteOk = new MutableLiveData<>();
     public static MutableLiveData<Boolean> isFavorite = new MutableLiveData<>();
-   // private LiveData<Movie> movie;
 
     MovieRepository(Application application)
     {
@@ -55,16 +54,9 @@ public class MovieRepository
 //        return movie != null;
 //    }
 
+    //Method used when declaring isFavorite in the Detail Activity
 //   public LiveData<Movie> select(String id)
 //    {
-////        if(movie != null)
-////        {
-////            MovieRepository.this.setFavorite(true);
-////        }
-////        else
-////        {
-////            MovieRepository.this.setFavorite(false);
-////        }
 //       return mMovieDao.getSelectedMovie(id);
 //   }
 

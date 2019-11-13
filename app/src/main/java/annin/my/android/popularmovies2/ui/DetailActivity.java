@@ -131,6 +131,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
         // Set a click listener for the Favorite button
        favoritesButton.setOnClickListener(view -> {
+        //Code commented out: isFavorite is now declared in the Repository
        // favoritesButton.setOnClickListener(new View.OnClickListener() {
                                              //  @Override
                                              //  public void onClick(View view) {
