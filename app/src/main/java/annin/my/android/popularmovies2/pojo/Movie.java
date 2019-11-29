@@ -73,11 +73,13 @@ public class Movie implements Parcelable
         this.posterUrl = poster;
     }
 
+    //Will only store the poster path in the database
     public String getPosterUrl()
     {
         return posterUrl;
     }
 
+    //Will be used on all the Adapters
     public String getFullPosterUrl()
     {
         return BASE_POSTER_URL + posterUrl;

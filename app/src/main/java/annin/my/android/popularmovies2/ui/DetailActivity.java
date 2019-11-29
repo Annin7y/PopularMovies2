@@ -130,17 +130,30 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 
 
         // Set a click listener for the Favorite button
-       favoritesButton.setOnClickListener(view -> {
+       favoritesButton.setOnClickListener(view ->
+               {
+                   if (favoritesButton.getText().equals(getString(R.string.favorites_button_text_remove))) {
+                       mMovieViewModel.delete(movie);
+                       Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
+                       favoritesButton.setText(R.string.favorites_button_text_add);
+                   }
+                   else {
+//                                                       // If the movie is not favorite, we add it to the DB
+                       mMovieViewModel.insert(movie);
+                       Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
+                       favoritesButton.setText((R.string.favorites_button_text_remove));
+
+                   }
+
+               });
+
         //Code commented out: isFavorite is now declared in the Repository
        // favoritesButton.setOnClickListener(new View.OnClickListener() {
                                              //  @Override
                                              //  public void onClick(View view) {
 
                                                 // if (isFavorite) {
-           if (favoritesButton.getText().equals(getString(R.string.favorites_button_text_remove))) {
-                                                       mMovieViewModel.delete(movie);
-                                                     Toast.makeText(DetailActivity.this, getString(R.string.movie_removed_from_favorites), Toast.LENGTH_SHORT).show();
-                                                     favoritesButton.setText(R.string.favorites_button_text_add);
+
                                                    // If the movie is already a favorite, we remove it from the DB
                                                  //  mMovieViewModel.delete(movie).observe(DetailActivity.this, new Observer<Boolean>() {
                                                    //    @Override
@@ -155,16 +168,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                                                        //    }
                                                      //  }
                                                //    });
-           }
-                                                    else {
-//                                                       // If the movie is not favorite, we add it to the DB
-                                                      mMovieViewModel.insert(movie);
-                                                     Toast.makeText(DetailActivity.this, R.string.favorites_added, Toast.LENGTH_SHORT).show();
-                                                   favoritesButton.setText((R.string.favorites_button_text_remove));
-
-                                                   }
-
-                                          });
 
 //                                                   mMovieViewModel.insert(movie).observe(DetailActivity.this, new Observer<Boolean>()
 //                                                   {
@@ -207,7 +210,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //            } else {
 //                favoritesButton.setText(getString(R.string.favorites_button_text_add));
 //            }
-            mMovieViewModel.select(movieId);
             //The code below is to set the button in the Detail Activity to "Remove from Favorites"
             //when we click on a movie in the Favorites list
             // mMovieViewModel.isFavorite().observe(this, new Observer<Boolean>() {
@@ -217,6 +219,8 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //            mMovieViewModel.isFavorite().observe(this, value ->
 //            {
 //                isFavorite = value;
+            mMovieViewModel.select(movieId);
+            
             mMovieViewModel.isFavorite().observe(this, isFavorite -> {
                 if (isFavorite) {
                     favoritesButton.setText(getString(R.string.favorites_button_text_remove));
@@ -226,7 +230,6 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
                 }
             });
         }
-
 
 //                mMovieViewModel.select(movieId).observe(DetailActivity.this, new Observer<Movie>()
 //                {

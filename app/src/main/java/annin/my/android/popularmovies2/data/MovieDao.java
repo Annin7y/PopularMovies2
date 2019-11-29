@@ -20,7 +20,8 @@ import annin.my.android.popularmovies2.pojo.Movie;
 
         @Query("SELECT * FROM movies WHERE movieId =:id")
         //LiveData<Movie> getSelectedMovie(String id);
-        //Method used when testing running the database on the main thread
+        //Method used when testing running the database on the main thread &
+        //setting isFavorite in the Repository
          Movie getSelectedMovie(String id);
 
         @Insert(onConflict = OnConflictStrategy.IGNORE)

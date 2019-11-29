@@ -69,7 +69,7 @@ public class MovieWidgetProvider extends AppWidgetProvider {
             views.setTextViewText(R.id.movie_widget_title, movie.getOriginalTitle());
 
 
-            Picasso.with(context).load(movie.getPosterUrl())
+            Picasso.with(context).load(movie.getFullPosterUrl())
                                 .error(R.drawable.user_placeholder_error)
                         .into(views, R.id.imageViewWidget,new int[] {widgetId});
                        appWidgetManager.updateAppWidget(widgetId, views);
