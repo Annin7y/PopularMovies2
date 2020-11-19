@@ -220,7 +220,7 @@ public class DetailActivity extends AppCompatActivity implements MovieTrailerAda
 //            {
 //                isFavorite = value;
             mMovieViewModel.select(movieId);
-            
+
             mMovieViewModel.isFavorite().observe(this, isFavorite -> {
                 if (isFavorite) {
                     favoritesButton.setText(getString(R.string.favorites_button_text_remove));
